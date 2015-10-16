@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for your interest in contributing to Project Ascension! We have a few guidelines to make sure that your pull request is accepted and merged.
+Thanks for your interest in contributing to Horizon Launcher! We have a few guidelines to make sure that your pull request is accepted and merged.
 
 **Note that ALL pull requests must be opened on the 'dev' branch.**
 
