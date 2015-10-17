@@ -1,6 +1,7 @@
 #Horizon Launcher Client Repo 
 
 [![Slack Status](http://horizonlauncher-slack.herokuapp.com/badge.svg)](http://slack.launchhorizon.com)
+[![Build Status](https://travis-ci.org/HorizonLauncher/Client.svg?branch=dev)](https://travis-ci.org/HorizonLauncher/Client)
 
 You're in the official repo for the Horizon Launcher client interface. The Borderless window system for WinAPI is pulled from deimos1877's [BorderlessWindow](http://github.com/deimos1877/BorderlessWindow).
 
