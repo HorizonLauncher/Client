@@ -23,6 +23,9 @@ notifications:
   email:
     on_success: change
     on_failure: always
-  slack: horizonlauncher:VBY2bmPSmg4UbzvE6ZCVODQJ
+  slack:
+    rooms:
+      - horizonlauncher:VBY2bmPSmg4UbzvE6ZCVODQJ#general
+      - horizonlauncher:VBY2bmPSmg4UbzvE6ZCVODQJ#client
 os:
 - linux
