@@ -23,7 +23,5 @@ notifications:
   email:
     on_success: change
     on_failure: always
-  slack:
-    secure: WYVqOk/ueLiOYmUblkY3PkA6hdYk3w7JuL8jbNcGgioPik1Wq45uiYKRf8whm8SCPeOFVlhuAxlbXpaQ3Z6ipsK1Adu/4twKbBJeyBZ1iOBuzTSM8eYmkrPieR8JOcVEFkq48nof4wods7bHFcSaaR86heX7iTtpKfLFcv1WMI0=
 os:
 - linux
