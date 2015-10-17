@@ -32,7 +32,13 @@ Library::Library(QSettings* p, QWidget* parent)
                         "background-color: " + p->value("Primary/InactiveSelection").toString() + ";} "
                         "QListWidget {"
                         "background-color: " + p->value("Primary/TertiaryBase").toString() + "; "
-                        "color: " + p->value("Primary/LightText").toString() + ";}");
+                        "color: " + p->value("Primary/LightText").toString() + ";}"
+                        "QLabel {"
+                        "color: " + p->value("Primary/LightText").toString() + ";"
+                        "font-family: SourceSansPro;"
+                        "}"
+                        "#gameNameLabel { font-size: 20px; }");
+
     QFont buttonFont("SourceSansPro", 12);
     ui->addGame->setFont(buttonFont);
     ui->addGame->setText("Add Game");
@@ -119,6 +125,12 @@ void Library::on_removeGame_clicked()
         db.removeGameByName(selection->text());
         refreshGames();
     }
+}
+/** Event handler for when a game is selected.
+ */
+void Library::on_gameListWidget_currentTextChanged(const QString & currentText)
+{
+    ui->gameNameLabel->setText(currentText);
 }
 
 /** Launch a new QProcess using the passed exe and working directory.
