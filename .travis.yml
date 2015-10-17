@@ -4,7 +4,7 @@ compiler:
 before_install:
 - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
 - sudo add-apt-repository -y ppa:ubuntu-sdk-team/ppa
-- sudo add-apt-repository -y ppa:sschuberth/cmake-here
+- sudo add-apt-repository -y ppa:george-edison55/precise-backports
 - sudo add-apt-repository -y ppa:boost-latest/ppa
 - sudo apt-get update -qq
 install:
@@ -23,7 +23,6 @@ notifications:
   email:
     on_success: change
     on_failure: always
-  slack:
-    secure: WYVqOk/ueLiOYmUblkY3PkA6hdYk3w7JuL8jbNcGgioPik1Wq45uiYKRf8whm8SCPeOFVlhuAxlbXpaQ3Z6ipsK1Adu/4twKbBJeyBZ1iOBuzTSM8eYmkrPieR8JOcVEFkq48nof4wods7bHFcSaaR86heX7iTtpKfLFcv1WMI0=
+  slack: horizonlauncher:VBY2bmPSmg4UbzvE6ZCVODQJ
 os:
 - linux
