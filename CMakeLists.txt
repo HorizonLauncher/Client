@@ -12,6 +12,7 @@ project(HorizonLauncher C CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 set(SOURCE
     Source/Main.cpp
