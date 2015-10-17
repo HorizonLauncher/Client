@@ -43,7 +43,7 @@ BorderlessWindow::BorderlessWindow(QApplication* app, HBRUSH windowBackground, c
     int offsetX = (screenWidth - width) / 2;
     int offsetY = (screenHeight - height) / 2;
 
-    hWnd = CreateWindow(_T("WindowClass"), _T("Project Ascension"), static_cast<DWORD>(Style::windowed), offsetX, offsetY, width, height, 0, 0, hInstance, nullptr);
+    hWnd = CreateWindow(_T("WindowClass"), _T("Horizon Launcher"), static_cast<DWORD>(Style::windowed), offsetX, offsetY, width, height, 0, 0, hInstance, nullptr);
 
     if (!hWnd)
     {

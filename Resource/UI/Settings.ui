@@ -38,7 +38,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Add Games to Ascension</string>
+     <string>Add Games to Horizon</string>
     </property>
    </widget>
    <widget class="QPushButton" name="ClearDatabaseButton">

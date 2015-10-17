@@ -8,7 +8,7 @@ endif()
 
 # --- BUILD CONFIGURATION ---
 
-project(ProjectAscension C CXX)
+project(HorizonLauncher C CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
@@ -133,14 +133,14 @@ include_directories(
     BorderlessWindow
     Source
 )
-add_executable(ProjectAscension
+add_executable(HorizonLauncher
     ${GUI_TYPE}
     ${SOURCE}
     ${OS_SOURCE}
     ${FORMS_HEADERS}
     ${UI_RESOURCES}
 )
-target_link_libraries(ProjectAscension
+target_link_libraries(HorizonLauncher
     Qt5::Widgets
     Qt5::Core
     Qt5::Gui
@@ -153,7 +153,7 @@ target_link_libraries(ProjectAscension
 )
 
 if(WIN32)
-    target_link_libraries(ProjectAscension
+    target_link_libraries(HorizonLauncher
         user32.lib
         gdi32.lib
         dwmapi.lib
@@ -161,8 +161,8 @@ if(WIN32)
 
     if(MSVC)
         set(WIN_LINKFLAGS \"${CMAKE_CURRENT_SOURCE_DIR}/Resource/Launcher.res\")
-        set_target_properties(ProjectAscension PROPERTIES LINK_FLAGS ${WIN_LINKFLAGS})
-        set_target_properties(ProjectAscension PROPERTIES COMPILE_FLAGS "/EHsc")
+        set_target_properties(HorizonLauncher PROPERTIES LINK_FLAGS ${WIN_LINKFLAGS})
+        set_target_properties(HorizonLauncher PROPERTIES COMPILE_FLAGS "/EHsc")
     endif(MSVC)
 endif()
 
@@ -177,8 +177,8 @@ if(WITH_TESTS)
     foreach(FILE
             appinfo.vdf
             game)
-    add_custom_command(TARGET ProjectAscension POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/Tests/${FILE} $<TARGET_FILE_DIR:ProjectAscension>)
+    add_custom_command(TARGET HorizonLauncher POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/Tests/${FILE} $<TARGET_FILE_DIR:HorizonLauncher>)
         endforeach()
 endif(WITH_TESTS)
 
@@ -188,7 +188,7 @@ endif(WITH_TESTS)
 if(WIN32)
     cmake_policy(SET CMP0026 OLD)
 
-    get_target_property(BuildLocation ProjectAscension LOCATION)
+    get_target_property(BuildLocation HorizonLauncher LOCATION)
     get_filename_component(TargetDirectory ${BuildLocation} PATH)
 
     if (EXISTS ${Qt5Core_DIR}/../../../bin/icuin53.dll)
@@ -219,7 +219,7 @@ if(WIN32)
         icuuc${ICU_VER}.dll
         icudt${ICU_VER}.dll
     )
-        add_custom_command(TARGET ProjectAscension POST_BUILD
+        add_custom_command(TARGET HorizonLauncher POST_BUILD
             # Copy the given dependency into the executable directory.
             COMMAND ${CMAKE_COMMAND} -E copy_if_different ${Qt5Core_DIR}/../../../bin/${DEPENDENCY} ${TargetDirectory}
             COMMENT "Copying ${DEPENDENCY} into '${TargetDirectory}/'" VERBATIM

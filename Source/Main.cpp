@@ -22,16 +22,16 @@ int main(int argc, char* argv[])
 {
     QApplication::setStyle("fusion");
     QApplication* application = new QApplication(argc, argv);
-	bool dbExists = QFile("ascension.db").exists();
+	bool dbExists = QFile("horizon.db").exists();
     DRMSetupWizard* wiz = new DRMSetupWizard();
 
     #ifndef Q_OS_WIN
         // dynamic loading of the icon under Linux/UNIX
-        application->setWindowIcon(QIcon(":/SystemMenu/Icons/Ascension_Icon.ico"));
+        application->setWindowIcon(QIcon(":/SystemMenu/Icons/Horizon.ico"));
     #endif
 
     // Global stylesheet
-    QFile stylesheet(":/Styles/PAClient.css");
+    QFile stylesheet(":/Styles/Horizon.css");
     if (stylesheet.open(QFile::ReadOnly))
     {
         QString styleSheet = stylesheet.readAll();

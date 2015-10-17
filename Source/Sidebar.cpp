@@ -53,7 +53,7 @@ Sidebar::Sidebar(QSettings* p, QWidget* parent) : QWidget(parent)
     dropdownTitle->setObjectName("dropdownTitle");
     dropdownTitle->setStyleSheet("color: " + p->value("Primary/LightText").toString() + ";");
     dropdownTitle->setFont(QFont("SourceSansPro", 12, QFont::DemiBold));
-    dropdownTitle->setText("Project Ascension");
+    dropdownTitle->setText("Horizon Launcher");
     dropdownLayout->addWidget(dropdownTitle);
 
     // Username layout

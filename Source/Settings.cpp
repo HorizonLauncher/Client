@@ -22,7 +22,7 @@ Settings::Settings(QSettings* p, QWidget* parent) : QWidget(parent), ui(new Ui::
 		"color: " + p->value("Primary/LightText").toString() + ";");
 	QFont buttonFont("SourceSansPro", 9);
 	ui->WizardButton->setFont(buttonFont);
-	ui->WizardButton->setText("Add Games to Ascension");
+	ui->WizardButton->setText("Add Games to Horizon");
 	ui->ClearDatabaseButton->setFont(buttonFont);
 	ui->ClearDatabaseButton->setText("Clear Database");
 	ui->AccentButton->setFont(buttonFont);
@@ -80,7 +80,7 @@ void Settings::on_AccentButton_3_clicked()
 
 void Settings::on_ResetAccents_clicked()
 {
-    QSettings palette(QSettings::IniFormat, QSettings::UserScope, "Project Ascension", "palette");
+    QSettings palette(QSettings::IniFormat, QSettings::UserScope, "Horizon Launcher", "palette");
 
     if (palette.isWritable())
     {
@@ -113,7 +113,7 @@ void Settings::on_ResetAccents_clicked()
 
 void Settings::updateAccent(int accent, QColor color)
 {
-    QSettings palette(QSettings::IniFormat, QSettings::UserScope, "Project Ascension", "palette");
+    QSettings palette(QSettings::IniFormat, QSettings::UserScope, "Horizon Launcher", "palette");
     if (palette.isWritable())
     {
         palette.beginGroup("Primary");

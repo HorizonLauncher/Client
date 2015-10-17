@@ -23,7 +23,7 @@ QList<QButtonGroup*> uplayBtnGroupVector;
  * \param parent Parent widget to draw from
  * \param dbPath Path to the database used
  */
-DRMSetupWizard::DRMSetupWizard(QWidget* parent, QString dbPath) : QWizard(parent), db(dbPath + "ascension.db")
+DRMSetupWizard::DRMSetupWizard(QWidget* parent, QString dbPath) : QWizard(parent), db(dbPath + "horizon.db")
 {
     drmPage = new DRMPage();
     resultsPage = new ResultsPage(db, *drmPage);
@@ -32,7 +32,7 @@ DRMSetupWizard::DRMSetupWizard(QWidget* parent, QString dbPath) : QWizard(parent
     setPage(pages::DRM, drmPage);
     setPage(pages::RESULTS, resultsPage);
     setPage(pages::FINAL, finalPage);
-    setWindowTitle("Project Ascension setup");
+    setWindowTitle("Horizon Launcher Setup");
     setFixedSize(QSize(700, 450));
 	addedVector.erase(addedVector.begin(), addedVector.end());
 	if (!db.init())

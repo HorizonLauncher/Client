@@ -9,7 +9,7 @@
  * \param parent Parent widget to draw from
  * \param dbPath Path to the database used
  */
-AddGameWizard::AddGameWizard(QWidget* parent, QString dbPath) : QWizard(parent), db(dbPath + "ascension.db")
+AddGameWizard::AddGameWizard(QWidget* parent, QString dbPath) : QWizard(parent), db(dbPath + "horizon.db")
 {
     addPage(new InitPage());
     addPage(new InfoPage());

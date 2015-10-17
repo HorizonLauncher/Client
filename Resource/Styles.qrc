@@ -1,5 +1,5 @@
 <RCC>
     <qresource prefix="/Styles">
-        <file>PAClient.css</file>
+        <file>Horizon.css</file>
     </qresource>
 </RCC>

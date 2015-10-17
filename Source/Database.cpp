@@ -11,7 +11,7 @@ Database::Database()
     : db(QSqlDatabase::addDatabase("QSQLITE"))
 {
     db.setHostName("localhost");
-    db.setDatabaseName("ascension.db");
+    db.setDatabaseName("horizon.db");
 }
 
 Database::Database(QString path)
