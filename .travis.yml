@@ -10,7 +10,7 @@ before_install:
 install:
 - sudo apt-get install -y ninja-build
 - sudo apt-get install -y gcc-4.8 g++-4.8
-- sudo apt-get install -y cmake=3.2.3-5ppa5~precise1
+- sudo apt-get install -y cmake=3.2.3-5ppa5~precise1 cmake-data=3.2.3-5ppa5~precise1
 - sudo apt-get install -y qtbase5-dev qtdeclarative5-dev libqt5webkit5-dev libqt5gui5
 - sudo apt-get install -y libboost1.55-dev
 - sudo sed -i -e 's/COPY_ONLY/COPYONLY/g' /usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreMacros.cmake
