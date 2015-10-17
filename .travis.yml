@@ -23,5 +23,6 @@ notifications:
   email:
     on_success: change
     on_failure: always
+  slack: horizonlauncher:VBY2bmPSmg4UbzvE6ZCVODQJ
 os:
 - linux
