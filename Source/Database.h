@@ -1,10 +1,9 @@
 #pragma once
 
-#include <tuple>
-#include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QtWidgets>
 
-/** Game type
+/** Game type.
  * Defines a game type. 
  * Members correspond to a field within the database.
  */
@@ -16,6 +15,8 @@ typedef struct
     QString executablePath; /**< Path to the executable */
     QString arguments; /**< Arguments to pas to the executable */
 } Game;
+
+typedef std::vector<Game> GameList;
 
 /** Database class.
  * Wrapper class to manage the internal game database.
@@ -30,14 +31,16 @@ public:
     bool reset();
 
     bool addGame(QString gameName, QString gameDirectory, QString executablePath, QString arguments);
+    void addGames(GameList games);
     bool removeGameById(unsigned int id);
     bool removeGameByName(QString name);
     Game getGameById(unsigned int id);
     Game getGameByName(QString name);
-    std::tuple<bool, Game> isExistant(unsigned int id);
-    std::tuple<bool, Game> isExistant(QString name);
+    std::pair<bool, Game> isExistant(unsigned int id);
+    std::pair<bool, Game> isExistant(QString name);
     QList<Game> getGames();
-    unsigned int getGameCount();
+    unsigned int getGameCount() const;
+
 private:
     QSqlDatabase db;
 };

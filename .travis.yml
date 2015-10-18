@@ -4,7 +4,7 @@ compiler:
 before_install:
 - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
 - sudo add-apt-repository -y ppa:ubuntu-sdk-team/ppa
-- sudo add-apt-repository -y ppa:sschuberth/cmake-here
+- sudo add-apt-repository -y ppa:george-edison55/precise-backports
 - sudo add-apt-repository -y ppa:boost-latest/ppa
 - sudo apt-get update -qq
 install:
@@ -24,6 +24,6 @@ notifications:
     on_success: change
     on_failure: always
   slack:
-    secure: WYVqOk/ueLiOYmUblkY3PkA6hdYk3w7JuL8jbNcGgioPik1Wq45uiYKRf8whm8SCPeOFVlhuAxlbXpaQ3Z6ipsK1Adu/4twKbBJeyBZ1iOBuzTSM8eYmkrPieR8JOcVEFkq48nof4wods7bHFcSaaR86heX7iTtpKfLFcv1WMI0=
+    secure: ZcGbyWH+0Ek/UiJqcgVK9BhbiTNjZJlAX9m+0cSZNIMDzWGVLxojF5MrHjAGeacak0FYSvKIHuhcqZD5e3WPD03OPQkpiuHDNAC/0Qf1EFomzwT3Cxh2hbHCA9vhzkATbm10DIN6ZrCDnTz0YcXcaBL2lnEVfN697ON9d19s9plq7PlAHNYNs0xxDhdt8M6JF3rf5xW8jQl3z622BO/mKN2ntGaKP5UA2U587nUnSNQGM4oB8+SXepDLZB6epApmdyQxx+RvoMe2rH14bbhsZWaYt1MHoKSqlTVYknqXou/+qXf5P1xRdgf41e6np4Dqcgt8cHdeheElJhO9oSxZsphPqjengf/lX40Ht5x/qgmeTCFQPCOxaqCbwoYxt6Sqb1efm2Ot8Lpe8QndXENhGgrNPiKDdKhYtC4JJyJh8nrb4EOydQTjFlLPH95oLsUs0O3ehwBEznX/RyYaTFfvcpDEBER3UgDEUha/yHHw9V1WutCcwXTNeSCdM88qJ6+EoAIZiei9hgLsMgfjnMe66PDsHLMBquKSZFAP1nBc9lOQfMRMzaTUmodoKJHhURpcu4PvE8YMiw0Rz8PdJUDLa/KYHyiYCbm9I5d6ybWYCNqcs8kqCCJljKzuxvx6aJLGKE5nY804E5SyjUaQqfrKy6lgqvcCOqOxZDVNyFrjvT0=
 os:
 - linux

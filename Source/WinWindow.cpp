@@ -1,16 +1,8 @@
 #include "WinWindow.h"
 #include "Library.h"
-#include "Browser.h"
 
-#include <QApplication>
 #include <QGridLayout>
-#include <QDebug>
-#include <QLabel>
-#include <QPushButton>
-#include <QScrollArea>
-#include <QSpacerItem>
-#include <QGraphicsDropShadowEffect>
-#include <QFontDatabase>
+#include <QMouseEvent>
 
 #include <windows.h>
 #include <windowsx.h>
@@ -23,7 +15,7 @@ WinWindow::WinWindow(HWND hWnd) : QWinWidget(hWnd)
 
     mainPanel = new WinPanel(this);
 
-    QVBoxLayout* layout = new QVBoxLayout();
+    QGridLayout* layout = new QGridLayout();
     layout->setMargin(0);
     setLayout(layout);
     layout->addWidget(mainPanel);
@@ -73,26 +65,29 @@ bool WinPanel::winEvent(MSG* message, long*)
 
 void WinWindow::mousePressEvent(QMouseEvent* event)
 {
-    if (event->button() == Qt::LeftButton)
-    {
-        ReleaseCapture();
-        SendMessage(windowHandle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
-    }
-
-    if (event->type() == QEvent::MouseButtonDblClick)
+    if (event->pos().y() < 32)
     {
         if (event->button() == Qt::LeftButton)
         {
-            WINDOWPLACEMENT wp;
-            wp.length = sizeof(WINDOWPLACEMENT);
-            GetWindowPlacement(parentWindow(), &wp);
-            if (wp.showCmd == SW_MAXIMIZE)
+            ReleaseCapture();
+            SendMessage(windowHandle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
+        }
+
+        if (event->type() == QEvent::MouseButtonDblClick)
+        {
+            if (event->button() == Qt::LeftButton)
             {
-                ShowWindow(parentWindow(), SW_RESTORE);
-            }
-            else
-            {
-                ShowWindow(parentWindow(), SW_MAXIMIZE);
+                WINDOWPLACEMENT wp;
+                wp.length = sizeof(WINDOWPLACEMENT);
+                GetWindowPlacement(parentWindow(), &wp);
+                if (wp.showCmd == SW_MAXIMIZE)
+                {
+                    ShowWindow(parentWindow(), SW_RESTORE);
+                }
+                else
+                {
+                    ShowWindow(parentWindow(), SW_MAXIMIZE);
+                }
             }
         }
     }

@@ -5,52 +5,55 @@
 #include <QSettings>
 #include <QMessageBox>
 #include <QFile>
+#include <QDir>
+#include <QStandardPaths>
+#include <QDebug>
 
+/** Namespace for entry point initialization functions. */
 namespace entryPoint
 {
-void initSettings(QApplication* application)
+void initSettings(QApplication &application)
 {
-    QString configFile = "config.ini", paletteFile = "palette.ini";
-    QSettings config(configFile, QSettings::IniFormat), palette(paletteFile, QSettings::IniFormat);
+    QSettings config(QSettings::IniFormat, QSettings::UserScope, "Horizon Launcher", "config");
+    QSettings palette(QSettings::IniFormat, QSettings::UserScope, "Horizon Launcher", "palette");
 
-    config.setPath(QSettings::IniFormat, QSettings::UserScope, application->applicationDirPath());
-    palette.setPath(QSettings::IniFormat, QSettings::UserScope, application->applicationDirPath());
-
-    if (!QFile(configFile).exists() && config.isWritable())
+    if (!QFile("config.ini").exists() && config.isWritable())
     {
         // TODO: Set default config settings.
     }
-    if (!QFile(paletteFile).exists() && palette.isWritable())
+
+    if (!QFile(palette.fileName()).exists() && palette.isWritable())
     {
         palette.beginGroup("Primary");
 
         palette.setValue("ActiveElement", "#FFFFFF");
-        palette.setValue("ActiveSelection", "#242424");
-        palette.setValue("HoverSelection", "#1B1B1B");
+        palette.setValue("InactiveSelection", "#686868");
+        palette.setValue("HoverSelection", "#ADADAD");
+        palette.setValue("DarkElement", "#4D5250");
         palette.setValue("LightText", "#FFFFFF");
         palette.setValue("DarkText", "#242424");
-        palette.setValue("SubText", "#8B8B8B");
+        palette.setValue("SubText", "#B2B4B3");
         palette.setValue("PrimaryBase", "#282828");
         palette.setValue("SecondaryBase", "#1F1F1F");
-        palette.setValue("TertiaryBase", "#181818");
+        palette.setValue("TertiaryBase", "#131313");
         palette.setValue("DarkestBase", "#0F0F0F");
         palette.endGroup();
 
         palette.beginGroup("Accent");
 
-        palette.setValue("LightAccent", "#68AD28");
-        palette.setValue("MediumAccent", "#589828");
-        palette.setValue("DarkAccent", "#487D28");
+        palette.setValue("LightAccent", "#E58F12");
+        palette.setValue("MediumAccent", "#895f06");
+        palette.setValue("DarkAccent", "#6a4a05");
         palette.endGroup();
     }
 }
 
-void initFonts(QApplication* application)
+void initFonts(QApplication &application)
 {
     // Font
-    QFont mainFont = application->font();
+    QFont mainFont = application.font();
     mainFont.setStyleStrategy(QFont::PreferAntialias);
-    application->setFont(mainFont);
+    application.setFont(mainFont);
 
     // Dynamically load fonts
     QStringList list;

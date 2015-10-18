@@ -8,39 +8,59 @@ endif()
 
 # --- BUILD CONFIGURATION ---
 
-project(ProjectAscension)
+project(HorizonLauncher C CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 set(SOURCE
     Source/Main.cpp
-    Source/TabLabel.cpp
+    Source/TabWidget.cpp
     Source/Library.cpp
-    Source/Browser.cpp
     Source/MainPanel.cpp
     Source/Database.cpp
+    Source/DRMSetupWizard.cpp
+    Source/Sidebar.cpp
+    Source/Sidebar.cpp
+    Source/Homepage.cpp
+    Source/BuddyList.cpp
+    Source/BuddyWidget.cpp
+    Source/Community.cpp
+    Source/AddGameWizard.cpp
+	Source/Settings.cpp
 )
 
 set(HEADERS
-    Source/TabLabel.h
+    Source/TabWidget.h
     Source/Library.h
-    Source/Browser.h
     Source/MainPanel.h
     Source/Database.h
     Source/Init.h
+    Source/Sidebar.h
     Source/Libs/SteamVdfParse.hpp
+    Source/DRMSetupWizard.h
+    Source/Homepage.h
+    Source/BuddyList.h
+    Source/BuddyWidget.h
+    Source/Community.h
+    Source/AddGameWizard.h
+	Source/Settings.h
 )
 
 set(FORMS
     Resource/UI/Library.ui
-    Resource/UI/Browser.ui
+    Resource/UI/homepage.ui
+    Resource/UI/BuddyList.ui
+    Resource/UI/Community.ui
+    Resource/UI/Settings.ui
 )
 
 set(RESOURCES
     Resource/Icons.qrc
     Resource/Fonts.qrc
     Resource/Styles.qrc
+    Resource/Elements.qrc
 )
 
 set(GUI_TYPE "")
@@ -91,11 +111,12 @@ endif()
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Gui REQUIRED)
-find_package(Qt5Network REQUIRED)
-find_package(Qt5WebKit REQUIRED)
-find_package(Qt5WebKitWidgets REQUIRED)
+# find_package(Qt5Network REQUIRED)
+# find_package(Qt5WebKit REQUIRED)
+# find_package(Qt5WebKitWidgets REQUIRED)
 find_package(Qt5Sql REQUIRED)
 find_package(Boost REQUIRED)
+find_package(Threads REQUIRED)
 
 qt5_wrap_ui(FORMS_HEADERS ${FORMS})
 qt5_add_resources(UI_RESOURCES ${RESOURCES})
@@ -105,43 +126,44 @@ include_directories(
     ${Qt5Gui_PRIVATE_INCLUDE_DIRS}
     ${Qt5Widgets_INCLUDE_DIRS}
     ${Qt5Core_INCLUDE_DIRS}
-    ${Qt5Network_INCLUDE_DIRS}
-    ${Qt5WebKit_INCLUDE_DIRS}
-    ${Qt5WebKitWidgets_INCLUDE_DIRS}
+#   ${Qt5Network_INCLUDE_DIRS}
+#   ${Qt5WebKit_INCLUDE_DIRS}
+#   ${Qt5WebKitWidgets_INCLUDE_DIRS}
     ${Qt5Sql_INCLUDE_DIRS}
     ${Boost_INCLUDE_DIRS}
     BorderlessWindow
     Source
 )
-add_executable(ProjectAscension
+add_executable(HorizonLauncher
     ${GUI_TYPE}
     ${SOURCE}
     ${OS_SOURCE}
     ${FORMS_HEADERS}
     ${UI_RESOURCES}
 )
-target_link_libraries(ProjectAscension
+target_link_libraries(HorizonLauncher
     Qt5::Widgets
     Qt5::Core
     Qt5::Gui
-    Qt5::Network
-    Qt5::WebKit
-    Qt5::WebKitWidgets
+#	Qt5::Network
+#	Qt5::WebKit
+#	Qt5::WebkitWidgets
     Qt5::Sql
     ${Boost_LIBRARIES}
+    ${CMAKE_THREAD_LIBS_INIT}
 )
 
 if(WIN32)
-    target_link_libraries(ProjectAscension
+    target_link_libraries(HorizonLauncher
         user32.lib
         gdi32.lib
         dwmapi.lib
     )
-    
+
     if(MSVC)
         set(WIN_LINKFLAGS \"${CMAKE_CURRENT_SOURCE_DIR}/Resource/Launcher.res\")
-        set_target_properties(ProjectAscension PROPERTIES LINK_FLAGS ${WIN_LINKFLAGS})
-        set_target_properties(ProjectAscension PROPERTIES COMPILE_FLAGS "/EHsc")
+        set_target_properties(HorizonLauncher PROPERTIES LINK_FLAGS ${WIN_LINKFLAGS})
+        set_target_properties(HorizonLauncher PROPERTIES COMPILE_FLAGS "/EHsc")
     endif(MSVC)
 endif()
 
@@ -149,15 +171,15 @@ if(WITH_TESTS)
     enable_testing()
     add_executable(test_runner
         Source/Database.cpp
-        tests/Test.cpp)
+        Tests/Test.cpp)
     target_link_libraries(test_runner
         Qt5::Sql)
     add_test(test_runner test_runner)
     foreach(FILE
             appinfo.vdf
             game)
-    add_custom_command(TARGET ProjectAscension POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/tests/${FILE} $<TARGET_FILE_DIR:ProjectAscension>)
+    add_custom_command(TARGET HorizonLauncher POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/Tests/${FILE} $<TARGET_FILE_DIR:HorizonLauncher>)
         endforeach()
 endif(WITH_TESTS)
 
@@ -167,7 +189,7 @@ endif(WITH_TESTS)
 if(WIN32)
     cmake_policy(SET CMP0026 OLD)
 
-    get_target_property(BuildLocation ProjectAscension LOCATION)
+    get_target_property(BuildLocation HorizonLauncher LOCATION)
     get_filename_component(TargetDirectory ${BuildLocation} PATH)
 
     if (EXISTS ${Qt5Core_DIR}/../../../bin/icuin53.dll)
@@ -180,9 +202,9 @@ if(WIN32)
         Qt5Widgetsd.dll
         Qt5Guid.dll
         Qt5Cored.dll
-        Qt5Networkd.dll
-        Qt5WebKitd.dll
-        Qt5WebKitWidgetsd.dll
+#       Qt5Networkd.dll
+#       Qt5WebKitd.dll
+#       Qt5WebKitWidgetsd.dll
         Qt5Sqld.dll
         Qt5Sensorsd.dll
         Qt5Positioningd.dll
@@ -190,16 +212,17 @@ if(WIN32)
         Qt5Qmld.dll
         Qt5Multimediad.dll
         Qt5MultimediaWidgetsd.dll
-        Qt5WebChanneld.dll
+#       Qt5WebChanneld.dll
+        Qt5Svgd.dll
         Qt5OpenGLd.dll
         Qt5PrintSupportd.dll
         icuin${ICU_VER}.dll
         icuuc${ICU_VER}.dll
         icudt${ICU_VER}.dll
     )
-        add_custom_command(TARGET ProjectAscension POST_BUILD
+        add_custom_command(TARGET HorizonLauncher POST_BUILD
             # Copy the given dependency into the executable directory.
-            COMMAND ${CMAKE_COMMAND} -E copy ${Qt5Core_DIR}/../../../bin/${DEPENDENCY} ${TargetDirectory}
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different ${Qt5Core_DIR}/../../../bin/${DEPENDENCY} ${TargetDirectory}
             COMMENT "Copying ${DEPENDENCY} into '${TargetDirectory}/'" VERBATIM
         )
     endforeach()
