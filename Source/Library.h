@@ -16,7 +16,7 @@ class Library;
 }
 
 /** Library class.
- * Class to handle the library section of the launcher 
+ * Class to handle the library section of the launcher
 */
 class Library : public QWidget
 {
