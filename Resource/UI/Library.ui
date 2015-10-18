@@ -121,6 +121,38 @@
           <bool>true</bool>
         </property>
       </widget>
+      <widget class="QLabel" name="gameHoursLabel">
+        <property name="geometry">
+          <rect>
+            <x>10</x>
+            <y>80</y>
+            <width>100</width>
+            <height>20</height>
+          </rect>
+        </property>
+        <property name="wordWrap">
+          <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>PLAYED: 0 hrs</string>
+        </property>
+      </widget>
+      <widget class="QLabel" name="lastPlayedLabel">
+        <property name="geometry">
+          <rect>
+            <x>10</x>
+            <y>95</y>
+            <width>200</width>
+            <height>20</height>
+          </rect>
+        </property>
+        <property name="wordWrap">
+          <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>LAST PLAYED: Never</string>
+        </property>
+      </widget>
        <widget class="QPushButton" name="testLaunch">
         <property name="geometry">
          <rect>

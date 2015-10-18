@@ -37,7 +37,9 @@ Library::Library(QSettings* p, QWidget* parent)
                         "color: " + p->value("Primary/LightText").toString() + ";"
                         "font-family: SourceSansPro;"
                         "}"
-                        "#gameNameLabel { font-size: 20px; }");
+                        "#gameNameLabel { font-size: 20px; }"
+                        "#gameHoursLabel, #lastPlayedLabel {"
+                        "font-size: 14px;}");
 
     QFont buttonFont("SourceSansPro", 12);
     ui->addGame->setFont(buttonFont);
