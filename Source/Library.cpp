@@ -45,7 +45,7 @@ Library::Library(QSettings* p, QWidget* parent)
     ui->removeGame->setFont(buttonFont);
     ui->removeGame->setText("Remove Game");
     ui->testLaunch->setFont(buttonFont);
-    ui->testLaunch->setText("Launch Game");
+    ui->testLaunch->setText("Play");
 
     if (!db.init())
     {
