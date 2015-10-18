@@ -15,8 +15,7 @@
 */
 Library::Library(QSettings* p, QWidget* parent)
     : QWidget(parent),
-      ui(new Ui::Library),
-      runningProcess(new QProcess(this))
+      ui(new Ui::Library)
 {
     ui->setupUi(this);
     this->setObjectName("libraryUI");
@@ -56,9 +55,6 @@ Library::Library(QSettings* p, QWidget* parent)
         exit(EXIT_FAILURE);
     }
 
-    connect(runningProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(finished(int, QProcess::ExitStatus)));
-    connect(runningProcess, SIGNAL(error(QProcess::ProcessError)), this, SLOT(onLaunchError(QProcess::ProcessError)));
-
     QList<Game> games = db.getGames();
     for (auto game : games)
     {
@@ -76,7 +72,6 @@ Library::Library(QSettings* p, QWidget* parent)
 Library::~Library()
 {
     delete ui;
-    delete runningProcess;
 }
 
 /** Event handler for launching a game.
@@ -84,7 +79,7 @@ Library::~Library()
 */
 void Library::on_testLaunch_clicked()
 {
-    if (!isProcessRunning())
+    if (!gl.isProcessRunning())
     {
         auto selection = ui->gameListWidget->currentItem();
         if (selection != nullptr)
@@ -92,11 +87,11 @@ void Library::on_testLaunch_clicked()
             Game game = db.getGameByName(selection->text());
             if (game.arguments.trimmed() == "")
             {
-                runProcess(game.executablePath, game.gameDirectory);
+                gl.runProcess(game.executablePath, game.gameDirectory);
             }
             else
             {
-                runProcessWithArgs(game.executablePath, game.gameDirectory, game.arguments);
+                gl.runProcessWithArgs(game.executablePath, game.gameDirectory, game.arguments);
             }
         }
     }
@@ -135,43 +130,6 @@ void Library::on_gameListWidget_currentTextChanged(const QString & currentText)
     ui->gameNameLabel->setText(currentText);
 }
 
-/** Launch a new QProcess using the passed exe and working directory.
- * \param file Location of the exe to run.
- * \param workingDirectory The directory that QProcess should spawn in.
-*/
-void Library::runProcess(QString file, QString workingDirectory)
-{
-    // TODO: Implement some threading
-    if (!isProcessRunning())
-    {
-        qDebug() << "Launching:" << file << ", at" << workingDirectory;
-        runningProcess->setWorkingDirectory(workingDirectory);
-        runningProcess->setStandardErrorFile("error.txt");
-        runningProcess->setStandardOutputFile("log.txt");
-        runningProcess->start(file, QStringList());
-        runningProcess->waitForStarted();
-    }
-}
-
-/** Launch a new QProcess using the passed exe and working directory.
- * \param file Location of the exe to run.
- * \param workingDirectory The directory that QProcess should spawn in.
- * \param args String of arguments to launch the executable with.
-*/
-void Library::runProcessWithArgs(QString file, QString workingDirectory, QString args)
-{
-    // TODO: Implement some threading
-    if (!isProcessRunning())
-    {
-        qDebug() << "Launching:" << file << ", at" << workingDirectory << "with " << args;
-        runningProcess->setWorkingDirectory(workingDirectory);
-        runningProcess->setStandardErrorFile("error.txt");
-        runningProcess->setStandardOutputFile("log.txt");
-        runningProcess->start(file, QStringList(args.split(" ")));
-        runningProcess->waitForStarted();
-    }
-}
-
 /** Recreate the list of games displayed in the main widget.
 * Sort the list alphabetically by name
 */
@@ -184,44 +142,4 @@ void Library::refreshGames()
     {
         ui->gameListWidget->addItem(game.gameName);
     }
-}
-
-/** Attempt to handle process ending unexpectedly or fork.
- * \param exitCode Exit code to check.
- * \param exitStatus Status to check.
-*/
-void Library::finished(int exitCode, QProcess::ExitStatus exitStatus)
-{
-    if (exitCode != 0)
-    {
-        QMessageBox(QMessageBox::Warning, "Warning", "The game finished, but it claims to have encountered an error").exec();
-    }
-}
-
-/** Handle errors before the process has launched.
- * \param error The error to translate.
-*/
-void Library::onLaunchError(QProcess::ProcessError error)
-{
-    switch (error)
-    {
-        case QProcess::FailedToStart:
-            QMessageBox(QMessageBox::Critical, "Error", "Could not start the game. Please double check that you are using the correct file to launch it.").exec();
-            break;
-        case QProcess::Crashed:
-            QMessageBox(QMessageBox::Warning, "Crash!", "The launched game has crashed").exec();
-            break;
-        default:
-            // Other cases are errors unrelated to startup, so let's not handle them
-            break;
-    }
-}
-
-/** Check if a process is running already.
- * \return Success/failure upon completion.
-*/
-bool Library::isProcessRunning() const
-{
-    // We shall consider "Starting" to be running here too
-    return runningProcess->state() != QProcess::NotRunning;
 }

@@ -29,6 +29,7 @@ set(SOURCE
     Source/Community.cpp
     Source/AddGameWizard.cpp
 	Source/Settings.cpp
+    Source/GameLauncher.cpp
 )
 
 set(HEADERS
@@ -46,6 +47,7 @@ set(HEADERS
     Source/Community.h
     Source/AddGameWizard.h
 	Source/Settings.h
+    Source/GameLauncher.h
 )
 
 set(FORMS
