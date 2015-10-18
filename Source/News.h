@@ -1,7 +1,21 @@
 #ifndef NEWS_H
 #define NEWS_H
 
-#include <QWidget>
+#include <QWidget>\
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #include <QSettings>
 
 /*
@@ -35,7 +49,9 @@ public:
     explicit News(QSettings* p, QWidget* parent = 0);
     ~News();
 
-private slots:
+public slots:
+    void onFetchComplete();
+    void errorOccured(QNetworkReply::NetworkError);
 
 private:
     Ui::News *ui;
