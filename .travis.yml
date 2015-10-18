@@ -24,8 +24,6 @@ notifications:
     on_success: change
     on_failure: always
   slack:
-    rooms:
-      - horizonlauncher:VBY2bmPSmg4UbzvE6ZCVODQJ#general
-      - horizonlauncher:VBY2bmPSmg4UbzvE6ZCVODQJ#client
+    secure: ZcGbyWH+0Ek/UiJqcgVK9BhbiTNjZJlAX9m+0cSZNIMDzWGVLxojF5MrHjAGeacak0FYSvKIHuhcqZD5e3WPD03OPQkpiuHDNAC/0Qf1EFomzwT3Cxh2hbHCA9vhzkATbm10DIN6ZrCDnTz0YcXcaBL2lnEVfN697ON9d19s9plq7PlAHNYNs0xxDhdt8M6JF3rf5xW8jQl3z622BO/mKN2ntGaKP5UA2U587nUnSNQGM4oB8+SXepDLZB6epApmdyQxx+RvoMe2rH14bbhsZWaYt1MHoKSqlTVYknqXou/+qXf5P1xRdgf41e6np4Dqcgt8cHdeheElJhO9oSxZsphPqjengf/lX40Ht5x/qgmeTCFQPCOxaqCbwoYxt6Sqb1efm2Ot8Lpe8QndXENhGgrNPiKDdKhYtC4JJyJh8nrb4EOydQTjFlLPH95oLsUs0O3ehwBEznX/RyYaTFfvcpDEBER3UgDEUha/yHHw9V1WutCcwXTNeSCdM88qJ6+EoAIZiei9hgLsMgfjnMe66PDsHLMBquKSZFAP1nBc9lOQfMRMzaTUmodoKJHhURpcu4PvE8YMiw0Rz8PdJUDLa/KYHyiYCbm9I5d6ybWYCNqcs8kqCCJljKzuxvx6aJLGKE5nY804E5SyjUaQqfrKy6lgqvcCOqOxZDVNyFrjvT0=
 os:
 - linux
