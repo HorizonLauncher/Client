@@ -28,6 +28,7 @@ private:
     Ui::Homepage* ui;
     GameLauncher gl;
     QString curRandom;
+    bool noGames;
 
     void selectRandomGame();
 };
