@@ -45,6 +45,11 @@ void Homepage::on_playRandom_clicked()
 {
     if (!gl.isProcessRunning())
     {
+        if(noGames)
+        {
+            return;
+        }
+
         Game game = db.getGameByName(curRandom);
         if (game.arguments.trimmed() == "")
         {
@@ -66,11 +71,18 @@ void Homepage::on_playRandom_clicked()
 void Homepage::selectRandomGame()
 {
     QList<Game> games = db.getGames();
-    Game game = games[rand() % games.length()];
-
-    curRandom = game.gameName;
-    ui->randomGameLbl->setText("Random Game: " + game.gameName);
-    ui->randomGameLbl->adjustSize();
+    if(games.length() != 0)
+    {
+        Game game = games[rand() % games.length()];
+        curRandom = game.gameName;
+        noGames = false;
+        ui->randomGameLbl->setText("Random Game: " + game.gameName);
+        ui->randomGameLbl->adjustSize();
+    }
+    else
+    {
+        noGames = true;
+    }
 }
 
 Homepage::~Homepage()
