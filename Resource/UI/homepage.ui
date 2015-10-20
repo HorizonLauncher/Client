@@ -22,6 +22,42 @@
   <property name="styleSheet">
    <string notr="true"/>
   </property>
+  <widget class="QLabel" name="randomGameLbl">
+    <property name="geometry">
+      <rect>
+        <x>10</x>
+        <y>80</y>
+        <width>50</width>
+        <height>40</height>
+      </rect>
+    </property>
+    <property name="text">
+     <string>Random Game: </string>
+    </property>
+  </widget>
+  <widget class="QPushButton" name="playRandom">
+    <property name="geometry">
+      <rect>
+        <x>10</x>
+        <y>100</y>
+        <width>50</width>
+        <height>18</height>
+      </rect>
+    </property>
+    <property name="text">
+     <string>PLAY</string>
+    </property>
+  </widget>
+  <widget class="QPushButton" name="newRandom">
+    <property name="geometry">
+      <rect>
+        <x>65</x>
+        <y>100</y>
+        <width>18</width>
+        <height>18</height>
+      </rect>
+    </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

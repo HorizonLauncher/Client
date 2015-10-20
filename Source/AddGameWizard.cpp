@@ -92,7 +92,7 @@ void LastPage::initializePage()
     if (!std::get<0>(db.isExistant(field("nameEdit").toString())))
     {
         label->setText("Game added successfully.");
-        db.addGame(field("nameEdit").toString(),field("dirEdit").toString(), field("exeEdit").toString(),field("argsEdit").toString());
+        db.addGame(field("nameEdit").toString(),field("dirEdit").toString(), field("exeEdit").toString(),field("argsEdit").toString(), 0);
     }
     else
     {

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Database.h"
+#include "GameLauncher.h"
 #include "BuddyList.h"
 
 #include <QWidget>
@@ -15,7 +16,7 @@ class Library;
 }
 
 /** Library class.
- * Class to handle the library section of the launcher 
+ * Class to handle the library section of the launcher
 */
 class Library : public QWidget
 {
@@ -31,15 +32,9 @@ private slots:
     void on_removeGame_clicked();
     void on_gameListWidget_currentTextChanged(const QString & currentText);
     void refreshGames();
-    void finished(int exitCode, QProcess::ExitStatus exitStatus);
-    void onLaunchError(QProcess::ProcessError error);
 
 private:
     Database db;
     Ui::Library* ui;
-    QProcess* runningProcess;
-
-    bool isProcessRunning() const;
-    void runProcess(QString file, QString workingDirectory);
-    void runProcessWithArgs(QString file, QString workingDirectory, QString args);
+    GameLauncher gl;
 };

@@ -34,7 +34,7 @@ bool Database::init()
     }
 
     QSqlQuery createQuery(db);
-    return createQuery.exec("CREATE TABLE IF NOT EXISTS games(ID INTEGER PRIMARY KEY ASC, GAMENAME TEXT NOT NULL, GAMEDIRECTORY TEXT NOT NULL, GAMEEXECUTABLE TEXT NOT NULL, ARGUMENTS TEXT NOT NULL);");
+    return createQuery.exec("CREATE TABLE IF NOT EXISTS games(ID INTEGER PRIMARY KEY ASC, GAMENAME TEXT NOT NULL, GAMEDIRECTORY TEXT NOT NULL, GAMEEXECUTABLE TEXT NOT NULL, ARGUMENTS TEXT NOT NULL, DRM INT DEFAULT 0);");
 }
 
 /** Remove every table in the database.
@@ -51,17 +51,19 @@ bool Database::reset()
  * \param gameDirectory Working directory of the game.
  * \param executablePath The location of the executable on the filesystem.
  * \param arguments List of arguments to launch with.
+ * \param drm The DRM the game came from, where 0 = None, 1 = Steam, 2 = Origin, 3 = uPlay
  * \return Success/failure of the operation.
 */
-bool Database::addGame(QString gameName, QString gameDirectory, QString executablePath, QString arguments)
+bool Database::addGame(QString gameName, QString gameDirectory, QString executablePath, QString arguments, int drm)
 {
     QSqlQuery query(db);
-    query.prepare("INSERT OR IGNORE INTO GAMES(GAMENAME, GAMEDIRECTORY, GAMEEXECUTABLE, ARGUMENTS) VALUES (:gameName, :gameDirectory, :executablePath, :arguments);");
+    query.prepare("INSERT OR IGNORE INTO GAMES(GAMENAME, GAMEDIRECTORY, GAMEEXECUTABLE, ARGUMENTS, DRM) VALUES (:gameName, :gameDirectory, :executablePath, :arguments, :drm);");
     query.bindValue(":gameName", gameName);
     query.bindValue(":gameDirectory", gameDirectory);
     query.bindValue(":executablePath", executablePath);
     query.bindValue(":arguments", arguments);
-    return query.exec();
+    query.bindValue(":drm", drm);
+    query.exec();
 }
 
 /** Add games to the database and repopulate the games list.
@@ -72,7 +74,7 @@ void Database::addGames(GameList games)
 {
     for (auto& game : games)
     {
-        addGame(game.gameName, game.gameDirectory, game.executablePath, game.arguments);
+        addGame(game.gameName, game.gameDirectory, game.executablePath, game.arguments, game.drm);
     }
 }
 
@@ -139,7 +141,7 @@ Game Database::getGameByName(QString name)
 std::pair<bool, Game> Database::isExistant(unsigned int id)
 {
     QSqlQuery query(db);
-    query.prepare("SELECT ID, GAMENAME, GAMEDIRECTORY, GAMEEXECUTABLE, ARGUMENTS FROM GAMES WHERE ID = :id;");
+    query.prepare("SELECT ID, GAMENAME, GAMEDIRECTORY, GAMEEXECUTABLE, ARGUMENTS, DRM FROM GAMES WHERE ID = :id;");
     query.bindValue(":id", id);
     query.exec();
 
@@ -149,8 +151,9 @@ std::pair<bool, Game> Database::isExistant(unsigned int id)
         QString path = query.value(2).toString();
         QString exe = query.value(3).toString();
         QString args = query.value(4).toString();
+        int drm = query.value(5).toInt();
 
-        return std::make_pair(true, Game {id, name, path, exe, args});
+        return std::make_pair(true, Game {id, name, path, exe, args, drm});
     }
     else
     {
@@ -167,7 +170,7 @@ std::pair<bool, Game> Database::isExistant(unsigned int id)
 std::pair<bool, Game> Database::isExistant(QString name)
 {
     QSqlQuery query(db);
-    query.prepare("SELECT ID, GAMEDIRECTORY, GAMEEXECUTABLE, ARGUMENTS FROM GAMES WHERE GAMENAME = :name;");
+    query.prepare("SELECT ID, GAMEDIRECTORY, GAMEEXECUTABLE, ARGUMENTS, DRM FROM GAMES WHERE GAMENAME = :name;");
     query.bindValue(":name", name);
     query.exec();
     if (query.next())
@@ -176,8 +179,9 @@ std::pair<bool, Game> Database::isExistant(QString name)
         QString path = query.value(1).toString();
         QString exe = query.value(2).toString();
         QString args = query.value(3).toString();
+        int drm = query.value(4).toInt();
 
-        return std::make_pair(true, Game {id, name, path, exe, args});
+        return std::make_pair(true, Game {id, name, path, exe, args, drm});
     }
     else
     {
@@ -192,7 +196,7 @@ QList<Game> Database::getGames()
 {
     QList<Game> games;
     QSqlQuery query;
-    query.exec("SELECT ID, GAMENAME, GAMEDIRECTORY, GAMEEXECUTABLE, ARGUMENTS FROM GAMES;");
+    query.exec("SELECT ID, GAMENAME, GAMEDIRECTORY, GAMEEXECUTABLE, ARGUMENTS, DRM FROM GAMES;");
     while (query.next())
     {
         unsigned int id = query.value(0).toUInt();
@@ -200,8 +204,9 @@ QList<Game> Database::getGames()
         QString path = query.value(2).toString();
         QString exe = query.value(3).toString();
         QString args = query.value(4).toString();
+        int drm = query.value(5).toInt();
 
-        games.append({id, name, path, exe, args});
+        games.append({id, name, path, exe, args, drm});
     }
     return games;
 }
