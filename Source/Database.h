@@ -13,7 +13,7 @@ typedef struct
     QString gameName; /**< Name of the game to display */
     QString gameDirectory; /**< Working directory of the game */
     QString executablePath; /**< Path to the executable */
-    QString arguments; /**< Arguments to pas to the executable */
+    QString arguments; /**< Arguments to pass to the executable */
     int drm; /**< DRM the game came from, where 0 = None, 1 = Steam, 2 = Origin, 3 = uPlay */
 } Game;
 
