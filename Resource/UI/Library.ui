@@ -121,6 +121,16 @@
           <bool>true</bool>
         </property>
       </widget>
+      <widget class="QLabel" name="gameDRMLabel">
+        <property name="geometry">
+          <rect>
+            <x>10</x>
+            <y>30</y>
+            <width>40</width>
+            <height>10</height>
+          </rect>
+        </property>
+      </widget>
       <widget class="QLabel" name="gameHoursLabel">
         <property name="geometry">
           <rect>

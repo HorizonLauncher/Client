@@ -37,8 +37,8 @@ Library::Library(QSettings* p, QWidget* parent)
                         "font-family: SourceSansPro;"
                         "}"
                         "#gameNameLabel { font-size: 20px; }"
-                        "#gameHoursLabel, #lastPlayedLabel {"
-                        "font-size: 14px;}");
+                        "#gameHoursLabel, #lastPlayedLabel, #gameDRMLabel {"
+                        "font-size: 14px; }");
 
     QFont buttonFont("SourceSansPro", 12);
     ui->addGame->setFont(buttonFont);
@@ -127,7 +127,27 @@ void Library::on_removeGame_clicked()
  */
 void Library::on_gameListWidget_currentTextChanged(const QString & currentText)
 {
+    Game game = db.getGameByName(currentText);
+    QString drmString = "";
+    if (game.drm == 0)
+    {
+        drmString = "None";
+    }
+    else if (game.drm == 1)
+    {
+        drmString = "Steam";
+    }
+    else if (game.drm == 2)
+    {
+        drmString = "Origin";
+    }
+    else if (game.drm == 3)
+    {
+        drmString = "uPlay";
+    }
+
     ui->gameNameLabel->setText(currentText);
+    ui->gameDRMLabel->setText(drmString);
 }
 
 /** Recreate the list of games displayed in the main widget.

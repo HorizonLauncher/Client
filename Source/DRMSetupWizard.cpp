@@ -482,7 +482,7 @@ int ResultsPage::nextId() const
 
                     std::cout << "Adding " << name << std::endl;
                     unsigned int count = db.getGameCount();
-                    addedVector.push_back({count, QString::fromStdString(name), originRoot.filePath(QString::fromStdString(name)), path.filePath(""), ""});
+                    addedVector.push_back({count, QString::fromStdString(name), originRoot.filePath(QString::fromStdString(name)), path.filePath(""), "", 2});
                 }
             }
         }
@@ -501,7 +501,7 @@ int ResultsPage::nextId() const
 
                     std::cout << "Adding " << name << std::endl;
                     unsigned int count = db.getGameCount();
-                    addedVector.push_back({count, QString::fromStdString(name), uplayRoot.filePath(QString::fromStdString(name)), path.filePath(""), ""});
+                    addedVector.push_back({count, QString::fromStdString(name), uplayRoot.filePath(QString::fromStdString(name)), path.filePath(""), "", 3});
                 }
             }
         }
@@ -805,7 +805,7 @@ void ResultsPage::parseAcf(QDir steamRoot)
 
 //                db.addGame(name, path, exe, args);
 //                refreshGames();
-                steamVector.push_back(Game{0, name, path, exe, args});
+                steamVector.push_back({0, name, path, exe, args, 1});
             }
         }
     }

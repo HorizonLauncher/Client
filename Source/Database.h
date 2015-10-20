@@ -14,6 +14,7 @@ typedef struct
     QString gameDirectory; /**< Working directory of the game */
     QString executablePath; /**< Path to the executable */
     QString arguments; /**< Arguments to pas to the executable */
+    int drm; /**< DRM the game came from, where 0 = None, 1 = Steam, 2 = Origin, 3 = uPlay */
 } Game;
 
 typedef std::vector<Game> GameList;
@@ -30,7 +31,7 @@ public:
     bool init();
     bool reset();
 
-    bool addGame(QString gameName, QString gameDirectory, QString executablePath, QString arguments);
+    bool addGame(QString gameName, QString gameDirectory, QString executablePath, QString arguments, int drm = 0);
     void addGames(GameList games);
     bool removeGameById(unsigned int id);
     bool removeGameByName(QString name);
