@@ -76,13 +76,15 @@ void Homepage::selectRandomGame()
         Game game = games[rand() % games.length()];
         curRandom = game.gameName;
         noGames = false;
-        ui->randomGameLbl->setText("Random Game: " + game.gameName);
-        ui->randomGameLbl->adjustSize();
     }
     else
     {
         noGames = true;
+        curRandom = "No games!";
     }
+
+    ui->randomGameLbl->setText("Random Game: " + curRandom);
+    ui->randomGameLbl->adjustSize();
 }
 
 Homepage::~Homepage()
