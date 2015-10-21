@@ -51,7 +51,7 @@ TabWidget::TabWidget(const QString &name, const QString &text,
     // Tab text
     tabText = new QLabel(this);
     tabText->setObjectName("tabText");
-    tabText->setStyleSheet("color: " + p->value("Primary/InactiveSelection").toString() + ";");
+    tabText->setStyleSheet("color: #7d8f94;");
     tabText->setFont(font);
     tabText->setText(text);
     tabText->setAlignment(Qt::AlignCenter);
@@ -149,6 +149,7 @@ void TabWidget::toggleActive()
 {
     isActive = true;
     effect->setColor(QColor("#9351e5"));
+    tabText->setStyleSheet("color: #ffffff;");
     setOpacity(1.0);
 }
 
@@ -158,5 +159,6 @@ void TabWidget::toggleInactive()
 {
     isActive = false;
     effect->setColor(QColor(p->value("Primary/HoverSelection").toString()));
+    tabText->setStyleSheet("color: #7d8f94");
     setOpacity(0.0);
 }
