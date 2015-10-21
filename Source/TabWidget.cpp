@@ -143,7 +143,7 @@ void TabWidget::toggleUnhovered()
     }
 }
 
-/** Sets this tab active on the sidebar.
+/** Sets this tab active on the navbar.
 */
 void TabWidget::toggleActive()
 {
@@ -153,7 +153,7 @@ void TabWidget::toggleActive()
     setOpacity(1.0);
 }
 
-/** Sets this tab inactive on the sidebar.
+/** Sets this tab inactive on the navbar.
 */
 void TabWidget::toggleInactive()
 {

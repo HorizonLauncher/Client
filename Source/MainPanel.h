@@ -1,7 +1,7 @@
 #pragma once
 
 #include "TabWidget.h"
-#include "Sidebar.h"
+#include "Navbar.h"
 #include "Library.h"
 #include "Homepage.h"
 #include "BuddyList.h"
@@ -14,7 +14,7 @@
 
 /** MainPanel class.
 * Class to construct the core content of the launcher window.
-* Also moderates interaction between sidebar and stacked content.
+* Also moderates interaction between navbar and stacked content.
 */
 class MainPanel : public QWidget
 {
@@ -38,7 +38,7 @@ protected:
 
 private:
     QSettings* p;
-    Sidebar* sidebar;
+    Navbar* navbar;
     TabWidget* activeTab;
 
     QWidget* home;
@@ -49,68 +49,68 @@ private:
 private slots:
     void setHome()
     {
-        if (!(activeTab == sidebar->homeTab))
+        if (!(activeTab == navbar->homeTab))
         {
             activeTab->toggleInactive();
             stack->setCurrentWidget(home);
-            activeTab = sidebar->homeTab;
+            activeTab = navbar->homeTab;
             activeTab->toggleActive();
         }
     }
     void setStore()
     {
-        if (!(activeTab == sidebar->storeTab))
+        if (!(activeTab == navbar->storeTab))
         {
             activeTab->toggleInactive();
-            activeTab = sidebar->storeTab;
+            activeTab = navbar->storeTab;
             activeTab->toggleActive();
         }
     }
     void setGames()
     {
-        if (!(activeTab == sidebar->gamesTab))
+        if (!(activeTab == navbar->gamesTab))
         {
             activeTab->toggleInactive();
             stack->setCurrentWidget(library);
-            activeTab = sidebar->gamesTab;
+            activeTab = navbar->gamesTab;
             activeTab->toggleActive();
         }
     }
     void setCommunity()
     {
-        if (!(activeTab == sidebar->communityTab))
+        if (!(activeTab == navbar->communityTab))
         {
             activeTab->toggleInactive();
             stack->setCurrentWidget(community);
-            activeTab = sidebar->communityTab;
+            activeTab = navbar->communityTab;
             activeTab->toggleActive();
         }
     }
     void setNews()
     {
-        if (!(activeTab == sidebar->newsTab))
+        if (!(activeTab == navbar->newsTab))
         {
             activeTab->toggleInactive();
-            activeTab = sidebar->newsTab;
+            activeTab = navbar->newsTab;
             activeTab->toggleActive();
         }
     }
     void setMods()
     {
-        if (!(activeTab == sidebar->modsTab))
+        if (!(activeTab == navbar->modsTab))
         {
             activeTab->toggleInactive();
-            activeTab = sidebar->modsTab;
+            activeTab = navbar->modsTab;
             activeTab->toggleActive();
         }
     }
     void setSettings()
     {
-        if (!(activeTab == sidebar->settingsTab))
+        if (!(activeTab == navbar->settingsTab))
         {
             activeTab->toggleInactive();
 			stack->setCurrentWidget(settings);
-            activeTab = sidebar->settingsTab;
+            activeTab = navbar->settingsTab;
             activeTab->toggleActive();
         }
     }

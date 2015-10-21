@@ -1,4 +1,4 @@
-#include "Sidebar.h"
+#include "Navbar.h"
 #include "TabWidget.h"
 
 #include <QPainter>
@@ -7,14 +7,14 @@
 #include <QLabel>
 
 /** MainPanel constructor
-* Constructs the sidebar by depth - back to front.
+* Constructs the navbar by depth - back to front.
 * \param p Inherited palette configuration for setting StyleSheets.
 * \param parent Pointer to parent widget.
 */
-Sidebar::Sidebar(QSettings* p, QWidget* parent)
+Navbar::Navbar(QSettings* p, QWidget* parent)
     : QWidget(parent)
 {
-    setObjectName("sidebar");
+    setObjectName("navbar");
 
     setMinimumHeight(50);
     setMaximumHeight(50);
@@ -68,10 +68,10 @@ Sidebar::Sidebar(QSettings* p, QWidget* parent)
 }
 
 /** Overridden size hint.
-* Ensures visibility of the sidebar at app launch.
-* \return Constant QSize representing the preferred sidebar size.
+* Ensures visibility of the navbar at app launch.
+* \return Constant QSize representing the preferred navbar size.
 */
-QSize Sidebar::sizeHint() const
+QSize Navbar::sizeHint() const
 {
     return QSize(224, 224);
 }
@@ -80,7 +80,7 @@ QSize Sidebar::sizeHint() const
 * Necessary for displaying stylesheets correctly.
 * \param event The QPaintEvent trigger.
 */
-void Sidebar::paintEvent(QPaintEvent* event)
+void Navbar::paintEvent(QPaintEvent* event)
 {
     // Default paint event
     QWidget::paintEvent(event);

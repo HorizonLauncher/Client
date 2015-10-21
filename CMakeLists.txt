@@ -21,8 +21,7 @@ set(SOURCE
     Source/MainPanel.cpp
     Source/Database.cpp
     Source/DRMSetupWizard.cpp
-    Source/Sidebar.cpp
-    Source/Sidebar.cpp
+    Source/Navbar.cpp
     Source/Homepage.cpp
     Source/BuddyList.cpp
     Source/BuddyWidget.cpp
@@ -38,7 +37,7 @@ set(HEADERS
     Source/MainPanel.h
     Source/Database.h
     Source/Init.h
-    Source/Sidebar.h
+    Source/Navbar.h
     Source/Libs/SteamVdfParse.hpp
     Source/DRMSetupWizard.h
     Source/Homepage.h

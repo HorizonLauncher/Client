@@ -24,7 +24,7 @@ MainPanel::MainPanel(QWidget* parent)
 
 /** Main initializer for the UI.
 * QObjects are initialized by depth - back to front.
-* Note that the sidebar is initialized as a derived class.
+* Note that the navbar is initialized as a derived class.
 */
 void MainPanel::init()
 {
@@ -88,9 +88,9 @@ void MainPanel::init()
     windowControlLayout->addWidget(pushButtonClose);
     QObject::connect(pushButtonClose, SIGNAL(clicked()), this, SLOT(pushButtonClose()));
 
-    // Sidebar
-    sidebar = new Sidebar(p, coreWidget);
-    verticalLayout1->addWidget(sidebar);
+    // Navbar
+    navbar = new Navbar(p, coreWidget);
+    verticalLayout1->addWidget(navbar);
 
     // Main Horizontal Layout
     QHBoxLayout* horizontalLayout = new QHBoxLayout;
@@ -129,17 +129,17 @@ void MainPanel::init()
     stack->setCurrentWidget(library);
 
     // Set active tab
-    activeTab = sidebar->gamesTab;
+    activeTab = navbar->gamesTab;
     activeTab->toggleActive();
 
     // Connect signals
-    connect(sidebar->homeTab, SIGNAL(clicked()), this, SLOT(setHome()));
-    // connect(sidebar->storeTab, SIGNAL(clicked()), this, SLOT(setStore()));
-    connect(sidebar->gamesTab, SIGNAL(clicked()), this, SLOT(setGames()));
-    connect(sidebar->communityTab, SIGNAL(clicked()), this, SLOT(setCommunity()));
-    // connect(sidebar->newsTab, SIGNAL(clicked()), this, SLOT(setNews()));
-    // connect(sidebar->modsTab, SIGNAL(clicked()), this, SLOT(setMods()));
-    connect(sidebar->settingsTab, SIGNAL(clicked()), this, SLOT(setSettings()));
+    connect(navbar->homeTab, SIGNAL(clicked()), this, SLOT(setHome()));
+    // connect(navbar->storeTab, SIGNAL(clicked()), this, SLOT(setStore()));
+    connect(navbar->gamesTab, SIGNAL(clicked()), this, SLOT(setGames()));
+    connect(navbar->communityTab, SIGNAL(clicked()), this, SLOT(setCommunity()));
+    // connect(navbar->newsTab, SIGNAL(clicked()), this, SLOT(setNews()));
+    // connect(navbar->modsTab, SIGNAL(clicked()), this, SLOT(setMods()));
+    connect(navbar->settingsTab, SIGNAL(clicked()), this, SLOT(setSettings()));
 
     // Show
     show();
