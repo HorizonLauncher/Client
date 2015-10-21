@@ -24,7 +24,6 @@ set(SOURCE
     Source/Navbar.cpp
     Source/Homepage.cpp
     Source/BuddyList.cpp
-    Source/BuddyWidget.cpp
     Source/Community.cpp
     Source/AddGameWizard.cpp
     Source/Settings.cpp
@@ -42,7 +41,6 @@ set(HEADERS
     Source/DRMSetupWizard.h
     Source/Homepage.h
     Source/BuddyList.h
-    Source/BuddyWidget.h
     Source/Community.h
     Source/AddGameWizard.h
     Source/Settings.h
