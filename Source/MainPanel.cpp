@@ -59,11 +59,15 @@ void MainPanel::init()
     verticalLayout1->setAlignment(Qt::AlignHCenter);
     coreWidget->setLayout(verticalLayout1);
 
+    QWidget* borderWidget = new QWidget;
+    borderWidget->setStyleSheet("background-color: #F5F6F7;");
+    verticalLayout1->addWidget(borderWidget);
+
     // Window Control Horizontal Layout
     QHBoxLayout* windowControlLayout = new QHBoxLayout;
     windowControlLayout->setSpacing(0);
     windowControlLayout->setMargin(8);
-    verticalLayout1->addLayout(windowControlLayout);
+    borderWidget->setLayout(windowControlLayout);
     windowControlLayout->addStretch();
 
     // Window controls
