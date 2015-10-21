@@ -59,6 +59,7 @@ void MainPanel::init()
     verticalLayout1->setAlignment(Qt::AlignHCenter);
     coreWidget->setLayout(verticalLayout1);
 
+    // Title bar widget
     QWidget* borderWidget = new QWidget;
     borderWidget->setStyleSheet("background-color: #F5F6F7;");
     verticalLayout1->addWidget(borderWidget);
@@ -87,34 +88,34 @@ void MainPanel::init()
     windowControlLayout->addWidget(pushButtonClose);
     QObject::connect(pushButtonClose, SIGNAL(clicked()), this, SLOT(pushButtonClose()));
 
-    // Sidebar widget - locked width
+    // Sidebar
     sidebar = new Sidebar(p, coreWidget);
     verticalLayout1->addWidget(sidebar);
 
-    // Horizontal layout #2
-    QHBoxLayout* horizontalLayout2 = new QHBoxLayout;
-    horizontalLayout2->setSpacing(0);
-    horizontalLayout2->setMargin(0);
-    horizontalLayout2->setAlignment(Qt::AlignVCenter);
-    verticalLayout1->addLayout(horizontalLayout2);
+    // Main Horizontal Layout
+    QHBoxLayout* horizontalLayout = new QHBoxLayout;
+    horizontalLayout->setSpacing(0);
+    horizontalLayout->setMargin(0);
+    horizontalLayout->setAlignment(Qt::AlignVCenter);
+    verticalLayout1->addLayout(horizontalLayout);
 
-    // Backdrop widget - vertical layout #3
+    // Backdrop widget
     QWidget* mainPanelBackdrop = new QWidget(coreWidget);
     mainPanelBackdrop->setObjectName("mainPanelBackdrop");
-    horizontalLayout2->addWidget(mainPanelBackdrop);
+    horizontalLayout->addWidget(mainPanelBackdrop);
 
-    // Vertical layout #3
-    QVBoxLayout* verticalLayout3 = new QVBoxLayout;
-    verticalLayout3->setSpacing(0);
-    verticalLayout3->setMargin(0);
-    verticalLayout3->setAlignment(Qt::AlignHCenter);
-    mainPanelBackdrop->setLayout(verticalLayout3);
+    // Vertical layout #2
+    QVBoxLayout* verticalLayout2 = new QVBoxLayout;
+    verticalLayout2->setSpacing(0);
+    verticalLayout2->setMargin(0);
+    verticalLayout2->setAlignment(Qt::AlignHCenter);
+    mainPanelBackdrop->setLayout(verticalLayout2);
 
     // Stacked content panel
     stack = new QStackedWidget(coreWidget);
     stack->setObjectName("stack");
     stack->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    verticalLayout3->addWidget(stack);
+    verticalLayout2->addWidget(stack);
 
     // Stack widgets
     home = new Homepage(p, stack);

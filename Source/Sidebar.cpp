@@ -11,14 +11,14 @@
 * \param p Inherited palette configuration for setting StyleSheets.
 * \param parent Pointer to parent widget.
 */
-Sidebar::Sidebar(QSettings* p, QWidget* parent) : QWidget(parent)
+Sidebar::Sidebar(QSettings* p, QWidget* parent)
+    : QWidget(parent)
 {
     setObjectName("sidebar");
 
     setMinimumHeight(50);
     setMaximumHeight(50);
     setStyleSheet("background-color: #111111;");
-
 
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 

@@ -13,8 +13,8 @@
 * \param palette Inherited palette configuration for setting StyleSheets.
 * \param parent Pointer to parent widget.
 */
-TabWidget::TabWidget(const QString &name, const QString &text,
-                     QSettings* palette, QWidget* parent) : QWidget(parent)
+TabWidget::TabWidget(const QString &name, const QString &text, QSettings* palette, QWidget* parent)
+    : QWidget(parent)
 {
     this->setObjectName(name);
     this->setMinimumHeight(34);
