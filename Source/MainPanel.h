@@ -95,12 +95,12 @@ private slots:
             activeTab->toggleActive();
         }
     }
-    void setDownloads()
+    void setMods()
     {
-        if (!(activeTab == sidebar->downloadsTab))
+        if (!(activeTab == sidebar->modsTab))
         {
             activeTab->toggleInactive();
-            activeTab = sidebar->downloadsTab;
+            activeTab = sidebar->modsTab;
             activeTab->toggleActive();
         }
     }
@@ -111,15 +111,6 @@ private slots:
             activeTab->toggleInactive();
 			stack->setCurrentWidget(settings);
             activeTab = sidebar->settingsTab;
-            activeTab->toggleActive();
-        }
-    }
-    void setExit()
-    {
-        if (!(activeTab == sidebar->exitTab))
-        {
-            activeTab->toggleInactive();
-            activeTab = sidebar->exitTab;
             activeTab->toggleActive();
         }
     }

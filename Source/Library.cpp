@@ -22,7 +22,7 @@ Library::Library(QSettings* p, QWidget* parent)
     this->setStyleSheet("#leftSidebar {"
                         "background-color: " + p->value("Primary/SecondaryBase").toString() + ";} "
                         "#content {"
-                        "background-color: " + p->value("Primary/SecondaryBase").toString() + ";} "
+                        "background-color: #111111; } "
                         "QPushButton {"
                         "color: " + p->value("Primary/LightText").toString() + "; "
                         "background-color: " + p->value("Primary/DarkElement").toString() + "; "

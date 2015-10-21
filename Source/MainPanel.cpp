@@ -50,6 +50,7 @@ void MainPanel::init()
     coreWidget->setObjectName("coreWidget");
     coreWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     scrollArea->setWidget(coreWidget);
+    coreWidget->setStyleSheet("background-color: #111111;");
 
     // Vertical layout #1
     QVBoxLayout* verticalLayout1 = new QVBoxLayout;
@@ -58,33 +59,45 @@ void MainPanel::init()
     verticalLayout1->setAlignment(Qt::AlignHCenter);
     coreWidget->setLayout(verticalLayout1);
 
-    // Accent border
-    QLabel* accentBorder = new QLabel(coreWidget);
-    accentBorder->setObjectName("accentBorder");
-    accentBorder->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-    accentBorder->setMaximumHeight(3);
-    accentBorder->setStyleSheet("border-top: 2px solid " + p->value("Accent/MediumAccent").toString() +
-                                ";border-bottom: 1px solid" + p->value("Accent/DarkAccent").toString() + ";");
-    accentBorder->adjustSize();
-    verticalLayout1->addWidget(accentBorder);
+    // Window Control Horizontal Layout
+    QHBoxLayout* windowControlLayout = new QHBoxLayout;
+    windowControlLayout->setSpacing(0);
+    windowControlLayout->setMargin(8);
+    verticalLayout1->addLayout(windowControlLayout);
+    windowControlLayout->addStretch();
 
-    // Horizontal layout #1
-    QHBoxLayout* horizontalLayout1 = new QHBoxLayout;
-    horizontalLayout1->setSpacing(0);
-    horizontalLayout1->setMargin(0);
-    horizontalLayout1->setAlignment(Qt::AlignVCenter);
-    verticalLayout1->addLayout(horizontalLayout1);
+    // Window controls
+    // Minimize
+    QPushButton* pushButtonMinimize = new QPushButton("", coreWidget);
+    pushButtonMinimize->setObjectName("pushButtonMinimize");
+    windowControlLayout->addWidget(pushButtonMinimize);
+    QObject::connect(pushButtonMinimize, SIGNAL(clicked()), this, SLOT(pushButtonMinimize()));
+    // Maximize
+    QPushButton* pushButtonMaximize = new QPushButton("", coreWidget);
+    pushButtonMaximize->setObjectName("pushButtonMaximize");
+    windowControlLayout->addWidget(pushButtonMaximize);
+    QObject::connect(pushButtonMaximize, SIGNAL(clicked()), this, SLOT(pushButtonMaximize()));
+    // Close
+    QPushButton* pushButtonClose = new QPushButton("", coreWidget);
+    pushButtonClose->setObjectName("pushButtonClose");
+    windowControlLayout->addWidget(pushButtonClose);
+    QObject::connect(pushButtonClose, SIGNAL(clicked()), this, SLOT(pushButtonClose()));
 
     // Sidebar widget - locked width
     sidebar = new Sidebar(p, coreWidget);
-    horizontalLayout1->addWidget(sidebar);
+    verticalLayout1->addWidget(sidebar);
+
+    // Horizontal layout #2
+    QHBoxLayout* horizontalLayout2 = new QHBoxLayout;
+    horizontalLayout2->setSpacing(0);
+    horizontalLayout2->setMargin(0);
+    horizontalLayout2->setAlignment(Qt::AlignVCenter);
+    verticalLayout1->addLayout(horizontalLayout2);
 
     // Backdrop widget - vertical layout #3
     QWidget* mainPanelBackdrop = new QWidget(coreWidget);
     mainPanelBackdrop->setObjectName("mainPanelBackdrop");
-    mainPanelBackdrop->setStyleSheet("QWidget#mainPanelBackdrop {background-color: " +
-                                     p->value("Primary/DarkestBase").toString() + ";}");
-    horizontalLayout1->addWidget(mainPanelBackdrop);
+    horizontalLayout2->addWidget(mainPanelBackdrop);
 
     // Vertical layout #3
     QVBoxLayout* verticalLayout3 = new QVBoxLayout;
@@ -92,33 +105,6 @@ void MainPanel::init()
     verticalLayout3->setMargin(0);
     verticalLayout3->setAlignment(Qt::AlignHCenter);
     mainPanelBackdrop->setLayout(verticalLayout3);
-
-    // Horizontal layout #2 - window controls
-    QHBoxLayout* horizontalLayout2 = new QHBoxLayout;
-    horizontalLayout2->setSpacing(0);
-    horizontalLayout2->setMargin(8);
-    verticalLayout3->addLayout(horizontalLayout2);
-
-    horizontalLayout2->addStretch();
-
-    // Window controls
-    // Minimize
-    QPushButton* pushButtonMinimize = new QPushButton("", coreWidget);
-    pushButtonMinimize->setObjectName("pushButtonMinimize");
-    horizontalLayout2->addWidget(pushButtonMinimize);
-    QObject::connect(pushButtonMinimize, SIGNAL(clicked()), this, SLOT(pushButtonMinimize()));
-
-    // Maximize
-    QPushButton* pushButtonMaximize = new QPushButton("", coreWidget);
-    pushButtonMaximize->setObjectName("pushButtonMaximize");
-    horizontalLayout2->addWidget(pushButtonMaximize);
-    QObject::connect(pushButtonMaximize, SIGNAL(clicked()), this, SLOT(pushButtonMaximize()));
-
-    // Close
-    QPushButton* pushButtonClose = new QPushButton("", coreWidget);
-    pushButtonClose->setObjectName("pushButtonClose");
-    horizontalLayout2->addWidget(pushButtonClose);
-    QObject::connect(pushButtonClose, SIGNAL(clicked()), this, SLOT(pushButtonClose()));
 
     // Stacked content panel
     stack = new QStackedWidget(coreWidget);
@@ -147,9 +133,8 @@ void MainPanel::init()
     connect(sidebar->gamesTab, SIGNAL(clicked()), this, SLOT(setGames()));
     connect(sidebar->communityTab, SIGNAL(clicked()), this, SLOT(setCommunity()));
     // connect(sidebar->newsTab, SIGNAL(clicked()), this, SLOT(setNews()));
-    // connect(sidebar->downloadsTab, SIGNAL(clicked()), this, SLOT(setDownloads()));
+    // connect(sidebar->modsTab, SIGNAL(clicked()), this, SLOT(setMods()));
     connect(sidebar->settingsTab, SIGNAL(clicked()), this, SLOT(setSettings()));
-    connect(sidebar->exitTab, SIGNAL(clicked()), QApplication::instance(), SLOT(quit()));
 
     // Show
     show();

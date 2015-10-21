@@ -16,8 +16,7 @@ public:
     explicit Sidebar(QSettings* p, QWidget* parent = 0);
     virtual QSize sizeHint() const;
 
-    TabWidget *homeTab, *storeTab, *gamesTab, *communityTab, 
-              *newsTab, *downloadsTab, *settingsTab, *exitTab;
+    TabWidget *homeTab, *storeTab, *gamesTab, *communityTab, *newsTab, *modsTab, *settingsTab;
 
 protected:
     void paintEvent(QPaintEvent* event);
