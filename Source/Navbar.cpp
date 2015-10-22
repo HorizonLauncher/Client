@@ -18,7 +18,7 @@ Navbar::Navbar(QSettings* p, QWidget* parent)
 
     setMinimumHeight(50);
     setMaximumHeight(50);
-    setStyleSheet("background-color: #111111;");
+    setStyleSheet("background-color: " + p->value("NavBar/NavbarBG").toString() + ";");
 
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
@@ -41,13 +41,10 @@ Navbar::Navbar(QSettings* p, QWidget* parent)
 
     // Store tab
     storeTab = new TabWidget("storeTab", "STORE", p, this);
-    storeTab->setStyleSheet("background-color:#red;");
     upperLayout->addWidget(storeTab);
 
     // Games tab
     gamesTab = new TabWidget("gamesTab", "GAMES", p, this);
-    storeTab->setStyleSheet("background-color:#red;");
-
     upperLayout->addWidget(gamesTab);
 
     // Community tab

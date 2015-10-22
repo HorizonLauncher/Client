@@ -44,6 +44,9 @@ void initSettings(QApplication &application)
         palette.setValue("LightAccent", "#E58F12");
         palette.setValue("MediumAccent", "#895f06");
         palette.setValue("DarkAccent", "#6a4a05");
+
+        palette.setValue("BodyColor", "#1F1F1F");
+        palette.setValue("NavBarColor", "#111111");
         palette.endGroup();
     }
 }

@@ -31,6 +31,10 @@ Settings::Settings(QSettings* p, QWidget* parent) : QWidget(parent), ui(new Ui::
     ui->AccentButton_2->setStyleSheet("background-color: " + p->value("Accent/MediumAccent").toString() + ";}");
     ui->AccentButton_3->setFont(buttonFont);
     ui->AccentButton_3->setStyleSheet("background-color: " + p->value("Accent/DarkAccent").toString() + ";}");
+    ui->BodyColor->setFont(buttonFont);
+    ui->BodyColor->setStyleSheet("background-color: " + p->value("Body/BodyColor").toString() + ";}");
+    ui->NavbarBG->setFont(buttonFont);
+    ui->NavbarBG->setStyleSheet("background-color: " + p->value("NavBar/NavbarBG").toString() + ";}");
     ui->ResetAccents->setFont(buttonFont);
     ui->label_2->setStyleSheet("{color: #FFFFFF}");
     ui->ResetAccents->setText("Reset Colors to Default");
@@ -41,6 +45,8 @@ Settings::Settings(QSettings* p, QWidget* parent) : QWidget(parent), ui(new Ui::
     connect(ui->AccentButton, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_AccentButton_clicked()));
     connect(ui->AccentButton_2, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_AccentButton_2_clicked()));
     connect(ui->AccentButton_3, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_AccentButton_3_clicked()));
+    connect(ui->BodyColor, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_BodyColor_clicked()));
+    connect(ui->NavbarBG, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_NavbarBG_clicked()));
     connect(ui->ResetAccents, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_ResetAccents_clicked()));
 	connect(ui->ClearDatabaseButton, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_ClearDatabaseButton_clicked()));
 	if (!db.init())
@@ -75,7 +81,19 @@ void Settings::on_AccentButton_2_clicked()
 void Settings::on_AccentButton_3_clicked()
 {
     QColor color = QColorDialog::getColor(Qt::white);
-    updateAccent(3,color);
+    updateAccent(3, color);
+}
+
+void Settings::on_BodyColor_clicked()
+{
+    QColor color = QColorDialog::getColor(Qt::white);
+    updateBodyColor(color);
+}
+
+void Settings::on_NavbarBG_clicked()
+{
+    QColor color = QColorDialog::getColor(Qt::white);
+    updateNavbarBG(color);
 }
 
 void Settings::on_ResetAccents_clicked()
@@ -100,15 +118,23 @@ void Settings::on_ResetAccents_clicked()
         palette.endGroup();
 
         palette.beginGroup("Accent");
-
         palette.setValue("LightAccent", "#E58F12");
         palette.setValue("MediumAccent", "#895f06");
         palette.setValue("DarkAccent", "#6a4a05");
+        palette.endGroup();
+
+        palette.beginGroup("Body");
+        palette.setValue("BodyColor", "#111111");
+        palette.endGroup();
+        palette.beginGroup("NavBar");
+        palette.setValue("NavbarBG", "#111111");
         palette.endGroup();
     }
     ui->AccentButton->setStyleSheet("background-color: " + palette.value("Accent/LightAccent").toString() + ";}");
     ui->AccentButton_2->setStyleSheet("background-color: " + palette.value("Accent/MediumAccent").toString() + ";}");
     ui->AccentButton_3->setStyleSheet("background-color: " + palette.value("Accent/DarkAccent").toString() + ";}");
+    ui->BodyColor->setStyleSheet("background-color: " + palette.value("Body/BodyColor").toString() + ";}");
+    ui->NavbarBG->setStyleSheet("background-color: " + palette.value("NavBar/NavbarBG").toString() + ";}");
 }
 
 void Settings::updateAccent(int accent, QColor color)
@@ -127,6 +153,32 @@ void Settings::updateAccent(int accent, QColor color)
     if(accent == 1) ui->AccentButton->setStyleSheet("background-color: " + palette.value("Accent/LightAccent").toString() + ";}");
     if(accent == 2) ui->AccentButton_2->setStyleSheet("background-color: " + palette.value("Accent/MediumAccent").toString() + ";}");
     if(accent == 3) ui->AccentButton_3->setStyleSheet("background-color: " + palette.value("Accent/DarkAccent").toString() + ";}");
+}
+
+void Settings::updateBodyColor(QColor color) {
+    QSettings palette(QSettings::IniFormat, QSettings::UserScope, "Horizon Launcher", "palette");
+    if (palette.isWritable())
+    {
+        palette.beginGroup("Primary");
+        palette.endGroup();
+        palette.beginGroup("Body");
+        palette.setValue("BodyColor", color.name());
+        palette.endGroup();
+    }
+    ui->BodyColor->setStyleSheet("background-color: " + palette.value("Body/BodyColor").toString() + ";}");
+}
+
+void Settings::updateNavbarBG(QColor color) {
+    QSettings palette(QSettings::IniFormat, QSettings::UserScope, "Horizon Launcher", "palette");
+    if (palette.isWritable())
+    {
+        palette.beginGroup("Primary");
+        palette.endGroup();
+        palette.beginGroup("NavBar");
+        palette.setValue("NavbarBG", color.name());
+        palette.endGroup();
+    }
+    ui->NavbarBG->setStyleSheet("background-color: " + palette.value("NavBar/NavbarBG").toString() + ";}");
 }
 
 void Settings::on_ClearDatabaseButton_clicked()

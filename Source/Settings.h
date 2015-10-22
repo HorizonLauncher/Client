@@ -26,6 +26,11 @@ public slots:
     void on_AccentButton_3_clicked();
     void on_ResetAccents_clicked();
     void updateAccent(int accent, QColor color);
+    void updateBodyColor(QColor color);
+    void updateNavbarBG(QColor color);
+    void on_BodyColor_clicked();
+    void on_NavbarBG_clicked();
+
 public:
 	explicit Settings(QSettings* p, QWidget* parent = 0);
 	~Settings();
