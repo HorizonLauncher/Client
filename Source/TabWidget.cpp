@@ -60,7 +60,7 @@ TabWidget::TabWidget(const QString &name, const QString &text, QSettings* palett
     // Hover colorize effect
     opacity = 0;
     effect = new QGraphicsColorizeEffect();
-    effect->setColor(QColor(p->value("Primary/HoverSelection").toString()));
+    effect->setColor(QColor(p->value("Accent/MediumAccent").toString()));
     effect->setStrength(opacity);
     contentWidget->setGraphicsEffect(effect);
 
@@ -148,7 +148,7 @@ void TabWidget::toggleUnhovered()
 void TabWidget::toggleActive()
 {
     isActive = true;
-    effect->setColor(QColor("#9351e5"));
+    effect->setColor(QColor(p->value("Accent/LightAccent").toString()));
     tabText->setStyleSheet("color: #ffffff;");
     setOpacity(1.0);
 }
@@ -158,7 +158,7 @@ void TabWidget::toggleActive()
 void TabWidget::toggleInactive()
 {
     isActive = false;
-    effect->setColor(QColor(p->value("Primary/HoverSelection").toString()));
+    effect->setColor(QColor(p->value("Accent/DarkAccent").toString()));
     tabText->setStyleSheet("color: #7d8f94");
     setOpacity(0.0);
 }

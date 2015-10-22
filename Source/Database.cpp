@@ -63,7 +63,7 @@ bool Database::addGame(QString gameName, QString gameDirectory, QString executab
     query.bindValue(":executablePath", executablePath);
     query.bindValue(":arguments", arguments);
     query.bindValue(":drm", drm);
-    query.exec();
+    return query.exec();
 }
 
 /** Add games to the database and repopulate the games list.
