@@ -21,8 +21,6 @@ Library::Library(QSettings* p, QWidget* parent)
     this->setObjectName("libraryUI");
     this->setStyleSheet("#leftSidebar {"
                         "background-color: " + p->value("Primary/SecondaryBase").toString() + ";} "
-                        "#content {"
-                        "background-color: " + p->value("Primary/SecondaryBase").toString() + ";} "
                         "QPushButton {"
                         "color: " + p->value("Primary/LightText").toString() + "; "
                         "background-color: " + p->value("Primary/DarkElement").toString() + "; "

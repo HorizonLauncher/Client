@@ -24,7 +24,7 @@ MainPanel::MainPanel(QWidget* parent)
 
 /** Main initializer for the UI.
 * QObjects are initialized by depth - back to front.
-* Note that the sidebar is initialized as a derived class.
+* Note that the navbar is initialized as a derived class.
 */
 void MainPanel::init()
 {
@@ -50,6 +50,7 @@ void MainPanel::init()
     coreWidget->setObjectName("coreWidget");
     coreWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     scrollArea->setWidget(coreWidget);
+    coreWidget->setStyleSheet("background-color: " + p->value("Body/Background").toString() + ";");
 
     // Vertical layout #1
     QVBoxLayout* verticalLayout1 = new QVBoxLayout;
@@ -58,73 +59,63 @@ void MainPanel::init()
     verticalLayout1->setAlignment(Qt::AlignHCenter);
     coreWidget->setLayout(verticalLayout1);
 
-    // Accent border
-    QLabel* accentBorder = new QLabel(coreWidget);
-    accentBorder->setObjectName("accentBorder");
-    accentBorder->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-    accentBorder->setMaximumHeight(3);
-    accentBorder->setStyleSheet("border-top: 2px solid " + p->value("Accent/MediumAccent").toString() +
-                                ";border-bottom: 1px solid" + p->value("Accent/DarkAccent").toString() + ";");
-    accentBorder->adjustSize();
-    verticalLayout1->addWidget(accentBorder);
+    // Title bar widget
+    QWidget* borderWidget = new QWidget;
+    borderWidget->setStyleSheet("background-color: #F5F6F7;");
+    verticalLayout1->addWidget(borderWidget);
 
-    // Horizontal layout #1
-    QHBoxLayout* horizontalLayout1 = new QHBoxLayout;
-    horizontalLayout1->setSpacing(0);
-    horizontalLayout1->setMargin(0);
-    horizontalLayout1->setAlignment(Qt::AlignVCenter);
-    verticalLayout1->addLayout(horizontalLayout1);
-
-    // Sidebar widget - locked width
-    sidebar = new Sidebar(p, coreWidget);
-    horizontalLayout1->addWidget(sidebar);
-
-    // Backdrop widget - vertical layout #3
-    QWidget* mainPanelBackdrop = new QWidget(coreWidget);
-    mainPanelBackdrop->setObjectName("mainPanelBackdrop");
-    mainPanelBackdrop->setStyleSheet("QWidget#mainPanelBackdrop {background-color: " +
-                                     p->value("Primary/DarkestBase").toString() + ";}");
-    horizontalLayout1->addWidget(mainPanelBackdrop);
-
-    // Vertical layout #3
-    QVBoxLayout* verticalLayout3 = new QVBoxLayout;
-    verticalLayout3->setSpacing(0);
-    verticalLayout3->setMargin(0);
-    verticalLayout3->setAlignment(Qt::AlignHCenter);
-    mainPanelBackdrop->setLayout(verticalLayout3);
-
-    // Horizontal layout #2 - window controls
-    QHBoxLayout* horizontalLayout2 = new QHBoxLayout;
-    horizontalLayout2->setSpacing(0);
-    horizontalLayout2->setMargin(8);
-    verticalLayout3->addLayout(horizontalLayout2);
-
-    horizontalLayout2->addStretch();
+    // Window Control Horizontal Layout
+    QHBoxLayout* windowControlLayout = new QHBoxLayout;
+    windowControlLayout->setSpacing(0);
+    windowControlLayout->setMargin(8);
+    borderWidget->setLayout(windowControlLayout);
+    windowControlLayout->addStretch();
 
     // Window controls
     // Minimize
     QPushButton* pushButtonMinimize = new QPushButton("", coreWidget);
     pushButtonMinimize->setObjectName("pushButtonMinimize");
-    horizontalLayout2->addWidget(pushButtonMinimize);
+    windowControlLayout->addWidget(pushButtonMinimize);
     QObject::connect(pushButtonMinimize, SIGNAL(clicked()), this, SLOT(pushButtonMinimize()));
-
     // Maximize
     QPushButton* pushButtonMaximize = new QPushButton("", coreWidget);
     pushButtonMaximize->setObjectName("pushButtonMaximize");
-    horizontalLayout2->addWidget(pushButtonMaximize);
+    windowControlLayout->addWidget(pushButtonMaximize);
     QObject::connect(pushButtonMaximize, SIGNAL(clicked()), this, SLOT(pushButtonMaximize()));
-
     // Close
     QPushButton* pushButtonClose = new QPushButton("", coreWidget);
     pushButtonClose->setObjectName("pushButtonClose");
-    horizontalLayout2->addWidget(pushButtonClose);
+    windowControlLayout->addWidget(pushButtonClose);
     QObject::connect(pushButtonClose, SIGNAL(clicked()), this, SLOT(pushButtonClose()));
+
+    // Navbar
+    navbar = new Navbar(p, coreWidget);
+    verticalLayout1->addWidget(navbar);
+
+    // Main Horizontal Layout
+    QHBoxLayout* horizontalLayout = new QHBoxLayout;
+    horizontalLayout->setSpacing(0);
+    horizontalLayout->setMargin(0);
+    horizontalLayout->setAlignment(Qt::AlignVCenter);
+    verticalLayout1->addLayout(horizontalLayout);
+
+    // Backdrop widget
+    QWidget* mainPanelBackdrop = new QWidget(coreWidget);
+    mainPanelBackdrop->setObjectName("mainPanelBackdrop");
+    horizontalLayout->addWidget(mainPanelBackdrop);
+
+    // Vertical layout #2
+    QVBoxLayout* verticalLayout2 = new QVBoxLayout;
+    verticalLayout2->setSpacing(0);
+    verticalLayout2->setMargin(0);
+    verticalLayout2->setAlignment(Qt::AlignHCenter);
+    mainPanelBackdrop->setLayout(verticalLayout2);
 
     // Stacked content panel
     stack = new QStackedWidget(coreWidget);
     stack->setObjectName("stack");
     stack->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    verticalLayout3->addWidget(stack);
+    verticalLayout2->addWidget(stack);
 
     // Stack widgets
     home = new Homepage(p, stack);
@@ -138,18 +129,17 @@ void MainPanel::init()
     stack->setCurrentWidget(library);
 
     // Set active tab
-    activeTab = sidebar->gamesTab;
+    activeTab = navbar->gamesTab;
     activeTab->toggleActive();
 
     // Connect signals
-    connect(sidebar->homeTab, SIGNAL(clicked()), this, SLOT(setHome()));
-    // connect(sidebar->storeTab, SIGNAL(clicked()), this, SLOT(setStore()));
-    connect(sidebar->gamesTab, SIGNAL(clicked()), this, SLOT(setGames()));
-    connect(sidebar->communityTab, SIGNAL(clicked()), this, SLOT(setCommunity()));
-    // connect(sidebar->newsTab, SIGNAL(clicked()), this, SLOT(setNews()));
-    // connect(sidebar->downloadsTab, SIGNAL(clicked()), this, SLOT(setDownloads()));
-    connect(sidebar->settingsTab, SIGNAL(clicked()), this, SLOT(setSettings()));
-    connect(sidebar->exitTab, SIGNAL(clicked()), QApplication::instance(), SLOT(quit()));
+    connect(navbar->homeTab, SIGNAL(clicked()), this, SLOT(setHome()));
+    // connect(navbar->storeTab, SIGNAL(clicked()), this, SLOT(setStore()));
+    connect(navbar->gamesTab, SIGNAL(clicked()), this, SLOT(setGames()));
+    connect(navbar->communityTab, SIGNAL(clicked()), this, SLOT(setCommunity()));
+    // connect(navbar->newsTab, SIGNAL(clicked()), this, SLOT(setNews()));
+    // connect(navbar->modsTab, SIGNAL(clicked()), this, SLOT(setMods()));
+    connect(navbar->settingsTab, SIGNAL(clicked()), this, SLOT(setSettings()));
 
     // Show
     show();

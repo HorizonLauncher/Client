@@ -36,5 +36,8 @@
         <file alias="SourceCodePro-Medium.ttf">Fonts/SourceCodePro-Medium.ttf</file>
         <file alias="SourceCodePro-Regular.ttf">Fonts/SourceCodePro-Regular.ttf</file>
         <file alias="SourceCodePro-Semibold.ttf">Fonts/SourceCodePro-Semibold.ttf</file>
+        <file alias="Raleway-Regular.ttf">Fonts/Raleway-Regular.ttf</file>
+        <file alias="Raleway-Bold.ttf">Fonts/Raleway-Bold.ttf</file>
+        <file alias="Raleway-Italic.ttf">Fonts/Raleway-Italic.ttf</file>
     </qresource>
 </RCC>

@@ -109,10 +109,10 @@
      </rect>
     </property>
     <property name="text">
-     <string>Light Accent</string>
+     <string>Body Background</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="AccentButton">
+   <widget class="QPushButton" name="BodyColor">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -125,7 +125,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="AccentButton_2">
+   <widget class="QPushButton" name="NavbarBG">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -148,10 +148,10 @@
      </rect>
     </property>
     <property name="text">
-     <string>Medium Accent</string>
+     <string>Navbar Background</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="AccentButton_3">
+   <widget class="QPushButton" name="NavbarHover">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -174,14 +174,40 @@
      </rect>
     </property>
     <property name="text">
-     <string>Dark Accent</string>
+     <string>Navbar Hover</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="ResetAccents">
+   <widget class="QPushButton" name="NavbarSelected">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>140</y>
+      <width>21</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>140</y>
+      <width>81</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Navbar Selected</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ResetColors">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>180</y>
       <width>141</width>
       <height>23</height>
      </rect>

@@ -21,11 +21,9 @@ set(SOURCE
     Source/MainPanel.cpp
     Source/Database.cpp
     Source/DRMSetupWizard.cpp
-    Source/Sidebar.cpp
-    Source/Sidebar.cpp
+    Source/Navbar.cpp
     Source/Homepage.cpp
     Source/BuddyList.cpp
-    Source/BuddyWidget.cpp
     Source/Community.cpp
     Source/AddGameWizard.cpp
     Source/Settings.cpp
@@ -38,12 +36,11 @@ set(HEADERS
     Source/MainPanel.h
     Source/Database.h
     Source/Init.h
-    Source/Sidebar.h
+    Source/Navbar.h
     Source/Libs/SteamVdfParse.hpp
     Source/DRMSetupWizard.h
     Source/Homepage.h
     Source/BuddyList.h
-    Source/BuddyWidget.h
     Source/Community.h
     Source/AddGameWizard.h
     Source/Settings.h
@@ -62,7 +59,6 @@ set(RESOURCES
     Resource/Icons.qrc
     Resource/Fonts.qrc
     Resource/Styles.qrc
-    Resource/Elements.qrc
 )
 
 set(GUI_TYPE "")
