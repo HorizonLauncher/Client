@@ -50,7 +50,7 @@ void MainPanel::init()
     coreWidget->setObjectName("coreWidget");
     coreWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     scrollArea->setWidget(coreWidget);
-    coreWidget->setStyleSheet("background-color: #212121;");
+    coreWidget->setStyleSheet("background-color: " + p->value("Body/Background").toString() + ";");
 
     // Vertical layout #1
     QVBoxLayout* verticalLayout1 = new QVBoxLayout;

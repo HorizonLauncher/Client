@@ -13,42 +13,55 @@ Settings::Settings(QSettings* p, QWidget* parent) : QWidget(parent), ui(new Ui::
 	this->setObjectName("settingsUI");
 	this->setStyleSheet("background-color: " + p->value("Primary/SecondaryBase").toString() + ";} "
         "QLabel { color:  #ffffff;}"
-		"QPushButton {"
-		"color: " + p->value("Primary/LightText").toString() + "; "
-		"background-color: " + p->value("Primary/DarkElement").toString() + "; "
-		"border: none; margin: 0px; padding: 0px;} "
-		"QPushButton:hover {"
-		"background-color: " + p->value("Primary/InactiveSelection").toString() + ";} "
-		"color: " + p->value("Primary/LightText").toString() + ";");
-	QFont buttonFont("SourceSansPro", 9);
-	ui->WizardButton->setFont(buttonFont);
-	ui->WizardButton->setText("Add Games to Horizon");
-	ui->ClearDatabaseButton->setFont(buttonFont);
-	ui->ClearDatabaseButton->setText("Clear Database");
-	ui->AccentButton->setFont(buttonFont);
-    ui->AccentButton->setStyleSheet("background-color: " + p->value("Accent/LightAccent").toString() + ";}");
-    ui->AccentButton_2->setFont(buttonFont);
-    ui->AccentButton_2->setStyleSheet("background-color: " + p->value("Accent/MediumAccent").toString() + ";}");
-    ui->AccentButton_3->setFont(buttonFont);
-    ui->AccentButton_3->setStyleSheet("background-color: " + p->value("Accent/DarkAccent").toString() + ";}");
-    ui->ResetAccents->setFont(buttonFont);
+        "QPushButton {"
+        "color: " + p->value("Primary/LightText").toString() + "; "
+        "background-color: " + p->value("Primary/DarkElement").toString() + "; "
+        "border: none; margin: 0px; padding: 0px;} "
+        "QPushButton:hover {"
+        "background-color: " + p->value("Primary/InactiveSelection").toString() + ";} "
+        "color: " + p->value("Primary/LightText").toString() + ";");
+
+    QFont buttonFont("SourceSansPro", 9);
+
+    ui->WizardButton->setFont(buttonFont);
+    ui->WizardButton->setText("Add Games to Horizon");
+
+    ui->ClearDatabaseButton->setFont(buttonFont);
+    ui->ClearDatabaseButton->setText("Clear Database");
+
+    ui->BodyColor->setFont(buttonFont);
+    ui->BodyColor->setStyleSheet("background-color: " + p->value("Body/Background").toString() + ";}");
+
+    ui->NavbarBG->setFont(buttonFont);
+    ui->NavbarBG->setStyleSheet("background-color: " + p->value("Navbar/Background").toString() + ";}");
+
+    ui->NavbarHover->setFont(buttonFont);
+    ui->NavbarHover->setStyleSheet("background-color: " + p->value("Navbar/HoverColor").toString() + ";}");
+
+    ui->NavbarSelected->setFont(buttonFont);
+    ui->NavbarSelected->setStyleSheet("background-color: " + p->value("Navbar/SelectedColor").toString() + ";}");
+
+    ui->ResetColors->setFont(buttonFont);
+
     ui->label_2->setStyleSheet("{color: #FFFFFF}");
-    ui->ResetAccents->setText("Reset Colors to Default");
     ui->UserSettingsBox->setStyleSheet("color: #FFFFFF;} ");
     ui->ClientSettingsBox->setStyleSheet("color: #FFFFFF;} ");
     ui->StyleSettingsBox->setStyleSheet("color: #FFFFFF;} ");
+
 	connect(ui->WizardButton, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_WizardButton_clicked()));
-    connect(ui->AccentButton, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_AccentButton_clicked()));
-    connect(ui->AccentButton_2, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_AccentButton_2_clicked()));
-    connect(ui->AccentButton_3, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_AccentButton_3_clicked()));
-    connect(ui->ResetAccents, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_ResetAccents_clicked()));
-	connect(ui->ClearDatabaseButton, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_ClearDatabaseButton_clicked()));
-	if (!db.init())
-	{
-		QMessageBox error;
-		error.critical(0, "Error!", "An error occured while trying to load the database.");
-		exit(EXIT_FAILURE);
-	}
+    connect(ui->BodyColor, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_BodyColor_clicked()));
+    connect(ui->NavbarBG, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_NavbarBG_clicked()));
+    connect(ui->NavbarHover, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_NavbarHover_clicked()));
+    connect(ui->NavbarSelected, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_NavbarSelected_clicked()));
+    connect(ui->ResetColors, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_ResetColors_clicked()));
+    connect(ui->ClearDatabaseButton, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_ClearDatabaseButton_clicked()));
+
+    if (!db.init())
+    {
+        QMessageBox error;
+        error.critical(0, "Error!", "An error occured while trying to load the database.");
+        exit(EXIT_FAILURE);
+    }
 }
 
 /** Event handler for Wizard Button
@@ -56,36 +69,41 @@ Settings::Settings(QSettings* p, QWidget* parent) : QWidget(parent), ui(new Ui::
 */
 void Settings::on_WizardButton_clicked()
 {
-	DRMSetupWizard* wiz = new DRMSetupWizard();
-	wiz->show();
+    DRMSetupWizard* wiz = new DRMSetupWizard();
+    wiz->show();
 }
 
-void Settings::on_AccentButton_clicked()
+void Settings::on_BodyColor_clicked()
 {
     QColor color = QColorDialog::getColor(Qt::white);
-    updateAccent(1,color);
+    updateColor(1, color);
 }
 
-void Settings::on_AccentButton_2_clicked()
+void Settings::on_NavbarBG_clicked()
 {
     QColor color = QColorDialog::getColor(Qt::white);
-    updateAccent(2,color);
+    updateColor(2, color);
 }
 
-void Settings::on_AccentButton_3_clicked()
+void Settings::on_NavbarHover_clicked()
 {
     QColor color = QColorDialog::getColor(Qt::white);
-    updateAccent(3,color);
+    updateColor(3, color);
 }
 
-void Settings::on_ResetAccents_clicked()
+void Settings::on_NavbarSelected_clicked()
+{
+    QColor color = QColorDialog::getColor(Qt::white);
+    updateColor(4, color);
+}
+
+void Settings::on_ResetColors_clicked()
 {
     QSettings palette(QSettings::IniFormat, QSettings::UserScope, "Horizon Launcher", "palette");
 
     if (palette.isWritable())
     {
         palette.beginGroup("Primary");
-
         palette.setValue("ActiveElement", "#FFFFFF");
         palette.setValue("InactiveSelection", "#686868");
         palette.setValue("HoverSelection", "#ADADAD");
@@ -99,52 +117,91 @@ void Settings::on_ResetAccents_clicked()
         palette.setValue("DarkestBase", "#0F0F0F");
         palette.endGroup();
 
-        palette.beginGroup("Accent");
+        palette.beginGroup("Body");
+        palette.setValue("Background", "#212121");
+        palette.endGroup();
 
-        palette.setValue("LightAccent", "#E58F12");
-        palette.setValue("MediumAccent", "#895f06");
-        palette.setValue("DarkAccent", "#6a4a05");
+        palette.beginGroup("Navbar");
+        palette.setValue("Background", "#111111");
+        palette.setValue("SelectedColor", "#9351E5");
+        palette.setValue("HoverColor", "#ADADAD");
+        palette.endGroup();
+
+        palette.beginGroup("TitleBar");
+        palette.setValue("Color", "#F5F6F7");
         palette.endGroup();
     }
-    ui->AccentButton->setStyleSheet("background-color: " + palette.value("Accent/LightAccent").toString() + ";}");
-    ui->AccentButton_2->setStyleSheet("background-color: " + palette.value("Accent/MediumAccent").toString() + ";}");
-    ui->AccentButton_3->setStyleSheet("background-color: " + palette.value("Accent/DarkAccent").toString() + ";}");
+
+    ui->BodyColor->setStyleSheet("background-color: " + palette.value("Body/Background").toString() + ";}");
+    ui->NavbarBG->setStyleSheet("background-color: " + palette.value("Navbar/Background").toString() + ";}");
+    ui->NavbarHover->setStyleSheet("background-color: " + palette.value("Navbar/HoverColor").toString() + ";}");
+    ui->NavbarSelected->setStyleSheet("background-color: " + palette.value("Navbar/SelectedColor").toString() + ";}");
 }
 
-void Settings::updateAccent(int accent, QColor color)
+void Settings::updateColor(int id, QColor color)
 {
+    if (!color.isValid())
+    {
+        return;
+    }
+
     QSettings palette(QSettings::IniFormat, QSettings::UserScope, "Horizon Launcher", "palette");
+
     if (palette.isWritable())
     {
-        palette.beginGroup("Primary");
-        palette.endGroup();
-        palette.beginGroup("Accent");
-        if(accent == 1) palette.setValue("LightAccent", color.name());
-        if(accent == 2) palette.setValue("MediumAccent", color.name());
-        if(accent == 3) palette.setValue("DarkAccent", color.name());
-        palette.endGroup();
+        if (id == 1) // Body/Background
+        {
+            palette.beginGroup("Body");
+            palette.setValue("Background", color.name());
+            palette.endGroup();
+
+            ui->BodyColor->setStyleSheet("background-color: " + color.name() + ";}");
+        }
+        else if (id <= 4) // Navbar
+        {
+            palette.beginGroup("Navbar");
+            if (id == 2) // Background
+            {
+                palette.setValue("Background", color.name());
+                ui->NavbarBG->setStyleSheet("background-color: " + color.name() + ";}");
+            }
+            else if (id == 3) // Hover
+            {
+                palette.setValue("HoverColor", color.name());
+                ui->NavbarHover->setStyleSheet("background-color: " + color.name() + ";}");
+            }
+            else if (id == 4) // Selected
+            {
+                palette.setValue("SelectedColor", color.name());
+                ui->NavbarSelected->setStyleSheet("background-color: " + color.name() + ";}");
+            }
+            palette.endGroup();
+        }
+        else if (id == 5)
+        {
+            palette.beginGroup("TitleBar");
+            palette.setValue("Color", color.name());
+            palette.endGroup();
+        }
     }
-    if(accent == 1) ui->AccentButton->setStyleSheet("background-color: " + palette.value("Accent/LightAccent").toString() + ";}");
-    if(accent == 2) ui->AccentButton_2->setStyleSheet("background-color: " + palette.value("Accent/MediumAccent").toString() + ";}");
-    if(accent == 3) ui->AccentButton_3->setStyleSheet("background-color: " + palette.value("Accent/DarkAccent").toString() + ";}");
 }
 
 void Settings::on_ClearDatabaseButton_clicked()
 {
-	int ret = QMessageBox(QMessageBox::Question, "Deleting Database", "Proceeding will delete the database, the database will be non-recoverable. Proceed?", QMessageBox::Yes | QMessageBox::No).exec();
-	switch (ret)
-	{
-	case QMessageBox::Yes:
-		db.reset();
-		break;
-	case QMessageBox::No:
-		break;
-	default:
-		break;
-	}
+    int ret = QMessageBox(QMessageBox::Question, "Deleting Database", "Proceeding will delete the database, the database will be non-recoverable. Proceed?", QMessageBox::Yes | QMessageBox::No).exec();
+    switch (ret)
+    {
+        case QMessageBox::Yes:
+            db.reset();
+            break;
+        case QMessageBox::No:
+            break;
+        default:
+            break;
+    }
 }
 
 Settings::~Settings()
 {
-	delete ui;
+    delete ui;
 }

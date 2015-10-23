@@ -18,7 +18,7 @@ Navbar::Navbar(QSettings* p, QWidget* parent)
 
     setMinimumHeight(50);
     setMaximumHeight(50);
-    setStyleSheet("background-color: #111111;");
+    setStyleSheet("background-color: " + p->value("Navbar/Background").toString() + ";");
 
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
