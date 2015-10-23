@@ -4,10 +4,12 @@
 #include <QSettings>
 #include <string>
 #include <QDebug>
+#include <QListWidgetItem>
 
 News::News(QSettings* p, QWidget* parent) :
     QWidget(parent),
-    ui(new Ui::News)
+
+    ui(new Ui::NewsPanel)
 {
     ui->setupUi(this);
     this->setObjectName("NewsUI");
@@ -21,7 +23,7 @@ News::News(QSettings* p, QWidget* parent) :
                         "border: none; margin: 0px; padding: 0px;} "
                         "QPushButton:hover {"
                         "background-color: " + p->value("Primary/InactiveSelection").toString() + ";} "
-                        "QListWidget {"
+                        "QVBoxLayout {"
                         "background-color: " + p->value("Primary/TertiaryBase").toString() + "; "
                         "color: " + p->value("Primary/LightText").toString() + ";}"
                         "QLabel {"
@@ -29,6 +31,7 @@ News::News(QSettings* p, QWidget* parent) :
                         "font-family: SourceSansPro;"
                         "}"
                         "#gameNameLabel { font-size: 20px; }");
+    this->settings = p;
 
     loadXML();
 }
@@ -45,7 +48,7 @@ void News::loadXML()
     QNetworkRequest* req = new QNetworkRequest(url);
 
 
-   req->setRawHeader("User-Agent", "Horizon Launcher");
+    req->setRawHeader("User-Agent", "Horizon Launcher");
 
     QNetworkReply* reply = manager->get(*req);
 
@@ -93,7 +96,21 @@ void News::onFetchComplete()
 
             if (reader.name() == "title") {
 
-                ui->newsList->addItem(reader.readElementText());
+               NewsItemWidget* currentItemWidget = new NewsItemWidget(settings, this);
+               QString title = reader.readElementText();
+               QListWidgetItem* item = new QListWidgetItem(" ");
+               currentItemWidget->titleLabel->setText(title);
+
+               QString text = "";
+
+               while (reader.name() != "description") {
+                   reader.readNext();
+               }
+
+               text = this->parseElementText(reader.readElementText());
+               currentItemWidget->contentLabel->setText(text);
+
+               ui->firstColumn->addWidget(currentItemWidget);
 
             }
 
@@ -103,6 +120,12 @@ void News::onFetchComplete()
     }
 
     reply->deleteLater();
+}
+
+QString News::parseElementText(QString input) {
+
+    qDebug() << input;
+    return input;
 }
 
 

@@ -22,9 +22,15 @@
 
 #include <qxmlstream.h>
 
+/*
+ * Custom Widget Headers
+ */
+
+#include "newsitemwidget.h"
+
 
 namespace Ui {
-class News;
+class NewsPanel;
 }
 
 class News : public QWidget
@@ -40,8 +46,10 @@ public slots:
     void errorOccured(QNetworkReply::NetworkError);
 
 private:
-    Ui::News *ui;
+    Ui::NewsPanel *ui;
     void loadXML();
+    QString parseElementText(QString);
+    QSettings* settings;
 };
 
 #endif // News_H

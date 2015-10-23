@@ -122,10 +122,12 @@ void MainPanel::init()
     library = new Library(p, stack);
     community = new Community(p, stack);
 	settings = new Settings(p, stack);
+    news = new News(p, stack);
     stack->addWidget(home);
     stack->addWidget(library);
     stack->addWidget(community);
 	stack->addWidget(settings);
+    stack->addWidget(news);
     stack->setCurrentWidget(library);
 
     // Set active tab
@@ -137,7 +139,7 @@ void MainPanel::init()
     // connect(navbar->storeTab, SIGNAL(clicked()), this, SLOT(setStore()));
     connect(navbar->gamesTab, SIGNAL(clicked()), this, SLOT(setGames()));
     connect(navbar->communityTab, SIGNAL(clicked()), this, SLOT(setCommunity()));
-    // connect(navbar->newsTab, SIGNAL(clicked()), this, SLOT(setNews()));
+    connect(navbar->newsTab, SIGNAL(clicked()), this, SLOT(setNews()));
     // connect(navbar->modsTab, SIGNAL(clicked()), this, SLOT(setMods()));
     connect(navbar->settingsTab, SIGNAL(clicked()), this, SLOT(setSettings()));
 
