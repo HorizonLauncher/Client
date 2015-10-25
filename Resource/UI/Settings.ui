@@ -256,22 +256,6 @@
                 </property>
             </widget>
         </widget>
-        <widget class="QGroupBox" name="groupBox_4">
-            <property name="geometry">
-                <rect>
-                    <x>390</x>
-                    <y>260</y>
-                    <width>161</width>
-                    <height>211</height>
-                </rect>
-            </property>
-            <property name="title">
-                <string>-</string>
-            </property>
-            <property name="alignment">
-                <set>Qt::AlignCenter</set>
-            </property>
-        </widget>
     </widget>
     <resources/>
     <connections/>
