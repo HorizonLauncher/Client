@@ -42,7 +42,8 @@ public:
     ~News();
 
 public slots:
-    void onFetchComplete();
+    void onFetchCompleteIGN();
+    void onFetchCompletePCGamer();
     void errorOccured(QNetworkReply::NetworkError);
 
 private:

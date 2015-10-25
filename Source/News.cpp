@@ -40,20 +40,20 @@ void News::loadXML()
 
 {
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
-    std::string urlString = "http://feeds.ign.com/ign/news?format=xml";
+    std::string IGNurlString = "http://feeds.ign.com/ign/news?format=xml";
+    const QUrl IGNurl(QString::fromStdString(IGNurlString));
+    QNetworkRequest* IGNreq = new QNetworkRequest(IGNurl);
+    IGNreq->setRawHeader("User-Agent", "Horizon Launcher");
+    QNetworkReply* IGNreply = manager->get(*IGNreq);
+    QObject::connect(IGNreply, SIGNAL(finished()), this, SLOT(onFetchCompleteIGN()));
+   // QObject::connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(errorOccured(QNetworkReply::NetworkError)));
 
-    const QUrl url(QString::fromStdString(urlString));
-
-
-    QNetworkRequest* req = new QNetworkRequest(url);
-
-
-    req->setRawHeader("User-Agent", "Horizon Launcher");
-
-    QNetworkReply* reply = manager->get(*req);
-
-    QObject::connect(reply, SIGNAL(finished()), this, SLOT(onFetchComplete()));
-    QObject::connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(errorOccured(QNetworkReply::NetworkError)));
+    std::string PCGamerUrlString = "http://feeds.feedburner.com/RockPaperShotgun?format=xml";
+    const QUrl PCGamerUrl (QString::fromStdString(PCGamerUrlString));
+    QNetworkRequest* PCGamerReq = new QNetworkRequest(PCGamerUrl);
+    PCGamerReq->setRawHeader("User-Agent", "Horizon Launcher");
+    QNetworkReply* PCGamerReply = manager->get(*PCGamerReq);
+    QObject::connect(PCGamerReply, SIGNAL(finished()), this, SLOT (onFetchCompletePCGamer()));
 
 }
 
@@ -69,7 +69,7 @@ void News::errorOccured(QNetworkReply::NetworkError)
        qDebug("error");
 }
 
-void News::onFetchComplete()
+void News::onFetchCompleteIGN()
 
 {\
     QNetworkReply *reply = (QNetworkReply*)sender();
@@ -81,7 +81,6 @@ void News::onFetchComplete()
     QByteArray array = reply->readAll();
 
     QXmlStreamReader reader(array);
-
 
     if (reader.hasError()) {
 
@@ -109,7 +108,6 @@ void News::onFetchComplete()
 
                text = this->parseElementText(reader.readElementText());
                currentItemWidget->contentLabel->setText(text);
-
                ui->firstColumn->addWidget(currentItemWidget);
 
             }
@@ -117,14 +115,69 @@ void News::onFetchComplete()
         }
 
         reader.readNext();
+
     }
 
     reply->deleteLater();
 }
 
+
+
+void News::onFetchCompletePCGamer () {
+
+    QNetworkReply *reply = (QNetworkReply*)sender();
+
+    if (reply->error()) {
+        qDebug("Error with network request");
+    }
+
+    QByteArray array = reply->readAll();
+
+    qDebug() << "fetch complete";
+
+    QXmlStreamReader reader(array);
+
+    if (reader.hasError()) {
+
+        qDebug("Error parsing XML");
+    }
+
+    reader.readNextStartElement();
+
+    while(!reader.atEnd()) {
+
+
+        if (reader.isStartElement()) {
+
+            if (reader.name() == "title") {
+
+                NewsItemWidget* currentItemWidget = new NewsItemWidget(settings, this);
+                QString title = reader.readElementText();
+                QListWidgetItem* item = new QListWidgetItem(" ");
+                currentItemWidget->titleLabel->setText(title);
+
+                QString text = "";
+
+                while (reader.name() != "description") {
+                    reader.readNext();
+                }
+
+                text = this->parseElementText(reader.readElementText());
+                currentItemWidget->contentLabel->setText(text);
+                ui->secondColumn->addWidget(currentItemWidget);
+
+            }
+
+        }
+
+        reader.readNextStartElement();
+    }
+
+}
+
 QString News::parseElementText(QString input) {
 
-    qDebug() << input;
+   // qDebug() << input;
     return input;
 }
 
