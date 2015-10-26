@@ -44,6 +44,7 @@ public:
 public slots:
     void onFetchCompleteIGN();
     void onFetchCompletePCGamer();
+    void onFetchCompleteReddit();
     void errorOccured(QNetworkReply::NetworkError);
 
 private:

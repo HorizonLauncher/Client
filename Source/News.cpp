@@ -5,6 +5,7 @@
 #include <string>
 #include <QDebug>
 #include <QListWidgetItem>
+#include <QtNetwork>
 
 News::News(QSettings* p, QWidget* parent) :
     QWidget(parent),
@@ -54,6 +55,15 @@ void News::loadXML()
     PCGamerReq->setRawHeader("User-Agent", "Horizon Launcher");
     QNetworkReply* PCGamerReply = manager->get(*PCGamerReq);
     QObject::connect(PCGamerReply, SIGNAL(finished()), this, SLOT (onFetchCompletePCGamer()));
+
+
+    std::string PCMRUrlString = "http://www.reddit.com/r/pcmasterrace.rss";
+    const QUrl PCMRUrl (QString::fromStdString(PCMRUrlString));
+    QNetworkRequest* PCMRReq = new QNetworkRequest(PCMRUrl);
+    PCMRReq->setRawHeader("User-Agent", "Horizon Launcher");
+    QNetworkReply* PCMRReply = manager->get(*PCMRReq);
+    QObject::connect(PCMRReply, SIGNAL(finished()), this, SLOT (onFetchCompleteReddit()));
+
 
 }
 
@@ -172,6 +182,61 @@ void News::onFetchCompletePCGamer () {
 
         reader.readNextStartElement();
     }
+
+}
+
+
+void News::onFetchCompleteReddit() {
+    \
+    QNetworkReply *reply = (QNetworkReply*)sender();
+
+    if (reply->error()) {
+        qDebug() << reply->errorString();
+    }
+
+    QByteArray array = reply->readAll();
+
+    qDebug() << "fetch complete";
+
+    QXmlStreamReader reader(array);
+
+    if (reader.hasError()) {
+
+        qDebug("Error parsing XML");
+    }
+
+    reader.readNextStartElement();
+
+    while(!reader.atEnd()) {
+
+        if (reader.isStartElement()) {
+
+           if (reader.name() == "title") {
+
+               NewsItemWidget* currentItemWidget = new NewsItemWidget(settings, this);
+               QString title = reader.readElementText();
+               QListWidgetItem* item = new QListWidgetItem(" ");
+               currentItemWidget->titleLabel->setText(title);
+
+               QString text = "";
+
+               while (reader.name() != "link") {
+                   reader.readNext();
+               }
+
+               text = this->parseElementText(reader.readElementText());
+               currentItemWidget->contentLabel->setText(text);
+               ui->thirdColumn->addWidget(currentItemWidget);
+               reader.readNextStartElement();
+               while (reader.name() != "title") reader.readNext();
+               reader.readNext();
+
+           }
+        }
+
+        reader.readNext();
+    }
+
 
 }
 
