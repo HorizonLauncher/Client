@@ -15,15 +15,7 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
-    <layout class="QVBoxLayout" name="firstColumn">
-     <item>
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <layout class="QVBoxLayout" name="firstColumn"/>
    </item>
    <item>
     <layout class="QVBoxLayout" name="secondColumn"/>

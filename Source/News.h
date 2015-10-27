@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QSettings>
+#include <QVector>
 
 /*
  * Networking headers for consuming RSS
@@ -43,15 +44,17 @@ public:
 
 public slots:
     void onFetchCompleteIGN();
-    void onFetchCompletePCGamer();
+    void onFetchCompleteRPS();
     void onFetchCompleteReddit();
-    void errorOccured(QNetworkReply::NetworkError);
 
 private:
     Ui::NewsPanel *ui;
     void loadXML();
+    void reloadHeadlines();
     QString parseElementText(QString);
     QSettings* settings;
+    QVector<QWidget*> headlines;
+
 };
 
 #endif // News_H

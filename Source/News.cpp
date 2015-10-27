@@ -30,8 +30,7 @@ News::News(QSettings* p, QWidget* parent) :
                         "QLabel {"
                         "color: " + p->value("Primary/LightText").toString() + ";"
                         "font-family: SourceSansPro;"
-                        "}"
-                        "#gameNameLabel { font-size: 20px; }");
+                        "}");
     this->settings = p;
 
     loadXML();
@@ -47,15 +46,13 @@ void News::loadXML()
     IGNreq->setRawHeader("User-Agent", "Horizon Launcher");
     QNetworkReply* IGNreply = manager->get(*IGNreq);
     QObject::connect(IGNreply, SIGNAL(finished()), this, SLOT(onFetchCompleteIGN()));
-   // QObject::connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(errorOccured(QNetworkReply::NetworkError)));
 
-    std::string PCGamerUrlString = "http://feeds.feedburner.com/RockPaperShotgun?format=xml";
-    const QUrl PCGamerUrl (QString::fromStdString(PCGamerUrlString));
-    QNetworkRequest* PCGamerReq = new QNetworkRequest(PCGamerUrl);
-    PCGamerReq->setRawHeader("User-Agent", "Horizon Launcher");
-    QNetworkReply* PCGamerReply = manager->get(*PCGamerReq);
-    QObject::connect(PCGamerReply, SIGNAL(finished()), this, SLOT (onFetchCompletePCGamer()));
-
+    std::string RPSUrlString = "http://feeds.feedburner.com/RockPaperShotgun?format=xml";
+    const QUrl RPSGamerUrl (QString::fromStdString(RPSUrlString));
+    QNetworkRequest* RPSReq = new QNetworkRequest(RPSUrl);
+    RPSReq->setRawHeader("User-Agent", "Horizon Launcher");
+    QNetworkReply* RPSReply = manager->get(*RPSReq);
+    QObject::connect(RPSReply, SIGNAL(finished()), this, SLOT (onFetchCompleteRPS()));
 
     std::string PCMRUrlString = "http://www.reddit.com/r/pcmasterrace.rss";
     const QUrl PCMRUrl (QString::fromStdString(PCMRUrlString));
@@ -69,19 +66,12 @@ void News::loadXML()
 
 News::~News()
 {
-    qDebug("deleted");
     delete ui;
-}
-
-void News::errorOccured(QNetworkReply::NetworkError)
-
-{
-       qDebug("error");
 }
 
 void News::onFetchCompleteIGN()
 
-{\
+{
     QNetworkReply *reply = (QNetworkReply*)sender();
 
     if (reply->error()) {
@@ -108,17 +98,16 @@ void News::onFetchCompleteIGN()
                NewsItemWidget* currentItemWidget = new NewsItemWidget(settings, this);
                QString title = reader.readElementText();
                QListWidgetItem* item = new QListWidgetItem(" ");
-               currentItemWidget->titleLabel->setText(title);
+               currentItemWidget->titleLabel->setText(title + " [IGN]");
 
                QString text = "";
 
-               while (reader.name() != "description") {
+               while (reader.name() != "link") {
                    reader.readNext();
                }
 
-               text = this->parseElementText(reader.readElementText());
-               currentItemWidget->contentLabel->setText(text);
-               ui->firstColumn->addWidget(currentItemWidget);
+               currentItemWidget->urlString = reader.readElementText();
+               headlines.append(currentItemWidget);
 
             }
 
@@ -129,11 +118,10 @@ void News::onFetchCompleteIGN()
     }
 
     reply->deleteLater();
+    reloadHeadlines();
 }
 
-
-
-void News::onFetchCompletePCGamer () {
+void News::onFetchCompleteRPS () {
 
     QNetworkReply *reply = (QNetworkReply*)sender();
 
@@ -156,7 +144,6 @@ void News::onFetchCompletePCGamer () {
 
     while(!reader.atEnd()) {
 
-
         if (reader.isStartElement()) {
 
             if (reader.name() == "title") {
@@ -164,24 +151,25 @@ void News::onFetchCompletePCGamer () {
                 NewsItemWidget* currentItemWidget = new NewsItemWidget(settings, this);
                 QString title = reader.readElementText();
                 QListWidgetItem* item = new QListWidgetItem(" ");
-                currentItemWidget->titleLabel->setText(title);
+                currentItemWidget->titleLabel->setText(title + " [Rock, Paper, Shotgun]");
 
                 QString text = "";
 
-                while (reader.name() != "description") {
+                while (reader.name() != "link") {
+                    qDebug() << "fetching RPS data" << endl;
                     reader.readNext();
                 }
 
-                text = this->parseElementText(reader.readElementText());
-                currentItemWidget->contentLabel->setText(text);
-                ui->secondColumn->addWidget(currentItemWidget);
-
+                currentItemWidget->urlString = reader.readElementText();
+                headlines.append(currentItemWidget);
             }
 
         }
 
-        reader.readNextStartElement();
+        reader.readNext();
     }
+
+    reloadHeadlines();
 
 }
 
@@ -195,8 +183,6 @@ void News::onFetchCompleteReddit() {
     }
 
     QByteArray array = reply->readAll();
-
-    qDebug() << "fetch complete";
 
     QXmlStreamReader reader(array);
 
@@ -216,17 +202,19 @@ void News::onFetchCompleteReddit() {
                NewsItemWidget* currentItemWidget = new NewsItemWidget(settings, this);
                QString title = reader.readElementText();
                QListWidgetItem* item = new QListWidgetItem(" ");
-               currentItemWidget->titleLabel->setText(title);
+               currentItemWidget->titleLabel->setText(title + " [reddit]");
 
                QString text = "";
 
                while (reader.name() != "link") {
-                   reader.readNext();
+                   reader.readNextStartElement();
                }
 
                text = this->parseElementText(reader.readElementText());
+               currentItemWidget->urlString = text;
+
+               headlines.append(currentItemWidget);
                currentItemWidget->contentLabel->setText(text);
-               ui->thirdColumn->addWidget(currentItemWidget);
                reader.readNextStartElement();
                while (reader.name() != "title") reader.readNext();
                reader.readNext();
@@ -234,15 +222,26 @@ void News::onFetchCompleteReddit() {
            }
         }
 
-        reader.readNext();
+        reader.readNextStartElement();
     }
 
+    reloadHeadlines();
 
 }
 
-QString News::parseElementText(QString input) {
+void News::reloadHeadlines() {
 
-   // qDebug() << input;
+    int size = headlines.size();
+
+    for (int i = 0; i < 9; ++i) {
+
+        ui->firstColumn->addWidget(headlines.at(qrand() % size));
+        ui->secondColumn->addWidget(headlines.at(qrand() % size));
+        ui->thirdColumn->addWidget(headlines.at(qrand() % size));
+    }
+}
+
+QString News::parseElementText(QString input) {
     return input;
 }
 
