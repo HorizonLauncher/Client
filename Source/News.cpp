@@ -48,7 +48,7 @@ void News::loadXML()
     QObject::connect(IGNreply, SIGNAL(finished()), this, SLOT(onFetchCompleteIGN()));
 
     std::string RPSUrlString = "http://feeds.feedburner.com/RockPaperShotgun?format=xml";
-    const QUrl RPSGamerUrl (QString::fromStdString(RPSUrlString));
+    const QUrl RPSUrl (QString::fromStdString(RPSUrlString));
     QNetworkRequest* RPSReq = new QNetworkRequest(RPSUrl);
     RPSReq->setRawHeader("User-Agent", "Horizon Launcher");
     QNetworkReply* RPSReply = manager->get(*RPSReq);

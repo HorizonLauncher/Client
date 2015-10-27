@@ -11,7 +11,6 @@ NewsItemWidget::NewsItemWidget(QSettings* p, QWidget *parent) : QWidget(parent)
                 "color: " + p->value("Primary/LightText").toString() + ";"
                 "font-family: SourceSansPro;" +
                 "}" +
-
                 "QLabel: hover { background-color: yellow } "
                 );
     titleLabel = new QLabel ("1 ");
@@ -19,7 +18,6 @@ NewsItemWidget::NewsItemWidget(QSettings* p, QWidget *parent) : QWidget(parent)
     contentLabel = new QLabel ("1 ");
     contentLabel->setWordWrap(true);
     layout->addWidget(titleLabel);
-   // layout->addWidget(contentLabel);
     this->setLayout(layout);
     source = "";
 }
