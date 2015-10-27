@@ -66,13 +66,6 @@ set(RESOURCES
     Resource/Styles.qrc
 )
 
-set (LIBS
-
-    -L /Source/Libs/OpenSSL -l libeay32
-    -L /Source/Libs/OpenSSL -l ssleay32
-
-)
-
 set(GUI_TYPE "")
 
 if(WIN32)
