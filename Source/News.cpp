@@ -27,10 +27,7 @@ News::News(QSettings* p, QWidget* parent) :
                         "QVBoxLayout {"
                         "background-color: " + p->value("Primary/TertiaryBase").toString() + "; "
                         "color: " + p->value("Primary/LightText").toString() + ";}"
-                        "QLabel {"
-                        "color: " + p->value("Primary/LightText").toString() + ";"
-                        "font-family: SourceSansPro;"
-                        "}");
+                           );
     this->settings = p;
 
     loadXML();
@@ -95,7 +92,7 @@ void News::onFetchCompleteIGN()
 
             if (reader.name() == "title") {
 
-               NewsItemWidget* currentItemWidget = new NewsItemWidget(settings, this);
+               NewsItemWidget* currentItemWidget = new NewsItemWidget(settings, nullptr);
                QString title = reader.readElementText();
                QListWidgetItem* item = new QListWidgetItem(" ");
                currentItemWidget->titleLabel->setText(title + " [IGN]");
@@ -136,7 +133,6 @@ void News::onFetchCompleteRPS () {
     QXmlStreamReader reader(array);
 
     if (reader.hasError()) {
-
         qDebug("Error parsing XML");
     }
 
@@ -148,17 +144,13 @@ void News::onFetchCompleteRPS () {
 
             if (reader.name() == "title") {
 
-                NewsItemWidget* currentItemWidget = new NewsItemWidget(settings, this);
+                NewsItemWidget* currentItemWidget = new NewsItemWidget(settings, nullptr);
                 QString title = reader.readElementText();
                 QListWidgetItem* item = new QListWidgetItem(" ");
                 currentItemWidget->titleLabel->setText(title + " [Rock, Paper, Shotgun]");
 
                 QString text = "";
-
-                while (reader.name() != "link") {
-                    qDebug() << "fetching RPS data" << endl;
-                    reader.readNext();
-                }
+                while (reader.name() != "link") reader.readNext();
 
                 currentItemWidget->urlString = reader.readElementText();
                 headlines.append(currentItemWidget);
@@ -169,6 +161,7 @@ void News::onFetchCompleteRPS () {
         reader.readNext();
     }
 
+    reply->deleteLater();
     reloadHeadlines();
 
 }
@@ -191,40 +184,29 @@ void News::onFetchCompleteReddit() {
         qDebug("Error parsing XML");
     }
 
-    reader.readNextStartElement();
+    reader.readNext();
+
+    while (reader.name() != "item") reader.readNextStartElement();
 
     while(!reader.atEnd()) {
 
-        if (reader.isStartElement()) {
+        if (reader.name() == "item" && reader.isStartElement()) {
 
-           if (reader.name() == "title") {
+            NewsItemWidget* currentItem = new NewsItemWidget(settings, nullptr);
 
-               NewsItemWidget* currentItemWidget = new NewsItemWidget(settings, this);
-               QString title = reader.readElementText();
-               QListWidgetItem* item = new QListWidgetItem(" ");
-               currentItemWidget->titleLabel->setText(title + " [reddit]");
+            while (reader.name() != "title") reader.readNext();
+            currentItem->titleLabel->setText(reader.readElementText() + " [reddit]");
 
-               QString text = "";
+            while (reader.name() != "link") reader.readNext();
+            currentItem->urlString = reader.readElementText();
 
-               while (reader.name() != "link") {
-                   reader.readNextStartElement();
-               }
-
-               text = this->parseElementText(reader.readElementText());
-               currentItemWidget->urlString = text;
-
-               headlines.append(currentItemWidget);
-               currentItemWidget->contentLabel->setText(text);
-               reader.readNextStartElement();
-               while (reader.name() != "title") reader.readNext();
-               reader.readNext();
-
-           }
+            headlines.append(currentItem);
         }
 
         reader.readNextStartElement();
     }
 
+    reply->deleteLater();
     reloadHeadlines();
 
 }
@@ -238,11 +220,9 @@ void News::reloadHeadlines() {
         ui->firstColumn->addWidget(headlines.at(qrand() % size));
         ui->secondColumn->addWidget(headlines.at(qrand() % size));
         ui->thirdColumn->addWidget(headlines.at(qrand() % size));
+
     }
 }
 
-QString News::parseElementText(QString input) {
-    return input;
-}
 
 

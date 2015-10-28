@@ -51,10 +51,10 @@ private:
     Ui::NewsPanel *ui;
     void loadXML();
     void reloadHeadlines();
+    void parseRedditItemText (QString, NewsItemWidget*);
     QString parseElementText(QString);
     QSettings* settings;
-    QVector<QWidget*> headlines;
-
+    QVector<NewsItemWidget*> headlines;
 };
 
 #endif // News_H

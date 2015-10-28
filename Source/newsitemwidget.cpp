@@ -3,15 +3,14 @@
 #include <QDesktopServices>
 #include <QUrl>
 
-NewsItemWidget::NewsItemWidget(QSettings* p, QWidget *parent) : QWidget(parent)
+NewsItemWidget::NewsItemWidget(QSettings* p, QWidget* parent = 0) : QWidget(parent)
 {
     QVBoxLayout* layout = new QVBoxLayout(this);
     this->setStyleSheet(
                 "QLabel {"
                 "color: " + p->value("Primary/LightText").toString() + ";"
                 "font-family: SourceSansPro;" +
-                "}" +
-                "QLabel: hover { background-color: yellow } "
+                "}"
                 );
     titleLabel = new QLabel ("1 ");
     titleLabel->setWordWrap(true);
