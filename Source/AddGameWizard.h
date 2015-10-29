@@ -36,6 +36,15 @@ class InfoPage : public QWizardPage
 Q_OBJECT
 public:
     InfoPage(QWidget* parent = 0);
+
+public slots:
+    void pickDir();
+    void pickExe();
+
+private:
+    void pickFile(QLineEdit* edit, QFileDialog::FileMode mode);
+    QLineEdit* dirEdit;
+    QLineEdit* exeEdit;
 };
 
 /** LastPage class

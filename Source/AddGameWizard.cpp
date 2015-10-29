@@ -1,7 +1,8 @@
 #include "AddGameWizard.h"
+#include "Database.h"
+
 #include <QDebug>
 #include <QString>
-#include "Database.h"
 
 /** AddGameWizard constructor
  * Defines the pages and initializes the database with the path given. Also sets up some window-related properties,
@@ -16,6 +17,32 @@ AddGameWizard::AddGameWizard(QWidget* parent, QString dbPath) : QWizard(parent),
     addPage(new LastPage(db));
 
     setWindowTitle("Add game wizard");
+}
+
+void InfoPage::pickDir()
+{
+    pickFile(this->dirEdit, QFileDialog::Directory);
+}
+
+void InfoPage::pickExe()
+{
+    pickFile(this->exeEdit, QFileDialog::ExistingFile);
+}
+
+/** pickFile function
+ * Picks a file or directory and puts the path in edit
+ * \param edit A QLineEdit to put the file path in
+ * \param mode A FileMode to choose what files can be selectedFiles
+ */
+void InfoPage::pickFile(QLineEdit* edit, QFileDialog::FileMode mode)
+{
+    QFileDialog dlg(this);
+    dlg.setFileMode(mode);
+
+    if (dlg.exec())
+    {
+        edit->setText(dlg.selectedFiles().at(0));
+    }
 }
 
 /** InitPage constructor
@@ -40,14 +67,20 @@ InfoPage::InfoPage(QWidget* parent) : QWizardPage(parent)
 {
     setTitle("Input game details.");
     QLineEdit* nameEdit = new QLineEdit();
-    QLineEdit* dirEdit = new QLineEdit();
-    QLineEdit* exeEdit = new QLineEdit();
+    this->dirEdit = new QLineEdit();
+    this->exeEdit = new QLineEdit();
     QLineEdit* argsEdit = new QLineEdit();
 
     QLabel* nameLabel = new QLabel("Name: ");
     QLabel* dirLabel = new QLabel("Directory: ");
     QLabel* exeLabel = new QLabel("Executable: ");
     QLabel* argsLabel = new QLabel("Arguments (optional): ");
+
+    QPushButton* dirFileBtn = new QPushButton("Browse");
+    QPushButton* exeFileBtn = new QPushButton("Browse");
+
+    connect(dirFileBtn, SIGNAL(clicked()), this, SLOT(pickDir()));
+    connect(exeFileBtn, SIGNAL(clicked()), this, SLOT(pickExe()));
 
     registerField("nameEdit*", nameEdit);
     registerField("dirEdit*", dirEdit);
@@ -58,9 +91,11 @@ InfoPage::InfoPage(QWidget* parent) : QWizardPage(parent)
     layout->addWidget(nameLabel, 0, 0);
     layout->addWidget(nameEdit, 0, 1);
     layout->addWidget(dirLabel, 1, 0);
-    layout->addWidget(dirEdit, 1, 1);
+    layout->addWidget(this->dirEdit, 1, 1);
+    layout->addWidget(dirFileBtn, 1, 2);
     layout->addWidget(exeLabel, 2, 0);
-    layout->addWidget(exeEdit, 2, 1);
+    layout->addWidget(this->exeEdit, 2, 1);
+    layout->addWidget(exeFileBtn, 2, 2);
     layout->addWidget(argsLabel, 3, 0);
     layout->addWidget(argsEdit, 3, 1);
 
