@@ -149,6 +149,10 @@ void DRMPage::checkOriginExists()
             originFolder = QDir("C:\\Program Files (x86)\\Origin Games\\");
         }
     }
+    else
+    {
+        return;
+    }
 
     if (originFolder.filePath("").trimmed() != "" && originFolder.exists())
     {
