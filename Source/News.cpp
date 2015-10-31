@@ -8,11 +8,9 @@
 #include <QtNetwork>
 
 News::News(QSettings* p, QWidget* parent) :
-    QWidget(parent),
+    QWidget(parent)
 
-    ui(new Ui::NewsPanel)
 {
-    ui->setupUi(this);
     this->setObjectName("NewsUI");
     this->setStyleSheet("#leftSidebar {"
                         "background-color: " + p->value("Primary/SecondaryBase").toString() + ";} "
@@ -34,16 +32,14 @@ News::News(QSettings* p, QWidget* parent) :
     this->feedUrls.append("http://feeds.feedburner.com/RockPaperShotgun?format=xml");
     this->feedUrls.append("http://www.reddit.com/r/pcmasterrace.rss");
 
-
+    setupUI();
     loadXML();
 }
 
 void News::loadXML()
-
 {
-
-    for (auto urlString : feedUrls) {
-
+    for (auto urlString : feedUrls)
+    {
         QNetworkAccessManager* manager = new QNetworkAccessManager(this);
         const QUrl url(urlString);
         QNetworkRequest* req = new QNetworkRequest(url);
@@ -56,7 +52,20 @@ void News::loadXML()
 
 News::~News()
 {
-    delete ui;
+    //delete ui;
+}
+
+void News::setupUI() {
+
+    QHBoxLayout* mainLayout = new QHBoxLayout();
+    firstColumn = new QVBoxLayout();
+    secondColumn = new QVBoxLayout();
+    thirdColumn = new QVBoxLayout();
+    mainLayout->addLayout(firstColumn);
+    mainLayout->addLayout(secondColumn);
+    mainLayout->addLayout(thirdColumn);
+    this->setLayout(mainLayout);
+
 }
 
 void News::onFetchComplete()
@@ -64,7 +73,8 @@ void News::onFetchComplete()
 {
     QNetworkReply *reply = (QNetworkReply*)sender();
 
-    if (reply->error()) {
+    if (reply->error())
+    {
         qDebug("Error with network request");
     }
 
@@ -72,20 +82,21 @@ void News::onFetchComplete()
 
     QXmlStreamReader reader(array);
 
-    if (reader.hasError()) {
-
+    if (reader.hasError())
+    {
         qDebug("Error parsing XML");
     }
 
     reader.readNext();
 
-    while(!reader.atEnd()) {
-
-        if (reader.isStartElement()) {
-
-            if (reader.name() == "item") {
-
-               while (reader.name() != "title") {
+    while(!reader.atEnd())
+    {
+        if (reader.isStartElement())
+        {
+            if (reader.name() == "item")
+            {
+               while (reader.name() != "title")
+               {
                     reader.readNext();
                }
 
@@ -93,10 +104,10 @@ void News::onFetchComplete()
                QString title = reader.readElementText();
                QListWidgetItem* item = new QListWidgetItem(" ");
                currentItemWidget->titleLabel->setText(title);
-
                QString text = "";
 
-               while (reader.name() != "link") {
+               while (reader.name() != "link")
+               {
                    reader.readNext();
                }
 
@@ -108,7 +119,6 @@ void News::onFetchComplete()
         }
 
         reader.readNext();
-
     }
 
     reply->deleteLater();
@@ -119,11 +129,11 @@ void News::reloadHeadlines() {
 
     int size = headlines.size();
 
-    for (int i = 0; i < 9; ++i) {
-
-        ui->firstColumn->addWidget(headlines.at(qrand() % size));
-        ui->secondColumn->addWidget(headlines.at(qrand() % size));
-        ui->thirdColumn->addWidget(headlines.at(qrand() % size));
+    for (int i = 0; i < 9; ++i)
+    {
+        firstColumn->addWidget(headlines.at(qrand() % size));
+        secondColumn->addWidget(headlines.at(qrand() % size));
+        thirdColumn->addWidget(headlines.at(qrand() % size));
 
     }
 }

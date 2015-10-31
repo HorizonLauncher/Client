@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QSettings>
 #include <QVector>
+#include <QVBoxLayout>
 
 /*
  * Networking headers for consuming RSS
@@ -29,11 +30,6 @@
 
 #include "newsitemwidget.h"
 
-
-namespace Ui {
-class NewsPanel;
-}
-
 class News : public QWidget
 {
     Q_OBJECT
@@ -46,12 +42,17 @@ public slots:
     void onFetchComplete();
 
 private:
-    Ui::NewsPanel *ui;
     void loadXML();
+    void setupUI();
     void reloadHeadlines();
     QSettings* settings;
     QVector<NewsItemWidget*> headlines;
     QVector<QString> feedUrls;
+
+    //Layout properties
+    QVBoxLayout* firstColumn;
+    QVBoxLayout* secondColumn;
+    QVBoxLayout* thirdColumn;
 };
 
 #endif // News_H
