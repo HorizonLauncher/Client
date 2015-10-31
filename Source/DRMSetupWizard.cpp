@@ -180,6 +180,7 @@ void DRMPage::checkOriginExists()
 void DRMPage::checkSteamExists()
 {
     QDir steamFolder;
+    bool steamExists = false;
 
 #if defined(__linux__)
     QProcess which;
@@ -194,15 +195,16 @@ void DRMPage::checkSteamExists()
     }
 #elif defined(_WIN32) || defined(_WIN64)
     QSettings settings("HKEY_CURRENT_USER\\Software\\Valve\\Steam", QSettings::NativeFormat);
-    if (!settings.value("SteamPath").isNull())
+    if (settings.contains("SteamPath"))
     {
         steamFolder = QDir(settings.value("SteamPath").toString()).canonicalPath();
+        steamExists = true;
     }
 #elif defined(__APPLE__)
     steamFolder = QDir(QDir::home().filePath("Library/Application Support/Steam"));
 #endif
 
-    if (steamFolder.filePath("").trimmed() != "" && steamFolder.exists())
+    if (steamFolder.filePath("").trimmed() != "" && steamFolder.exists() && steamExists)
     {
         statusLabel->setPixmap(QPixmap(":SystemMenu/Icons/Tick.svg"));
         descLabel = new QLabel("Steam found in " + steamFolder.filePath(""));
