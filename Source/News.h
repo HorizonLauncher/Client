@@ -5,6 +5,7 @@
 #include <QSettings>
 #include <QVector>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 
 /*
  * Networking headers for consuming RSS
@@ -53,6 +54,7 @@ private:
     QVBoxLayout* firstColumn;
     QVBoxLayout* secondColumn;
     QVBoxLayout* thirdColumn;
+    QHBoxLayout* mainLayout
 };
 
 #endif // News_H

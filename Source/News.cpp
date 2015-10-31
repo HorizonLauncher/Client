@@ -26,8 +26,8 @@ News::News(QSettings* p, QWidget* parent) :
                         "background-color: " + p->value("Primary/TertiaryBase").toString() + "; "
                         "color: " + p->value("Primary/LightText").toString() + ";}"
                            );
-    this->settings = p;
 
+    this->settings = p;
     this->feedUrls.append("http://feeds.ign.com/ign/news?format=xml");
     this->feedUrls.append("http://feeds.feedburner.com/RockPaperShotgun?format=xml");
     this->feedUrls.append("http://www.reddit.com/r/pcmasterrace.rss");
@@ -52,12 +52,20 @@ void News::loadXML()
 
 News::~News()
 {
-    //delete ui;
+    for (int i = 0; i < headlines.size(); ++i)
+    {
+        delete headlines[i];
+    }
+
+    delete firstColumn;
+    delete secondColumn;
+    delete thirdColumn;
+    delete mainLayout;
 }
 
 void News::setupUI() {
 
-    QHBoxLayout* mainLayout = new QHBoxLayout();
+    mainLayout = new QHBoxLayout();
     firstColumn = new QVBoxLayout();
     secondColumn = new QVBoxLayout();
     thirdColumn = new QVBoxLayout();
@@ -79,7 +87,6 @@ void News::onFetchComplete()
     }
 
     QByteArray array = reply->readAll();
-
     QXmlStreamReader reader(array);
 
     if (reader.hasError())
@@ -134,7 +141,6 @@ void News::reloadHeadlines() {
         firstColumn->addWidget(headlines.at(qrand() % size));
         secondColumn->addWidget(headlines.at(qrand() % size));
         thirdColumn->addWidget(headlines.at(qrand() % size));
-
     }
 }
 
