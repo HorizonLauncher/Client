@@ -43,18 +43,15 @@ public:
     ~News();
 
 public slots:
-    void onFetchCompleteIGN();
-    void onFetchCompleteRPS();
-    void onFetchCompleteReddit();
+    void onFetchComplete();
 
 private:
     Ui::NewsPanel *ui;
     void loadXML();
     void reloadHeadlines();
-    void parseRedditItemText (QString, NewsItemWidget*);
-    QString parseElementText(QString);
     QSettings* settings;
     QVector<NewsItemWidget*> headlines;
+    QVector<QString> feedUrls;
 };
 
 #endif // News_H

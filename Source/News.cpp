@@ -30,35 +30,28 @@ News::News(QSettings* p, QWidget* parent) :
                            );
     this->settings = p;
 
+    this->feedUrls.append("http://feeds.ign.com/ign/news?format=xml");
+    this->feedUrls.append("http://feeds.feedburner.com/RockPaperShotgun?format=xml");
+    this->feedUrls.append("http://www.reddit.com/r/pcmasterrace.rss");
+
+
     loadXML();
 }
 
 void News::loadXML()
 
 {
-    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
-    std::string IGNurlString = "http://feeds.ign.com/ign/news?format=xml";
-    const QUrl IGNurl(QString::fromStdString(IGNurlString));
-    QNetworkRequest* IGNreq = new QNetworkRequest(IGNurl);
-    IGNreq->setRawHeader("User-Agent", "Horizon Launcher");
-    QNetworkReply* IGNreply = manager->get(*IGNreq);
-    QObject::connect(IGNreply, SIGNAL(finished()), this, SLOT(onFetchCompleteIGN()));
 
-    std::string RPSUrlString = "http://feeds.feedburner.com/RockPaperShotgun?format=xml";
-    const QUrl RPSUrl (QString::fromStdString(RPSUrlString));
-    QNetworkRequest* RPSReq = new QNetworkRequest(RPSUrl);
-    RPSReq->setRawHeader("User-Agent", "Horizon Launcher");
-    QNetworkReply* RPSReply = manager->get(*RPSReq);
-    QObject::connect(RPSReply, SIGNAL(finished()), this, SLOT (onFetchCompleteRPS()));
+    for (auto urlString : feedUrls) {
 
-    std::string PCMRUrlString = "http://www.reddit.com/r/pcmasterrace.rss";
-    const QUrl PCMRUrl (QString::fromStdString(PCMRUrlString));
-    QNetworkRequest* PCMRReq = new QNetworkRequest(PCMRUrl);
-    PCMRReq->setRawHeader("User-Agent", "Horizon Launcher");
-    QNetworkReply* PCMRReply = manager->get(*PCMRReq);
-    QObject::connect(PCMRReply, SIGNAL(finished()), this, SLOT (onFetchCompleteReddit()));
+        QNetworkAccessManager* manager = new QNetworkAccessManager(this);
+        const QUrl url(urlString);
+        QNetworkRequest* req = new QNetworkRequest(url);
+        req->setRawHeader("User-Agent", "Horizon Launcher");
+        QNetworkReply* reply = manager->get(*req);
+        QObject::connect(reply, SIGNAL(finished()), this, SLOT(onFetchComplete()));
 
-
+    }
 }
 
 News::~News()
@@ -66,7 +59,7 @@ News::~News()
     delete ui;
 }
 
-void News::onFetchCompleteIGN()
+void News::onFetchComplete()
 
 {
     QNetworkReply *reply = (QNetworkReply*)sender();
@@ -90,12 +83,16 @@ void News::onFetchCompleteIGN()
 
         if (reader.isStartElement()) {
 
-            if (reader.name() == "title") {
+            if (reader.name() == "item") {
+
+               while (reader.name() != "title") {
+                    reader.readNext();
+               }
 
                NewsItemWidget* currentItemWidget = new NewsItemWidget(settings, nullptr);
                QString title = reader.readElementText();
                QListWidgetItem* item = new QListWidgetItem(" ");
-               currentItemWidget->titleLabel->setText(title + " [IGN]");
+               currentItemWidget->titleLabel->setText(title);
 
                QString text = "";
 
@@ -116,99 +113,6 @@ void News::onFetchCompleteIGN()
 
     reply->deleteLater();
     reloadHeadlines();
-}
-
-void News::onFetchCompleteRPS () {
-
-    QNetworkReply *reply = (QNetworkReply*)sender();
-
-    if (reply->error()) {
-        qDebug("Error with network request");
-    }
-
-    QByteArray array = reply->readAll();
-
-    qDebug() << "fetch complete";
-
-    QXmlStreamReader reader(array);
-
-    if (reader.hasError()) {
-        qDebug("Error parsing XML");
-    }
-
-    reader.readNextStartElement();
-
-    while(!reader.atEnd()) {
-
-        if (reader.isStartElement()) {
-
-            if (reader.name() == "title") {
-
-                NewsItemWidget* currentItemWidget = new NewsItemWidget(settings, nullptr);
-                QString title = reader.readElementText();
-                QListWidgetItem* item = new QListWidgetItem(" ");
-                currentItemWidget->titleLabel->setText(title + " [Rock, Paper, Shotgun]");
-
-                QString text = "";
-                while (reader.name() != "link") reader.readNext();
-
-                currentItemWidget->urlString = reader.readElementText();
-                headlines.append(currentItemWidget);
-            }
-
-        }
-
-        reader.readNext();
-    }
-
-    reply->deleteLater();
-    reloadHeadlines();
-
-}
-
-
-void News::onFetchCompleteReddit() {
-    \
-    QNetworkReply *reply = (QNetworkReply*)sender();
-
-    if (reply->error()) {
-        qDebug() << reply->errorString();
-    }
-
-    QByteArray array = reply->readAll();
-
-    QXmlStreamReader reader(array);
-
-    if (reader.hasError()) {
-
-        qDebug("Error parsing XML");
-    }
-
-    reader.readNext();
-
-    while (reader.name() != "item") reader.readNextStartElement();
-
-    while(!reader.atEnd()) {
-
-        if (reader.name() == "item" && reader.isStartElement()) {
-
-            NewsItemWidget* currentItem = new NewsItemWidget(settings, nullptr);
-
-            while (reader.name() != "title") reader.readNext();
-            currentItem->titleLabel->setText(reader.readElementText() + " [reddit]");
-
-            while (reader.name() != "link") reader.readNext();
-            currentItem->urlString = reader.readElementText();
-
-            headlines.append(currentItem);
-        }
-
-        reader.readNextStartElement();
-    }
-
-    reply->deleteLater();
-    reloadHeadlines();
-
 }
 
 void News::reloadHeadlines() {
