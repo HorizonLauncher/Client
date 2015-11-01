@@ -1,4 +1,5 @@
 #include "Database.h"
+#include "Defines.h"
 
 #include <QDebug>
 
@@ -11,7 +12,7 @@ Database::Database()
     : db(QSqlDatabase::addDatabase("QSQLITE"))
 {
     db.setHostName("localhost");
-    db.setDatabaseName("horizon.db");
+    db.setDatabaseName(CONFIG_FOLDER + "horizon.db");
 }
 
 Database::Database(QString path)

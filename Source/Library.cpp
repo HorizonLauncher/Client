@@ -1,6 +1,7 @@
 #include "Library.h"
 #include "ui_Library.h"
 #include "AddGameWizard.h"
+#include "Defines.h"
 
 #include <QFileDialog>
 #include <QInputDialog>
@@ -60,7 +61,7 @@ Library::Library(QSettings* p, QWidget* parent)
     }
 
     QFileSystemWatcher* watcher = new QFileSystemWatcher;
-    watcher->addPath(QDir(".").filePath("horizon.db"));
+    watcher->addPath(QDir(CONFIG_FOLDER).filePath("horizon.db"));
     connect(watcher, SIGNAL(fileChanged(QString)), this, SLOT(refreshGames()));
 
     refreshGames();

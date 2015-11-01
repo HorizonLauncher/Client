@@ -47,6 +47,7 @@ set(HEADERS
     Source/Settings.h
     Source/GameLauncher.h
     Source.SetupWizard.h
+    Source/Defines.h
 )
 
 set(FORMS
