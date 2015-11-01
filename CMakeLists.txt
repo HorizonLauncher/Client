@@ -30,6 +30,7 @@ set(SOURCE
     Source/GameLauncher.cpp
     Source/News.cpp
     Source/newsitemwidget.cpp
+    Source/SetupWizard.cpp
 )
 
 set(HEADERS
@@ -49,6 +50,7 @@ set(HEADERS
     Source/GameLauncher.h
     Source/News.h
     Source/newsitemwidget.h
+    Source.SetupWizard.h
 )
 
 set(FORMS

@@ -61,7 +61,7 @@ void MainPanel::init()
 
     // Title bar widget
     QWidget* borderWidget = new QWidget;
-    borderWidget->setStyleSheet("background-color: #F5F6F7;");
+    borderWidget->setStyleSheet("background-color: " + p->value("TitleBar/Color").toString() + ";");
     verticalLayout1->addWidget(borderWidget);
 
     // Window Control Horizontal Layout

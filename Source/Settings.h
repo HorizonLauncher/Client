@@ -26,6 +26,7 @@ public slots:
     void on_NavbarHover_clicked();
 	void on_NavbarSelected_clicked();
     void on_ResetColors_clicked();
+	void on_TitleBarColor_clicked();
     void updateColor(int id, QColor color);
 public:
 	explicit Settings(QSettings* p, QWidget* parent = 0);

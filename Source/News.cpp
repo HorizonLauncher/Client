@@ -9,7 +9,6 @@
 
 News::News(QSettings* p, QWidget* parent) :
     QWidget(parent)
-
 {
     this->setObjectName("NewsUI");
     this->setStyleSheet("#leftSidebar {"
@@ -46,7 +45,6 @@ void News::loadXML()
         req->setRawHeader("User-Agent", "Horizon Launcher");
         QNetworkReply* reply = manager->get(*req);
         QObject::connect(reply, SIGNAL(finished()), this, SLOT(onFetchComplete()));
-
     }
 }
 
@@ -77,7 +75,6 @@ void News::setupUI() {
 }
 
 void News::onFetchComplete()
-
 {
     QNetworkReply *reply = (QNetworkReply*)sender();
 
@@ -132,8 +129,8 @@ void News::onFetchComplete()
     reloadHeadlines();
 }
 
-void News::reloadHeadlines() {
-
+void News::reloadHeadlines()
+{
     int size = headlines.size();
 
     for (int i = 0; i < 9; ++i)

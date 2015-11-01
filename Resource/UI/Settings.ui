@@ -73,7 +73,7 @@
                 <rect>
                     <x>200</x>
                     <y>260</y>
-                    <width>175</width>
+                    <width>350</width>
                     <height>211</height>
                 </rect>
             </property>
@@ -201,6 +201,32 @@
                 </property>
                 <property name="text">
                     <string>Navbar Selected</string>
+                </property>
+            </widget>
+            <widget class="QPushButton" name="TitleBarColor">
+                <property name="geometry">
+                    <rect>
+                        <x>180</x>
+                        <y>50</y>
+                        <width>21</width>
+                        <height>23</height>
+                    </rect>
+                </property>
+                <property name="text">
+                    <string/>
+                </property>
+            </widget>
+            <widget class="QLabel" name="label_7">
+                <property name="geometry">
+                    <rect>
+                        <x>210</x>
+                        <y>50</y>
+                        <width>110</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <property name="text">
+                    <string>Titlebar Color</string>
                 </property>
             </widget>
             <widget class="QPushButton" name="ResetColors">

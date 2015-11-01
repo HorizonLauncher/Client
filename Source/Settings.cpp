@@ -41,6 +41,9 @@ Settings::Settings(QSettings* p, QWidget* parent) : QWidget(parent), ui(new Ui::
     ui->NavbarSelected->setFont(buttonFont);
     ui->NavbarSelected->setStyleSheet("background-color: " + p->value("Navbar/SelectedColor").toString() + ";}");
 
+	ui->TitleBarColor->setFont(buttonFont);
+	ui->TitleBarColor->setStyleSheet("background-color: " + p->value("TitleBar/Color").toString() + ";}");
+
     ui->ResetColors->setFont(buttonFont);
 
     ui->label_2->setStyleSheet("{color: #FFFFFF}");
@@ -53,6 +56,7 @@ Settings::Settings(QSettings* p, QWidget* parent) : QWidget(parent), ui(new Ui::
     connect(ui->NavbarBG, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_NavbarBG_clicked()));
     connect(ui->NavbarHover, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_NavbarHover_clicked()));
     connect(ui->NavbarSelected, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_NavbarSelected_clicked()));
+    connect(ui->TitleBarColor, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_TitleBarColor_clicked()));
     connect(ui->ResetColors, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_ResetColors_clicked()));
     connect(ui->ClearDatabaseButton, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_ClearDatabaseButton_clicked()));
 
@@ -97,6 +101,12 @@ void Settings::on_NavbarSelected_clicked()
     updateColor(4, color);
 }
 
+void Settings::on_TitleBarColor_clicked()
+{
+    QColor color = QColorDialog::getColor(Qt::white);
+    updateColor(5, color);
+}
+
 void Settings::on_ResetColors_clicked()
 {
     QSettings palette(QSettings::IniFormat, QSettings::UserScope, "Horizon Launcher", "palette");
@@ -136,6 +146,7 @@ void Settings::on_ResetColors_clicked()
     ui->NavbarBG->setStyleSheet("background-color: " + palette.value("Navbar/Background").toString() + ";}");
     ui->NavbarHover->setStyleSheet("background-color: " + palette.value("Navbar/HoverColor").toString() + ";}");
     ui->NavbarSelected->setStyleSheet("background-color: " + palette.value("Navbar/SelectedColor").toString() + ";}");
+    ui->TitleBarColor->setStyleSheet("background-color: " + palette.value("TitleBar/Color").toString() + ";}");
 }
 
 void Settings::updateColor(int id, QColor color)
@@ -182,6 +193,7 @@ void Settings::updateColor(int id, QColor color)
             palette.beginGroup("TitleBar");
             palette.setValue("Color", color.name());
             palette.endGroup();
+            ui->TitleBarColor->setStyleSheet("background-color: " + color.name() + ";}");
         }
     }
 }
