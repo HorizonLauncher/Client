@@ -54,7 +54,7 @@ private:
     QVBoxLayout* firstColumn;
     QVBoxLayout* secondColumn;
     QVBoxLayout* thirdColumn;
-    QHBoxLayout* mainLayout
+    QHBoxLayout* mainLayout;
 };
 
 #endif // News_H
