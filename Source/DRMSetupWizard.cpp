@@ -192,6 +192,7 @@ void DRMPage::checkSteamExists()
     if (which.exitCode() == 0)
     {
         steamFolder = QDir(QDir::homePath() + "/.local/share/Steam");
+        steamExists = true;
     }
 #elif defined(_WIN32) || defined(_WIN64)
     QSettings settings("HKEY_CURRENT_USER\\Software\\Valve\\Steam", QSettings::NativeFormat);
@@ -202,6 +203,7 @@ void DRMPage::checkSteamExists()
     }
 #elif defined(__APPLE__)
     steamFolder = QDir(QDir::home().filePath("Library/Application Support/Steam"));
+    steamExists = steamFolder.exits()
 #endif
 
     if (steamFolder.filePath("").trimmed() != "" && steamFolder.exists() && steamExists)
