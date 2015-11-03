@@ -51,12 +51,12 @@ Settings::Settings(QSettings* p, QWidget* parent) : QWidget(parent), ui(new Ui::
     ui->ClientSettingsBox->setStyleSheet("color: #FFFFFF;} ");
     ui->StyleSettingsBox->setStyleSheet("color: #FFFFFF;} ");
 
-	connect(ui->WizardButton, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_WizardButton_clicked()));
-    connect(ui->BodyColor, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_BodyColor_clicked()));
-    connect(ui->NavbarBG, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_NavbarBG_clicked()));
-    connect(ui->NavbarHover, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_NavbarHover_clicked()));
-    connect(ui->NavbarSelected, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_NavbarSelected_clicked()));
-    connect(ui->TitleBarColor, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_TitleBarColor_clicked()));
+    connect(ui->WizardButton, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_WizardButton_clicked()));
+    connect(ui->BodyColor, &QPushButton::clicked, [=]() { pickSetColor(1); });
+    connect(ui->NavbarBG, &QPushButton::clicked, [=]() { pickSetColor(2); });
+    connect(ui->NavbarHover, &QPushButton::clicked, [=]() { pickSetColor(3); });
+    connect(ui->NavbarSelected, &QPushButton::clicked, [=]() { pickSetColor(4); });
+    connect(ui->TitleBarColor, &QPushButton::clicked, [=]() { pickSetColor(5); });
     connect(ui->ResetColors, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_ResetColors_clicked()));
     connect(ui->ClearDatabaseButton, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_ClearDatabaseButton_clicked()));
 
@@ -75,36 +75,6 @@ void Settings::on_WizardButton_clicked()
 {
     DRMSetupWizard* wiz = new DRMSetupWizard();
     wiz->show();
-}
-
-void Settings::on_BodyColor_clicked()
-{
-    QColor color = QColorDialog::getColor(Qt::white);
-    updateColor(1, color);
-}
-
-void Settings::on_NavbarBG_clicked()
-{
-    QColor color = QColorDialog::getColor(Qt::white);
-    updateColor(2, color);
-}
-
-void Settings::on_NavbarHover_clicked()
-{
-    QColor color = QColorDialog::getColor(Qt::white);
-    updateColor(3, color);
-}
-
-void Settings::on_NavbarSelected_clicked()
-{
-    QColor color = QColorDialog::getColor(Qt::white);
-    updateColor(4, color);
-}
-
-void Settings::on_TitleBarColor_clicked()
-{
-    QColor color = QColorDialog::getColor(Qt::white);
-    updateColor(5, color);
 }
 
 void Settings::on_ResetColors_clicked()
@@ -149,6 +119,12 @@ void Settings::on_ResetColors_clicked()
     ui->TitleBarColor->setStyleSheet("background-color: " + palette.value("TitleBar/Color").toString() + ";}");
 }
 
+void Settings::pickSetColor(int id)
+{
+    QColor color = QColorDialog::getColor(Qt::white);
+    updateColor(id, color);
+}
+
 void Settings::updateColor(int id, QColor color)
 {
     if (!color.isValid())
@@ -188,7 +164,7 @@ void Settings::updateColor(int id, QColor color)
             }
             palette.endGroup();
         }
-        else if (id == 5)
+        else if (id == 5) //TitleBar/Color
         {
             palette.beginGroup("TitleBar");
             palette.setValue("Color", color.name());

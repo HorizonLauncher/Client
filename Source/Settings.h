@@ -6,29 +6,26 @@
 
 /** Settings UI namespace. */
 namespace Ui {
-	class Settings;
+    class Settings;
 }
 /** Settings class.
 * Class to handle the settings section of the launcher
 */
 class Settings : public QWidget
 {
-	Q_OBJECT
+    Q_OBJECT
 private:
-	Ui::Settings *ui;
-	Database db;
+    Ui::Settings *ui;
+    Database db;
+    void pickSetColor(int id);
 
 public slots:
-	void on_WizardButton_clicked();
-	void on_ClearDatabaseButton_clicked();
-	void on_BodyColor_clicked();
-    void on_NavbarBG_clicked();
-    void on_NavbarHover_clicked();
-	void on_NavbarSelected_clicked();
+    void on_WizardButton_clicked();
+    void on_ClearDatabaseButton_clicked();
     void on_ResetColors_clicked();
-	void on_TitleBarColor_clicked();
+
     void updateColor(int id, QColor color);
 public:
-	explicit Settings(QSettings* p, QWidget* parent = 0);
-	~Settings();
+    explicit Settings(QSettings* p, QWidget* parent = 0);
+    ~Settings();
 };
