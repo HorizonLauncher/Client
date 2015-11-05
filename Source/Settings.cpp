@@ -9,9 +9,9 @@
 */
 Settings::Settings(QSettings* p, QWidget* parent) : QWidget(parent), ui(new Ui::Settings)
 {
-	ui->setupUi(this);
-	this->setObjectName("settingsUI");
-	this->setStyleSheet("background-color: " + p->value("Primary/SecondaryBase").toString() + ";} "
+    ui->setupUi(this);
+    this->setObjectName("settingsUI");
+    this->setStyleSheet("background-color: " + p->value("Primary/SecondaryBase").toString() + ";} "
         "QLabel { color:  #ffffff;}"
         "QPushButton {"
         "color: " + p->value("Primary/LightText").toString() + "; "
@@ -41,8 +41,41 @@ Settings::Settings(QSettings* p, QWidget* parent) : QWidget(parent), ui(new Ui::
     ui->NavbarSelected->setFont(buttonFont);
     ui->NavbarSelected->setStyleSheet("background-color: " + p->value("Navbar/SelectedColor").toString() + ";}");
 
-	ui->TitleBarColor->setFont(buttonFont);
-	ui->TitleBarColor->setStyleSheet("background-color: " + p->value("TitleBar/Color").toString() + ";}");
+    ui->TitleBarColor->setFont(buttonFont);
+    ui->TitleBarColor->setStyleSheet("background-color: " + p->value("TitleBar/Color").toString() + ";}");
+
+    ui->ActiveElement->setFont(buttonFont);
+    ui->ActiveElement->setStyleSheet("background-color: " + p->value("Primary/ActiveElement").toString() + ";}");
+
+    ui->InactiveSelection->setFont(buttonFont);
+    ui->InactiveSelection->setStyleSheet("background-color: " + p->value("Primary/InactiveSelection").toString() + ";}");
+
+    ui->HoverSelection->setFont(buttonFont);
+    ui->HoverSelection->setStyleSheet("background-color: " + p->value("Primary/HoverSelection").toString() + ";}");
+
+    ui->DarkElement->setFont(buttonFont);
+    ui->DarkElement->setStyleSheet("background-color: " + p->value("Primary/DarkElement").toString() + ";}");
+
+    ui->LightText->setFont(buttonFont);
+    ui->LightText->setStyleSheet("background-color: " + p->value("Primary/LightText").toString() + ";}");
+
+    ui->DarkText->setFont(buttonFont);
+    ui->DarkText->setStyleSheet("background-color: " + p->value("Primary/DarkText").toString() + ";}");
+
+    ui->SubText->setFont(buttonFont);
+    ui->SubText->setStyleSheet("background-color: " + p->value("Primary/SubText").toString() + ";}");
+
+    ui->PrimaryBase->setFont(buttonFont);
+    ui->PrimaryBase->setStyleSheet("background-color: " + p->value("Primary/PrimaryBase").toString() + ";}");
+
+    ui->SecondaryBase->setFont(buttonFont);
+    ui->SecondaryBase->setStyleSheet("background-color: " + p->value("Primary/SecondaryBase").toString() + ";}");
+
+    ui->TertiaryBase->setFont(buttonFont);
+    ui->TertiaryBase->setStyleSheet("background-color: " + p->value("Primary/TertiaryBase").toString() + ";}");
+
+    ui->DarkestBase->setFont(buttonFont);
+    ui->DarkestBase->setStyleSheet("background-color: " + p->value("Primary/DarkestBase").toString() + ";}");
 
     ui->ResetColors->setFont(buttonFont);
 
@@ -57,6 +90,17 @@ Settings::Settings(QSettings* p, QWidget* parent) : QWidget(parent), ui(new Ui::
     connect(ui->NavbarHover, &QPushButton::clicked, [=]() { pickSetColor(3); });
     connect(ui->NavbarSelected, &QPushButton::clicked, [=]() { pickSetColor(4); });
     connect(ui->TitleBarColor, &QPushButton::clicked, [=]() { pickSetColor(5); });
+    connect(ui->ActiveElement, &QPushButton::clicked, [=]() { pickSetColor(6); });
+    connect(ui->InactiveSelection, &QPushButton::clicked, [=]() { pickSetColor(7); });
+    connect(ui->HoverSelection, &QPushButton::clicked, [=]() { pickSetColor(8); });
+    connect(ui->DarkElement, &QPushButton::clicked, [=]() { pickSetColor(9); });
+    connect(ui->LightText, &QPushButton::clicked, [=]() { pickSetColor(10); });
+    connect(ui->DarkText, &QPushButton::clicked, [=]() { pickSetColor(11); });
+    connect(ui->SubText, &QPushButton::clicked, [=]() { pickSetColor(12); });
+    connect(ui->PrimaryBase, &QPushButton::clicked, [=]() { pickSetColor(13); });
+    connect(ui->SecondaryBase, &QPushButton::clicked, [=]() { pickSetColor(14); });
+    connect(ui->TertiaryBase, &QPushButton::clicked, [=]() { pickSetColor(15); });
+    connect(ui->DarkestBase, &QPushButton::clicked, [=]() { pickSetColor(16); });
     connect(ui->ResetColors, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_ResetColors_clicked()));
     connect(ui->ClearDatabaseButton, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_ClearDatabaseButton_clicked()));
 
@@ -116,7 +160,17 @@ void Settings::on_ResetColors_clicked()
     ui->NavbarBG->setStyleSheet("background-color: " + palette.value("Navbar/Background").toString() + ";}");
     ui->NavbarHover->setStyleSheet("background-color: " + palette.value("Navbar/HoverColor").toString() + ";}");
     ui->NavbarSelected->setStyleSheet("background-color: " + palette.value("Navbar/SelectedColor").toString() + ";}");
-    ui->TitleBarColor->setStyleSheet("background-color: " + palette.value("TitleBar/Color").toString() + ";}");
+    ui->ActiveElement->setStyleSheet("background-color: " + palette.value("Primary/ActiveElement").toString() + ";}");
+    ui->InactiveSelection->setStyleSheet("background-color: " + palette.value("Primary/InactiveSelection").toString() + ";}");
+    ui->HoverSelection->setStyleSheet("background-color: " + palette.value("Primary/HoverSelection").toString() + ";}");
+    ui->DarkElement->setStyleSheet("background-color: " + palette.value("Primary/DarkElement").toString() + ";}");
+    ui->LightText->setStyleSheet("background-color: " + palette.value("Primary/LightText").toString() + ";}");
+    ui->DarkText->setStyleSheet("background-color: " + palette.value("Primary/DarkText").toString() + ";}");
+    ui->SubText->setStyleSheet("background-color: " + palette.value("Primary/SubText").toString() + ";}");
+    ui->PrimaryBase->setStyleSheet("background-color: " + palette.value("Primary/PrimaryBase").toString() + ";}");
+    ui->SecondaryBase->setStyleSheet("background-color: " + palette.value("Primary/SecondaryBase").toString() + ";}");
+    ui->TertiaryBase->setStyleSheet("background-color: " + palette.value("Primary/TertiaryBase").toString() + ";}");
+    ui->DarkestBase->setStyleSheet("background-color: " + palette.value("Primary/DarkestBase").toString() + ";}");
 }
 
 void Settings::pickSetColor(int id)
@@ -170,6 +224,68 @@ void Settings::updateColor(int id, QColor color)
             palette.setValue("Color", color.name());
             palette.endGroup();
             ui->TitleBarColor->setStyleSheet("background-color: " + color.name() + ";}");
+        }
+        else if (id <= 16)
+        {
+            palette.beginGroup("Primary");
+
+            if (id == 6)
+            {
+                palette.setValue("ActiveElement", color.name());
+                ui->ActiveElement->setStyleSheet("background-color: " + color.name() + ";}");
+            }
+            else if (id == 7)
+            {
+                palette.setValue("InactiveSelection", color.name());
+                ui->InactiveSelection->setStyleSheet("background-color: " + color.name() + ";}");
+            }
+            else if (id == 8)
+            {
+                palette.setValue("HoverSelection", color.name());
+                ui->HoverSelection->setStyleSheet("background-color: " + color.name() + ";}");
+            }
+            else if (id == 9)
+            {
+                palette.setValue("DarkElement", color.name());
+                ui->DarkElement->setStyleSheet("background-color: " + color.name() + ";}");
+            }
+            else if (id == 10)
+            {
+                palette.setValue("LightText", color.name());
+                ui->LightText->setStyleSheet("background-color: " + color.name() + ";}");
+            }
+            else if (id == 11)
+            {
+                palette.setValue("DarkText", color.name());
+                ui->DarkText->setStyleSheet("background-color: " + color.name() + ";}");
+            }
+            else if (id == 12)
+            {
+                palette.setValue("SubText", color.name());
+                ui->SubText->setStyleSheet("background-color: " + color.name() + ";}");
+            }
+            else if (id == 13)
+            {
+                palette.setValue("PrimaryBase", color.name());
+                ui->PrimaryBase->setStyleSheet("background-color: " + color.name() + ";}");
+            }
+            else if (id == 14)
+            {
+                palette.setValue("SecondaryBase", color.name());
+                ui->SecondaryBase->setStyleSheet("background-color: " + color.name() + ";}");
+            }
+            else if (id == 15)
+            {
+                palette.setValue("TertiaryBase", color.name());
+                ui->TertiaryBase->setStyleSheet("background-color: " + color.name() + ";}");
+            }
+            else if (id == 16)
+            {
+                palette.setValue("DarkestBase", color.name());
+                ui->DarkestBase->setStyleSheet("background-color: " + color.name() + ";}");
+            }
+
+            palette.endGroup();
         }
     }
 }
