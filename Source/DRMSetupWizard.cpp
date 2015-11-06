@@ -443,9 +443,9 @@ void ResultsPage::initializePage()
         QPushButton* selectAllBtn = new QPushButton("Select all");
         QPushButton* deselectAllBtn = new QPushButton("Deselect all");
         QPushButton* invertBtn = new QPushButton("Invert selection");
-        connect(selectAllBtn, SIGNAL(clicked()), this, SLOT(selectAll()));
-        connect(deselectAllBtn, SIGNAL(clicked()), this, SLOT(deselectAll()));
-        connect(invertBtn, SIGNAL(clicked()), this, SLOT(invert()));
+        connect(selectAllBtn, &QPushButton::clicked, this, &ResultsPage::selectAll);
+        connect(deselectAllBtn, &QPushButton::clicked, this, &ResultsPage::deselectAll);
+        connect(invertBtn, &QPushButton::clicked, this, &ResultsPage::invert);
 
         top_layout->addWidget(tabWidget);
         QHBoxLayout* boxLayout = new QHBoxLayout();
@@ -453,7 +453,7 @@ void ResultsPage::initializePage()
         boxLayout->addWidget(deselectAllBtn);
         boxLayout->addWidget(invertBtn);
         top_layout->addLayout(boxLayout, 1, 0, 0);
-        connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(tabSelected()));
+        connect(tabWidget, &QTabWidget::currentChanged, this, &ResultsPage::tabSelected);
         setLayout(top_layout);
     }
 }

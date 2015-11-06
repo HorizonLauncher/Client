@@ -76,17 +76,17 @@ void MainPanel::init()
     QPushButton* pushButtonMinimize = new QPushButton("", coreWidget);
     pushButtonMinimize->setObjectName("pushButtonMinimize");
     windowControlLayout->addWidget(pushButtonMinimize);
-    QObject::connect(pushButtonMinimize, SIGNAL(clicked()), this, SLOT(pushButtonMinimize()));
+    QObject::connect(pushButtonMinimize, &QPushButton::clicked, this, &MainPanel::pushButtonMinimize);
     // Maximize
     QPushButton* pushButtonMaximize = new QPushButton("", coreWidget);
     pushButtonMaximize->setObjectName("pushButtonMaximize");
     windowControlLayout->addWidget(pushButtonMaximize);
-    QObject::connect(pushButtonMaximize, SIGNAL(clicked()), this, SLOT(pushButtonMaximize()));
+    QObject::connect(pushButtonMaximize, &QPushButton::clicked, this, &MainPanel::pushButtonMaximize);
     // Close
     QPushButton* pushButtonClose = new QPushButton("", coreWidget);
     pushButtonClose->setObjectName("pushButtonClose");
     windowControlLayout->addWidget(pushButtonClose);
-    QObject::connect(pushButtonClose, SIGNAL(clicked()), this, SLOT(pushButtonClose()));
+    QObject::connect(pushButtonClose, &QPushButton::clicked, this, &MainPanel::pushButtonClose);
 
     // Navbar
     navbar = new Navbar(p, coreWidget);
@@ -133,13 +133,13 @@ void MainPanel::init()
     activeTab->toggleActive();
 
     // Connect signals
-    connect(navbar->homeTab, SIGNAL(clicked()), this, SLOT(setHome()));
-    // connect(navbar->storeTab, SIGNAL(clicked()), this, SLOT(setStore()));
-    connect(navbar->gamesTab, SIGNAL(clicked()), this, SLOT(setGames()));
-    connect(navbar->communityTab, SIGNAL(clicked()), this, SLOT(setCommunity()));
-    // connect(navbar->newsTab, SIGNAL(clicked()), this, SLOT(setNews()));
-    // connect(navbar->modsTab, SIGNAL(clicked()), this, SLOT(setMods()));
-    connect(navbar->settingsTab, SIGNAL(clicked()), this, SLOT(setSettings()));
+    connect(navbar->homeTab, &TabWidget::clicked, this, &MainPanel::setHome);
+    // connect(navbar->storeTab, &TabWidget::clicked, this, &MainPanel::setStore);
+    connect(navbar->gamesTab, &TabWidget::clicked, this, &MainPanel::setGames);
+    connect(navbar->communityTab, &TabWidget::clicked, this, &MainPanel::setCommunity);
+    // connect(navbar->newsTab, &TabWidget::clicked, this, &MainPanel::setNews);
+    // connect(navbar->modsTab, &TabWidget::clicked, this, &MainPanel::setMods);
+    connect(navbar->settingsTab, &TabWidget::clicked, this, &MainPanel::setSettings);
 
     // Show
     show();

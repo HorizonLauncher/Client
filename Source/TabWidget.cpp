@@ -70,8 +70,8 @@ TabWidget::TabWidget(const QString &name, const QString &text, QSettings* palett
     animation->setEasingCurve(QEasingCurve::Linear);
 
     // Effect signals
-    connect(this, SIGNAL(hovered()), this, SLOT(toggleHovered()));
-    connect(this, SIGNAL(unhovered()), this, SLOT(toggleUnhovered()));
+    connect(this, &TabWidget::hovered, this, &TabWidget::toggleHovered);
+    connect(this, &TabWidget::unhovered, this, &TabWidget::toggleUnhovered);
 }
 
 /** Overridden enter event.

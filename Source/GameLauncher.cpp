@@ -6,8 +6,8 @@
 GameLauncher::GameLauncher()
     : runningProcess(new QProcess(this))
 {
-    connect(runningProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(finished(int, QProcess::ExitStatus)));
-    connect(runningProcess, SIGNAL(error(QProcess::ProcessError)), this, SLOT(onLaunchError(QProcess::ProcessError)));
+    connect(runningProcess, (void (QProcess::*) (int, QProcess::ExitStatus)) &QProcess::finished, this, &GameLauncher::finished);
+    connect(runningProcess, (void (QProcess::*) (QProcess::ProcessError)) &QProcess::error, this, &GameLauncher::onLaunchError);
 }
 
 GameLauncher::~GameLauncher()

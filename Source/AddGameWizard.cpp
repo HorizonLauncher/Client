@@ -19,16 +19,6 @@ AddGameWizard::AddGameWizard(QWidget* parent, QString dbPath) : QWizard(parent),
     setWindowTitle("Add game wizard");
 }
 
-void InfoPage::pickDir()
-{
-    pickFile(this->dirEdit, QFileDialog::Directory);
-}
-
-void InfoPage::pickExe()
-{
-    pickFile(this->exeEdit, QFileDialog::ExistingFile);
-}
-
 /** pickFile function
  * Picks a file or directory and puts the path in edit
  * \param edit A QLineEdit to put the file path in
@@ -79,8 +69,8 @@ InfoPage::InfoPage(QWidget* parent) : QWizardPage(parent)
     QPushButton* dirFileBtn = new QPushButton("Browse");
     QPushButton* exeFileBtn = new QPushButton("Browse");
 
-    connect(dirFileBtn, SIGNAL(clicked()), this, SLOT(pickDir()));
-    connect(exeFileBtn, SIGNAL(clicked()), this, SLOT(pickExe()));
+    connect(dirFileBtn, &QPushButton::clicked, [=] { pickFile(this->dirEdit, QFileDialog::Directory); });
+    connect(exeFileBtn, &QPushButton::clicked, [=] { pickFile(this->exeEdit, QFileDialog::ExistingFile); });
 
     registerField("nameEdit*", nameEdit);
     registerField("dirEdit*", dirEdit);

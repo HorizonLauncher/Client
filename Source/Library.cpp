@@ -62,7 +62,7 @@ Library::Library(QSettings* p, QWidget* parent)
 
     QFileSystemWatcher* watcher = new QFileSystemWatcher;
     watcher->addPath(QDir(CONFIG_FOLDER).filePath("horizon.db"));
-    connect(watcher, SIGNAL(fileChanged(QString)), this, SLOT(refreshGames()));
+    connect(watcher, &QFileSystemWatcher::fileChanged, this, &Library::refreshGames);
 
     refreshGames();
 }

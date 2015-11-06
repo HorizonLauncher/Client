@@ -54,8 +54,8 @@ AddGamePage::AddGamePage(QWidget* parent)
     addGameBtn->setFixedSize(80, 20);
     addDRMBtn->setFixedSize(80, 20);
 
-    connect(addGameBtn, SIGNAL(clicked()), this, SLOT(openAddGameWizard()));
-    connect(addDRMBtn, SIGNAL(clicked()), this, SLOT(openDRMWizard()));
+    connect(addGameBtn, &QPushButton::clicked, this, &AddGamePage::openAddGameWizard);
+    connect(addDRMBtn, &QPushButton::clicked, this, &AddGamePage::openDRMWizard);
 
     QGridLayout* layout = new QGridLayout;
     layout->addWidget(addGameBtn, 0, 0, Qt::AlignLeft);
