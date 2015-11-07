@@ -21,7 +21,7 @@ Homepage::Homepage(QSettings* p, QWidget* parent) :
                         "#randomGameLbl { font-size: 16px; }"
                         "#newRandom { background-color: transparent; }");
 
-    QPixmap refresh(":/SystemMenu/Icons/Refresh_Inverted.png");
+    QPixmap refresh(":/SystemMenu/Icons/RefreshInverted.png");
     QIcon icon(refresh);
     ui->newRandom->setIcon(icon);
     ui->newRandom->setIconSize(QSize(18, 18));

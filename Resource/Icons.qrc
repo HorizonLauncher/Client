@@ -14,6 +14,6 @@
         <file>Icons/Dots.svg</file>
         <file>Icons/Settings.png</file>
         <file>Icons/Refresh.png</file>
-        <file>Icons/Refresh_Inverted.png</file>
+        <file>Icons/RefreshInverted.png</file>
     </qresource>
 </RCC>
