@@ -36,4 +36,4 @@ FORMS = Resource/UI/Library.ui \
     Resource/UI/Community.ui \
     Resource/UI/Settings.ui \
 
-TRANSLATIONS = 
+TRANSLATIONS = horizon_da.ts
