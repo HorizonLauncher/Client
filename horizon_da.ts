@@ -151,7 +151,7 @@ Understøttet: Steam, uPlay, Origin</translation>
         <translation>Færdig</translation>
     </message>
     <message>
-        <location filename="Source/DRMSetupWizard.cpp" line="850"/>
+        <location filename="Source/DRMSetupWizard.cpp" line="849"/>
         <source>Added %1 games to the database. Click finish to complete the wizard.</source>
         <oldsource>Added %d games to the database. Click finish to complete the wizard.</oldsource>
         <translation>Tilføjet %1 spil til databasen. Tryk på udfør for at fuldføre guiden.</translation>
@@ -436,75 +436,70 @@ Understøttet: Steam, uPlay, Origin</translation>
         <translation>Vi fandt følgende på dit system.</translation>
     </message>
     <message>
-        <location filename="Source/DRMSetupWizard.cpp" line="303"/>
-        <source>We found </source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="Source/DRMSetupWizard.cpp" line="311"/>
+        <location filename="Source/DRMSetupWizard.cpp" line="310"/>
         <source>Install Steam, Origin and/or Uplay to find games with this wizard, or check current installation(s).</source>
         <translation>Installer Steam, Origin og/eller Uplay for at finde spil med denne guide, eller tjek nuværende installation(er).</translation>
     </message>
     <message>
-        <location filename="Source/DRMSetupWizard.cpp" line="315"/>
-        <location filename="Source/DRMSetupWizard.cpp" line="547"/>
+        <location filename="Source/DRMSetupWizard.cpp" line="314"/>
+        <location filename="Source/DRMSetupWizard.cpp" line="546"/>
         <source>Change the title for each game by clicking the text box and editing.</source>
         <translation>Ændre titlen for hvert spil ved at klikke på tekstfeltet og rediger teksten.</translation>
     </message>
     <message>
-        <location filename="Source/DRMSetupWizard.cpp" line="331"/>
+        <location filename="Source/DRMSetupWizard.cpp" line="330"/>
         <source>Executable not found</source>
         <translation>Eksekverbar fil ikke fundet</translation>
     </message>
     <message>
-        <location filename="Source/DRMSetupWizard.cpp" line="340"/>
+        <location filename="Source/DRMSetupWizard.cpp" line="339"/>
         <source>Executable:  </source>
         <translation>Eksekverbar:  </translation>
     </message>
     <message>
-        <location filename="Source/DRMSetupWizard.cpp" line="352"/>
+        <location filename="Source/DRMSetupWizard.cpp" line="351"/>
         <source>Steam</source>
         <translation>Steam</translation>
     </message>
     <message>
-        <location filename="Source/DRMSetupWizard.cpp" line="310"/>
+        <location filename="Source/DRMSetupWizard.cpp" line="309"/>
         <source>We found no games.</source>
         <translation>Ingen fundne spil.</translation>
     </message>
     <message>
-        <location filename="Source/DRMSetupWizard.cpp" line="430"/>
+        <location filename="Source/DRMSetupWizard.cpp" line="429"/>
         <source>We found %1 Steam games, %2 Origin games, and %3 uPlay games.</source>
         <extracomment>%1, %2, and %3 will be replaced with the number of Steam, Origin, and uPlay games, respectively</extracomment>
         <translation>Vi fandt %1 Steam spil, %2 Origin spil og %3 uPlay spil.</translation>
     </message>
     <message>
-        <location filename="Source/DRMSetupWizard.cpp" line="433"/>
+        <location filename="Source/DRMSetupWizard.cpp" line="432"/>
         <source>Select all</source>
         <translation>Vælg alle</translation>
     </message>
     <message>
-        <location filename="Source/DRMSetupWizard.cpp" line="434"/>
+        <location filename="Source/DRMSetupWizard.cpp" line="433"/>
         <source>Deselect all</source>
         <translation>Fravælg alle</translation>
     </message>
     <message>
-        <location filename="Source/DRMSetupWizard.cpp" line="435"/>
+        <location filename="Source/DRMSetupWizard.cpp" line="434"/>
         <source>Invert selection</source>
         <translation>Omvendt markering</translation>
     </message>
     <message>
-        <location filename="Source/DRMSetupWizard.cpp" line="475"/>
-        <location filename="Source/DRMSetupWizard.cpp" line="494"/>
+        <location filename="Source/DRMSetupWizard.cpp" line="474"/>
+        <location filename="Source/DRMSetupWizard.cpp" line="493"/>
         <source>Executable: </source>
         <translation>Eksekverbar: </translation>
     </message>
     <message>
-        <location filename="Source/DRMSetupWizard.cpp" line="543"/>
+        <location filename="Source/DRMSetupWizard.cpp" line="542"/>
         <source>Change the title for each game by clicking the text box and editing. Choose which executable to use from the tree view.</source>
         <translation>Ændre titlen for hvert spil ved at trykke på tekstboksen og rediger teksten. Vælg hvilken eksekverbar fil at bruge fra visning.</translation>
     </message>
     <message>
-        <location filename="Source/DRMSetupWizard.cpp" line="795"/>
+        <location filename="Source/DRMSetupWizard.cpp" line="794"/>
         <source>Select Executable</source>
         <translation>Vælg eksekverbar fil</translation>
     </message>
@@ -649,12 +644,12 @@ Understøttet: Steam, uPlay, Origin</translation>
         <translation>Skift adgangskode</translation>
     </message>
     <message>
-        <location filename="Source/Settings.cpp" line="110"/>
+        <location filename="Source/Settings.cpp" line="128"/>
         <source>Error!</source>
         <translation>Fejl!</translation>
     </message>
     <message>
-        <location filename="Source/Settings.cpp" line="110"/>
+        <location filename="Source/Settings.cpp" line="128"/>
         <source>An error occurred while trying to load the database.</source>
         <translation>Der opstod en fejl under indlæsning af databasen.</translation>
     </message>
