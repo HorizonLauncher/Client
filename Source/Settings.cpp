@@ -104,6 +104,24 @@ Settings::Settings(QSettings* p, QWidget* parent) : QWidget(parent), ui(new Ui::
     connect(ui->ResetColors, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_ResetColors_clicked()));
     connect(ui->ClearDatabaseButton, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_ClearDatabaseButton_clicked()));
 
+    ui->label_2->adjustSize();
+    ui->label_3->adjustSize();
+    ui->label_4->adjustSize();
+    ui->label_5->adjustSize();
+    ui->label_6->adjustSize();
+    ui->label_7->adjustSize();
+    ui->label_8->adjustSize();
+    ui->label_9->adjustSize();
+    ui->label_10->adjustSize();
+    ui->label_11->adjustSize();
+    ui->label_12->adjustSize();
+    ui->label_13->adjustSize();
+    ui->label_14->adjustSize();
+    ui->label_15->adjustSize();
+    ui->label_16->adjustSize();
+    ui->label_17->adjustSize();
+    ui->label_18->adjustSize();
+
     if (!db.init())
     {
         QMessageBox error;
