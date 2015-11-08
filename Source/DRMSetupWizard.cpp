@@ -847,7 +847,7 @@ void FinalPage::initializePage()
 {
     std::sort(addedVector.begin(), addedVector.end(), [&](const Game& g1, const Game& g2){return g1.gameName < g2.gameName;});
     db.addGames(addedVector);
-    setSubTitle(QString(tr("Added %d games to the database. Click finish to complete the wizard.")).arg(addedVector.size()));
+    setSubTitle(QString(tr("Added %1 games to the database. Click finish to complete the wizard.")).arg(addedVector.size()));
 }
 
 /** Overloads the nextId function */
