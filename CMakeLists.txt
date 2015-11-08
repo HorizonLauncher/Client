@@ -67,7 +67,7 @@ set(RESOURCES
 set(GUI_TYPE "")
 
 set(TRANSLATIONS
-    horizon_da.ts
+    Translations/horizon_da.ts
 )
 
 if(WIN32)
