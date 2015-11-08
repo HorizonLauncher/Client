@@ -300,7 +300,6 @@ void DRMPage::checkUplayExists()
  */
 void ResultsPage::initializePage()
 {
-    setTitle(QString(tr("We found ")));
     int originCount = 0;
     int steamCount = 0;
     int uPlayCount = 0;
