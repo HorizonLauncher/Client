@@ -34,14 +34,14 @@ DRMSetupWizard::DRMSetupWizard(QWidget* parent, QString dbPath) : QWizard(parent
     setPage(pages::FINAL, finalPage);
     setWindowTitle(tr("Horizon Launcher Setup"));
     setFixedSize(QSize(700, 450));
-	addedVector.erase(addedVector.begin(), addedVector.end());
-	if (!db.init())
-	{
-		QMessageBox error;
-		error.critical(0, tr("Error!"), tr("An error occured while trying to load the database."));
-		exit(EXIT_FAILURE);
-	}
- }
+    addedVector.erase(addedVector.begin(), addedVector.end());
+    if (!db.init())
+    {
+        QMessageBox error;
+        error.critical(0, tr("Error!"), tr("An error occurred while trying to load the database."));
+        exit(EXIT_FAILURE);
+    }
+}
 
 /** IntroPage constructor
  * Defines some initial properties for the introduction page.
@@ -157,7 +157,8 @@ void DRMPage::checkOriginExists()
     if (originFolder.filePath("").trimmed() != "" && originFolder.exists())
     {
         statusLabel->setPixmap(QPixmap(":/SystemMenu/Icons/Tick.svg"));
-        descLabel = new QLabel(tr("Origin found in ") + originFolder.filePath(""));
+        //: %1 will be replaced with the path to Origin.
+        descLabel = new QLabel(QString(tr("Origin found in %1")).arg(originFolder.filePath("")));
         originBox->setChecked(true);
         originPath = originFolder.filePath("");
     }
@@ -209,7 +210,8 @@ void DRMPage::checkSteamExists()
     if (steamFolder.filePath("").trimmed() != "" && steamFolder.exists() && steamExists)
     {
         statusLabel->setPixmap(QPixmap(":SystemMenu/Icons/Tick.svg"));
-        descLabel = new QLabel(tr("Steam found in ") + steamFolder.filePath(""));
+        //: %1 will be replaced with the path to Steam.
+        descLabel = new QLabel(QString(tr("Steam found in %1")).arg(steamFolder.filePath("")));
         steamBox->setChecked(true);
         steamPath = steamFolder.filePath("");
     }
@@ -273,7 +275,8 @@ void DRMPage::checkUplayExists()
     if (uplayFolder.filePath("").trimmed() != "" && uplayFolder != QDir(".") && uplayFolder.exists())
     {
         statusLabel->setPixmap(QPixmap(":/SystemMenu/Icons/Tick.svg"));
-        descLabel = new QLabel(tr("Uplay found in ") + uplayFolder.filePath(""));
+        //: %1 will be replaced with the path to uPlay.
+        descLabel = new QLabel(QString(tr("Uplay found in %1")).arg(uplayFolder.filePath("")));
         uplayBox->setChecked(true);
         uplayPath = uplayFolder.filePath("");
     }
@@ -298,10 +301,13 @@ void DRMPage::checkUplayExists()
 void ResultsPage::initializePage()
 {
     setTitle(QString(tr("We found ")));
+    int originCount = 0;
+    int steamCount = 0;
+    int uPlayCount = 0;
 
     if (!field("uplayFound").toBool() && !field("steamFound").toBool() && !field("originFound").toBool())
     {
-        setTitle(title() + tr("no games."));
+        setTitle(tr("We found no games."));
         setSubTitle(tr("Install Steam, Origin and/or Uplay to find games with this wizard, or check current installation(s)."));
     }
     else
@@ -319,19 +325,7 @@ void ResultsPage::initializePage()
             auto t = std::async(&ResultsPage::findSteamGames, this);
             t.get();
             int row = 0;
-            if (field("uplayFound").toBool() && field("originFound").toBool())
-            {
-                setTitle(title() + QString::number(steamVector.size()) + QString(tr(" Steam game")) + (steamVector.size() == 1 ? QString(", "):QString("s, ")));
-            }
-            else if (field("uplayFound").toBool() || field("originFound").toBool())
-            {
-                setTitle(title() + QString::number(steamVector.size()) + QString(tr(" Steam game")) + (steamVector.size() == 1 ? QString(tr(" and ")):QString(tr("s and "))));
-            }
-            else
-            {
-                setTitle(title() + QString::number(steamVector.size()) + QString(tr(" Steam game")) + (steamVector.size() == 1 ? QString("."):QString("s.")));
-            }
-
+            steamCount = steamVector.size();
             for (auto i : steamVector)
             {
                 QCheckBox* checkBox = new QCheckBox(tr("Executable not found"));
@@ -367,14 +361,7 @@ void ResultsPage::initializePage()
             t.get();
             int row = 0;
             int count = originTree.get<int>("games.count");
-            if (field("uplayFound").toBool())
-            {
-                setTitle(title() + QString::number(count) + QString(tr(" Origin game")) + (count == 1 ? QString(tr(" and ")):QString(tr("s and "))));
-            }
-            else
-            {
-                setTitle(title() + QString::number(count) + QString(tr(" Origin game")) + (count == 1 ? QString("."):QString("s.")));
-            }
+            originCount = count;
 
 
             for (pt::ptree::value_type& games : originTree.get_child("games"))
@@ -412,7 +399,7 @@ void ResultsPage::initializePage()
             t.get();
             int row = 0;
             int count = uplayTree.get<int>("games.count");
-            setTitle(title() + QString::number(count) + QString(tr(" Uplay game")) + (count == 1 ? QString("."):QString("s.")));
+            uPlayCount = count;
 
             for (pt::ptree::value_type& games : uplayTree.get_child("games"))
             {
@@ -439,6 +426,9 @@ void ResultsPage::initializePage()
             uplayScrollArea->setWidget(uplayViewport);
             tabWidget->addTab(uplayScrollArea, "Uplay");
         }
+        //: %1, %2, and %3 will be replaced with the number of Steam, Origin, and uPlay games, respectively
+        setTitle(QString(tr("We found %1 Steam games, %2 Origin games, and %3 uPlay games.")).arg(QString::number(steamCount),
+                                QString::number(originCount), QString::number(uPlayCount)));
 
         QPushButton* selectAllBtn = new QPushButton(tr("Select all"));
         QPushButton* deselectAllBtn = new QPushButton(tr("Deselect all"));
@@ -857,7 +847,7 @@ void FinalPage::initializePage()
 {
     std::sort(addedVector.begin(), addedVector.end(), [&](const Game& g1, const Game& g2){return g1.gameName < g2.gameName;});
     db.addGames(addedVector);
-    setSubTitle(QString(tr("Added ")) + QString::number(addedVector.size()) + tr(" games to the database. Click finish to complete the wizard."));
+    setSubTitle(QString(tr("Added %d games to the database. Click finish to complete the wizard.")).arg(addedVector.size()));
 }
 
 /** Overloads the nextId function */

@@ -50,7 +50,7 @@ Library::Library(QSettings* p, QWidget* parent)
     if (!db.init())
     {
         QMessageBox error;
-        error.critical(0, tr("Error!"), tr("An error occured while trying to load the database."));
+        error.critical(0, tr("Error!"), tr("An error occurred while trying to load the database."));
         exit(EXIT_FAILURE);
     }
 
