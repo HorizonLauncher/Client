@@ -69,7 +69,7 @@ void GameLauncher::finished(int exitCode, QProcess::ExitStatus exitStatus)
 {
     if (exitCode != 0)
     {
-        QMessageBox(QMessageBox::Warning, "Warning", "The game finished, but it claims to have encountered an error").exec();
+        QMessageBox(QMessageBox::Warning, tr("Warning"), tr("The game finished, but it claims to have encountered an error")).exec();
     }
 }
 
@@ -81,10 +81,10 @@ void GameLauncher::onLaunchError(QProcess::ProcessError error)
     switch (error)
     {
         case QProcess::FailedToStart:
-            QMessageBox(QMessageBox::Critical, "Error", "Could not start the game. Please double check that you are using the correct file to launch it.").exec();
+            QMessageBox(QMessageBox::Critical, tr("Error"), tr("Could not start the game. Please double check that you are using the correct file to launch it.")).exec();
             break;
         case QProcess::Crashed:
-            QMessageBox(QMessageBox::Warning, "Crash!", "The launched game has crashed").exec();
+            QMessageBox(QMessageBox::Warning, tr("Crash!"), tr("The launched game has crashed")).exec();
             break;
         default:
             // Other cases are errors unrelated to startup, so let's not handle them

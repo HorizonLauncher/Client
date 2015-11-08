@@ -29,7 +29,7 @@ Homepage::Homepage(QSettings* p, QWidget* parent) :
     if (!db.init())
     {
         QMessageBox error;
-        error.critical(0, "Error!", "An error occured while trying to load the database.");
+        error.critical(0, tr("Error!"), tr("An error occured while trying to load the database."));
         exit(EXIT_FAILURE);
     }
 
@@ -63,7 +63,7 @@ void Homepage::on_playRandom_clicked()
     else
     {
         QMessageBox messageBox;
-        messageBox.setText("Error: an application is already running.");
+        messageBox.setText(tr("Error: an application is already running."));
         messageBox.exec();
     }
 }
@@ -80,10 +80,10 @@ void Homepage::selectRandomGame()
     else
     {
         noGames = true;
-        curRandom = "No games!";
+        curRandom = tr("No games!");
     }
 
-    ui->randomGameLbl->setText("Random Game: " + curRandom);
+    ui->randomGameLbl->setText(tr("Random Game: ") + curRandom);
     ui->randomGameLbl->adjustSize();
 }
 

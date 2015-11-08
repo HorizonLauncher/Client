@@ -24,10 +24,10 @@ Settings::Settings(QSettings* p, QWidget* parent) : QWidget(parent), ui(new Ui::
     QFont buttonFont("SourceSansPro", 9);
 
     ui->WizardButton->setFont(buttonFont);
-    ui->WizardButton->setText("Add Games to Horizon");
+    ui->WizardButton->setText(tr("Add Games to Horizon"));
 
     ui->ClearDatabaseButton->setFont(buttonFont);
-    ui->ClearDatabaseButton->setText("Clear Database");
+    ui->ClearDatabaseButton->setText(tr("Clear Database"));
 
     ui->BodyColor->setFont(buttonFont);
     ui->BodyColor->setStyleSheet("background-color: " + p->value("Body/Background").toString() + ";}");
@@ -107,7 +107,7 @@ Settings::Settings(QSettings* p, QWidget* parent) : QWidget(parent), ui(new Ui::
     if (!db.init())
     {
         QMessageBox error;
-        error.critical(0, "Error!", "An error occured while trying to load the database.");
+        error.critical(0, tr("Error!"), tr("An error occured while trying to load the database."));
         exit(EXIT_FAILURE);
     }
 }

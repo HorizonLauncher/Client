@@ -36,32 +36,32 @@ Navbar::Navbar(QSettings* p, QWidget* parent)
 
     // Tabs
     // Home tab
-    homeTab = new TabWidget("homeTab", "HOME", p, this);
+    homeTab = new TabWidget("homeTab", tr("HOME"), p, this);
     upperLayout->addWidget(homeTab);
 
     // Store tab
-    storeTab = new TabWidget("storeTab", "STORE", p, this);
+    storeTab = new TabWidget("storeTab", tr("STORE"), p, this);
     upperLayout->addWidget(storeTab);
 
     // Games tab
-    gamesTab = new TabWidget("gamesTab", "GAMES", p, this);
+    gamesTab = new TabWidget("gamesTab", tr("GAMES"), p, this);
     upperLayout->addWidget(gamesTab);
 
     // Community tab
-    communityTab = new TabWidget("communityTab", "COMMUNITY", p, this);
+    communityTab = new TabWidget("communityTab", tr("COMMUNITY"), p, this);
     upperLayout->addWidget(communityTab);
 
     // News tab
-    newsTab = new TabWidget("newsTab", "NEWS", p, this);
+    newsTab = new TabWidget("newsTab", tr("NEWS"), p, this);
     upperLayout->addWidget(newsTab);
 
     // Mods tab
-    modsTab = new TabWidget("modsTab", "MODS", p, this);
+    modsTab = new TabWidget("modsTab", tr("MODS"), p, this);
     upperLayout->addWidget(modsTab);
     upperLayout->addStretch();
 
     // Settings tab
-    settingsTab = new TabWidget("settingsTab", "SETTINGS", p, this);
+    settingsTab = new TabWidget("settingsTab", tr("SETTINGS"), p, this);
     upperLayout->addWidget(settingsTab);
 
     show();
