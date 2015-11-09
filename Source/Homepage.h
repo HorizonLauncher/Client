@@ -7,29 +7,27 @@
 #include <QWidget>
 #include <QSettings>
 
-namespace Ui {
-class Homepage;
-}
-
 class Homepage : public QWidget
 {
     Q_OBJECT
 
 public:
     Homepage(QSettings* p, QWidget* parent = 0);
-    ~Homepage();
 
 private slots:
-    void on_newRandom_clicked();
-    void on_playRandom_clicked();
+    void playRandomGame();
 
 private:
     Database db;
-    Ui::Homepage* ui;
     GameLauncher gl;
     QString curRandom;
     bool noGames;
 
+    QLabel *randomGameLbl;
+    QPushButton* playRandom;
+    QPushButton* newRandom;
+
+    void init();
     void selectRandomGame();
 };
 

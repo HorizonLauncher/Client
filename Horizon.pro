@@ -31,7 +31,6 @@ HEADERS = Source/TabWidget.h \
     Source/Defines.h
 
 FORMS = Resource/UI/Library.ui \
-    Resource/UI/homepage.ui \
     Resource/UI/BuddyList.ui \
     Resource/UI/Community.ui \
     Resource/UI/Settings.ui \

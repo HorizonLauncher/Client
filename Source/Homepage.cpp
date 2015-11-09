@@ -1,12 +1,9 @@
 #include "Homepage.h"
-#include "ui_homepage.h"
 
 Homepage::Homepage(QSettings* p, QWidget* parent) :
-    QWidget(parent),
-    ui(new Ui::Homepage)
+    QWidget(parent)
 {
-    ui->setupUi(this);
-    this->setObjectName("homepageUI");
+    this->setObjectName("homepage");
     this->setStyleSheet("QPushButton {"
                         "font-family: SourceSansPro;"
                         "background-color: " + p->value("Primary/DarkElement").toString() + ";"
@@ -16,15 +13,9 @@ Homepage::Homepage(QSettings* p, QWidget* parent) :
                         "background-color: " + p->value("Primary/InactiveSelection").toString() + ";} "
                         "QLabel {"
                         "font-family: SourceSansPro;"
-                        "color: " + p->value("Primary/LightText").toString() + " }"
-                        "#playRandom { font-size: 12px; }"
-                        "#randomGameLbl { font-size: 16px; }"
-                        "#newRandom { background-color: transparent; }");
+                        "color: " + p->value("Primary/LightText").toString() + " }");
 
-    QPixmap refresh(":/SystemMenu/Icons/RefreshInverted.png");
-    QIcon icon(refresh);
-    ui->newRandom->setIcon(icon);
-    ui->newRandom->setIconSize(QSize(18, 18));
+    init();
 
     if (!db.init())
     {
@@ -36,12 +27,36 @@ Homepage::Homepage(QSettings* p, QWidget* parent) :
     selectRandomGame();
 }
 
-void Homepage::on_newRandom_clicked()
+void Homepage::init()
 {
+    QGridLayout* mainLayout = new QGridLayout(this);
+
+    randomGameLbl = new QLabel(tr("Random game: "));
+    randomGameLbl->setStyleSheet("font-size: 16px;");
+    mainLayout->addWidget(randomGameLbl, 0, 0, 1, 1, Qt::AlignBottom);
+
+    playRandom = new QPushButton(tr("PLAY"));
+    playRandom->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    playRandom->setStyleSheet("font-size: 12px;");
+    mainLayout->addWidget(playRandom, 0, 1, 1, 1, Qt::AlignBottom);
+
+    QPixmap refresh(":/SystemMenu/Icons/RefreshInverted.png");
+    QIcon icon(refresh);
+
+    newRandom = new QPushButton("");
+    newRandom->setIcon(icon);
+    newRandom->setIconSize(QSize(18, 18));
+    newRandom->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    newRandom->setStyleSheet("background-color: transparent;");
+    mainLayout->addWidget(newRandom, 0, 2, 1, 1, Qt::AlignBottom | Qt::AlignLeft);
+
+    connect(newRandom, &QPushButton::clicked, [=] { selectRandomGame(); });
+    connect(playRandom, &QPushButton::clicked, this, &Homepage::playRandomGame);
+
     selectRandomGame();
 }
 
-void Homepage::on_playRandom_clicked()
+void Homepage::playRandomGame()
 {
     if (!gl.isProcessRunning())
     {
@@ -83,11 +98,6 @@ void Homepage::selectRandomGame()
         curRandom = tr("No games!");
     }
 
-    ui->randomGameLbl->setText(tr("Random Game: ") + curRandom);
-    ui->randomGameLbl->adjustSize();
-}
-
-Homepage::~Homepage()
-{
-    delete ui;
+    randomGameLbl->setText(tr("Random Game: ") + curRandom);
+    randomGameLbl->adjustSize();
 }
