@@ -1,1 +1,1 @@
-#define CONFIG_FOLDER QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation)
+#define CONFIG_FOLDER QStandardPaths::writableLocation(QStandardPaths::DataLocation)
