@@ -178,6 +178,7 @@ void Settings::on_ResetColors_clicked()
     ui->NavbarBG->setStyleSheet("background-color: " + palette.value("Navbar/Background").toString() + ";}");
     ui->NavbarHover->setStyleSheet("background-color: " + palette.value("Navbar/HoverColor").toString() + ";}");
     ui->NavbarSelected->setStyleSheet("background-color: " + palette.value("Navbar/SelectedColor").toString() + ";}");
+    ui->TitleBarColor->setStyleSheet("background-color: " + palette.value("TitleBar/Color").toString() + ";}");
     ui->ActiveElement->setStyleSheet("background-color: " + palette.value("Primary/ActiveElement").toString() + ";}");
     ui->InactiveSelection->setStyleSheet("background-color: " + palette.value("Primary/InactiveSelection").toString() + ";}");
     ui->HoverSelection->setStyleSheet("background-color: " + palette.value("Primary/HoverSelection").toString() + ";}");
