@@ -103,6 +103,7 @@ Settings::Settings(QSettings* p, QWidget* parent) : QWidget(parent), ui(new Ui::
     connect(ui->DarkestBase, &QPushButton::clicked, [=]() { pickSetColor(16); });
     connect(ui->ResetColors, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_ResetColors_clicked()));
     connect(ui->ClearDatabaseButton, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_ClearDatabaseButton_clicked()));
+    connect(ui->manageNewsButton, SIGNAL(clicked()), QApplication::instance, SLOT (Settings::on_ManageNewsButton_clicked()));
 
     ui->label_2->adjustSize();
     ui->label_3->adjustSize();
@@ -323,6 +324,12 @@ void Settings::on_ClearDatabaseButton_clicked()
     }
 }
 
+void Settings::on_ManageNewsButton_clicked()
+{
+  QWidget newsFeedChooser = new NewsFeedChooserWindow();
+  newsFeedChooser->show(); 
+
+}
 Settings::~Settings()
 {
     delete ui;
