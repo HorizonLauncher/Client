@@ -52,7 +52,6 @@ set(HEADERS
 
 set(FORMS
     Resource/UI/Library.ui
-    Resource/UI/BuddyList.ui
     Resource/UI/Community.ui
     Resource/UI/Settings.ui
 )
