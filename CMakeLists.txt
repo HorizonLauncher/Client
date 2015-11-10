@@ -51,11 +51,11 @@ set(HEADERS
     Source/News.h
     Source/newsitemwidget.h
     Source.SetupWizard.h
+    Source/Defines.h
 )
 
 set(FORMS
     Resource/UI/Library.ui
-    Resource/UI/homepage.ui
     Resource/UI/BuddyList.ui
     Resource/UI/Community.ui
     Resource/UI/Settings.ui
@@ -69,6 +69,10 @@ set(RESOURCES
 )
 
 set(GUI_TYPE "")
+
+set(TRANSLATIONS
+    Translations/horizon_da.ts
+)
 
 if(WIN32)
     #Additional configuration for Windows systems.
@@ -122,9 +126,11 @@ find_package(Qt5Network REQUIRED)
 find_package(Qt5Sql REQUIRED)
 find_package(Boost REQUIRED)
 find_package(Threads REQUIRED)
+find_package(Qt5LinguistTools REQUIRED)
 
 qt5_wrap_ui(FORMS_HEADERS ${FORMS})
 qt5_add_resources(UI_RESOURCES ${RESOURCES})
+qt5_add_translation(TRANSLATIONS ${TRANSLATIONS})
 include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
     ${Qt5Gui_INCLUDE_DIRS}
@@ -145,6 +151,7 @@ add_executable(HorizonLauncher
     ${OS_SOURCE}
     ${FORMS_HEADERS}
     ${UI_RESOURCES}
+    ${TRANSLATIONS}
 )
 target_link_libraries(HorizonLauncher
     Qt5::Widgets

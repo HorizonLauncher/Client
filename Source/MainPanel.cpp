@@ -76,17 +76,17 @@ void MainPanel::init()
     QPushButton* pushButtonMinimize = new QPushButton("", coreWidget);
     pushButtonMinimize->setObjectName("pushButtonMinimize");
     windowControlLayout->addWidget(pushButtonMinimize);
-    QObject::connect(pushButtonMinimize, SIGNAL(clicked()), this, SLOT(pushButtonMinimize()));
+    QObject::connect(pushButtonMinimize, &QPushButton::clicked, this, &MainPanel::pushButtonMinimize);
     // Maximize
     QPushButton* pushButtonMaximize = new QPushButton("", coreWidget);
     pushButtonMaximize->setObjectName("pushButtonMaximize");
     windowControlLayout->addWidget(pushButtonMaximize);
-    QObject::connect(pushButtonMaximize, SIGNAL(clicked()), this, SLOT(pushButtonMaximize()));
+    QObject::connect(pushButtonMaximize, &QPushButton::clicked, this, &MainPanel::pushButtonMaximize);
     // Close
     QPushButton* pushButtonClose = new QPushButton("", coreWidget);
     pushButtonClose->setObjectName("pushButtonClose");
     windowControlLayout->addWidget(pushButtonClose);
-    QObject::connect(pushButtonClose, SIGNAL(clicked()), this, SLOT(pushButtonClose()));
+    QObject::connect(pushButtonClose, &QPushButton::clicked, this, &MainPanel::pushButtonClose);
 
     // Navbar
     navbar = new Navbar(p, coreWidget);
@@ -142,6 +142,7 @@ void MainPanel::init()
     connect(navbar->newsTab, SIGNAL(clicked()), this, SLOT(setNews()));
     // connect(navbar->modsTab, SIGNAL(clicked()), this, SLOT(setMods()));
     connect(navbar->settingsTab, SIGNAL(clicked()), this, SLOT(setSettings()));
+
 
     // Show
     show();

@@ -1,6 +1,7 @@
 #include "Init.h"
 #include "BuddyList.h"
 #include "SetupWizard.h"
+#include "Defines.h"
 
 #include <QApplication>
 #include <QFile>
@@ -22,7 +23,12 @@ int main(int argc, char* argv[])
 {
     QApplication::setStyle("fusion");
     QApplication* application = new QApplication(argc, argv);
-	bool dbExists = QFile("horizon.db").exists();
+
+    QTranslator horizonTranslator;
+    horizonTranslator.load("horizon_" + QLocale::system().name());
+    application->installTranslator(&horizonTranslator);
+
+    bool dbExists = QFile(CONFIG_FOLDER + "/horizon.db").exists();
     SetupWizard* wiz = new SetupWizard();
 
     #ifndef Q_OS_WIN
@@ -56,10 +62,10 @@ int main(int argc, char* argv[])
     #endif
 
     // Launch
-	if (!dbExists)
-	{
-		wiz->show();
-	}
-	application->exec();
+    if (!dbExists)
+    {
+        wiz->show();
+    }
+    application->exec();
     return 0;
 }

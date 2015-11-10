@@ -1,5 +1,6 @@
 #pragma once
 #include "Database.h"
+#include "Defines.h"
 
 #include <QtWidgets>
 #include <vector>
@@ -29,7 +30,7 @@ class DRMSetupWizard : public QWizard
     Q_OBJECT
 public:
     Database db;
-    DRMSetupWizard(QWidget* parent = 0, QString dbPath = "./");
+    DRMSetupWizard(QWidget* parent = 0, QString dbPath = CONFIG_FOLDER);
     DRMPage* drmPage;
     ResultsPage* resultsPage;
     FinalPage* finalPage;

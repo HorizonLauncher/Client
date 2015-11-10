@@ -32,16 +32,16 @@ DRMSetupWizard::DRMSetupWizard(QWidget* parent, QString dbPath) : QWizard(parent
     setPage(pages::DRM, drmPage);
     setPage(pages::RESULTS, resultsPage);
     setPage(pages::FINAL, finalPage);
-    setWindowTitle("Horizon Launcher Setup");
+    setWindowTitle(tr("Horizon Launcher Setup"));
     setFixedSize(QSize(700, 450));
-	addedVector.erase(addedVector.begin(), addedVector.end());
-	if (!db.init())
-	{
-		QMessageBox error;
-		error.critical(0, "Error!", "An error occured while trying to load the database.");
-		exit(EXIT_FAILURE);
-	}
- }
+    addedVector.erase(addedVector.begin(), addedVector.end());
+    if (!db.init())
+    {
+        QMessageBox error;
+        error.critical(0, tr("Error!"), tr("An error occurred while trying to load the database."));
+        exit(EXIT_FAILURE);
+    }
+}
 
 /** IntroPage constructor
  * Defines some initial properties for the introduction page.
@@ -49,10 +49,10 @@ DRMSetupWizard::DRMSetupWizard(QWidget* parent, QString dbPath) : QWizard(parent
  */
 IntroPage::IntroPage(QWidget* parent) : QWizardPage(parent)
 {
-    setTitle("Finding games");
-    setSubTitle("This wizard will try to find all your games.");
+    setTitle(tr("Finding games"));
+    setSubTitle(tr("This wizard will try to find all your games."));
     auto layout = new QGridLayout();
-    auto label = new QLabel("Click next to attempt to find Steam, Origin and Uplay games where applicable.");
+    auto label = new QLabel(tr("Click next to attempt to find Steam, Origin and Uplay games where applicable."));
     layout->addWidget(label);
     setLayout(layout);
 }
@@ -63,7 +63,7 @@ IntroPage::IntroPage(QWidget* parent) : QWizardPage(parent)
  */
 DRMPage::DRMPage(QWidget* parent) : QWizardPage(parent)
 {
-    setTitle("Checking for Steam");
+    setTitle(tr("Checking for Steam"));
     steamBox = new QCheckBox();
     originBox = new QCheckBox();
     uplayBox = new QCheckBox();
@@ -71,21 +71,21 @@ DRMPage::DRMPage(QWidget* parent) : QWizardPage(parent)
     registerField("uplayFound", uplayBox);
     registerField("originFound", originBox);
     layout = new QGridLayout();
-    platformLabel = new QLabel("<b>Steam</b>");
+    platformLabel = new QLabel(tr("<b>Steam</b>"));
     descLabel = new QLabel();
     statusLabel = new QLabel();
     platformLabel->setTextFormat(Qt::TextFormat::RichText);
     checkSteamExists();
 
 #if defined(_WIN32) || defined(_WIN64) || defined(__APPLE__)
-    setTitle(title() += ", Origin");
+    setTitle(title() += tr(", Origin"));
     platformLabel = new QLabel("<b>Origin</b>");
     statusLabel = new QLabel();
     checkOriginExists();
 #endif
 
 #if defined(_WIN32) || defined (_WIN64)
-    setTitle(title() += " and Uplay.");
+    setTitle(title() += tr(" and Uplay."));
     platformLabel = new QLabel("<b>Uplay</b>");
     statusLabel = new QLabel();
     checkUplayExists();
@@ -99,7 +99,7 @@ DRMPage::DRMPage(QWidget* parent) : QWizardPage(parent)
  */
 ResultsPage::ResultsPage(Database db, DRMPage& drmPage, QWidget* parent) : QWizardPage(parent), db(db)
 {
-    setSubTitle("We found the following on your system.");
+    setSubTitle(tr("We found the following on your system."));
     steamRoot = drmPage.steamPath;
     originRoot = drmPage.originPath;
     uplayRoot = drmPage.uplayPath;
@@ -110,7 +110,7 @@ ResultsPage::ResultsPage(Database db, DRMPage& drmPage, QWidget* parent) : QWiza
  */
 FinalPage::FinalPage(Database db, QWidget* parent) : QWizardPage(parent), db(db)
 {
-    setTitle("Done");
+    setTitle(tr("Done"));
 }
 
 /** Check if Origin is installed on the current computer, if applicable, and sets some values for later pages to
@@ -157,14 +157,15 @@ void DRMPage::checkOriginExists()
     if (originFolder.filePath("").trimmed() != "" && originFolder.exists())
     {
         statusLabel->setPixmap(QPixmap(":/SystemMenu/Icons/Tick.svg"));
-        descLabel = new QLabel("Origin found in " + originFolder.filePath(""));
+        //: %1 will be replaced with the path to Origin.
+        descLabel = new QLabel(QString(tr("Origin found in %1")).arg(originFolder.filePath("")));
         originBox->setChecked(true);
         originPath = originFolder.filePath("");
     }
     else
     {
         statusLabel->setPixmap(QPixmap(":/SystemMenu/Icons/Cross.svg"));
-        descLabel = new QLabel("Origin not found. Verify installation and try again.");
+        descLabel = new QLabel(tr("Origin not found. Verify installation and try again."));
     }
     layout->addWidget(platformLabel, 3, 0, 0);
     layout->addWidget(descLabel, 4, 0, 0);
@@ -192,6 +193,7 @@ void DRMPage::checkSteamExists()
     if (which.exitCode() == 0)
     {
         steamFolder = QDir(QDir::homePath() + "/.local/share/Steam");
+        steamExists = true;
     }
 #elif defined(_WIN32) || defined(_WIN64)
     QSettings settings("HKEY_CURRENT_USER\\Software\\Valve\\Steam", QSettings::NativeFormat);
@@ -202,19 +204,21 @@ void DRMPage::checkSteamExists()
     }
 #elif defined(__APPLE__)
     steamFolder = QDir(QDir::home().filePath("Library/Application Support/Steam"));
+    steamExists = steamFolder.exits()
 #endif
 
     if (steamFolder.filePath("").trimmed() != "" && steamFolder.exists() && steamExists)
     {
         statusLabel->setPixmap(QPixmap(":SystemMenu/Icons/Tick.svg"));
-        descLabel = new QLabel("Steam found in " + steamFolder.filePath(""));
+        //: %1 will be replaced with the path to Steam.
+        descLabel = new QLabel(QString(tr("Steam found in %1")).arg(steamFolder.filePath("")));
         steamBox->setChecked(true);
         steamPath = steamFolder.filePath("");
     }
     else
     {
         statusLabel->setPixmap(QPixmap(":SystemMenu/Icons/Cross.svg"));
-        descLabel = new QLabel("Steam not found. Verify installation and try again.");
+        descLabel = new QLabel(tr("Steam not found. Verify installation and try again."));
     }
     layout->addWidget(platformLabel, 0, 0, 0);
     layout->addWidget(descLabel, 1, 0, 0);
@@ -271,14 +275,15 @@ void DRMPage::checkUplayExists()
     if (uplayFolder.filePath("").trimmed() != "" && uplayFolder != QDir(".") && uplayFolder.exists())
     {
         statusLabel->setPixmap(QPixmap(":/SystemMenu/Icons/Tick.svg"));
-        descLabel = new QLabel("Uplay found in " + uplayFolder.filePath(""));
+        //: %1 will be replaced with the path to uPlay.
+        descLabel = new QLabel(QString(tr("Uplay found in %1")).arg(uplayFolder.filePath("")));
         uplayBox->setChecked(true);
         uplayPath = uplayFolder.filePath("");
     }
     else
     {
         statusLabel->setPixmap(QPixmap(":/SystemMenu/Icons/Cross.svg"));
-        descLabel = new QLabel("Uplay not found on the system. Verify installation and try again.");
+        descLabel = new QLabel(tr("Uplay not found on the system. Verify installation and try again."));
     }
     layout->addWidget(platformLabel, 5, 0, 0);
     layout->addWidget(descLabel, 6, 0, 0);
@@ -295,16 +300,18 @@ void DRMPage::checkUplayExists()
  */
 void ResultsPage::initializePage()
 {
-    setTitle(QString("We found "));
+    int originCount = 0;
+    int steamCount = 0;
+    int uPlayCount = 0;
 
     if (!field("uplayFound").toBool() && !field("steamFound").toBool() && !field("originFound").toBool())
     {
-        setTitle(title() + "no games.");
-        setSubTitle("Install Steam, Origin and/or Uplay to find games with this wizard, or check current installation(s).");
+        setTitle(tr("We found no games."));
+        setSubTitle(tr("Install Steam, Origin and/or Uplay to find games with this wizard, or check current installation(s)."));
     }
     else
     {
-        setSubTitle("Change the title for each game by clicking the text box and editing.");
+        setSubTitle(tr("Change the title for each game by clicking the text box and editing."));
         btnGroup = new QButtonGroup();
         btnGroup->setExclusive(false);
         tabWidget = new QTabWidget();
@@ -317,22 +324,10 @@ void ResultsPage::initializePage()
             auto t = std::async(&ResultsPage::findSteamGames, this);
             t.get();
             int row = 0;
-            if (field("uplayFound").toBool() && field("originFound").toBool())
-            {
-                setTitle(title() + QString::number(steamVector.size()) + QString(" Steam game") + (steamVector.size() == 1 ? QString(", "):QString("s, ")));
-            }
-            else if (field("uplayFound").toBool() || field("originFound").toBool())
-            {
-                setTitle(title() + QString::number(steamVector.size()) + QString(" Steam game") + (steamVector.size() == 1 ? QString(" and "):QString("s and ")));
-            }
-            else
-            {
-                setTitle(title() + QString::number(steamVector.size()) + QString(" Steam game") + (steamVector.size() == 1 ? QString("."):QString("s.")));
-            }
-
+            steamCount = steamVector.size();
             for (auto i : steamVector)
             {
-                QCheckBox* checkBox = new QCheckBox("Executable not found");
+                QCheckBox* checkBox = new QCheckBox(tr("Executable not found"));
                 QLineEdit* name = new QLineEdit(i.gameName);
                 name->setFixedWidth(350);
                 checkBox->setStyleSheet("QLabel { color: red; }");
@@ -341,7 +336,7 @@ void ResultsPage::initializePage()
                     if (i.executablePath.contains(dir))
                     {
                         checkBox->setStyleSheet("QLabel { color: black; }");
-                        checkBox->setText("Executable:  " + i.executablePath.remove(QDir(dir).filePath("SteamApps/common")).remove(0, 1));
+                        checkBox->setText(tr("Executable:  ") + i.executablePath.remove(QDir(dir).filePath("SteamApps/common")).remove(0, 1));
                         break;
                     }
                 }
@@ -353,7 +348,7 @@ void ResultsPage::initializePage()
             }
             steamViewport->setLayout(steamLayout);
             steamScrollArea->setWidget(steamViewport);
-            tabWidget->addTab(steamScrollArea, "Steam");
+            tabWidget->addTab(steamScrollArea, tr("Steam"));
         }
 
         if (field("originFound").toBool())
@@ -365,14 +360,7 @@ void ResultsPage::initializePage()
             t.get();
             int row = 0;
             int count = originTree.get<int>("games.count");
-            if (field("uplayFound").toBool())
-            {
-                setTitle(title() + QString::number(count) + QString(" Origin game") + (count == 1 ? QString(" and "):QString("s and ")));
-            }
-            else
-            {
-                setTitle(title() + QString::number(count) + QString(" Origin game") + (count == 1 ? QString("."):QString("s.")));
-            }
+            originCount = count;
 
 
             for (pt::ptree::value_type& games : originTree.get_child("games"))
@@ -410,7 +398,7 @@ void ResultsPage::initializePage()
             t.get();
             int row = 0;
             int count = uplayTree.get<int>("games.count");
-            setTitle(title() + QString::number(count) + QString(" Uplay game") + (count == 1 ? QString("."):QString("s.")));
+            uPlayCount = count;
 
             for (pt::ptree::value_type& games : uplayTree.get_child("games"))
             {
@@ -437,13 +425,16 @@ void ResultsPage::initializePage()
             uplayScrollArea->setWidget(uplayViewport);
             tabWidget->addTab(uplayScrollArea, "Uplay");
         }
+        //: %1, %2, and %3 will be replaced with the number of Steam, Origin, and uPlay games, respectively
+        setTitle(QString(tr("We found %1 Steam games, %2 Origin games, and %3 uPlay games.")).arg(QString::number(steamCount),
+                                QString::number(originCount), QString::number(uPlayCount)));
 
-        QPushButton* selectAllBtn = new QPushButton("Select all");
-        QPushButton* deselectAllBtn = new QPushButton("Deselect all");
-        QPushButton* invertBtn = new QPushButton("Invert selection");
-        connect(selectAllBtn, SIGNAL(clicked()), this, SLOT(selectAll()));
-        connect(deselectAllBtn, SIGNAL(clicked()), this, SLOT(deselectAll()));
-        connect(invertBtn, SIGNAL(clicked()), this, SLOT(invert()));
+        QPushButton* selectAllBtn = new QPushButton(tr("Select all"));
+        QPushButton* deselectAllBtn = new QPushButton(tr("Deselect all"));
+        QPushButton* invertBtn = new QPushButton(tr("Invert selection"));
+        connect(selectAllBtn, &QPushButton::clicked, this, &ResultsPage::selectAll);
+        connect(deselectAllBtn, &QPushButton::clicked, this, &ResultsPage::deselectAll);
+        connect(invertBtn, &QPushButton::clicked, this, &ResultsPage::invert);
 
         top_layout->addWidget(tabWidget);
         QHBoxLayout* boxLayout = new QHBoxLayout();
@@ -451,7 +442,7 @@ void ResultsPage::initializePage()
         boxLayout->addWidget(deselectAllBtn);
         boxLayout->addWidget(invertBtn);
         top_layout->addLayout(boxLayout, 1, 0, 0);
-        connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(tabSelected()));
+        connect(tabWidget, &QTabWidget::currentChanged, this, &ResultsPage::tabSelected);
         setLayout(top_layout);
     }
 }
@@ -480,7 +471,7 @@ int ResultsPage::nextId() const
             {
                 if (group->isChecked())
                 {
-                    QDir path = group->text().remove("Executable: ");
+                    QDir path = group->text().remove(tr("Executable: "));
                     std::string name = QString(QDir::cleanPath(path.filePath("").remove(originRoot.filePath((""))))).toLocal8Bit().constData();
                     std::vector<std::string> strSplit;
                     boost::split(strSplit, name, boost::is_any_of("/"));
@@ -499,7 +490,7 @@ int ResultsPage::nextId() const
             {
                 if (group->isChecked())
                 {
-                    QDir path = group->text().remove("Executable: ");
+                    QDir path = group->text().remove(tr("Executable: "));
                     std::string name = QString(QDir::cleanPath(path.filePath("").remove(uplayRoot.filePath((""))))).toLocal8Bit().constData();
                     std::vector<std::string> strSplit;
                     boost::split(strSplit, name, boost::is_any_of("/"));
@@ -548,11 +539,11 @@ void ResultsPage::tabSelected()
 {
     if (tabWidget->currentIndex() >= 1)
     {
-        setSubTitle("Change the title for each game by clicking the text box and editing. Choose which executable to use from the tree view.");
+        setSubTitle(tr("Change the title for each game by clicking the text box and editing. Choose which executable to use from the tree view."));
     }
     else
     {
-        setSubTitle("Change the title for each game by clicking the text box and editing.");
+        setSubTitle(tr("Change the title for each game by clicking the text box and editing."));
     }
 }
 
@@ -800,7 +791,7 @@ void ResultsPage::parseAcf(QDir steamRoot)
                     QStringList exeList = QDir(path).entryList(QDir::Files | QDir::NoSymLinks | QDir::Executable);
 
                     QFileDialog exeDialog;
-                    exeDialog.setWindowTitle("Select Executable");
+                    exeDialog.setWindowTitle(tr("Select Executable"));
                     exeDialog.setFileMode(QFileDialog::ExistingFile);
                     exeDialog.setDirectory(path);
                     if (exeDialog.exec())
@@ -855,7 +846,7 @@ void FinalPage::initializePage()
 {
     std::sort(addedVector.begin(), addedVector.end(), [&](const Game& g1, const Game& g2){return g1.gameName < g2.gameName;});
     db.addGames(addedVector);
-    setSubTitle(QString("Added ") + QString::number(addedVector.size()) + " games to the database. Click finish to complete the wizard.");
+    setSubTitle(QString(tr("Added %1 games to the database. Click finish to complete the wizard.")).arg(addedVector.size()));
 }
 
 /** Overloads the nextId function */

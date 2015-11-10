@@ -16,17 +16,7 @@ AddGameWizard::AddGameWizard(QWidget* parent, QString dbPath) : QWizard(parent),
     addPage(new InfoPage());
     addPage(new LastPage(db));
 
-    setWindowTitle("Add game wizard");
-}
-
-void InfoPage::pickDir()
-{
-    pickFile(this->dirEdit, QFileDialog::Directory);
-}
-
-void InfoPage::pickExe()
-{
-    pickFile(this->exeEdit, QFileDialog::ExistingFile);
+    setWindowTitle(tr("Add game wizard"));
 }
 
 /** pickFile function
@@ -52,7 +42,7 @@ void InfoPage::pickFile(QLineEdit* edit, QFileDialog::FileMode mode)
 InitPage::InitPage(QWidget* parent) : QWizardPage(parent)
 {
     setTitle("Intro");
-    QLabel* label = new QLabel("This wizard will help you easily add games to your database.");
+    QLabel* label = new QLabel(tr("This wizard will help you easily add games to your database."));
     label->setWordWrap(true);
     QVBoxLayout* layout = new QVBoxLayout;
     layout->addWidget(label);
@@ -65,22 +55,22 @@ InitPage::InitPage(QWidget* parent) : QWizardPage(parent)
  */
 InfoPage::InfoPage(QWidget* parent) : QWizardPage(parent)
 {
-    setTitle("Input game details.");
+    setTitle(tr("Input game details."));
     QLineEdit* nameEdit = new QLineEdit();
     this->dirEdit = new QLineEdit();
     this->exeEdit = new QLineEdit();
     QLineEdit* argsEdit = new QLineEdit();
 
-    QLabel* nameLabel = new QLabel("Name: ");
-    QLabel* dirLabel = new QLabel("Directory: ");
-    QLabel* exeLabel = new QLabel("Executable: ");
-    QLabel* argsLabel = new QLabel("Arguments (optional): ");
+    QLabel* nameLabel = new QLabel(tr("Name: "));
+    QLabel* dirLabel = new QLabel(tr("Directory: "));
+    QLabel* exeLabel = new QLabel(tr("Executable: "));
+    QLabel* argsLabel = new QLabel(tr("Arguments (optional): "));
 
-    QPushButton* dirFileBtn = new QPushButton("Browse");
-    QPushButton* exeFileBtn = new QPushButton("Browse");
+    QPushButton* dirFileBtn = new QPushButton(tr("Browse"));
+    QPushButton* exeFileBtn = new QPushButton(tr("Browse"));
 
-    connect(dirFileBtn, SIGNAL(clicked()), this, SLOT(pickDir()));
-    connect(exeFileBtn, SIGNAL(clicked()), this, SLOT(pickExe()));
+    connect(dirFileBtn, &QPushButton::clicked, [=] { pickFile(this->dirEdit, QFileDialog::Directory); });
+    connect(exeFileBtn, &QPushButton::clicked, [=] { pickFile(this->exeEdit, QFileDialog::ExistingFile); });
 
     registerField("nameEdit*", nameEdit);
     registerField("dirEdit*", dirEdit);
@@ -108,7 +98,7 @@ InfoPage::InfoPage(QWidget* parent) : QWizardPage(parent)
  */
 LastPage::LastPage(Database db, QWidget* parent) : QWizardPage(parent), db(db)
 {
-    setTitle("Done");
+    setTitle(tr("Done"));
 }
 
 /** Initializes the last page. This function is called when the NextButton on the previous page is clicked,
@@ -126,12 +116,12 @@ void LastPage::initializePage()
 
     if (!std::get<0>(db.isExistant(field("nameEdit").toString())))
     {
-        label->setText("Game added successfully.");
+        label->setText(tr("Game added successfully."));
         db.addGame(field("nameEdit").toString(),field("dirEdit").toString(), field("exeEdit").toString(),field("argsEdit").toString(), 0);
     }
     else
     {
-        label->setText("Game already exists.");
+        label->setText(tr("Game already exists."));
     }
     label->setWordWrap(true);
     QVBoxLayout* layout = new QVBoxLayout;

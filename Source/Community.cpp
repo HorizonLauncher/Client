@@ -20,7 +20,7 @@ Community::Community(QSettings* p, QWidget* parent) :
                         "color: " + p->value("Primary/LightText").toString() + ";");
     QFont buttonFont("SourceSansPro", 12);
     ui->buddyButton->setFont(buttonFont);
-    ui->buddyButton->setText("Friends");
+    ui->buddyButton->setText(tr("Friends"));
 }
 
 Community::~Community()

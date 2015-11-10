@@ -1,6 +1,7 @@
 #include "Library.h"
 #include "ui_Library.h"
 #include "AddGameWizard.h"
+#include "Defines.h"
 
 #include <QFileDialog>
 #include <QInputDialog>
@@ -40,16 +41,16 @@ Library::Library(QSettings* p, QWidget* parent)
 
     QFont buttonFont("SourceSansPro", 12);
     ui->addGame->setFont(buttonFont);
-    ui->addGame->setText("Add Game");
+    ui->addGame->setText(tr("Add Game"));
     ui->removeGame->setFont(buttonFont);
-    ui->removeGame->setText("Remove Game");
+    ui->removeGame->setText(tr("Remove Game"));
     ui->testLaunch->setFont(buttonFont);
-    ui->testLaunch->setText("Play");
+    ui->testLaunch->setText(tr("Play"));
 
     if (!db.init())
     {
         QMessageBox error;
-        error.critical(0, "Error!", "An error occured while trying to load the database.");
+        error.critical(0, tr("Error!"), tr("An error occurred while trying to load the database."));
         exit(EXIT_FAILURE);
     }
 
@@ -60,8 +61,8 @@ Library::Library(QSettings* p, QWidget* parent)
     }
 
     QFileSystemWatcher* watcher = new QFileSystemWatcher;
-    watcher->addPath(QDir(".").filePath("horizon.db"));
-    connect(watcher, SIGNAL(fileChanged(QString)), this, SLOT(refreshGames()));
+    watcher->addPath(QDir(CONFIG_FOLDER).filePath("horizon.db"));
+    connect(watcher, &QFileSystemWatcher::fileChanged, this, &Library::refreshGames);
 
     refreshGames();
 }
@@ -96,7 +97,7 @@ void Library::on_testLaunch_clicked()
     else
     {
         QMessageBox messageBox;
-        messageBox.setText("Error: an application is already running.");
+        messageBox.setText(tr("Error: an application is already running."));
         messageBox.exec();
     }
 }
@@ -129,19 +130,19 @@ void Library::on_gameListWidget_currentTextChanged(const QString & currentText)
     QString drmString = "";
     if (game.drm == 0)
     {
-        drmString = "None";
+        drmString = tr("None");
     }
     else if (game.drm == 1)
     {
-        drmString = "Steam";
+        drmString = tr("Steam");
     }
     else if (game.drm == 2)
     {
-        drmString = "Origin";
+        drmString = tr("Origin");
     }
     else if (game.drm == 3)
     {
-        drmString = "uPlay";
+        drmString = tr("uPlay");
     }
 
     ui->gameNameLabel->setText(currentText);
