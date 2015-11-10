@@ -141,7 +141,7 @@ void Settings::on_WizardButton_clicked()
 
 void Settings::on_ResetColors_clicked()
 {
-    QSettings palette(QSettings::IniFormat, QSettings::UserScope, "Horizon Launcher", "palette");
+    QSettings palette(QSettings::IniFormat, QSettings::UserScope, "HorizonLauncher", "palette");
 
     if (palette.isWritable())
     {
@@ -204,7 +204,7 @@ void Settings::updateColor(int id, QColor color)
         return;
     }
 
-    QSettings palette(QSettings::IniFormat, QSettings::UserScope, "Horizon Launcher", "palette");
+    QSettings palette(QSettings::IniFormat, QSettings::UserScope, "HorizonLauncher", "palette");
 
     if (palette.isWritable())
     {
