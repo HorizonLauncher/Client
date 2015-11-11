@@ -60,6 +60,7 @@ set(RESOURCES
     Resource/Icons.qrc
     Resource/Fonts.qrc
     Resource/Styles.qrc
+    Resource/Images.qrc
 )
 
 set(GUI_TYPE "")

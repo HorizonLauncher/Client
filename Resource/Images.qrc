@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/SystemMenu">
+        <file>Images/TitleBarPattern.png</file>
+    </qresource>
+</RCC>
