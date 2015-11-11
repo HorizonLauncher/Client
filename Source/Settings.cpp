@@ -84,7 +84,7 @@ Settings::Settings(QSettings* p, QWidget* parent) : QWidget(parent), ui(new Ui::
     ui->ClientSettingsBox->setStyleSheet("color: #FFFFFF;} ");
     ui->StyleSettingsBox->setStyleSheet("color: #FFFFFF;} ");
 
-    connect(ui->WizardButton, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_WizardButton_clicked()));
+    connect(ui->WizardButton, &QPushButton::clicked, this, &Settings::on_WizardButton_clicked);
     connect(ui->BodyColor, &QPushButton::clicked, [=]() { pickSetColor(1); });
     connect(ui->NavbarBG, &QPushButton::clicked, [=]() { pickSetColor(2); });
     connect(ui->NavbarHover, &QPushButton::clicked, [=]() { pickSetColor(3); });
@@ -101,8 +101,8 @@ Settings::Settings(QSettings* p, QWidget* parent) : QWidget(parent), ui(new Ui::
     connect(ui->SecondaryBase, &QPushButton::clicked, [=]() { pickSetColor(14); });
     connect(ui->TertiaryBase, &QPushButton::clicked, [=]() { pickSetColor(15); });
     connect(ui->DarkestBase, &QPushButton::clicked, [=]() { pickSetColor(16); });
-    connect(ui->ResetColors, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_ResetColors_clicked()));
-    connect(ui->ClearDatabaseButton, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_ClearDatabaseButton_clicked()));
+    connect(ui->ResetColors, &QPushButton::clicked, this, &Settings::on_ResetColors_clicked);
+    connect(ui->ClearDatabaseButton, &QPushButton::clicked, this, &Settings::on_ClearDatabaseButton_clicked);
 
     ui->label_2->adjustSize();
     ui->label_3->adjustSize();
