@@ -62,7 +62,7 @@ void MainPanel::init()
     // Title bar widget
     QWidget* borderWidget = new QWidget;
     borderWidget->setStyleSheet("background-color: " + p->value("TitleBar/Color").toString() + ";"
-                                "background-image: url(:SystemMenu/Icons/TitleBarPattern.png);"
+                                "background-image: url(:SystemMenu/Images/TitleBarPattern.png);"
                                 "background-repeat: repeat-x;");
     verticalLayout1->addWidget(borderWidget);
 
