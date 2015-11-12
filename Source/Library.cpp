@@ -128,11 +128,7 @@ void Library::on_gameListWidget_currentTextChanged(const QString & currentText)
 {
     Game game = db.getGameByName(currentText);
     QString drmString = "";
-    if (game.drm == 0)
-    {
-        drmString = tr("None");
-    }
-    else if (game.drm == 1)
+    if (game.drm == 1)
     {
         drmString = tr("Steam");
     }
