@@ -29,6 +29,7 @@ set(SOURCE
     Source/Settings.cpp
     Source/GameLauncher.cpp
     Source/SetupWizard.cpp
+    Source/GridGameWidget.cpp
 )
 
 set(HEADERS
@@ -48,10 +49,10 @@ set(HEADERS
     Source/GameLauncher.h
     Source.SetupWizard.h
     Source/Defines.h
+    Source/GridGameWidget.h
 )
 
 set(FORMS
-    Resource/UI/Library.ui
     Resource/UI/Community.ui
     Resource/UI/Settings.ui
 )
