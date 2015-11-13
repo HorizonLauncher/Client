@@ -32,7 +32,7 @@ Library::Library(QSettings* p, QWidget* parent)
                         "font-family: SourceSansPro;"
                         "}");
 
-    init();
+    init(p);
 
     if (!db.init())
     {
@@ -54,17 +54,25 @@ Library::Library(QSettings* p, QWidget* parent)
     refreshGames();
 }
 
-void Library::init()
+void Library::init(QSettings* p)
 {
     QGridLayout* mainLayout = new QGridLayout(this);
+    mainLayout->setMargin(0);
+
+    QWidget* searchBar = new QWidget();
+    searchBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    searchBar->setMinimumHeight(40);
+    searchBar->setStyleSheet("background-color:" + p->value("Navbar/SelectedColor").toString() + ";");
+    mainLayout->addWidget(searchBar, 0, 0);
 
     QPushButton* addGameBtn = new QPushButton("Add game");
     addGameBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    mainLayout->addWidget(addGameBtn, 0, 0);
+    addGameBtn->setStyleSheet("margin: 11px 0 0 11px;");
+    mainLayout->addWidget(addGameBtn, 1, 0);
     connect(addGameBtn, &QPushButton::clicked, this, &Library::addGame);
 
     QWidget* gamesWidget = new QWidget();
-    mainLayout->addWidget(gamesWidget, 1, 0, 1, 2);
+    mainLayout->addWidget(gamesWidget, 2, 0);
 
     gamesLayout = new QGridLayout();
     gamesLayout->setSpacing(12);

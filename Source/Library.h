@@ -32,6 +32,6 @@ private:
     QGridLayout* gamesLayout;
     QList<QWidget*> gamesWidgets;
 
-    void init();
+    void init(QSettings* p);
     void launchGame(QString gameName);
 };
