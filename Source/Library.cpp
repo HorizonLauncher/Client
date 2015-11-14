@@ -65,6 +65,27 @@ void Library::init(QSettings* p)
     searchBar->setStyleSheet("background-color:" + p->value("Navbar/SelectedColor").toString() + ";");
     mainLayout->addWidget(searchBar, 0, 0);
 
+    QHBoxLayout* searchLayout = new QHBoxLayout(searchBar);
+
+    QLineEdit* searchBox = new QLineEdit();
+    searchBox->setPlaceholderText("Search games");
+    searchBox->setStyleSheet("border: none;"
+                             "color: " + p->value("Primary/LightText").toString() + ";");
+    searchBox->setMinimumWidth(225);
+    searchBox->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    searchLayout->addWidget(searchBox);
+
+    QPixmap search(":/SystemMenu/Icons/SearchInverted.png");
+    QIcon searchIcon(search);
+
+    QPushButton* searchBtn = new QPushButton("");
+    searchBtn->setIcon(searchIcon);
+    searchBtn->setIconSize(QSize(16, 16));
+    searchBtn->setStyleSheet("background-color: transparent;");
+    searchBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    searchLayout->addWidget(searchBtn);
+    searchLayout->addStretch();
+
     QPushButton* addGameBtn = new QPushButton("Add game");
     addGameBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     addGameBtn->setStyleSheet("margin: 11px 0 0 11px;");
