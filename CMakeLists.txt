@@ -53,7 +53,6 @@ set(HEADERS
 )
 
 set(FORMS
-    Resource/UI/Community.ui
     Resource/UI/Settings.ui
 )
 
