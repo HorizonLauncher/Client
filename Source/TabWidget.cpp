@@ -19,7 +19,7 @@ TabWidget::TabWidget(const QString &name, const QString &text, QSettings* palett
     this->setObjectName(name);
     this->setMinimumHeight(34);
     this->setMaximumHeight(34);
-    this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    this->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     this->setStyleSheet("border-top-left-radius: 2px; border-top-right-radius: 2px;");
 
     p = palette;
