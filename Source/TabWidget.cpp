@@ -149,6 +149,9 @@ void TabWidget::toggleActive()
 {
     isActive = true;
     effect->setColor(QColor(p->value("Navbar/SelectedColor").toString()));
+    this->setStyleSheet("border-top-left-radius: 2px;"
+                        "border-top-right-radius: 2px;"
+                        "background-color: #000000;");
     tabText->setStyleSheet("color: #ffffff;");
     setOpacity(1.0);
 }
@@ -159,6 +162,9 @@ void TabWidget::toggleInactive()
 {
     isActive = false;
     effect->setColor(QColor(p->value("Navbar/HoverColor").toString()));
+    this->setStyleSheet("border-top-left-radius: 2px;"
+                        "border-top-right-radius: 2px;"
+                        "background-color: transparent;");
     tabText->setStyleSheet("color: #7d8f94");
     setOpacity(0.0);
 }
