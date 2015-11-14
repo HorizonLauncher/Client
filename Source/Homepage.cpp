@@ -37,7 +37,7 @@ void Homepage::init()
 
     playRandom = new QPushButton(tr("PLAY"));
     playRandom->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    playRandom->setStyleSheet("font-size: 12px;");
+    playRandom->setStyleSheet("font-size: 12px; padding: 5px;");
     mainLayout->addWidget(playRandom, 0, 1, 1, 1, Qt::AlignBottom);
 
     QPixmap refresh(":/SystemMenu/Icons/RefreshInverted.png");

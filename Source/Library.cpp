@@ -88,7 +88,7 @@ void Library::init(QSettings* p)
 
     QPushButton* addGameBtn = new QPushButton("Add game");
     addGameBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    addGameBtn->setStyleSheet("margin: 11px 0 0 11px;");
+    addGameBtn->setStyleSheet("margin: 11px 0 0 11px; padding: 5px;");
     mainLayout->addWidget(addGameBtn, 1, 0);
     connect(addGameBtn, &QPushButton::clicked, this, &Library::addGame);
 
