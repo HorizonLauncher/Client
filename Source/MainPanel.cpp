@@ -121,14 +121,20 @@ void MainPanel::init()
 
     // Stack widgets
     home = new Homepage(p, stack);
+    home->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     library = new Library(p, stack);
+    library->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     community = new Community(p, stack);
-	settings = new Settings(p, stack);
+    community->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+    settings = new Settings(p, stack);
+    settings->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     stack->addWidget(home);
     stack->addWidget(library);
     stack->addWidget(community);
-	stack->addWidget(settings);
+    stack->addWidget(settings);
     stack->setCurrentWidget(library);
+
+    connect(stack, &QStackedWidget::currentChanged, this, &MainPanel::onStackedChanged);
 
     // Set active tab
     activeTab = navbar->gamesTab;
@@ -145,4 +151,10 @@ void MainPanel::init()
 
     // Show
     show();
+}
+
+void MainPanel::onStackedChanged(int index)
+{
+    QWidget* curWidget = stack->widget(index);
+    curWidget->adjustSize();
 }
