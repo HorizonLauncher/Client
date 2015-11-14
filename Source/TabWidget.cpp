@@ -164,7 +164,7 @@ void TabWidget::toggleInactive()
     effect->setColor(QColor(p->value("Navbar/HoverColor").toString()));
     this->setStyleSheet("border-top-left-radius: 2px;"
                         "border-top-right-radius: 2px;"
-                        "background-color: transparent;");
+                        "background-color: " + p->value("Navbar/Background").toString() + ";");
     tabText->setStyleSheet("color: #7d8f94");
     setOpacity(0.0);
 }
