@@ -20,9 +20,8 @@ private:
     void pickSetColor(int id);
 
 public slots:
-    void on_WizardButton_clicked();
-    void on_ClearDatabaseButton_clicked();
-    void on_ResetColors_clicked();
+    void confirmClearDb();
+    void resetColors();
 
     void updateColor(int id, QColor color);
 public:

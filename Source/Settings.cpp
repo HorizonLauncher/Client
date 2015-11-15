@@ -84,7 +84,6 @@ Settings::Settings(QSettings* p, QWidget* parent) : QWidget(parent), ui(new Ui::
     ui->ClientSettingsBox->setStyleSheet("color: #FFFFFF;} ");
     ui->StyleSettingsBox->setStyleSheet("color: #FFFFFF;} ");
 
-    connect(ui->WizardButton, &QPushButton::clicked, this, &Settings::on_WizardButton_clicked);
     connect(ui->BodyColor, &QPushButton::clicked, [=]() { pickSetColor(1); });
     connect(ui->NavbarBG, &QPushButton::clicked, [=]() { pickSetColor(2); });
     connect(ui->NavbarHover, &QPushButton::clicked, [=]() { pickSetColor(3); });
@@ -101,8 +100,9 @@ Settings::Settings(QSettings* p, QWidget* parent) : QWidget(parent), ui(new Ui::
     connect(ui->SecondaryBase, &QPushButton::clicked, [=]() { pickSetColor(14); });
     connect(ui->TertiaryBase, &QPushButton::clicked, [=]() { pickSetColor(15); });
     connect(ui->DarkestBase, &QPushButton::clicked, [=]() { pickSetColor(16); });
-    connect(ui->ResetColors, &QPushButton::clicked, this, &Settings::on_ResetColors_clicked);
-    connect(ui->ClearDatabaseButton, &QPushButton::clicked, this, &Settings::on_ClearDatabaseButton_clicked);
+    connect(ui->WizardButton, &QPushButton::clicked, [=] { DRMSetupWizard* wiz = new DRMSetupWizard(); wiz->show(); });
+    connect(ui->ResetColors, &QPushButton::clicked, this, &Settings::resetColors);
+    connect(ui->ClearDatabaseButton, &QPushButton::clicked, this, &Settings::confirmClearDb);
 
     ui->label_2->adjustSize();
     ui->label_3->adjustSize();
@@ -130,16 +130,7 @@ Settings::Settings(QSettings* p, QWidget* parent) : QWidget(parent), ui(new Ui::
     }
 }
 
-/** Event handler for Wizard Button
-* Runs setup wizard on click
-*/
-void Settings::on_WizardButton_clicked()
-{
-    DRMSetupWizard* wiz = new DRMSetupWizard();
-    wiz->show();
-}
-
-void Settings::on_ResetColors_clicked()
+void Settings::resetColors()
 {
     QSettings palette(QSettings::IniFormat, QSettings::UserScope, "HorizonLauncher", "palette");
 
@@ -309,7 +300,7 @@ void Settings::updateColor(int id, QColor color)
     }
 }
 
-void Settings::on_ClearDatabaseButton_clicked()
+void Settings::confirmClearDb()
 {
     int ret = QMessageBox(QMessageBox::Question, "Deleting Database", "Proceeding will delete the database, the database will be non-recoverable. Proceed?", QMessageBox::Yes | QMessageBox::No).exec();
     switch (ret)
