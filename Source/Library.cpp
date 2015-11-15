@@ -68,7 +68,7 @@ void Library::init(QSettings* p)
     QHBoxLayout* searchLayout = new QHBoxLayout(searchBar);
 
     QLineEdit* searchBox = new QLineEdit();
-    searchBox->setPlaceholderText("Search games");
+    searchBox->setPlaceholderText(tr("Search games"));
     searchBox->setStyleSheet("border: none;"
                              "color: " + p->value("Primary/LightText").toString() + ";");
     searchBox->setMinimumWidth(225);
@@ -86,7 +86,7 @@ void Library::init(QSettings* p)
     searchLayout->addWidget(searchBtn);
     searchLayout->addStretch();
 
-    QPushButton* addGameBtn = new QPushButton("Add game");
+    QPushButton* addGameBtn = new QPushButton(tr("Add game"));
     addGameBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     addGameBtn->setStyleSheet("margin: 11px 0 0 11px; padding: 5px;");
     mainLayout->addWidget(addGameBtn, 1, 0);
