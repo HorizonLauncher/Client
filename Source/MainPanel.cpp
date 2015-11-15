@@ -36,21 +36,12 @@ void MainPanel::init()
     mainGridLayout->setMargin(0);
     setLayout(mainGridLayout);
 
-    // Main panel scroll area
-    QScrollArea* scrollArea = new QScrollArea(this);
-    scrollArea->setWidgetResizable(true);
-    scrollArea->setObjectName("mainPanelScrollArea");
-    scrollArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    mainGridLayout->addWidget(scrollArea);
-
     // Core widget
-    QWidget* coreWidget = new QWidget(scrollArea);
+    QWidget* coreWidget = new QWidget();
     coreWidget->setObjectName("coreWidget");
     coreWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    scrollArea->setWidget(coreWidget);
     coreWidget->setStyleSheet("background-color: " + p->value("Body/Background").toString() + ";");
+    mainGridLayout->addWidget(coreWidget);
 
     // Vertical layout #1
     QVBoxLayout* verticalLayout1 = new QVBoxLayout;
@@ -113,11 +104,20 @@ void MainPanel::init()
     verticalLayout2->setAlignment(Qt::AlignHCenter);
     mainPanelBackdrop->setLayout(verticalLayout2);
 
+    // Main panel scroll area
+    QScrollArea* scrollArea = new QScrollArea(coreWidget);
+    scrollArea->setWidgetResizable(true);
+    scrollArea->setObjectName("mainPanelScrollArea");
+    scrollArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    verticalLayout2->addWidget(scrollArea);
+
     // Stacked content panel
-    stack = new QStackedWidget(coreWidget);
+    stack = new QStackedWidget(scrollArea);
     stack->setObjectName("stack");
     stack->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    verticalLayout2->addWidget(stack);
+    scrollArea->setWidget(stack);
 
     // Stack widgets
     home = new Homepage(p, stack);
