@@ -31,6 +31,8 @@ set(SOURCE
     Source/News.cpp
     Source/newsitemwidget.cpp
     Source/SetupWizard.cpp
+    Source/GridGameWidget.cpp
+    Source/NewsFeedChooserWindow.cpp
 )
 
 set(HEADERS
@@ -52,11 +54,11 @@ set(HEADERS
     Source/newsitemwidget.h
     Source.SetupWizard.h
     Source/Defines.h
+    Source/GridGameWidget.h
+    Source/NewsFeedChooserWindow.h
 )
 
 set(FORMS
-    Resource/UI/Library.ui
-    Resource/UI/BuddyList.ui
     Resource/UI/Community.ui
     Resource/UI/Settings.ui
     Resource/UI/newspanel.ui
@@ -66,6 +68,7 @@ set(RESOURCES
     Resource/Icons.qrc
     Resource/Fonts.qrc
     Resource/Styles.qrc
+    Resource/Images.qrc
 )
 
 set(GUI_TYPE "")

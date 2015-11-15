@@ -3,20 +3,14 @@
 
 #include <QWidget>
 
-namespace Ui {
-class BuddyList;
-}
-
 class BuddyList : public QWidget
 {
     Q_OBJECT
 
 public:
     explicit BuddyList(QWidget *parent = 0);
-    ~BuddyList();
-
 private:
-    Ui::BuddyList *ui;
+    void init();
 };
 
 #endif // BUDDYLIST_H

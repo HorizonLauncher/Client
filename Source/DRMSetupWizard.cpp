@@ -23,7 +23,7 @@ QList<QButtonGroup*> uplayBtnGroupVector;
  * \param parent Parent widget to draw from
  * \param dbPath Path to the database used
  */
-DRMSetupWizard::DRMSetupWizard(QWidget* parent, QString dbPath) : QWizard(parent), db(dbPath + "horizon.db")
+DRMSetupWizard::DRMSetupWizard(QWidget* parent, QString dbPath) : QWizard(parent), db(QDir(dbPath).filePath("horizon.db"))
 {
     drmPage = new DRMPage();
     resultsPage = new ResultsPage(db, *drmPage);

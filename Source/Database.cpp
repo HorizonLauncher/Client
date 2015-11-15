@@ -2,6 +2,7 @@
 #include "Defines.h"
 
 #include <QDebug>
+#include <QSqlError>
 
 /** Database constructor
  * Constructs the local database.
@@ -12,7 +13,7 @@ Database::Database()
     : db(QSqlDatabase::addDatabase("QSQLITE"))
 {
     db.setHostName("localhost");
-    db.setDatabaseName(CONFIG_FOLDER + "horizon.db");
+    db.setDatabaseName(QDir(CONFIG_FOLDER).filePath("horizon.db"));
 }
 
 Database::Database(QString path)
@@ -28,6 +29,7 @@ Database::Database(QString path)
 bool Database::init()
 {
     bool status = db.open();
+    qDebug() << db.lastError();
     if (!status)
     {
         qDebug("Couldn't connect to the database!");

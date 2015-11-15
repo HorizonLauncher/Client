@@ -14,8 +14,8 @@ namespace entryPoint
 {
 void initSettings(QApplication &application)
 {
-    QSettings config(QSettings::IniFormat, QSettings::UserScope, "Horizon Launcher", "config");
-    QSettings palette(QSettings::IniFormat, QSettings::UserScope, "Horizon Launcher", "palette");
+    QSettings config(QSettings::IniFormat, QSettings::UserScope, "HorizonLauncher", "config");
+    QSettings palette(QSettings::IniFormat, QSettings::UserScope, "HorizonLauncher", "palette");
 
     if (!QFile("config.ini").exists() && config.isWritable())
     {

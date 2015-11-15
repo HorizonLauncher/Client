@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/SystemMenu">
+        <file>Images/TitleBarPattern.png</file>
+        <file>Images/LibraryGridPlaceholder.png</file>
+    </qresource>
+</RCC>

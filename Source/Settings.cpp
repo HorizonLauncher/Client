@@ -1,6 +1,7 @@
 #include "Settings.h"
 #include "ui_Settings.h"
 #include "DRMSetupWizard.h"
+#include "NewsFeedChooserWindow.h"
 
 /** Settings constructor
 * Initialize the settings UI
@@ -84,7 +85,7 @@ Settings::Settings(QSettings* p, QWidget* parent) : QWidget(parent), ui(new Ui::
     ui->ClientSettingsBox->setStyleSheet("color: #FFFFFF;} ");
     ui->StyleSettingsBox->setStyleSheet("color: #FFFFFF;} ");
 
-    connect(ui->WizardButton, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_WizardButton_clicked()));
+    connect(ui->WizardButton, &QPushButton::clicked, this, &Settings::on_WizardButton_clicked);
     connect(ui->BodyColor, &QPushButton::clicked, [=]() { pickSetColor(1); });
     connect(ui->NavbarBG, &QPushButton::clicked, [=]() { pickSetColor(2); });
     connect(ui->NavbarHover, &QPushButton::clicked, [=]() { pickSetColor(3); });
@@ -103,7 +104,9 @@ Settings::Settings(QSettings* p, QWidget* parent) : QWidget(parent), ui(new Ui::
     connect(ui->DarkestBase, &QPushButton::clicked, [=]() { pickSetColor(16); });
     connect(ui->ResetColors, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_ResetColors_clicked()));
     connect(ui->ClearDatabaseButton, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_ClearDatabaseButton_clicked()));
-    connect(ui->manageNewsButton, SIGNAL(clicked()), QApplication::instance, SLOT (Settings::on_ManageNewsButton_clicked()));
+    connect(ui->manageNewsButton, &QPushButton::clicked, this, &Settings::on_ManageNewsButton_clicked);
+    connect(ui->ResetColors, &QPushButton::clicked, this, &Settings::on_ResetColors_clicked);
+    connect(ui->ClearDatabaseButton, &QPushButton::clicked, this, &Settings::on_ClearDatabaseButton_clicked);
 
     ui->label_2->adjustSize();
     ui->label_3->adjustSize();
@@ -142,7 +145,7 @@ void Settings::on_WizardButton_clicked()
 
 void Settings::on_ResetColors_clicked()
 {
-    QSettings palette(QSettings::IniFormat, QSettings::UserScope, "Horizon Launcher", "palette");
+    QSettings palette(QSettings::IniFormat, QSettings::UserScope, "HorizonLauncher", "palette");
 
     if (palette.isWritable())
     {
@@ -179,6 +182,7 @@ void Settings::on_ResetColors_clicked()
     ui->NavbarBG->setStyleSheet("background-color: " + palette.value("Navbar/Background").toString() + ";}");
     ui->NavbarHover->setStyleSheet("background-color: " + palette.value("Navbar/HoverColor").toString() + ";}");
     ui->NavbarSelected->setStyleSheet("background-color: " + palette.value("Navbar/SelectedColor").toString() + ";}");
+    ui->TitleBarColor->setStyleSheet("background-color: " + palette.value("TitleBar/Color").toString() + ";}");
     ui->ActiveElement->setStyleSheet("background-color: " + palette.value("Primary/ActiveElement").toString() + ";}");
     ui->InactiveSelection->setStyleSheet("background-color: " + palette.value("Primary/InactiveSelection").toString() + ";}");
     ui->HoverSelection->setStyleSheet("background-color: " + palette.value("Primary/HoverSelection").toString() + ";}");
@@ -205,7 +209,7 @@ void Settings::updateColor(int id, QColor color)
         return;
     }
 
-    QSettings palette(QSettings::IniFormat, QSettings::UserScope, "Horizon Launcher", "palette");
+    QSettings palette(QSettings::IniFormat, QSettings::UserScope, "HorizonLauncher", "palette");
 
     if (palette.isWritable())
     {
@@ -326,8 +330,9 @@ void Settings::on_ClearDatabaseButton_clicked()
 
 void Settings::on_ManageNewsButton_clicked()
 {
-  QWidget newsFeedChooser = new NewsFeedChooserWindow();
-  newsFeedChooser->show(); 
+  qDebug() << "manage news" << endl;
+  NewsFeedChooserWindow* newsFeedChooser = new NewsFeedChooserWindow();
+  newsFeedChooser->show();
 
 }
 Settings::~Settings()

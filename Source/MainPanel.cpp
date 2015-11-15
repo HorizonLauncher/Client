@@ -28,7 +28,7 @@ MainPanel::MainPanel(QWidget* parent)
 */
 void MainPanel::init()
 {
-    p = new QSettings(QSettings::IniFormat, QSettings::UserScope, "Horizon Launcher", "palette");
+    p = new QSettings(QSettings::IniFormat, QSettings::UserScope, "HorizonLauncher", "palette");
 
     // Main panel layout
     QGridLayout* mainGridLayout = new QGridLayout;
@@ -61,7 +61,9 @@ void MainPanel::init()
 
     // Title bar widget
     QWidget* borderWidget = new QWidget;
-    borderWidget->setStyleSheet("background-color: " + p->value("TitleBar/Color").toString() + ";");
+    borderWidget->setStyleSheet("background-color: " + p->value("TitleBar/Color").toString() + ";"
+                                "background-image: url(:SystemMenu/Images/TitleBarPattern.png);"
+                                "background-repeat: repeat-x;");
     verticalLayout1->addWidget(borderWidget);
 
     // Window Control Horizontal Layout

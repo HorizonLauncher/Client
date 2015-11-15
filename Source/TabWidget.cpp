@@ -19,7 +19,7 @@ TabWidget::TabWidget(const QString &name, const QString &text, QSettings* palett
     this->setObjectName(name);
     this->setMinimumHeight(34);
     this->setMaximumHeight(34);
-    this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    this->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     this->setStyleSheet("border-top-left-radius: 2px; border-top-right-radius: 2px;");
 
     p = palette;
@@ -149,6 +149,9 @@ void TabWidget::toggleActive()
 {
     isActive = true;
     effect->setColor(QColor(p->value("Navbar/SelectedColor").toString()));
+    this->setStyleSheet("border-top-left-radius: 2px;"
+                        "border-top-right-radius: 2px;"
+                        "background-color: #000000;");
     tabText->setStyleSheet("color: #ffffff;");
     setOpacity(1.0);
 }
@@ -159,6 +162,9 @@ void TabWidget::toggleInactive()
 {
     isActive = false;
     effect->setColor(QColor(p->value("Navbar/HoverColor").toString()));
+    this->setStyleSheet("border-top-left-radius: 2px;"
+                        "border-top-right-radius: 2px;"
+                        "background-color: " + p->value("Navbar/Background").toString() + ";");
     tabText->setStyleSheet("color: #7d8f94");
     setOpacity(0.0);
 }

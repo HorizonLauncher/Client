@@ -28,7 +28,14 @@ int main(int argc, char* argv[])
     horizonTranslator.load("horizon_" + QLocale::system().name());
     application->installTranslator(&horizonTranslator);
 
-    bool dbExists = QFile(CONFIG_FOLDER + "/horizon.db").exists();
+    QDir configFolder(CONFIG_FOLDER);
+    if (!configFolder.exists())
+    {
+        configFolder.cdUp();
+        configFolder.mkdir("HorizonLauncher");
+    }
+
+    bool dbExists = QFile(QDir(CONFIG_FOLDER).filePath("horizon.db")).exists();
     SetupWizard* wiz = new SetupWizard();
 
     #ifndef Q_OS_WIN

@@ -30,7 +30,7 @@ Navbar::Navbar(QSettings* p, QWidget* parent)
 
     // Upper layout
     QHBoxLayout* upperLayout = new QHBoxLayout;
-    upperLayout->setSpacing(5);
+    upperLayout->setSpacing(40);
     upperLayout->setMargin(18);
     mainLayout->addLayout(upperLayout);
 

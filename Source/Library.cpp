@@ -1,7 +1,7 @@
 #include "Library.h"
-#include "ui_Library.h"
 #include "AddGameWizard.h"
 #include "Defines.h"
+#include "GridGameWidget.h"
 
 #include <QFileDialog>
 #include <QInputDialog>
@@ -15,14 +15,10 @@
  * \param parent Pointer to parent widget.
 */
 Library::Library(QSettings* p, QWidget* parent)
-    : QWidget(parent),
-      ui(new Ui::Library)
+    : QWidget(parent)
 {
-    ui->setupUi(this);
     this->setObjectName("libraryUI");
-    this->setStyleSheet("#leftSidebar {"
-                        "background-color: " + p->value("Primary/SecondaryBase").toString() + ";} "
-                        "QPushButton {"
+    this->setStyleSheet("QPushButton {"
                         "color: " + p->value("Primary/LightText").toString() + "; "
                         "background-color: " + p->value("Primary/DarkElement").toString() + "; "
                         "border: none; margin: 0px; padding: 0px;} "
@@ -34,18 +30,9 @@ Library::Library(QSettings* p, QWidget* parent)
                         "QLabel {"
                         "color: " + p->value("Primary/LightText").toString() + ";"
                         "font-family: SourceSansPro;"
-                        "}"
-                        "#gameNameLabel { font-size: 20px; }"
-                        "#gameHoursLabel, #lastPlayedLabel, #gameDRMLabel {"
-                        "font-size: 14px; }");
+                        "}");
 
-    QFont buttonFont("SourceSansPro", 12);
-    ui->addGame->setFont(buttonFont);
-    ui->addGame->setText(tr("Add Game"));
-    ui->removeGame->setFont(buttonFont);
-    ui->removeGame->setText(tr("Remove Game"));
-    ui->testLaunch->setFont(buttonFont);
-    ui->testLaunch->setText(tr("Play"));
+    init(p);
 
     if (!db.init())
     {
@@ -67,31 +54,68 @@ Library::Library(QSettings* p, QWidget* parent)
     refreshGames();
 }
 
-
-Library::~Library()
+void Library::init(QSettings* p)
 {
-    delete ui;
+    QGridLayout* mainLayout = new QGridLayout(this);
+    mainLayout->setMargin(0);
+
+    QWidget* searchBar = new QWidget();
+    searchBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    searchBar->setMinimumHeight(40);
+    searchBar->setStyleSheet("background-color:" + p->value("Navbar/SelectedColor").toString() + ";");
+    mainLayout->addWidget(searchBar, 0, 0);
+
+    QHBoxLayout* searchLayout = new QHBoxLayout(searchBar);
+
+    QLineEdit* searchBox = new QLineEdit();
+    searchBox->setPlaceholderText("Search games");
+    searchBox->setStyleSheet("border: none;"
+                             "color: " + p->value("Primary/LightText").toString() + ";");
+    searchBox->setMinimumWidth(225);
+    searchBox->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    searchLayout->addWidget(searchBox);
+
+    QPixmap search(":/SystemMenu/Icons/SearchInverted.png");
+    QIcon searchIcon(search);
+
+    QPushButton* searchBtn = new QPushButton("");
+    searchBtn->setIcon(searchIcon);
+    searchBtn->setIconSize(QSize(16, 16));
+    searchBtn->setStyleSheet("background-color: transparent;");
+    searchBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    searchLayout->addWidget(searchBtn);
+    searchLayout->addStretch();
+
+    QPushButton* addGameBtn = new QPushButton("Add game");
+    addGameBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    addGameBtn->setStyleSheet("margin: 11px 0 0 11px; padding: 5px;");
+    mainLayout->addWidget(addGameBtn, 1, 0);
+    connect(addGameBtn, &QPushButton::clicked, this, &Library::addGame);
+
+    QWidget* gamesWidget = new QWidget();
+    mainLayout->addWidget(gamesWidget, 2, 0);
+
+    gamesLayout = new QGridLayout();
+    gamesLayout->setSpacing(12);
+    gamesWidget->setLayout(gamesLayout);
 }
 
-/** Event handler for launching a game.
+/** Function to launch a game.
  * Populates a message box on failure, or runs the games upon success.
+ * \param gameName The name of the game to launch
 */
-void Library::on_testLaunch_clicked()
+void Library::launchGame(QString gameName)
 {
     if (!gl.isProcessRunning())
     {
-        auto selection = ui->gameListWidget->currentItem();
-        if (selection != nullptr)
+        Game game = db.getGameByName(gameName);
+        if (game.arguments.trimmed() == "")
         {
-            Game game = db.getGameByName(selection->text());
-            if (game.arguments.trimmed() == "")
-            {
-                gl.runProcess(game.executablePath, game.gameDirectory);
-            }
-            else
-            {
-                gl.runProcessWithArgs(game.executablePath, game.gameDirectory, game.arguments);
-            }
+            gl.runProcess(game.executablePath, game.gameDirectory);
+        }
+        else
+        {
+            gl.runProcessWithArgs(game.executablePath, game.gameDirectory, game.arguments);
         }
     }
     else
@@ -105,48 +129,10 @@ void Library::on_testLaunch_clicked()
 /** Event handler for adding a game.
  * Prompts the user for various paths, and adds the final game to the database.
 */
-void Library::on_addGame_clicked()
+void Library::addGame()
 {
     AddGameWizard* wiz = new AddGameWizard();
     wiz->show();
-}
-
-/** Event handler for removing a game.
-*/
-void Library::on_removeGame_clicked()
-{
-    auto selection = ui->gameListWidget->currentItem();
-    if (selection != nullptr)
-    {
-        db.removeGameByName(selection->text());
-        refreshGames();
-    }
-}
-/** Event handler for when a game is selected.
- */
-void Library::on_gameListWidget_currentTextChanged(const QString & currentText)
-{
-    Game game = db.getGameByName(currentText);
-    QString drmString = "";
-    if (game.drm == 0)
-    {
-        drmString = tr("None");
-    }
-    else if (game.drm == 1)
-    {
-        drmString = tr("Steam");
-    }
-    else if (game.drm == 2)
-    {
-        drmString = tr("Origin");
-    }
-    else if (game.drm == 3)
-    {
-        drmString = tr("uPlay");
-    }
-
-    ui->gameNameLabel->setText(currentText);
-    ui->gameDRMLabel->setText(drmString);
 }
 
 /** Recreate the list of games displayed in the main widget.
@@ -154,11 +140,26 @@ void Library::on_gameListWidget_currentTextChanged(const QString & currentText)
 */
 void Library::refreshGames()
 {
-    ui->gameListWidget->clear();
+    for (auto gameWidget : gamesWidgets)
+    {
+        gamesLayout->removeWidget(gameWidget);
+        gameWidget->deleteLater();
+    }
+
     QList<Game> gameList = db.getGames();
-	std::sort(gameList.begin(), gameList.end(), [&](const Game& g1, const Game& g2){return g1.gameName < g2.gameName; });
+    std::sort(gameList.begin(), gameList.end(), [&](const Game& g1, const Game& g2){return g1.gameName < g2.gameName; });
+    int row = 0, col = 0;
     for (auto game : gameList)
     {
-        ui->gameListWidget->addItem(game.gameName);
+        GridGameWidget* gameWidget = new GridGameWidget(game.gameName, 999);
+        gamesLayout->addWidget(gameWidget, row, col);
+        connect(gameWidget, &GridGameWidget::clicked, [=] { launchGame(game.gameName); });
+        gamesWidgets.append(gameWidget);
+
+        if (col == 3)
+        {
+            row++;
+        }
+        col = (col < 3 ? col + 1 : 0);
     }
 }
