@@ -46,6 +46,7 @@ private:
     void loadXML();
     void setupUI();
     void reloadHeadlines();
+    void loadFeedUrlsFromSettings(); 
     QSettings* settings;
     QVector<NewsItemWidget*> headlines;
     QVector<QString> feedUrls;

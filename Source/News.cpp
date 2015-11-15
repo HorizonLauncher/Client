@@ -27,9 +27,7 @@ News::News(QSettings* p, QWidget* parent) :
                            );
 
     this->settings = p;
-    this->feedUrls.append("http://feeds.ign.com/ign/news?format=xml");
-    this->feedUrls.append("http://feeds.feedburner.com/RockPaperShotgun?format=xml");
-    this->feedUrls.append("http://www.reddit.com/r/pcmasterrace.rss");
+    this->loadFeedUrlsFromSettings();
 
     setupUI();
     loadXML();
@@ -48,6 +46,19 @@ void News::loadXML()
     }
 }
 
+void News::loadFeedUrlsFromSettings()
+{
+    QSettings settings ("Horizon Launcher", "Launcher");
+    int size = settings.beginReadArray ("URLs");
+
+    for (int i = 0; i < size; ++i) {
+        settings.setArrayIndex(i);
+        QString current = settings.value("url").toString();
+        feedUrls.append(current);
+    }
+
+    settings.endArray();
+}
 News::~News()
 {
     for (int i = 0; i < headlines.size(); ++i)
@@ -132,7 +143,7 @@ void News::onFetchComplete()
 void News::reloadHeadlines()
 {
     int size = headlines.size();
-
+    if (size == 0) return;
     for (int i = 0; i < 9; ++i)
     {
         firstColumn->addWidget(headlines.at(qrand() % size));
@@ -140,6 +151,3 @@ void News::reloadHeadlines()
         thirdColumn->addWidget(headlines.at(qrand() % size));
     }
 }
-
-
-

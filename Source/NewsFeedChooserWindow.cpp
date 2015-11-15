@@ -1,5 +1,4 @@
 #include "NewsFeedChooserWindow.h"
-
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QApplication>
@@ -11,13 +10,13 @@ NewsFeedChooserWindow::NewsFeedChooserWindow(QWidget *parent) : QDialog(parent)
 {
     layout = new QVBoxLayout();
     this->setLayout(layout);
-    newsSettingsFilePath = QApplication::applicationDirPath().left(1) + "news.ini";
-    this->loadURLsFromSettings();
-    this->createURLLabels();
 
     labels = new QWidget(this);
     labelLayout = new QVBoxLayout();
     labels->setLayout(labelLayout);
+    this->loadURLsFromSettings();
+    this->createURLLabels();
+
     QPushButton* addURLButton = new QPushButton("Add");
     layout->addWidget(labels);
     layout->addWidget(addURLButton);
@@ -26,29 +25,32 @@ NewsFeedChooserWindow::NewsFeedChooserWindow(QWidget *parent) : QDialog(parent)
 
 void NewsFeedChooserWindow::loadURLsFromSettings()
 {
-    QSettings settings (newsSettingsFilePath, QSettings::NativeFormat);
+    QSettings settings ("Horizon Launcher", "Launcher");
     int size = settings.beginReadArray ("URLs");
-
     for (int i = 0; i < size; ++i) {
         settings.setArrayIndex(i);
         QString current = settings.value("url").toString();
         urls.append(current);
     }
+
+    settings.endArray();
 }
 
 void NewsFeedChooserWindow::saveURLs()
 {
-    QSettings settings (newsSettingsFilePath, QSettings::NativeFormat);
+    QSettings settings ("Horizon Launcher", "Launcher");
     settings.beginWriteArray("URLs");
 
     for (int i = 0; i < newUrls.size(); ++i) {
         settings.setArrayIndex(i);
         settings.setValue("url", newUrls[i]);
     }
+
+    settings.endArray();
 }
 
-void NewsFeedChooserWindow::onAddURLButtonClicked() {
-
+void NewsFeedChooserWindow::onAddURLButtonClicked()
+{
     bool error;
     QString newUrl = QInputDialog::getText(this, tr("Add a new URL"), tr("URL: "));
 
@@ -59,10 +61,10 @@ void NewsFeedChooserWindow::onAddURLButtonClicked() {
     }
 }
 
-void NewsFeedChooserWindow::createURLLabels() {
-
-    for (auto url : this->urls) {
-        this->labelLayout->addWidget(new QLabel(url));
+void NewsFeedChooserWindow::createURLLabels()
+{
+    for (int i = 0; i < this->urls.size(); ++i) {
+        this->labelLayout->addWidget(new QLabel(this->urls[i]));
     }
 }
 
