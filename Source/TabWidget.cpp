@@ -55,6 +55,7 @@ TabWidget::TabWidget(const QString &name, const QString &text, QSettings* palett
     tabText->setFont(font);
     tabText->setText(text);
     tabText->setAlignment(Qt::AlignCenter);
+    tabText->setContentsMargins(5, 0, 5, 0);
     tabLayout->addWidget(tabText);
 
     // Hover colorize effect
