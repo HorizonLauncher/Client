@@ -52,10 +52,6 @@ set(HEADERS
     Source/GridGameWidget.h
 )
 
-set(FORMS
-    Resource/UI/Settings.ui
-)
-
 set(RESOURCES
     Resource/Icons.qrc
     Resource/Fonts.qrc
@@ -123,7 +119,6 @@ find_package(Boost REQUIRED)
 find_package(Threads REQUIRED)
 find_package(Qt5LinguistTools REQUIRED)
 
-qt5_wrap_ui(FORMS_HEADERS ${FORMS})
 qt5_add_resources(UI_RESOURCES ${RESOURCES})
 qt5_add_translation(TRANSLATIONS ${TRANSLATIONS})
 include_directories(
@@ -144,7 +139,6 @@ add_executable(HorizonLauncher
     ${GUI_TYPE}
     ${SOURCE}
     ${OS_SOURCE}
-    ${FORMS_HEADERS}
     ${UI_RESOURCES}
     ${TRANSLATIONS}
 )

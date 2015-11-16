@@ -52,13 +52,7 @@ Understøttet: Steam, uPlay, Origin</translation>
 <context>
     <name>Community</name>
     <message>
-        <location filename="../Resource/UI/Community.ui" line="20"/>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../Resource/UI/Community.ui" line="32"/>
-        <location filename="../Source/Community.cpp" line="23"/>
+        <location filename="../Source/Community.cpp" line="29"/>
         <source>Friends</source>
         <translation>Venner</translation>
     </message>
@@ -304,84 +298,29 @@ Understøttet: Steam, uPlay, Origin</translation>
 <context>
     <name>Library</name>
     <message>
-        <location filename="../Resource/UI/Library.ui" line="26"/>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../Resource/UI/Library.ui" line="81"/>
-        <source>ADD GAME</source>
-        <translation>TILFØJ SPIL</translation>
-    </message>
-    <message>
-        <location filename="../Resource/UI/Library.ui" line="91"/>
-        <source>REMOVE GAME</source>
-        <translation>FJERN SPIL</translation>
-    </message>
-    <message>
-        <location filename="../Resource/UI/Library.ui" line="147"/>
-        <source>PLAYED: 0 hrs</source>
-        <translation>SPILLET: 0 timer</translation>
-    </message>
-    <message>
-        <location filename="../Resource/UI/Library.ui" line="163"/>
-        <source>LAST PLAYED: Never</source>
-        <translation>SIDST SPILLET: Aldrig</translation>
-    </message>
-    <message>
-        <location filename="../Resource/UI/Library.ui" line="176"/>
-        <source>PLAY</source>
-        <translation>SPIL</translation>
-    </message>
-    <message>
-        <location filename="../Source/Library.cpp" line="44"/>
-        <source>Add Game</source>
-        <translation>Tilføj Spil</translation>
-    </message>
-    <message>
-        <location filename="../Source/Library.cpp" line="46"/>
-        <source>Remove Game</source>
-        <translation>Fjern spil</translation>
-    </message>
-    <message>
-        <location filename="../Source/Library.cpp" line="48"/>
-        <source>Play</source>
-        <translation>Spil</translation>
-    </message>
-    <message>
-        <location filename="../Source/Library.cpp" line="53"/>
+        <location filename="../Source/Library.cpp" line="40"/>
         <source>Error!</source>
         <translation>Fejl!</translation>
     </message>
     <message>
-        <location filename="../Source/Library.cpp" line="53"/>
+        <location filename="../Source/Library.cpp" line="40"/>
         <source>An error occurred while trying to load the database.</source>
         <translation>Der opstod en fejl under indlæsning af databasen.</translation>
     </message>
     <message>
-        <location filename="../Source/Library.cpp" line="100"/>
+        <location filename="../Source/Library.cpp" line="71"/>
+        <source>Search games</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/Library.cpp" line="89"/>
+        <source>Add game</source>
+        <translation type="unfinished">Tilføj spil</translation>
+    </message>
+    <message>
+        <location filename="../Source/Library.cpp" line="124"/>
         <source>Error: an application is already running.</source>
         <translation>Fejl: En applikation kører allerede.</translation>
-    </message>
-    <message>
-        <location filename="../Source/Library.cpp" line="133"/>
-        <source>None</source>
-        <translation>Ingen</translation>
-    </message>
-    <message>
-        <location filename="../Source/Library.cpp" line="137"/>
-        <source>Steam</source>
-        <translation>Steam</translation>
-    </message>
-    <message>
-        <location filename="../Source/Library.cpp" line="141"/>
-        <source>Origin</source>
-        <translation>Origin</translation>
-    </message>
-    <message>
-        <location filename="../Source/Library.cpp" line="145"/>
-        <source>uPlay</source>
-        <translation>uPlay</translation>
     </message>
 </context>
 <context>
@@ -501,149 +440,128 @@ Understøttet: Steam, uPlay, Origin</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../Resource/UI/Settings.ui" line="14"/>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../Resource/UI/Settings.ui" line="26"/>
+        <location filename="../Source/Settings.cpp" line="58"/>
         <source>Client Settings</source>
         <translation>Klient indstillinger</translation>
     </message>
     <message>
-        <location filename="../Resource/UI/Settings.ui" line="41"/>
-        <location filename="../Source/Settings.cpp" line="27"/>
-        <source>Add Games to Horizon</source>
-        <translation>Tilføj spil til Horizon</translation>
-    </message>
-    <message>
-        <location filename="../Resource/UI/Settings.ui" line="54"/>
-        <location filename="../Source/Settings.cpp" line="30"/>
-        <source>Clear Database</source>
-        <translation>Ryd database</translation>
-    </message>
-    <message>
-        <location filename="../Resource/UI/Settings.ui" line="67"/>
-        <source>Clear Launch Options</source>
-        <translation>Ryd startindstillinger </translation>
-    </message>
-    <message>
-        <location filename="../Resource/UI/Settings.ui" line="81"/>
+        <location filename="../Source/Settings.cpp" line="82"/>
         <source>Style Settings</source>
         <translation>Visuelle indstillinger</translation>
     </message>
     <message>
-        <location filename="../Resource/UI/Settings.ui" line="99"/>
-        <source>Colour Options:</source>
-        <translation>Farve indstillinger:</translation>
+        <location filename="../Source/Settings.cpp" line="64"/>
+        <source>Add games to Horizon</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Resource/UI/Settings.ui" line="112"/>
+        <location filename="../Source/Settings.cpp" line="70"/>
+        <source>Clear database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/Settings.cpp" line="76"/>
+        <source>Clear launch options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/Settings.cpp" line="95"/>
         <source>Body Background</source>
         <translation>Hovedbaggrund</translation>
     </message>
     <message>
-        <location filename="../Resource/UI/Settings.ui" line="151"/>
+        <location filename="../Source/Settings.cpp" line="105"/>
         <source>Navbar Background</source>
         <translation>Navigationsbaggrund</translation>
     </message>
     <message>
-        <location filename="../Resource/UI/Settings.ui" line="177"/>
+        <location filename="../Source/Settings.cpp" line="115"/>
         <source>Navbar Hover</source>
         <translation>Navigationsbar markørfarve</translation>
     </message>
     <message>
-        <location filename="../Resource/UI/Settings.ui" line="203"/>
+        <location filename="../Source/Settings.cpp" line="125"/>
         <source>Navbar Selected</source>
         <translation>Navigationsbar valgt farve</translation>
     </message>
     <message>
-        <location filename="../Resource/UI/Settings.ui" line="230"/>
+        <location filename="../Source/Settings.cpp" line="135"/>
         <source>Titlebar Color</source>
         <translation>Titelbar Farve</translation>
     </message>
     <message>
-        <location filename="../Resource/UI/Settings.ui" line="256"/>
+        <location filename="../Source/Settings.cpp" line="145"/>
         <source>Active Element</source>
         <translation>Aktivt objekt</translation>
     </message>
     <message>
-        <location filename="../Resource/UI/Settings.ui" line="282"/>
+        <location filename="../Source/Settings.cpp" line="155"/>
         <source>Inactive Selection</source>
         <translation>Inaktivt selektion</translation>
     </message>
     <message>
-        <location filename="../Resource/UI/Settings.ui" line="308"/>
+        <location filename="../Source/Settings.cpp" line="165"/>
         <source>Hover Selection</source>
         <translation>Markørfarve selektion</translation>
     </message>
     <message>
-        <location filename="../Resource/UI/Settings.ui" line="335"/>
+        <location filename="../Source/Settings.cpp" line="175"/>
         <source>Dark Element</source>
         <translation>Mørkt element</translation>
     </message>
     <message>
-        <location filename="../Resource/UI/Settings.ui" line="361"/>
+        <location filename="../Source/Settings.cpp" line="185"/>
         <source>Light Text</source>
         <translation>Lys tekst</translation>
     </message>
     <message>
-        <location filename="../Resource/UI/Settings.ui" line="387"/>
+        <location filename="../Source/Settings.cpp" line="195"/>
         <source>Dark Text</source>
         <translation>Mørk Tekst</translation>
     </message>
     <message>
-        <location filename="../Resource/UI/Settings.ui" line="413"/>
+        <location filename="../Source/Settings.cpp" line="205"/>
         <source>Sub Text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Resource/UI/Settings.ui" line="440"/>
+        <location filename="../Source/Settings.cpp" line="215"/>
         <source>Primary Base</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Resource/UI/Settings.ui" line="466"/>
+        <location filename="../Source/Settings.cpp" line="225"/>
         <source>Secondary Base</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Resource/UI/Settings.ui" line="492"/>
+        <location filename="../Source/Settings.cpp" line="235"/>
         <source>Tertiary Base</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Resource/UI/Settings.ui" line="518"/>
+        <location filename="../Source/Settings.cpp" line="245"/>
         <source>Darkest Base</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Resource/UI/Settings.ui" line="531"/>
-        <source>Reset Colours to Default</source>
-        <translation>Nulstiv farver til standardindstillinger</translation>
-    </message>
-    <message>
-        <location filename="../Resource/UI/Settings.ui" line="545"/>
+        <location filename="../Source/Settings.cpp" line="41"/>
         <source>User Settings</source>
         <translation>Brugerindstillinger</translation>
     </message>
     <message>
-        <location filename="../Resource/UI/Settings.ui" line="557"/>
+        <location filename="../Source/Settings.cpp" line="47"/>
+        <location filename="../Source/Settings.cpp" line="52"/>
         <source>Change Username</source>
         <translation>Skift brugernavn</translation>
     </message>
     <message>
-        <location filename="../Resource/UI/Settings.ui" line="570"/>
-        <source>Change Password</source>
-        <translation>Skift adgangskode</translation>
-    </message>
-    <message>
-        <location filename="../Source/Settings.cpp" line="128"/>
+        <location filename="../Source/Settings.cpp" line="29"/>
         <source>Error!</source>
         <translation>Fejl!</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="128"/>
+        <location filename="../Source/Settings.cpp" line="29"/>
         <source>An error occurred while trying to load the database.</source>
         <translation>Der opstod en fejl under indlæsning af databasen.</translation>
     </message>
