@@ -35,6 +35,7 @@ public slots:
 
 protected:
     QStackedWidget* stack;
+    QScrollArea* scrollArea;
     void init();
 
 private:

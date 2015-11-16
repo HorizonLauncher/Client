@@ -105,7 +105,7 @@ void MainPanel::init()
     mainPanelBackdrop->setLayout(verticalLayout2);
 
     // Main panel scroll area
-    QScrollArea* scrollArea = new QScrollArea(coreWidget);
+    scrollArea = new QScrollArea(coreWidget);
     scrollArea->setWidgetResizable(true);
     scrollArea->setObjectName("mainPanelScrollArea");
     scrollArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -156,6 +156,8 @@ void MainPanel::init()
 void MainPanel::onStackedChanged(int index)
 {
     QWidget* curWidget = stack->widget(index);
-    curWidget->setMinimumSize(this->size());
+    QSize windowSize = this->size();
+    windowSize.setHeight(windowSize.height() - (windowSize.height() - scrollArea->viewport()->height()));
+    curWidget->setMinimumSize(windowSize);
     curWidget->adjustSize();
 }
