@@ -156,5 +156,6 @@ void MainPanel::init()
 void MainPanel::onStackedChanged(int index)
 {
     QWidget* curWidget = stack->widget(index);
+    curWidget->setMinimumSize(this->size());
     curWidget->adjustSize();
 }
