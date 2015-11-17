@@ -63,6 +63,7 @@ set(GUI_TYPE "")
 
 set(TRANSLATIONS
     Translations/horizon_da.ts
+    Translations/horizon_nb.ts
 )
 
 if(WIN32)

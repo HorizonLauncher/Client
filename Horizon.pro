@@ -35,4 +35,5 @@ FORMS = Resource/UI/Library.ui \
     Resource/UI/Community.ui \
     Resource/UI/Settings.ui \
 
-TRANSLATIONS = Translations/horizon_da.ts
+TRANSLATIONS = Translations/horizon_da.ts \
+    horizon_nb.ts
