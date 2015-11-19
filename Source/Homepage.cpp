@@ -1,12 +1,9 @@
 #include "Homepage.h"
-#include "ui_homepage.h"
 
 Homepage::Homepage(QSettings* p, QWidget* parent) :
-    QWidget(parent),
-    ui(new Ui::Homepage)
+    QWidget(parent)
 {
-    ui->setupUi(this);
-    this->setObjectName("homepageUI");
+    this->setObjectName("homepage");
     this->setStyleSheet("QPushButton {"
                         "font-family: SourceSansPro;"
                         "background-color: " + p->value("Primary/DarkElement").toString() + ";"
@@ -16,32 +13,50 @@ Homepage::Homepage(QSettings* p, QWidget* parent) :
                         "background-color: " + p->value("Primary/InactiveSelection").toString() + ";} "
                         "QLabel {"
                         "font-family: SourceSansPro;"
-                        "color: " + p->value("Primary/LightText").toString() + " }"
-                        "#playRandom { font-size: 12px; }"
-                        "#randomGameLbl { font-size: 16px; }"
-                        "#newRandom { background-color: transparent; }");
+                        "color: " + p->value("Primary/LightText").toString() + " }");
 
-    QPixmap refresh(":/SystemMenu/Icons/Refresh_Inverted.png");
-    QIcon icon(refresh);
-    ui->newRandom->setIcon(icon);
-    ui->newRandom->setIconSize(QSize(18, 18));
+    init();
 
     if (!db.init())
     {
         QMessageBox error;
-        error.critical(0, "Error!", "An error occured while trying to load the database.");
+        error.critical(0, tr("Error!"), tr("An error occurred while trying to load the database."));
         exit(EXIT_FAILURE);
     }
 
     selectRandomGame();
 }
 
-void Homepage::on_newRandom_clicked()
+void Homepage::init()
 {
+    QGridLayout* mainLayout = new QGridLayout(this);
+
+    randomGameLbl = new QLabel(tr("Random game: "));
+    randomGameLbl->setStyleSheet("font-size: 16px;");
+    mainLayout->addWidget(randomGameLbl, 0, 0, 1, 1, Qt::AlignBottom);
+
+    playRandom = new QPushButton(tr("PLAY"));
+    playRandom->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    playRandom->setStyleSheet("font-size: 12px; padding: 5px;");
+    mainLayout->addWidget(playRandom, 0, 1, 1, 1, Qt::AlignBottom);
+
+    QPixmap refresh(":/SystemMenu/Icons/RefreshInverted.png");
+    QIcon icon(refresh);
+
+    newRandom = new QPushButton("");
+    newRandom->setIcon(icon);
+    newRandom->setIconSize(QSize(18, 18));
+    newRandom->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    newRandom->setStyleSheet("background-color: transparent;");
+    mainLayout->addWidget(newRandom, 0, 2, 1, 1, Qt::AlignBottom | Qt::AlignLeft);
+
+    connect(newRandom, &QPushButton::clicked, [=] { selectRandomGame(); });
+    connect(playRandom, &QPushButton::clicked, this, &Homepage::playRandomGame);
+
     selectRandomGame();
 }
 
-void Homepage::on_playRandom_clicked()
+void Homepage::playRandomGame()
 {
     if (!gl.isProcessRunning())
     {
@@ -63,7 +78,7 @@ void Homepage::on_playRandom_clicked()
     else
     {
         QMessageBox messageBox;
-        messageBox.setText("Error: an application is already running.");
+        messageBox.setText(tr("Error: an application is already running."));
         messageBox.exec();
     }
 }
@@ -76,16 +91,13 @@ void Homepage::selectRandomGame()
         Game game = games[rand() % games.length()];
         curRandom = game.gameName;
         noGames = false;
-        ui->randomGameLbl->setText("Random Game: " + game.gameName);
-        ui->randomGameLbl->adjustSize();
     }
     else
     {
         noGames = true;
+        curRandom = tr("No games!");
     }
-}
 
-Homepage::~Homepage()
-{
-    delete ui;
+    randomGameLbl->setText(tr("Random Game: ") + curRandom);
+    randomGameLbl->adjustSize();
 }

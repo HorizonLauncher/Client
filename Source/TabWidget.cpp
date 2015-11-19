@@ -13,19 +13,21 @@
 * \param palette Inherited palette configuration for setting StyleSheets.
 * \param parent Pointer to parent widget.
 */
-TabWidget::TabWidget(const QPixmap &icon, const QString &name, const QString &text, 
-                     QSettings* palette, QWidget* parent) : QWidget(parent)
+TabWidget::TabWidget(const QString &name, const QString &text, QSettings* palette, QWidget* parent)
+    : QWidget(parent)
 {
     this->setObjectName(name);
+    this->setMinimumHeight(34);
     this->setMaximumHeight(34);
-    this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    this->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    this->setStyleSheet("border-top-left-radius: 2px; border-top-right-radius: 2px;");
 
     p = palette;
 
     // Toggle mouse tracking
     this->setAttribute(Qt::WA_Hover, true);
     this->setMouseTracking(true);
-    
+
     // Background layout
     QGridLayout* bgLayout = new QGridLayout;
     bgLayout->setMargin(0);
@@ -43,27 +45,23 @@ TabWidget::TabWidget(const QPixmap &icon, const QString &name, const QString &te
     tabLayout->setSpacing(10);
     contentWidget->setLayout(tabLayout);
 
-    // Tab icon
-    tabIcon = new QLabel(this);
-    tabIcon->setObjectName("tabIcon");
-    tabIcon->setMinimumSize(QSize(18, 18));
-    tabIcon->setMaximumSize(QSize(18, 18));
-    tabIcon->setScaledContents(true);
-    tabIcon->setPixmap(icon);
-    tabLayout->addWidget(tabIcon);
+    QFont font = QFont("Raleway", 10);
+    font.setBold(true);
 
     // Tab text
     tabText = new QLabel(this);
     tabText->setObjectName("tabText");
-    tabText->setStyleSheet("color: " + p->value("Primary/InactiveSelection").toString() + ";");
-    tabText->setFont(QFont("SourceSansPro", 10));
+    tabText->setStyleSheet("color: #7d8f94;");
+    tabText->setFont(font);
     tabText->setText(text);
+    tabText->setAlignment(Qt::AlignCenter);
+    tabText->setContentsMargins(5, 0, 5, 0);
     tabLayout->addWidget(tabText);
 
     // Hover colorize effect
     opacity = 0;
     effect = new QGraphicsColorizeEffect();
-    effect->setColor(QColor(p->value("Primary/HoverSelection").toString()));
+    effect->setColor(QColor(p->value("Navbar/HoverColor").toString()));
     effect->setStrength(opacity);
     contentWidget->setGraphicsEffect(effect);
 
@@ -73,8 +71,8 @@ TabWidget::TabWidget(const QPixmap &icon, const QString &name, const QString &te
     animation->setEasingCurve(QEasingCurve::Linear);
 
     // Effect signals
-    connect(this, SIGNAL(hovered()), this, SLOT(toggleHovered()));
-    connect(this, SIGNAL(unhovered()), this, SLOT(toggleUnhovered()));
+    connect(this, &TabWidget::hovered, this, &TabWidget::toggleHovered);
+    connect(this, &TabWidget::unhovered, this, &TabWidget::toggleUnhovered);
 }
 
 /** Overridden enter event.
@@ -146,23 +144,28 @@ void TabWidget::toggleUnhovered()
     }
 }
 
-/** Sets this tab active on the sidebar.
+/** Sets this tab active on the navbar.
 */
 void TabWidget::toggleActive()
 {
     isActive = true;
-    this->setStyleSheet("TabWidget#" + this->objectName() + 
-                        " {background-color: " + p->value("Primary/DarkestBase").toString() + ";}");
-    effect->setColor(QColor(p->value("Accent/LightAccent").toString()));
+    effect->setColor(QColor(p->value("Navbar/SelectedColor").toString()));
+    this->setStyleSheet("border-top-left-radius: 2px;"
+                        "border-top-right-radius: 2px;"
+                        "background-color: #000000;");
+    tabText->setStyleSheet("color: #ffffff;");
     setOpacity(1.0);
 }
 
-/** Sets this tab inactive on the sidebar.
+/** Sets this tab inactive on the navbar.
 */
 void TabWidget::toggleInactive()
 {
     isActive = false;
-    this->setStyleSheet("background-color: rgba(0, 0, 0, 0);");
-    effect->setColor(QColor(p->value("Primary/HoverSelection").toString()));
+    effect->setColor(QColor(p->value("Navbar/HoverColor").toString()));
+    this->setStyleSheet("border-top-left-radius: 2px;"
+                        "border-top-right-radius: 2px;"
+                        "background-color: " + p->value("Navbar/Background").toString() + ";");
+    tabText->setStyleSheet("color: #7d8f94");
     setOpacity(0.0);
 }

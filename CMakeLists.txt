@@ -21,15 +21,15 @@ set(SOURCE
     Source/MainPanel.cpp
     Source/Database.cpp
     Source/DRMSetupWizard.cpp
-    Source/Sidebar.cpp
-    Source/Sidebar.cpp
+    Source/Navbar.cpp
     Source/Homepage.cpp
     Source/BuddyList.cpp
-    Source/BuddyWidget.cpp
     Source/Community.cpp
     Source/AddGameWizard.cpp
     Source/Settings.cpp
     Source/GameLauncher.cpp
+    Source/SetupWizard.cpp
+    Source/GridGameWidget.cpp
 )
 
 set(HEADERS
@@ -38,34 +38,33 @@ set(HEADERS
     Source/MainPanel.h
     Source/Database.h
     Source/Init.h
-    Source/Sidebar.h
+    Source/Navbar.h
     Source/Libs/SteamVdfParse.hpp
     Source/DRMSetupWizard.h
     Source/Homepage.h
     Source/BuddyList.h
-    Source/BuddyWidget.h
     Source/Community.h
     Source/AddGameWizard.h
     Source/Settings.h
     Source/GameLauncher.h
-)
-
-set(FORMS
-    Resource/UI/Library.ui
-    Resource/UI/homepage.ui
-    Resource/UI/BuddyList.ui
-    Resource/UI/Community.ui
-    Resource/UI/Settings.ui
+    Source.SetupWizard.h
+    Source/Defines.h
+    Source/GridGameWidget.h
 )
 
 set(RESOURCES
     Resource/Icons.qrc
     Resource/Fonts.qrc
     Resource/Styles.qrc
-    Resource/Elements.qrc
+    Resource/Images.qrc
 )
 
 set(GUI_TYPE "")
+
+set(TRANSLATIONS
+    Translations/horizon_da.ts
+    Translations/horizon_nb.ts
+)
 
 if(WIN32)
     #Additional configuration for Windows systems.
@@ -119,9 +118,10 @@ find_package(Qt5Gui REQUIRED)
 find_package(Qt5Sql REQUIRED)
 find_package(Boost REQUIRED)
 find_package(Threads REQUIRED)
+find_package(Qt5LinguistTools REQUIRED)
 
-qt5_wrap_ui(FORMS_HEADERS ${FORMS})
 qt5_add_resources(UI_RESOURCES ${RESOURCES})
+qt5_add_translation(TRANSLATIONS ${TRANSLATIONS})
 include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
     ${Qt5Gui_INCLUDE_DIRS}
@@ -140,8 +140,8 @@ add_executable(HorizonLauncher
     ${GUI_TYPE}
     ${SOURCE}
     ${OS_SOURCE}
-    ${FORMS_HEADERS}
     ${UI_RESOURCES}
+    ${TRANSLATIONS}
 )
 target_link_libraries(HorizonLauncher
     Qt5::Widgets

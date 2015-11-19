@@ -1,14 +1,20 @@
 #include "BuddyList.h"
-#include "ui_BuddyList.h"
+
+#include <QLabel>
+#include <QVBoxLayout>
 
 BuddyList::BuddyList(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::BuddyList)
+    QWidget(parent)
 {
-    ui->setupUi(this);
+    init();
 }
 
-BuddyList::~BuddyList()
+void BuddyList::init()
 {
-    delete ui;
+    QVBoxLayout* vLayout = new QVBoxLayout(this);
+
+    QLabel* wipLabel = new QLabel(tr("WIP"));
+    vLayout->addWidget(wipLabel, 0, Qt::AlignHCenter);
+
+    setMinimumSize(260, 524);
 }

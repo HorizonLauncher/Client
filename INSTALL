@@ -1,0 +1,39 @@
+More detailed information can be found at our wiki: https://github.com/HorizonLauncher/Client/wiki
+
+==== DEPENDENCIES ===
+
+ - Qt
+ - Boost
+ - CMake
+
+=== BUILDING ===
+
+Create a new `build` directory to keep your working directory clean and cd into it:
+
+    mkdir build && cd build
+
+Run CMake:
+
+  1. Regular Makefile:
+
+    cmake ..
+
+  2. Using Ninja
+
+    cmake .. -G Ninja
+
+Build Horizon:
+
+  1. Regular Makefile:
+
+    make -j$(expr $(nproc) + 1) -l$(nproc)
+
+    (or just `make`)
+
+  2. Using Ninja:
+
+    ninja
+
+Run it:
+
+    ./HorizonLauncher

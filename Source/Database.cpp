@@ -1,6 +1,8 @@
 #include "Database.h"
+#include "Defines.h"
 
 #include <QDebug>
+#include <QSqlError>
 
 /** Database constructor
  * Constructs the local database.
@@ -11,7 +13,7 @@ Database::Database()
     : db(QSqlDatabase::addDatabase("QSQLITE"))
 {
     db.setHostName("localhost");
-    db.setDatabaseName("horizon.db");
+    db.setDatabaseName(QDir(CONFIG_FOLDER).filePath("horizon.db"));
 }
 
 Database::Database(QString path)
@@ -27,6 +29,7 @@ Database::Database(QString path)
 bool Database::init()
 {
     bool status = db.open();
+    qDebug() << db.lastError();
     if (!status)
     {
         qDebug("Couldn't connect to the database!");
@@ -63,7 +66,7 @@ bool Database::addGame(QString gameName, QString gameDirectory, QString executab
     query.bindValue(":executablePath", executablePath);
     query.bindValue(":arguments", arguments);
     query.bindValue(":drm", drm);
-    query.exec();
+    return query.exec();
 }
 
 /** Add games to the database and repopulate the games list.

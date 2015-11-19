@@ -9,6 +9,8 @@ Horizon Launcher contains code from its predescessor [Project Ascension](https:/
 
 If you have any questions, feel free to join our Slack chatroom (it's like IRC but uses Slack for the chat) by using the little button above or [just clicking here](http://horizonlauncher-slack.herokuapp.com)!
 
+We also have an IRC channel which you can access online [here](https://kiwiirc.com/client/irc.freenode.net/horizonlauncher).
+
 # License
 This project is licensed under the MIT License.
 

@@ -4,30 +4,40 @@
 #include <QtWidgets>
 #include <QSettings>
 
-/** Settings UI namespace. */
-namespace Ui {
-	class Settings;
-}
 /** Settings class.
 * Class to handle the settings section of the launcher
 */
 class Settings : public QWidget
 {
-	Q_OBJECT
+    Q_OBJECT
 private:
-	Ui::Settings *ui;
-	Database db;
+    Database db;
+
+    void pickSetColor(int id);
+    void init(QSettings* p);
+
+    QPushButton* bodyColor;
+    QPushButton* navbarBG;
+    QPushButton* navbarHover;
+    QPushButton* navbarSelected;
+    QPushButton* titleBarColor;
+    QPushButton* activeElement;
+    QPushButton* inactiveSelection;
+    QPushButton* hoverSelection;
+    QPushButton* darkElement;
+    QPushButton* lightText;
+    QPushButton* darkText;
+    QPushButton* subText;
+    QPushButton* primaryBase;
+    QPushButton* secondaryBase;
+    QPushButton* tertiaryBase;
+    QPushButton* darkestBase;
 
 public slots:
-	void on_WizardButton_clicked();
-	void on_ClearDatabaseButton_clicked();
-	void on_AccentButton_clicked();
-    void on_AccentButton_2_clicked();
-    void on_AccentButton_3_clicked();
-    void on_ResetAccents_clicked();
-    void updateAccent(int accent, QColor color);
-public:
-	explicit Settings(QSettings* p, QWidget* parent = 0);
-	~Settings();
-};
+    void confirmClearDb();
+    void resetColors();
 
+    void updateColor(int id, QColor color);
+public:
+    explicit Settings(QSettings* p, QWidget* parent = 0);
+};

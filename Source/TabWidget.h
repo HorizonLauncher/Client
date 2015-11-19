@@ -7,7 +7,7 @@
 #include <QPropertyAnimation>
 
 /** TabWidget class.
-* Class to handle the construction and behavior of sidebar tabs.
+* Class to handle the construction and behavior of navbar tabs.
 */
 class TabWidget : public QWidget
 {
@@ -15,7 +15,7 @@ class TabWidget : public QWidget
     Q_PROPERTY(qreal opacity READ getOpacity WRITE setOpacity)
 
 public:
-    TabWidget(const QPixmap &icon, const QString &name, const QString &text, QSettings* p, QWidget* parent = 0);
+    TabWidget(const QString &name, const QString &text, QSettings* p, QWidget* parent = 0);
 
     void enterEvent(QEvent* event);
     void leaveEvent(QEvent* event);

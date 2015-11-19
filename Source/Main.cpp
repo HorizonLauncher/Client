@@ -1,6 +1,7 @@
 #include "Init.h"
 #include "BuddyList.h"
-#include "DRMSetupWizard.h"
+#include "SetupWizard.h"
+#include "Defines.h"
 
 #include <QApplication>
 #include <QFile>
@@ -22,8 +23,20 @@ int main(int argc, char* argv[])
 {
     QApplication::setStyle("fusion");
     QApplication* application = new QApplication(argc, argv);
-	bool dbExists = QFile("horizon.db").exists();
-    DRMSetupWizard* wiz = new DRMSetupWizard();
+
+    QTranslator horizonTranslator;
+    horizonTranslator.load("horizon_" + QLocale::system().name());
+    application->installTranslator(&horizonTranslator);
+
+    QDir configFolder(CONFIG_FOLDER);
+    if (!configFolder.exists())
+    {
+        configFolder.cdUp();
+        configFolder.mkdir("HorizonLauncher");
+    }
+
+    bool dbExists = QFile(QDir(CONFIG_FOLDER).filePath("horizon.db")).exists();
+    SetupWizard* wiz = new SetupWizard();
 
     #ifndef Q_OS_WIN
         // dynamic loading of the icon under Linux/UNIX
@@ -56,10 +69,10 @@ int main(int argc, char* argv[])
     #endif
 
     // Launch
-	if (!dbExists)
-	{
-		wiz->show();
-	}
-	application->exec();
+    if (!dbExists)
+    {
+        wiz->show();
+    }
+    application->exec();
     return 0;
 }

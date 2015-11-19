@@ -10,6 +10,7 @@
  */
 class GameLauncher : public QWidget
 {
+    Q_OBJECT
 
 public:
     GameLauncher();
