@@ -36,4 +36,6 @@ FORMS = Resource/UI/Library.ui \
     Resource/UI/Settings.ui \
 
 TRANSLATIONS = Translations/horizon_da.ts \
-    Translations/horizon_nb.ts
+    Translations/horizon_nb.ts \
+    Translations/horizon_pt_BR.ts \
+    Translations/horizon_fr.ts
