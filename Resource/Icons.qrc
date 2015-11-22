@@ -18,8 +18,8 @@
         <file>Icons/Search.png</file>
         <file>Icons/SearchInverted.png</file>
         <file>Icons/DropdownArrow.png</file>
-        <file>Icons/GridView.png</file>
-        <file>Icons/DetailedListView.png</file>
-        <file>Icons/CarouselView.png</file>
+        <file>Icons/GridViewInverted.png</file>
+        <file>Icons/DetailedListViewInverted.png</file>
+        <file>Icons/CarouselViewInverted.png</file>
     </qresource>
 </RCC>

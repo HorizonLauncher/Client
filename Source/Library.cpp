@@ -111,11 +111,11 @@ void Library::init(QSettings* p)
 
     searchLayout->addStretch();
 
-    QPixmap grid(":/SystemMenu/Icons/GridView.png");
+    QPixmap grid(":/SystemMenu/Icons/GridViewInverted.png");
     QIcon gridIcon(grid);
-    QPixmap listImg(":/SystemMenu/Icons/DetailedListView.png");
+    QPixmap listImg(":/SystemMenu/Icons/DetailedListViewInverted.png");
     QIcon listIcon(listImg);
-    QPixmap carousel(":/SystemMenu/Icons/CarouselView.png");
+    QPixmap carousel(":/SystemMenu/Icons/CarouselViewInverted.png");
     QIcon carouselIcon(carousel);
 
     QPushButton* gridBtn = new QPushButton("");
