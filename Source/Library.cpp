@@ -193,10 +193,10 @@ void Library::addGame()
 */
 void Library::refreshGames()
 {
-    for (auto gameWidget : gamesWidgets)
+    for (int i = 0; i < gamesWidgets.size(); i++)
     {
-        gamesLayout->removeWidget(gameWidget);
-        gameWidget->deleteLater();
+        QWidget* widget = gamesWidgets[i];
+        gamesLayout->removeWidget(widget);
     }
 
     QList<Game> gameList = db.getGames();
