@@ -29,8 +29,8 @@ Library::Library(QSettings* p, QWidget* parent)
                         "color: " + p->value("Primary/LightText").toString() + ";}"
                         "QLabel {"
                         "color: " + p->value("Primary/LightText").toString() + ";"
-                        "font-family: SourceSansPro;"
-                        "}");
+                        "font-family: SourceSansPro; }"
+                        "QComboBox::down-arrow { image: url(:/SystemMenu/Icons/DropdownArrow.png); }");
 
     init(p);
 
@@ -84,7 +84,60 @@ void Library::init(QSettings* p)
     searchBtn->setStyleSheet("background-color: transparent;");
     searchBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     searchLayout->addWidget(searchBtn);
+
+    QWidget* line = new QWidget();
+    line->setMinimumSize(1, 2);
+    line->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+    line->setStyleSheet("border: 1px solid #9e5eee;");
+    searchLayout->addWidget(line);
+
+    QFont textFont("Roboto", 11);
+
+    QLabel* filterLabel = new QLabel(tr("Filter by: "));
+    filterLabel->setFont(textFont);
+    searchLayout->addWidget(filterLabel);
+
+    QComboBox* filterBox = new QComboBox();
+    filterBox->addItem(tr("All"));
+    searchLayout->addWidget(filterBox);
+
+    QComboBox* actionBox = new QComboBox();
+    actionBox->addItem(tr("Action"));
+    searchLayout->addWidget(actionBox);
+
+    QComboBox* ratingBox = new QComboBox();
+    ratingBox->addItem(tr("Rating"));
+    searchLayout->addWidget(ratingBox);
+
     searchLayout->addStretch();
+
+    QPixmap grid(":/SystemMenu/Icons/GridView.png");
+    QIcon gridIcon(grid);
+    QPixmap listImg(":/SystemMenu/Icons/DetailedListView.png");
+    QIcon listIcon(listImg);
+    QPixmap carousel(":/SystemMenu/Icons/CarouselView.png");
+    QIcon carouselIcon(carousel);
+
+    QPushButton* gridBtn = new QPushButton("");
+    gridBtn->setIcon(gridIcon);
+    gridBtn->setIconSize(QSize(16, 16));
+    gridBtn->setStyleSheet("background-color: transparent;");
+    gridBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    searchLayout->addWidget(gridBtn);
+
+    QPushButton* listBtn = new QPushButton("");
+    listBtn->setIcon(listIcon);
+    listBtn->setIconSize(QSize(16, 16));
+    listBtn->setStyleSheet("background-color: transparent;");
+    listBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    searchLayout->addWidget(listBtn);
+
+    QPushButton* carouselBtn = new QPushButton("");
+    carouselBtn->setIcon(carouselIcon);
+    carouselBtn->setIconSize(QSize(16, 16));
+    carouselBtn->setStyleSheet("background-color: transparent;");
+    carouselBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    searchLayout->addWidget(carouselBtn);
 
     QPushButton* addGameBtn = new QPushButton(tr("Add game"));
     addGameBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
