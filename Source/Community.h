@@ -12,7 +12,7 @@ public:
     explicit Community(QSettings* p, QWidget* parent = 0);
 
 private slots:
-    void on_buddyButton_clicked();
+    void openBuddyList();
 
 private:
     void init();

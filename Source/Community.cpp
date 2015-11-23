@@ -31,9 +31,10 @@ void Community::init()
     buddyButton->setStyleSheet("padding: 5px;");
     buddyButton->setFont(buttonFont);
     mainLayout->addWidget(buddyButton, Qt::AlignCenter);
+    connect(buddyButton, &QPushButton::clicked, this, &Community::openBuddyList);
 }
 
-void Community::on_buddyButton_clicked()
+void Community::openBuddyList()
 {
     QWidget *buddyL = new BuddyList();
     buddyL->show();
