@@ -197,7 +197,9 @@ void Library::refreshGames()
     {
         QWidget* widget = gamesWidgets[i];
         gamesLayout->removeWidget(widget);
+        widget->deleteLater();
     }
+    gamesWidgets.clear();
 
     QList<Game> gameList = db.getGames();
     std::sort(gameList.begin(), gameList.end(), [&](const Game& g1, const Game& g2){return g1.gameName < g2.gameName; });
