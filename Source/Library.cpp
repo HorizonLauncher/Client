@@ -67,13 +67,14 @@ void Library::init(QSettings* p)
 
     QHBoxLayout* searchLayout = new QHBoxLayout(searchBar);
 
-    QLineEdit* searchBox = new QLineEdit();
+    searchBox = new QLineEdit();
     searchBox->setPlaceholderText(tr("Search games"));
     searchBox->setStyleSheet("border: none;"
                              "color: " + p->value("Primary/LightText").toString() + ";");
     searchBox->setMinimumWidth(225);
     searchBox->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     searchLayout->addWidget(searchBox);
+    connect(searchBox, &QLineEdit::returnPressed, this, &Library::refreshGames);
 
     QPixmap search(":/SystemMenu/Icons/SearchInverted.png");
     QIcon searchIcon(search);
@@ -84,6 +85,7 @@ void Library::init(QSettings* p)
     searchBtn->setStyleSheet("background-color: transparent;");
     searchBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     searchLayout->addWidget(searchBtn);
+    connect(searchBtn, &QPushButton::clicked, this, &Library::refreshGames);
 
     QWidget* line = new QWidget();
     line->setMinimumSize(1, 2);
@@ -206,6 +208,13 @@ void Library::refreshGames()
     int row = 0, col = 0;
     for (auto game : gameList)
     {
+        QString lowerGameName = game.gameName.toLower();
+        QString searchString = searchBox->text().trimmed();
+        if (!searchString.isEmpty() && !lowerGameName.contains(searchString.toLower()))
+        {
+            continue;
+        }
+
         GridGameWidget* gameWidget = new GridGameWidget(game.gameName, 999);
         gamesLayout->addWidget(gameWidget, row, col);
         connect(gameWidget, &GridGameWidget::clicked, [=] { launchGame(game.gameName); });

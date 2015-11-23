@@ -31,6 +31,7 @@ private:
 
     QGridLayout* gamesLayout;
     QList<QWidget*> gamesWidgets;
+    QLineEdit* searchBox;
 
     void init(QSettings* p);
     void launchGame(QString gameName);
