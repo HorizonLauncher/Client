@@ -9,14 +9,14 @@
  * Currently no interface to handle remote databases, just creates one in the
  * current working directory.
  */
-Database::Database()
+Database::Database(QObject* parent)
     : db(QSqlDatabase::addDatabase("QSQLITE"))
 {
     db.setHostName("localhost");
     db.setDatabaseName(QDir(CONFIG_FOLDER).filePath("horizon.db"));
 }
 
-Database::Database(QString path)
+Database::Database(QString path, QObject* parent)
     : db(QSqlDatabase::addDatabase("QSQLITE"))
 {
     db.setHostName("localhost");
@@ -37,7 +37,15 @@ bool Database::init()
     }
 
     QSqlQuery createQuery(db);
-    return createQuery.exec("CREATE TABLE IF NOT EXISTS games(ID INTEGER PRIMARY KEY ASC, GAMENAME TEXT NOT NULL, GAMEDIRECTORY TEXT NOT NULL, GAMEEXECUTABLE TEXT NOT NULL, ARGUMENTS TEXT NOT NULL, DRM INT DEFAULT 0);");
+
+    bool rtn = createQuery.exec("CREATE TABLE IF NOT EXISTS games(ID INTEGER PRIMARY KEY ASC, GAMENAME TEXT NOT NULL, GAMEDIRECTORY TEXT NOT NULL, GAMEEXECUTABLE TEXT NOT NULL, ARGUMENTS TEXT NOT NULL, DRM INT DEFAULT 0);");
+
+    if (rtn)
+    {
+        emit dbChanged();
+    }
+
+    return rtn;
 }
 
 /** Remove every table in the database.
@@ -46,7 +54,14 @@ bool Database::init()
 bool Database::reset()
 {
     QSqlQuery query(db);
-    return query.exec("DROP TABLE IF EXISTS games");
+    bool rtn = query.exec("DROP TABLE IF EXISTS games");
+
+    if (rtn)
+    {
+        emit dbChanged();
+    }
+
+    return rtn;
 }
 
 /** Add a game to the database and repopulate the games list.
@@ -66,7 +81,12 @@ bool Database::addGame(QString gameName, QString gameDirectory, QString executab
     query.bindValue(":executablePath", executablePath);
     query.bindValue(":arguments", arguments);
     query.bindValue(":drm", drm);
-    return query.exec();
+    bool rtn = query.exec();
+
+    if (rtn)
+    {
+        emit dbChanged();
+    }
 }
 
 /** Add games to the database and repopulate the games list.
@@ -79,6 +99,8 @@ void Database::addGames(GameList games)
     {
         addGame(game.gameName, game.gameDirectory, game.executablePath, game.arguments, game.drm);
     }
+
+    emit dbChanged();
 }
 
 /** Remove a game from the database by their ID.
@@ -92,7 +114,14 @@ bool Database::removeGameById(unsigned int id)
         QSqlQuery query(db);
         query.prepare("DELETE FROM games WHERE ID = :id;");
         query.bindValue(":id", id);
-        return query.exec();
+        bool rtn = query.exec();
+
+        if (rtn)
+        {
+            emit dbChanged();
+        }
+
+        return rtn;
     }
     else
     {
@@ -110,7 +139,14 @@ bool Database::removeGameByName(QString name)
         QSqlQuery query(db);
         query.prepare("DELETE FROM GAMES WHERE GAMENAME = :name;");
         query.bindValue(":name", name);
-        return query.exec();
+        bool rtn = query.exec();
+
+        if (rtn)
+        {
+            emit dbChanged();
+        }
+
+        return rtn;
     }
     else
     {

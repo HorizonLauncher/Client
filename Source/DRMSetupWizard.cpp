@@ -21,13 +21,12 @@ QList<QButtonGroup*> uplayBtnGroupVector;
  * Defines the pages and initializes the database with the path given. Also sets up some window-related properties,
  * such as title and initial size.
  * \param parent Parent widget to draw from
- * \param dbPath Path to the database used
  */
-DRMSetupWizard::DRMSetupWizard(QWidget* parent, QString dbPath) : QWizard(parent), db(QDir(dbPath).filePath("horizon.db"))
+DRMSetupWizard::DRMSetupWizard(QWidget* parent) : QWizard(parent)
 {
     drmPage = new DRMPage();
-    resultsPage = new ResultsPage(db, *drmPage);
-    finalPage = new FinalPage(db);
+    resultsPage = new ResultsPage(*drmPage);
+    finalPage = new FinalPage();
     setPage(pages::INTRO, new IntroPage());
     setPage(pages::DRM, drmPage);
     setPage(pages::RESULTS, resultsPage);
@@ -35,12 +34,6 @@ DRMSetupWizard::DRMSetupWizard(QWidget* parent, QString dbPath) : QWizard(parent
     setWindowTitle(tr("Horizon Launcher Setup"));
     setFixedSize(QSize(700, 450));
     addedVector.erase(addedVector.begin(), addedVector.end());
-    if (!db.init())
-    {
-        QMessageBox error;
-        error.critical(0, tr("Error!"), tr("An error occurred while trying to load the database."));
-        exit(EXIT_FAILURE);
-    }
 }
 
 /** IntroPage constructor
@@ -97,7 +90,7 @@ DRMPage::DRMPage(QWidget* parent) : QWizardPage(parent)
 /** ResultsPage constructor
  * Defines some initial properties for the results page.
  */
-ResultsPage::ResultsPage(Database db, DRMPage& drmPage, QWidget* parent) : QWizardPage(parent), db(db)
+ResultsPage::ResultsPage(DRMPage& drmPage, QWidget* parent) : QWizardPage(parent)
 {
     setSubTitle(tr("We found the following on your system."));
     steamRoot = drmPage.steamPath;
@@ -108,7 +101,7 @@ ResultsPage::ResultsPage(Database db, DRMPage& drmPage, QWidget* parent) : QWiza
 /** FinalPage constructor
  * Defines some initial properties for the final page.
  */
-FinalPage::FinalPage(Database db, QWidget* parent) : QWizardPage(parent), db(db)
+FinalPage::FinalPage(QWidget* parent) : QWizardPage(parent)
 {
     setTitle(tr("Done"));
 }
@@ -478,7 +471,7 @@ int ResultsPage::nextId() const
                     name = strSplit.at(1);
 
                     std::cout << "Adding " << name << std::endl;
-                    unsigned int count = db.getGameCount();
+                    unsigned int count = Library::db.getGameCount();
                     addedVector.push_back({count, QString::fromStdString(name), originRoot.filePath(QString::fromStdString(name)), path.filePath(""), "", 2});
                 }
             }
@@ -497,7 +490,7 @@ int ResultsPage::nextId() const
                     name = strSplit.at(1);
 
                     std::cout << "Adding " << name << std::endl;
-                    unsigned int count = db.getGameCount();
+                    unsigned int count = Library::db.getGameCount();
                     addedVector.push_back({count, QString::fromStdString(name), uplayRoot.filePath(QString::fromStdString(name)), path.filePath(""), "", 3});
                 }
             }
@@ -730,7 +723,7 @@ void ResultsPage::parseAcf(QDir steamRoot)
 
             // TODO: Either add SteamID to db, or add getGameByPath
 
-            if (!std::get<0>(db.isExistant(name)))
+            if (!std::get<0>(Library::db.isExistant(name)))
             {
                 QString exe;
                 QString args;
@@ -845,7 +838,7 @@ QStringList ResultsPage::recursiveFindFiles(QDir dir)
 void FinalPage::initializePage()
 {
     std::sort(addedVector.begin(), addedVector.end(), [&](const Game& g1, const Game& g2){return g1.gameName < g2.gameName;});
-    db.addGames(addedVector);
+    Library::db.addGames(addedVector);
     setSubTitle(QString(tr("Added %1 games to the database. Click finish to complete the wizard.")).arg(addedVector.size()));
 }
 

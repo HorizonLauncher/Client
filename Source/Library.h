@@ -21,12 +21,13 @@ class Library : public QWidget
 public:
     Library(QSettings* p, QWidget* parent = 0);
 
+    static Database db;
+
 private slots:
     void addGame();
     void refreshGames();
 
 private:
-    Database db;
     GameLauncher gl;
 
     QGridLayout* gamesLayout;

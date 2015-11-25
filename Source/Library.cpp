@@ -9,6 +9,8 @@
 #include <QDebug>
 #include <QFileSystemWatcher>
 
+Database Library::db(QDir(CONFIG_FOLDER).filePath("horizon.db"));
+
 /** Library constructor
  * Initialize the library UI and generate an initial list of all the games available.
  * \param p Inherited palette configuration for setting StyleSheets.
@@ -34,22 +36,13 @@ Library::Library(QSettings* p, QWidget* parent)
 
     init(p);
 
-    if (!db.init())
-    {
-        QMessageBox error;
-        error.critical(0, tr("Error!"), tr("An error occurred while trying to load the database."));
-        exit(EXIT_FAILURE);
-    }
-
-    QList<Game> games = db.getGames();
+    QList<Game> games = Library::db.getGames();
     for (auto game : games)
     {
         qDebug() << game.id << game.gameName << game.gameDirectory << game.executablePath;
     }
 
-    QFileSystemWatcher* watcher = new QFileSystemWatcher;
-    watcher->addPath(QDir(CONFIG_FOLDER).filePath("horizon.db"));
-    connect(watcher, &QFileSystemWatcher::fileChanged, this, &Library::refreshGames);
+    connect(&db, &Database::dbChanged, this, &Library::refreshGames);
 
     refreshGames();
 }
@@ -163,7 +156,7 @@ void Library::launchGame(QString gameName)
 {
     if (!gl.isProcessRunning())
     {
-        Game game = db.getGameByName(gameName);
+        Game game = Library::db.getGameByName(gameName);
         if (game.arguments.trimmed() == "")
         {
             gl.runProcess(game.executablePath, game.gameDirectory);
@@ -195,6 +188,7 @@ void Library::addGame()
 */
 void Library::refreshGames()
 {
+    qDebug() << "REFRESH";
     for (int i = 0; i < gamesWidgets.size(); i++)
     {
         QWidget* widget = gamesWidgets[i];
@@ -203,7 +197,7 @@ void Library::refreshGames()
     }
     gamesWidgets.clear();
 
-    QList<Game> gameList = db.getGames();
+    QList<Game> gameList = Library::db.getGames();
     std::sort(gameList.begin(), gameList.end(), [&](const Game& g1, const Game& g2){return g1.gameName < g2.gameName; });
     int row = 0, col = 0;
     for (auto game : gameList)

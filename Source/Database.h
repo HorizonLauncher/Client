@@ -1,7 +1,8 @@
-#pragma once
+ #pragma once
 
 #include <QSqlQuery>
 #include <QtWidgets>
+#include <QObject>
 
 /** Game type.
  * Defines a game type.
@@ -23,11 +24,13 @@ typedef std::vector<Game> GameList;
  * Wrapper class to manage the internal game database.
  * Also has a simple interface to find games by certain conditions.
  */
-class Database
+class Database : public QObject
 {
+    Q_OBJECT
+
 public:
-    Database();
-    Database(QString name);
+    Database(QObject* parent = 0);
+    Database(QString name, QObject* parent = 0);
     bool init();
     bool reset();
 
@@ -41,6 +44,9 @@ public:
     std::pair<bool, Game> isExistant(QString name);
     QList<Game> getGames();
     unsigned int getGameCount() const;
+
+signals:
+    void dbChanged();
 
 private:
     QSqlDatabase db;

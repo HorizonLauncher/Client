@@ -1,5 +1,5 @@
 #pragma once
-#include "Database.h"
+#include "Library.h"
 
 #include <QtWidgets>
 #include <QSettings>
@@ -11,8 +11,6 @@ class Settings : public QWidget
 {
     Q_OBJECT
 private:
-    Database db;
-
     void pickSetColor(int id);
     void init(QSettings* p);
 

@@ -22,13 +22,6 @@ Settings::Settings(QSettings* p, QWidget* parent) :
         "color: " + p->value("Primary/LightText").toString() + ";");
 
     init(p);
-
-    if (!db.init())
-    {
-        QMessageBox error;
-        error.critical(0, tr("Error!"), tr("An error occurred while trying to load the database."));
-        exit(EXIT_FAILURE);
-    }
 }
 
 void Settings::init(QSettings* p)
@@ -445,7 +438,7 @@ void Settings::confirmClearDb()
     switch (ret)
     {
         case QMessageBox::Yes:
-            db.reset();
+            Library::db.reset();
             break;
         case QMessageBox::No:
             break;
