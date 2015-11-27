@@ -188,7 +188,6 @@ void Library::addGame()
 */
 void Library::refreshGames()
 {
-    qDebug() << "REFRESH";
     for (int i = 0; i < gamesWidgets.size(); i++)
     {
         QWidget* widget = gamesWidgets[i];
