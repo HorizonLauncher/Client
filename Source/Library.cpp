@@ -55,7 +55,7 @@ void Library::init(QSettings* p)
     QWidget* searchBar = new QWidget();
     searchBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     searchBar->setMinimumHeight(40);
-    searchBar->setStyleSheet("background-color:" + p->value("Navbar/SelectedColor").toString() + ";");
+    searchBar->setStyleSheet("background-color:" + p->value("Navbar/SelectedColor").toString() + "; position: absolute;");
     mainLayout->addWidget(searchBar, 0, 0);
 
     QHBoxLayout* searchLayout = new QHBoxLayout(searchBar);
@@ -208,7 +208,13 @@ void Library::refreshGames()
             continue;
         }
 
-        GridGameWidget* gameWidget = new GridGameWidget(game.gameName, 999);
+        QString displayedName = game.gameName;
+        if (displayedName.length() > 20)
+        {
+            displayedName = displayedName.left(20) + "...";
+        }
+
+        GridGameWidget* gameWidget = new GridGameWidget(displayedName, 999);
         gamesLayout->addWidget(gameWidget, row, col);
         connect(gameWidget, &GridGameWidget::clicked, [=] { launchGame(game.gameName); });
         gamesWidgets.append(gameWidget);

@@ -37,14 +37,12 @@ GridGameWidget::GridGameWidget(QString gameName, int hours, QWidget* parent)
 
     QLabel* gameNameLabel = new QLabel(gameName);
     gameNameLabel->setStyleSheet("font-size: 18px; background-color: transparent;");
-    gameNameLabel->setWordWrap(true);
-    gameNameLabel->raise();
     otherLayout->addWidget(gameNameLabel, Qt::AlignBottom | Qt::AlignLeft);
 
     QLabel* hoursLabel = new QLabel(QString::number(hours) + " hours");
     hoursLabel->setStyleSheet("font-size: 12px; background-color: transparent;");
     hoursLabel->setContentsMargins(0, 0, 0, 0);
-    hoursLabel->raise();
+    hoursLabel->setWordWrap(true);
     otherLayout->addWidget(hoursLabel, Qt::AlignBottom | Qt::AlignLeft);
 }
 
