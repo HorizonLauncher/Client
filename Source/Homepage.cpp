@@ -1,4 +1,5 @@
 #include "Homepage.h"
+#include "Library.h"
 
 Homepage::Homepage(QSettings* p, QWidget* parent) :
     QWidget(parent)
@@ -16,13 +17,6 @@ Homepage::Homepage(QSettings* p, QWidget* parent) :
                         "color: " + p->value("Primary/LightText").toString() + " }");
 
     init();
-
-    if (!db.init())
-    {
-        QMessageBox error;
-        error.critical(0, tr("Error!"), tr("An error occurred while trying to load the database."));
-        exit(EXIT_FAILURE);
-    }
 
     selectRandomGame();
 }
@@ -65,7 +59,7 @@ void Homepage::playRandomGame()
             return;
         }
 
-        Game game = db.getGameByName(curRandom);
+        Game game = Library::db.getGameByName(curRandom);
         if (game.arguments.trimmed() == "")
         {
             gl.runProcess(game.executablePath, game.gameDirectory);
@@ -85,7 +79,7 @@ void Homepage::playRandomGame()
 
 void Homepage::selectRandomGame()
 {
-    QList<Game> games = db.getGames();
+    QList<Game> games = Library::db.getGames();
     if(games.length() != 0)
     {
         Game game = games[rand() % games.length()];

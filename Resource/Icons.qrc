@@ -17,5 +17,9 @@
         <file>Icons/RefreshInverted.png</file>
         <file>Icons/Search.png</file>
         <file>Icons/SearchInverted.png</file>
+        <file>Icons/DropdownArrow.png</file>
+        <file>Icons/GridViewInverted.png</file>
+        <file>Icons/DetailedListViewInverted.png</file>
+        <file>Icons/CarouselViewInverted.png</file>
     </qresource>
 </RCC>

@@ -75,6 +75,10 @@ set(GUI_TYPE "")
 
 set(TRANSLATIONS
     Translations/horizon_da.ts
+    Translations/horizon_nb.ts
+    Translations/horizon_nb.ts
+    Translations/horizon_pt_BR.ts
+    Translations/horizon_fr.ts
 )
 
 if(WIN32)
@@ -131,7 +135,6 @@ find_package(Boost REQUIRED)
 find_package(Threads REQUIRED)
 find_package(Qt5LinguistTools REQUIRED)
 
-qt5_wrap_ui(FORMS_HEADERS ${FORMS})
 qt5_add_resources(UI_RESOURCES ${RESOURCES})
 qt5_add_translation(TRANSLATIONS ${TRANSLATIONS})
 include_directories(
@@ -152,7 +155,6 @@ add_executable(HorizonLauncher
     ${GUI_TYPE}
     ${SOURCE}
     ${OS_SOURCE}
-    ${FORMS_HEADERS}
     ${UI_RESOURCES}
     ${TRANSLATIONS}
 )

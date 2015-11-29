@@ -1,14 +1,13 @@
 #include "Community.h"
-#include "ui_Community.h"
 #include "BuddyList.h"
 
 #include <QSettings>
+#include <QHBoxLayout>
+#include <QPushButton>
 
 Community::Community(QSettings* p, QWidget* parent) :
-    QWidget(parent),
-    ui(new Ui::Community)
+    QWidget(parent)
 {
-    ui->setupUi(this);
     this->setObjectName("communityUI");
     this->setStyleSheet("background-color: " + p->value("Primary/SecondaryBase").toString() + ";} "
                         "QPushButton {"
@@ -18,17 +17,24 @@ Community::Community(QSettings* p, QWidget* parent) :
                         "QPushButton:hover {"
                         "background-color: " + p->value("Primary/InactiveSelection").toString() + ";} "
                         "color: " + p->value("Primary/LightText").toString() + ";");
-    QFont buttonFont("SourceSansPro", 12);
-    ui->buddyButton->setFont(buttonFont);
-    ui->buddyButton->setText(tr("Friends"));
+
+    init();
 }
 
-Community::~Community()
+void Community::init()
 {
-    delete ui;
+    QHBoxLayout* mainLayout = new QHBoxLayout(this);
+
+    QFont buttonFont("SourceSansPro", 12);
+    QPushButton* buddyButton = new QPushButton(tr("Friends"));
+    buddyButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    buddyButton->setStyleSheet("padding: 5px;");
+    buddyButton->setFont(buttonFont);
+    mainLayout->addWidget(buddyButton, Qt::AlignCenter);
+    connect(buddyButton, &QPushButton::clicked, this, &Community::openBuddyList);
 }
 
-void Community::on_buddyButton_clicked()
+void Community::openBuddyList()
 {
     QWidget *buddyL = new BuddyList();
     buddyL->show();

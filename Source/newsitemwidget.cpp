@@ -10,7 +10,8 @@ NewsItemWidget::NewsItemWidget(QSettings* p, QWidget* parent = 0) : QWidget(pare
                 "QLabel {"
                 "color: " + p->value("Primary/LightText").toString() + ";"
                 "font-family: SourceSansPro;" +
-                "}"
+                "}" +
+                "*:hover {background:red}"
                 );
     titleLabel = new QLabel ("1 ");
     titleLabel->setWordWrap(true);
@@ -27,4 +28,3 @@ void NewsItemWidget::mousePressEvent(QMouseEvent *) {
     QDesktopServices::openUrl(QUrl(this->urlString));
 
 }
-

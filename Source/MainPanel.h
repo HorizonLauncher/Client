@@ -32,9 +32,11 @@ public slots:
     virtual void pushButtonMinimize() = 0;
     virtual void pushButtonMaximize() = 0;
     virtual void pushButtonClose() = 0;
+    void onStackedChanged(int index);
 
 protected:
     QStackedWidget* stack;
+    QScrollArea* scrollArea;
     void init();
 
 private:

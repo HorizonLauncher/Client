@@ -36,21 +36,12 @@ void MainPanel::init()
     mainGridLayout->setMargin(0);
     setLayout(mainGridLayout);
 
-    // Main panel scroll area
-    QScrollArea* scrollArea = new QScrollArea(this);
-    scrollArea->setWidgetResizable(true);
-    scrollArea->setObjectName("mainPanelScrollArea");
-    scrollArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    mainGridLayout->addWidget(scrollArea);
-
     // Core widget
-    QWidget* coreWidget = new QWidget(scrollArea);
+    QWidget* coreWidget = new QWidget();
     coreWidget->setObjectName("coreWidget");
     coreWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    scrollArea->setWidget(coreWidget);
     coreWidget->setStyleSheet("background-color: " + p->value("Body/Background").toString() + ";");
+    mainGridLayout->addWidget(coreWidget);
 
     // Vertical layout #1
     QVBoxLayout* verticalLayout1 = new QVBoxLayout;
@@ -113,16 +104,28 @@ void MainPanel::init()
     verticalLayout2->setAlignment(Qt::AlignHCenter);
     mainPanelBackdrop->setLayout(verticalLayout2);
 
+    // Main panel scroll area
+    scrollArea = new QScrollArea(coreWidget);
+    scrollArea->setWidgetResizable(true);
+    scrollArea->setObjectName("mainPanelScrollArea");
+    scrollArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    verticalLayout2->addWidget(scrollArea);
+
     // Stacked content panel
-    stack = new QStackedWidget(coreWidget);
+    stack = new QStackedWidget(scrollArea);
     stack->setObjectName("stack");
     stack->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    verticalLayout2->addWidget(stack);
+    scrollArea->setWidget(stack);
 
     // Stack widgets
     home = new Homepage(p, stack);
+    home->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     library = new Library(p, stack);
+    library->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     community = new Community(p, stack);
+<<<<<<< HEAD
 	settings = new Settings(p, stack);
     news = new News(p, stack);
     stack->addWidget(home);
@@ -130,7 +133,18 @@ void MainPanel::init()
     stack->addWidget(community);
 	stack->addWidget(settings);
     stack->addWidget(news);
+=======
+    community->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+    settings = new Settings(p, stack);
+    settings->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+    stack->addWidget(home);
+    stack->addWidget(library);
+    stack->addWidget(community);
+    stack->addWidget(settings);
+>>>>>>> 01d64a9d910d28dd718073562ee4d9f62b20335f
     stack->setCurrentWidget(library);
+
+    connect(stack, &QStackedWidget::currentChanged, this, &MainPanel::onStackedChanged);
 
     // Set active tab
     activeTab = navbar->gamesTab;
@@ -148,4 +162,13 @@ void MainPanel::init()
 
     // Show
     show();
+}
+
+void MainPanel::onStackedChanged(int index)
+{
+    QWidget* curWidget = stack->widget(index);
+    QSize windowSize = this->size();
+    windowSize.setHeight(windowSize.height() - (windowSize.height() - scrollArea->viewport()->height()));
+    curWidget->setMinimumSize(windowSize);
+    curWidget->adjustSize();
 }

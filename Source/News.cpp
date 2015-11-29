@@ -6,7 +6,7 @@
 #include <QDebug>
 #include <QListWidgetItem>
 #include <QtNetwork>
-
+#include <QShortcut>
 News::News(QSettings* p, QWidget* parent) :
     QWidget(parent)
 {
@@ -27,13 +27,26 @@ News::News(QSettings* p, QWidget* parent) :
                            );
 
     this->settings = p;
-    this->loadFeedUrlsFromSettings();
+    QShortcut* shortcut = new QShortcut(QKeySequence("R"), parent);
+    connect(shortcut, &QShortcut::activated, this, News::refreshRequested);
 
     setupUI();
-    loadXML();
+    loadFeeds();
 }
 
-void News::loadXML()
+void News::refreshRequested() {
+    loadFeeds();
+}
+
+void News::loadFeeds() {
+    headlines.clear();
+    clearLayout(firstColumn);
+    clearLayout(secondColumn);
+    clearLayout(thirdColumn);
+    loadFeedUrlsFromSettings();
+    loadXMLfromUrls();
+}
+void News::loadXMLfromUrls()
 {
     for (auto urlString : feedUrls)
     {
@@ -48,16 +61,16 @@ void News::loadXML()
 
 void News::loadFeedUrlsFromSettings()
 {
+    feedUrls.clear();
     QSettings settings ("Horizon Launcher", "Launcher");
     int size = settings.beginReadArray ("URLs");
 
     for (int i = 0; i < size; ++i) {
         settings.setArrayIndex(i);
         QString current = settings.value("url").toString();
+        qDebug() << "Read URL " << current << endl;
         feedUrls.append(current);
     }
-
-    settings.endArray();
 }
 News::~News()
 {
@@ -88,7 +101,7 @@ void News::setupUI() {
 void News::onFetchComplete()
 {
     QNetworkReply *reply = (QNetworkReply*)sender();
-
+    qDebug() << "Fetch compete" << endl;
     if (reply->error())
     {
         qDebug("Error with network request");
@@ -128,6 +141,7 @@ void News::onFetchComplete()
 
                currentItemWidget->urlString = reader.readElementText();
                headlines.append(currentItemWidget);
+               qDebug() << "Added headline" << endl;
 
             }
 
@@ -144,10 +158,37 @@ void News::reloadHeadlines()
 {
     int size = headlines.size();
     if (size == 0) return;
-    for (int i = 0; i < 9; ++i)
-    {
-        firstColumn->addWidget(headlines.at(qrand() % size));
-        secondColumn->addWidget(headlines.at(qrand() % size));
-        thirdColumn->addWidget(headlines.at(qrand() % size));
+    qDebug() << "Total Size " << size << endl;
+    //Initialize an array to keep track of which items were already inserted into the view
+    bool* inserted = new bool[size];
+    for (int i = 0; i < size; ++i) {
+        inserted[i] = false;
+    }
+
+    bool done = false;
+    int columnToInsert = 1;
+    int insertedCount = 0;
+    while(!done) {
+        int indexOfNewItem = qrand() % size;
+        if (!inserted[indexOfNewItem]){
+            if(columnToInsert == 1) firstColumn->addWidget(headlines.at(indexOfNewItem));
+            else if (columnToInsert == 2) secondColumn->addWidget(headlines.at(indexOfNewItem));
+            else if (columnToInsert == 3) thirdColumn->addWidget(headlines.at(indexOfNewItem));
+            inserted[indexOfNewItem] = true;
+            columnToInsert++;
+            if (columnToInsert > 3) columnToInsert = 1;
+            insertedCount++;
+        }
+
+        if (insertedCount == size || insertedCount > 30) done = true;
+    }
+}
+
+void News::clearLayout(QLayout *layout)
+{
+     QLayoutItem *item;
+     while ((item = layout->takeAt(0))) {
+        delete item->widget();
+        delete item;
     }
 }

@@ -1,5 +1,6 @@
 #include "AddGameWizard.h"
 #include "Database.h"
+#include "Library.h"
 
 #include <QDebug>
 #include <QString>
@@ -8,13 +9,12 @@
  * Defines the pages and initializes the database with the path given. Also sets up some window-related properties,
  * such as title and initial size.
  * \param parent Parent widget to draw from
- * \param dbPath Path to the database used
  */
-AddGameWizard::AddGameWizard(QWidget* parent, QString dbPath) : QWizard(parent), db(QDir(dbPath).filePath("horizon.db"))
+AddGameWizard::AddGameWizard(QWidget* parent) : QWizard(parent)
 {
     addPage(new InitPage());
     addPage(new InfoPage());
-    addPage(new LastPage(db));
+    addPage(new LastPage());
 
     setWindowTitle(tr("Add game wizard"));
 }
@@ -96,7 +96,7 @@ InfoPage::InfoPage(QWidget* parent) : QWizardPage(parent)
  * Defines some initial properties for the page in which the user will input the game's information.
  * \param parent Parent widget to draw from
  */
-LastPage::LastPage(Database db, QWidget* parent) : QWizardPage(parent), db(db)
+LastPage::LastPage(QWidget* parent) : QWizardPage(parent)
 {
     setTitle(tr("Done"));
 }
@@ -107,17 +107,16 @@ LastPage::LastPage(Database db, QWidget* parent) : QWizardPage(parent), db(db)
 */
 void LastPage::initializePage()
 {
-    db.init();
     QLabel* label = new QLabel();
     qDebug() << field("nameEdit").toString();
     qDebug() << field("dirEdit").toString();
     qDebug() << field("exeEdit").toString();
     qDebug() << field("argsEdit").toString();
 
-    if (!std::get<0>(db.isExistant(field("nameEdit").toString())))
+    if (!std::get<0>(Library::db.isExistant(field("nameEdit").toString())))
     {
         label->setText(tr("Game added successfully."));
-        db.addGame(field("nameEdit").toString(),field("dirEdit").toString(), field("exeEdit").toString(),field("argsEdit").toString(), 0);
+        Library::db.addGame(field("nameEdit").toString(),field("dirEdit").toString(), field("exeEdit").toString(),field("argsEdit").toString(), 0);
     }
     else
     {

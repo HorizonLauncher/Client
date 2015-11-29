@@ -18,7 +18,6 @@ private slots:
     void playRandomGame();
 
 private:
-    Database db;
     GameLauncher gl;
     QString curRandom;
     bool noGames;

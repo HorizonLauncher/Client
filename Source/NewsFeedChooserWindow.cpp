@@ -32,8 +32,6 @@ void NewsFeedChooserWindow::loadURLsFromSettings()
         QString current = settings.value("url").toString();
         urls.append(current);
     }
-
-    settings.endArray();
 }
 
 void NewsFeedChooserWindow::saveURLs()
@@ -41,9 +39,9 @@ void NewsFeedChooserWindow::saveURLs()
     QSettings settings ("Horizon Launcher", "Launcher");
     settings.beginWriteArray("URLs");
 
-    for (int i = 0; i < newUrls.size(); ++i) {
+    for (int i = 0; i < urls.size(); ++i) {
         settings.setArrayIndex(i);
-        settings.setValue("url", newUrls[i]);
+        settings.setValue("url", urls[i]);
     }
 
     settings.endArray();

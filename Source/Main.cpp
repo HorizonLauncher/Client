@@ -2,6 +2,8 @@
 #include "BuddyList.h"
 #include "SetupWizard.h"
 #include "Defines.h"
+#include "Library.h"
+#include "Database.h"
 
 #include <QApplication>
 #include <QFile>
@@ -27,6 +29,13 @@ int main(int argc, char* argv[])
     QTranslator horizonTranslator;
     horizonTranslator.load("horizon_" + QLocale::system().name());
     application->installTranslator(&horizonTranslator);
+
+    if (!Library::db.init())
+    {
+        QMessageBox error;
+        error.critical(0, QWidget::tr("Error!"), QWidget::tr("An error occurred while trying to load the database."));
+        exit(EXIT_FAILURE);
+    }
 
     QDir configFolder(CONFIG_FOLDER);
     if (!configFolder.exists())

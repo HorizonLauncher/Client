@@ -29,8 +29,7 @@ class DRMSetupWizard : public QWizard
 {
     Q_OBJECT
 public:
-    Database db;
-    DRMSetupWizard(QWidget* parent = 0, QString dbPath = CONFIG_FOLDER);
+    DRMSetupWizard(QWidget* parent = 0);
     DRMPage* drmPage;
     ResultsPage* resultsPage;
     FinalPage* finalPage;
@@ -98,7 +97,6 @@ class ResultsPage : public QWizardPage
     QScrollArea* originScrollArea;
     QScrollArea* uplayScrollArea;
     QStringList steamDirectoryList;
-    Database db;
 
     QDir steamRoot;
     QDir uplayRoot;
@@ -120,7 +118,7 @@ protected:
     void initializePage() Q_DECL_OVERRIDE;
 
 public:
-    ResultsPage(Database db, DRMPage& drmPage, QWidget* parent = 0);
+    ResultsPage(DRMPage& drmPage, QWidget* parent = 0);
     void findOriginGames();
     void findUplayGames();
     void findSteamGames();
@@ -133,11 +131,10 @@ public:
 class FinalPage : public QWizardPage
 {
     Q_OBJECT
-    Database db;
 
 protected:
     void initializePage() Q_DECL_OVERRIDE;
 
 public:
-    FinalPage(Database db, QWidget* parent = 0);
+    FinalPage(QWidget* parent = 0);
 };
