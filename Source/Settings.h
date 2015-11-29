@@ -36,6 +36,7 @@ public slots:
     void resetColors();
 
     void updateColor(int id, QColor color);
+    void manageNewsFeed();
 public:
     explicit Settings(QSettings* p, QWidget* parent = 0);
 };

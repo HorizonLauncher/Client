@@ -1,5 +1,6 @@
 #include "Settings.h"
 #include "DRMSetupWizard.h"
+#include "NewsFeedChooserWindow.h"
 
 /** Settings constructor
 * Initialize the settings UI
@@ -71,6 +72,10 @@ void Settings::init(QSettings* p)
     clearLaunchBtn->setFont(buttonFont);
     clientGroupLayout->addWidget(clearLaunchBtn);
 
+    QPushButton* manageNewsFeedButton = new QPushButton(tr("Manage News Feeds"));
+    manageNewsFeedButton->setStyleSheet("padding: 5px;");
+    manageNewsFeedButton->setFont(buttonFont);
+    clientGroupLayout->addWidget(manageNewsFeedButton);
     /* STYLE SETTINGS GROUP */
     QGroupBox* styleGroup = new QGroupBox(tr("Style Settings"));
     styleGroup->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
@@ -445,4 +450,9 @@ void Settings::confirmClearDb()
         default:
             break;
     }
+}
+
+void Settings::manageNewsFeed() {
+    NewsFeedChooserWindow* window = new NewsFeedChooserWindow();
+    window->show();
 }
