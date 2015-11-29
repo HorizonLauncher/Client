@@ -76,6 +76,7 @@ void Settings::init(QSettings* p)
     manageNewsFeedButton->setStyleSheet("padding: 5px;");
     manageNewsFeedButton->setFont(buttonFont);
     clientGroupLayout->addWidget(manageNewsFeedButton);
+    connect (manageNewsFeedButton, &QPushButton::clicked, this, &Settings::manageNewsFeed);
     /* STYLE SETTINGS GROUP */
     QGroupBox* styleGroup = new QGroupBox(tr("Style Settings"));
     styleGroup->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
