@@ -25,14 +25,15 @@ News::News(QSettings* p, QWidget* parent) :
                            );
 
     this->settings = p;
-    QShortcut* shortcut = new QShortcut(QKeySequence("R"), parent);
-    connect(shortcut, &QShortcut::activated, this, News::refreshRequested);
+    QShortcut* shortcut = new QShortcut(QKeySequence("Ctrl+R"), parent);
+    connect(shortcut, &QShortcut::activated, this, &News::refreshRequested);
 
     setupUI();
     loadFeeds();
 }
 
 void News::refreshRequested() {
+    qDebug() << "Refresh" << endl;
     loadFeeds();
 }
 
