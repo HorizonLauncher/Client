@@ -25,8 +25,8 @@ News::News(QSettings* p, QWidget* parent) :
                            );
 
     this->settings = p;
-    QShortcut* shortcut = new QShortcut(QKeySequence("Ctrl+R"), parent);
-    connect(shortcut, &QShortcut::activated, this, &News::refreshRequested);
+    QShortcut* shortcut = new QShortcut(QKeySequence("R"), parent);
+    connect(shortcut, SIGNAL(activated()), this, SLOT(refreshRequested()));
 
     setupUI();
     loadFeeds();
@@ -140,8 +140,6 @@ void News::onFetchComplete()
 
                currentItemWidget->urlString = reader.readElementText();
                headlines.append(currentItemWidget);
-               qDebug() << "Added headline" << endl;
-
             }
 
         }
@@ -166,21 +164,34 @@ void News::reloadHeadlines()
 
     bool done = false;
     int columnToInsert = 1;
+    int c1 = 0;
+    int c2 = 0;
+    int c3 = 0;
     int insertedCount = 0;
     while(!done) {
         int indexOfNewItem = qrand() % size;
         if (!inserted[indexOfNewItem]){
-            if(columnToInsert == 1) firstColumn->addWidget(headlines.at(indexOfNewItem));
-            else if (columnToInsert == 2) secondColumn->addWidget(headlines.at(indexOfNewItem));
-            else if (columnToInsert == 3) thirdColumn->addWidget(headlines.at(indexOfNewItem));
+            if(columnToInsert == 1) {
+                firstColumn->addWidget(headlines.at(indexOfNewItem));
+                c1++;
+            }
+            else if (columnToInsert == 2) {
+                secondColumn->addWidget(headlines.at(indexOfNewItem));
+                c2++;
+            }
+            else if (columnToInsert == 3) {
+                thirdColumn->addWidget(headlines.at(indexOfNewItem));
+                c3++;
+            }
             inserted[indexOfNewItem] = true;
             columnToInsert++;
             if (columnToInsert > 3) columnToInsert = 1;
             insertedCount++;
         }
 
-        if (insertedCount == size || insertedCount > 30) done = true;
+        if (insertedCount == size || insertedCount > 26) done = true;
     }
+    qDebug() << c1 << " " << c2 " " << c3 << " " << endl;
 }
 
 void News::clearLayout(QLayout *layout)

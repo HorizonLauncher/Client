@@ -67,16 +67,16 @@ void Settings::init(QSettings* p)
     clientGroupLayout->addWidget(clearDBBtn);
     connect(clearDBBtn, &QPushButton::clicked, this, &Settings::confirmClearDb);
 
+    QPushButton* clearLaunchBtn = new QPushButton(tr("Clear launch options"));
+    clearLaunchBtn->setStyleSheet("padding: 5px;");
+    clearLaunchBtn->setFont(buttonFont);
+    clientGroupLayout->addWidget(clearLaunchBtn);
+
     QPushButton* manageNewsButton = new QPushButton(tr("Manage News Sources"));
     manageNewsButton->setStyleSheet("padding: 5px;");
     manageNewsButton->setFont(buttonFont);
     clientGroupLayout->addWidget(manageNewsButton);
     connect(manageNewsButton, &QPushButton::clicked, this, &Settings::on_ManageNewsButton_clicked);
-
-    QPushButton* clearLaunchBtn = new QPushButton(tr("Clear launch options"));
-    clearLaunchBtn->setStyleSheet("padding: 5px;");
-    clearLaunchBtn->setFont(buttonFont);
-    clientGroupLayout->addWidget(clearLaunchBtn);
 
     /* STYLE SETTINGS GROUP */
     QGroupBox* styleGroup = new QGroupBox(tr("Style Settings"));
@@ -461,4 +461,3 @@ void Settings::on_ManageNewsButton_clicked()
   newsFeedChooser->show();
 
 }
-
