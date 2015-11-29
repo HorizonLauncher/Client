@@ -80,10 +80,13 @@ void Library::init(QSettings* p)
     searchLayout->addWidget(searchBtn);
     connect(searchBtn, &QPushButton::clicked, this, &Library::refreshGames);
 
+    QColor* selectedColor = new QColor(p->value("Navbar/SelectedColor").toString());
+    QColor lineColor = selectedColor->lighter(120); //#9e5eee
+
     QWidget* line = new QWidget();
     line->setMinimumSize(1, 2);
     line->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
-    line->setStyleSheet("border: 1px solid #9e5eee;");
+    line->setStyleSheet("border: 1px solid " + lineColor.name() + ";");
     searchLayout->addWidget(line);
 
     QFont textFont("Roboto", 11);
