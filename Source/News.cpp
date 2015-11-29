@@ -1,6 +1,4 @@
 #include "News.h"
-#include "ui_newspanel.h"
-
 #include <QSettings>
 #include <string>
 #include <QDebug>

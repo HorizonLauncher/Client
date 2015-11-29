@@ -9,9 +9,7 @@
 
 /*
  * Networking headers for consuming RSS
- *
  */
-
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkRequest>
 #include <QtNetwork/QNetworkReply>
@@ -49,7 +47,7 @@ private:
     void reloadHeadlines();
     void loadFeedUrlsFromSettings();
     void loadFeeds();
-    void clearLayout(QLayout* layout); 
+    void clearLayout(QLayout* layout);
     QSettings* settings;
     QVector<NewsItemWidget*> headlines;
     QVector<QString> feedUrls;
