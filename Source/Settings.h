@@ -34,8 +34,8 @@ private:
 public slots:
     void confirmClearDb();
     void resetColors();
+
     void updateColor(int id, QColor color);
-    void on_ManageNewsButton_clicked(); 
 public:
     explicit Settings(QSettings* p, QWidget* parent = 0);
 };
