@@ -191,7 +191,6 @@ void News::reloadHeadlines()
 
         if (insertedCount == size || insertedCount > 26) done = true;
     }
-    qDebug() << c1 << " " << c2 " " << c3 << " " << endl;
 }
 
 void News::clearLayout(QLayout *layout)
