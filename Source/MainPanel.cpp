@@ -125,25 +125,16 @@ void MainPanel::init()
     library = new Library(p, stack);
     library->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     community = new Community(p, stack);
-<<<<<<< HEAD
-	settings = new Settings(p, stack);
+    community->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+    settings = new Settings(p, stack);
+    settings->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     news = new News(p, stack);
     stack->addWidget(home);
     stack->addWidget(library);
     stack->addWidget(community);
-	stack->addWidget(settings);
-    stack->addWidget(news);
-=======
-    community->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
-    settings = new Settings(p, stack);
-    settings->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
-    stack->addWidget(home);
-    stack->addWidget(library);
-    stack->addWidget(community);
     stack->addWidget(settings);
->>>>>>> 01d64a9d910d28dd718073562ee4d9f62b20335f
+    stack->addWidget(news);
     stack->setCurrentWidget(library);
-
     connect(stack, &QStackedWidget::currentChanged, this, &MainPanel::onStackedChanged);
 
     // Set active tab

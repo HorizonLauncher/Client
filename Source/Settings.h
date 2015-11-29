@@ -32,16 +32,13 @@ private:
     QPushButton* darkestBase;
 
 public slots:
-<<<<<<< HEAD
+
     void on_WizardButton_clicked();
     void on_ClearDatabaseButton_clicked();
     void on_ResetColors_clicked();
     void on_ManageNewsButton_clicked(); 
-=======
     void confirmClearDb();
     void resetColors();
-
->>>>>>> 01d64a9d910d28dd718073562ee4d9f62b20335f
     void updateColor(int id, QColor color);
 public:
     explicit Settings(QSettings* p, QWidget* parent = 0);

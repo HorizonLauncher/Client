@@ -22,120 +22,7 @@ Settings::Settings(QSettings* p, QWidget* parent) :
         "background-color: " + p->value("Primary/InactiveSelection").toString() + ";} "
         "color: " + p->value("Primary/LightText").toString() + ";");
 
-<<<<<<< HEAD
-    QFont buttonFont("SourceSansPro", 9);
-
-    ui->WizardButton->setFont(buttonFont);
-    ui->WizardButton->setText(tr("Add Games to Horizon"));
-
-    ui->ClearDatabaseButton->setFont(buttonFont);
-    ui->ClearDatabaseButton->setText(tr("Clear Database"));
-
-    ui->BodyColor->setFont(buttonFont);
-    ui->BodyColor->setStyleSheet("background-color: " + p->value("Body/Background").toString() + ";}");
-
-    ui->NavbarBG->setFont(buttonFont);
-    ui->NavbarBG->setStyleSheet("background-color: " + p->value("Navbar/Background").toString() + ";}");
-
-    ui->NavbarHover->setFont(buttonFont);
-    ui->NavbarHover->setStyleSheet("background-color: " + p->value("Navbar/HoverColor").toString() + ";}");
-
-    ui->NavbarSelected->setFont(buttonFont);
-    ui->NavbarSelected->setStyleSheet("background-color: " + p->value("Navbar/SelectedColor").toString() + ";}");
-
-    ui->TitleBarColor->setFont(buttonFont);
-    ui->TitleBarColor->setStyleSheet("background-color: " + p->value("TitleBar/Color").toString() + ";}");
-
-    ui->ActiveElement->setFont(buttonFont);
-    ui->ActiveElement->setStyleSheet("background-color: " + p->value("Primary/ActiveElement").toString() + ";}");
-
-    ui->InactiveSelection->setFont(buttonFont);
-    ui->InactiveSelection->setStyleSheet("background-color: " + p->value("Primary/InactiveSelection").toString() + ";}");
-
-    ui->HoverSelection->setFont(buttonFont);
-    ui->HoverSelection->setStyleSheet("background-color: " + p->value("Primary/HoverSelection").toString() + ";}");
-
-    ui->DarkElement->setFont(buttonFont);
-    ui->DarkElement->setStyleSheet("background-color: " + p->value("Primary/DarkElement").toString() + ";}");
-
-    ui->LightText->setFont(buttonFont);
-    ui->LightText->setStyleSheet("background-color: " + p->value("Primary/LightText").toString() + ";}");
-
-    ui->DarkText->setFont(buttonFont);
-    ui->DarkText->setStyleSheet("background-color: " + p->value("Primary/DarkText").toString() + ";}");
-
-    ui->SubText->setFont(buttonFont);
-    ui->SubText->setStyleSheet("background-color: " + p->value("Primary/SubText").toString() + ";}");
-
-    ui->PrimaryBase->setFont(buttonFont);
-    ui->PrimaryBase->setStyleSheet("background-color: " + p->value("Primary/PrimaryBase").toString() + ";}");
-
-    ui->SecondaryBase->setFont(buttonFont);
-    ui->SecondaryBase->setStyleSheet("background-color: " + p->value("Primary/SecondaryBase").toString() + ";}");
-
-    ui->TertiaryBase->setFont(buttonFont);
-    ui->TertiaryBase->setStyleSheet("background-color: " + p->value("Primary/TertiaryBase").toString() + ";}");
-
-    ui->DarkestBase->setFont(buttonFont);
-    ui->DarkestBase->setStyleSheet("background-color: " + p->value("Primary/DarkestBase").toString() + ";}");
-
-    ui->ResetColors->setFont(buttonFont);
-
-    ui->label_2->setStyleSheet("{color: #FFFFFF}");
-    ui->UserSettingsBox->setStyleSheet("color: #FFFFFF;} ");
-    ui->ClientSettingsBox->setStyleSheet("color: #FFFFFF;} ");
-    ui->StyleSettingsBox->setStyleSheet("color: #FFFFFF;} ");
-
-    connect(ui->WizardButton, &QPushButton::clicked, this, &Settings::on_WizardButton_clicked);
-    connect(ui->BodyColor, &QPushButton::clicked, [=]() { pickSetColor(1); });
-    connect(ui->NavbarBG, &QPushButton::clicked, [=]() { pickSetColor(2); });
-    connect(ui->NavbarHover, &QPushButton::clicked, [=]() { pickSetColor(3); });
-    connect(ui->NavbarSelected, &QPushButton::clicked, [=]() { pickSetColor(4); });
-    connect(ui->TitleBarColor, &QPushButton::clicked, [=]() { pickSetColor(5); });
-    connect(ui->ActiveElement, &QPushButton::clicked, [=]() { pickSetColor(6); });
-    connect(ui->InactiveSelection, &QPushButton::clicked, [=]() { pickSetColor(7); });
-    connect(ui->HoverSelection, &QPushButton::clicked, [=]() { pickSetColor(8); });
-    connect(ui->DarkElement, &QPushButton::clicked, [=]() { pickSetColor(9); });
-    connect(ui->LightText, &QPushButton::clicked, [=]() { pickSetColor(10); });
-    connect(ui->DarkText, &QPushButton::clicked, [=]() { pickSetColor(11); });
-    connect(ui->SubText, &QPushButton::clicked, [=]() { pickSetColor(12); });
-    connect(ui->PrimaryBase, &QPushButton::clicked, [=]() { pickSetColor(13); });
-    connect(ui->SecondaryBase, &QPushButton::clicked, [=]() { pickSetColor(14); });
-    connect(ui->TertiaryBase, &QPushButton::clicked, [=]() { pickSetColor(15); });
-    connect(ui->DarkestBase, &QPushButton::clicked, [=]() { pickSetColor(16); });
-    connect(ui->ResetColors, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_ResetColors_clicked()));
-    connect(ui->ClearDatabaseButton, SIGNAL(clicked()), QApplication::instance(), SLOT(Settings::on_ClearDatabaseButton_clicked()));
-    connect(ui->manageNewsButton, &QPushButton::clicked, this, &Settings::on_ManageNewsButton_clicked);
-    connect(ui->ResetColors, &QPushButton::clicked, this, &Settings::on_ResetColors_clicked);
-    connect(ui->ClearDatabaseButton, &QPushButton::clicked, this, &Settings::on_ClearDatabaseButton_clicked);
-
-    ui->label_2->adjustSize();
-    ui->label_3->adjustSize();
-    ui->label_4->adjustSize();
-    ui->label_5->adjustSize();
-    ui->label_6->adjustSize();
-    ui->label_7->adjustSize();
-    ui->label_8->adjustSize();
-    ui->label_9->adjustSize();
-    ui->label_10->adjustSize();
-    ui->label_11->adjustSize();
-    ui->label_12->adjustSize();
-    ui->label_13->adjustSize();
-    ui->label_14->adjustSize();
-    ui->label_15->adjustSize();
-    ui->label_16->adjustSize();
-    ui->label_17->adjustSize();
-    ui->label_18->adjustSize();
-
-    if (!db.init())
-    {
-        QMessageBox error;
-        error.critical(0, tr("Error!"), tr("An error occurred while trying to load the database."));
-        exit(EXIT_FAILURE);
-    }
-=======
     init(p);
->>>>>>> 01d64a9d910d28dd718073562ee4d9f62b20335f
 }
 
 void Settings::init(QSettings* p)
@@ -179,6 +66,12 @@ void Settings::init(QSettings* p)
     clearDBBtn->setFont(buttonFont);
     clientGroupLayout->addWidget(clearDBBtn);
     connect(clearDBBtn, &QPushButton::clicked, this, &Settings::confirmClearDb);
+
+    QPushButton* manageNewsButton = new QPushButton(tr("Manage News Sources"));
+    manageNewsButton->setStyleSheet("padding: 5px;");
+    manageNewsButton->setFont(buttonFont);
+    clientGroupLayout->addWidget(manageNewsButton);
+    connect(manageNewsButton, &QPushButton::clicked, this, &Settings::on_ManageNewsButton_clicked);
 
     QPushButton* clearLaunchBtn = new QPushButton(tr("Clear launch options"));
     clearLaunchBtn->setStyleSheet("padding: 5px;");
@@ -560,7 +453,6 @@ void Settings::confirmClearDb()
             break;
     }
 }
-<<<<<<< HEAD
 
 void Settings::on_ManageNewsButton_clicked()
 {
@@ -569,9 +461,4 @@ void Settings::on_ManageNewsButton_clicked()
   newsFeedChooser->show();
 
 }
-Settings::~Settings()
-{
-    delete ui;
-}
-=======
->>>>>>> 01d64a9d910d28dd718073562ee4d9f62b20335f
+
