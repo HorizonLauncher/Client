@@ -3,6 +3,7 @@ if(WIN32)
     set(CMAKE_CXX_STANDARD 11)
 else()
     cmake_minimum_required(VERSION 2.8.12)
+    add_compile_options(-std=c++11)
 endif()
 
 # --- BUILD CONFIGURATION ---
@@ -27,7 +28,7 @@ set(SOURCE
     Source/Settings.cpp
     Source/GameLauncher.cpp
     Source/News.cpp
-    Source/newsitemwidget.cpp
+    Source/NewsItemWidget.cpp
     Source/SetupWizard.cpp
     Source/GridGameWidget.cpp
     Source/NewsFeedChooserWindow.cpp
@@ -59,7 +60,6 @@ set(HEADERS
 set(FORMS
     Resource/UI/Community.ui
     Resource/UI/Settings.ui
-    Resource/UI/newspanel.ui
 )
 
 set(RESOURCES

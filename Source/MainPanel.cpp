@@ -129,12 +129,14 @@ void MainPanel::init()
     settings = new Settings(p, stack);
     settings->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     news = new News(p, stack);
+    news->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     stack->addWidget(home);
     stack->addWidget(library);
     stack->addWidget(community);
-    stack->addWidget(settings);
     stack->addWidget(news);
+    stack->addWidget(settings);
     stack->setCurrentWidget(library);
+
     connect(stack, &QStackedWidget::currentChanged, this, &MainPanel::onStackedChanged);
 
     // Set active tab
@@ -142,14 +144,13 @@ void MainPanel::init()
     activeTab->toggleActive();
 
     // Connect signals
-    connect(navbar->homeTab, SIGNAL(clicked()), this, SLOT(setHome()));
-    // connect(navbar->storeTab, SIGNAL(clicked()), this, SLOT(setStore()));
-    connect(navbar->gamesTab, SIGNAL(clicked()), this, SLOT(setGames()));
-    connect(navbar->communityTab, SIGNAL(clicked()), this, SLOT(setCommunity()));
-    connect(navbar->newsTab, SIGNAL(clicked()), this, SLOT(setNews()));
-    // connect(navbar->modsTab, SIGNAL(clicked()), this, SLOT(setMods()));
-    connect(navbar->settingsTab, SIGNAL(clicked()), this, SLOT(setSettings()));
-
+    connect(navbar->homeTab, &TabWidget::clicked, this, &MainPanel::setHome);
+    // connect(navbar->storeTab, &TabWidget::clicked, this, &MainPanel::setStore);
+    connect(navbar->gamesTab, &TabWidget::clicked, this, &MainPanel::setGames);
+    connect(navbar->communityTab, &TabWidget::clicked, this, &MainPanel::setCommunity);
+    connect(navbar->newsTab, &TabWidget::clicked, this, &MainPanel::setNews);
+    // connect(navbar->modsTab, &TabWidget::clicked, this, &MainPanel::setMods);
+    connect(navbar->settingsTab, &TabWidget::clicked, this, &MainPanel::setSettings);
 
     // Show
     show();
