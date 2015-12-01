@@ -27,7 +27,7 @@
  * Custom Widget Headers
  */
 
-#include "newsitemwidget.h"
+#include "NewsItemWidget.h"
 
 class News : public QWidget
 {

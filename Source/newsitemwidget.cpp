@@ -1,4 +1,4 @@
-#include "newsitemwidget.h"
+#include "NewsItemWidget.h"
 #include <QVBoxLayout>
 #include <QDesktopServices>
 #include <QUrl>
@@ -11,7 +11,7 @@ NewsItemWidget::NewsItemWidget(QSettings* p, QWidget* parent = 0) : QWidget(pare
                 "color: " + p->value("Primary/LightText").toString() + ";"
                 "font-family: SourceSansPro;" +
                 "}" +
-                "*:hover {background:red}"
+                "*:hover { background: "  + p->value("Primary/HoverSelection").toString() + "}"
                 );
     titleLabel = new QLabel ("1 ");
     titleLabel->setWordWrap(true);
