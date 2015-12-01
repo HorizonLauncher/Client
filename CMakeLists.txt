@@ -50,7 +50,7 @@ set(HEADERS
     Source/Settings.h
     Source/GameLauncher.h
     Source/News.h
-    Source/newsitemwidget.h
+    Source/NewsItemWidget.h
     Source.SetupWizard.h
     Source/Defines.h
     Source/GridGameWidget.h
