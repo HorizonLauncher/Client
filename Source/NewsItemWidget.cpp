@@ -3,6 +3,11 @@
 #include <QDesktopServices>
 #include <QUrl>
 
+/**
+* NewsItemWidget constructor
+* \param p The color palette for the UI
+* \param parent The parent QWidget
+*/
 NewsItemWidget::NewsItemWidget(QSettings* p, QWidget* parent = 0) : QWidget(parent)
 {
     QVBoxLayout* layout = new QVBoxLayout(this);

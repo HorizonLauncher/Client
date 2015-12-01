@@ -1,5 +1,5 @@
-#ifndef NEWSITEMWIDGET_H
-#define NEWSITEMWIDGET_H
+#ifndef NEWSITEM_WIDGET_H
+#define NEWSITEM_WIDGET_H
 
 #include <QObject>
 #include <QWidget>
@@ -21,6 +21,6 @@ signals:
 public slots:
 
 private:
-};    
+};
 
-#endif // NEWSITEMWIDGET_H
+#endif // NEWSITEM_WIDGET_H
