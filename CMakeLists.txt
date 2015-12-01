@@ -3,7 +3,6 @@ if(WIN32)
     set(CMAKE_CXX_STANDARD 11)
 else()
     cmake_minimum_required(VERSION 2.8.12)
-    add_compile_options(-std=c++11 -g)
 endif()
 
 # --- BUILD CONFIGURATION ---
@@ -13,7 +12,6 @@ project(HorizonLauncher C CXX)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-set(CMAKE_BUILD_TYPE Debug)
 set(SOURCE
     Source/Main.cpp
     Source/TabWidget.cpp
