@@ -66,8 +66,13 @@ InfoPage::InfoPage(QWidget* parent) : QWizardPage(parent)
     QLabel* exeLabel = new QLabel(tr("Executable: "));
     QLabel* argsLabel = new QLabel(tr("Arguments (optional): "));
 
-    QPushButton* dirFileBtn = new QPushButton(tr("Browse"));
-    QPushButton* exeFileBtn = new QPushButton(tr("Browse"));
+    QPixmap browsePixmap(":/SystemMenu/Icons/FileSearch.png");
+    QIcon browseIcon(browsePixmap);
+
+    QPushButton* dirFileBtn = new QPushButton();
+    dirFileBtn->setIcon(browseIcon);
+    QPushButton* exeFileBtn = new QPushButton();
+    exeFileBtn->setIcon(browseIcon);
 
     connect(dirFileBtn, &QPushButton::clicked, [=] { pickFile(this->dirEdit, QFileDialog::Directory); });
     connect(exeFileBtn, &QPushButton::clicked, [=] { pickFile(this->exeEdit, QFileDialog::ExistingFile); });
