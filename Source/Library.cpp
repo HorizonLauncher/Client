@@ -55,7 +55,7 @@ void Library::init(QSettings* p)
     QWidget* searchBar = new QWidget();
     searchBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     searchBar->setMinimumHeight(40);
-    searchBar->setStyleSheet("background-color:" + p->value("Navbar/SelectedColor").toString() + "; position: absolute;");
+    searchBar->setStyleSheet("background-color:" + p->value("Navbar/SelectedColor").toString() + ";");
     mainLayout->addWidget(searchBar, 0, 0);
 
     QHBoxLayout* searchLayout = new QHBoxLayout(searchBar);
