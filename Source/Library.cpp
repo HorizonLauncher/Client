@@ -177,6 +177,24 @@ void Library::launchGame(QString gameName)
     }
 }
 
+void Library::changeLaunchOpts(QString gameName)
+{
+    Game game = Library::db.getGameByName(gameName);
+    bool ok;
+
+    QString newLaunchOpts = QInputDialog::getText(this,
+                                tr("Change Launch Options"),
+                                tr("Launch Options: "),
+                                QLineEdit::Normal,
+                                game.arguments,
+                                &ok);
+
+    if (ok)
+    {
+        Library::db.setLaunchOptionsByName(gameName, newLaunchOpts);
+    }
+}
+
 /** Event handler for adding a game.
  * Prompts the user for various paths, and adds the final game to the database.
 */
@@ -220,6 +238,7 @@ void Library::refreshGames()
         GridGameWidget* gameWidget = new GridGameWidget(displayedName, 999);
         gamesLayout->addWidget(gameWidget, row, col);
         connect(gameWidget, &GridGameWidget::leftClick, [=] (){ launchGame(game.gameName); });
+        connect(gameWidget, &GridGameWidget::changeLaunchOpts, [=]{ changeLaunchOpts(game.gameName); });
         gamesWidgets.append(gameWidget);
 
         if (col == 3)
