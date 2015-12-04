@@ -3,6 +3,7 @@
 #include <QLabel>
 #include <QBoxLayout>
 #include <QMouseEvent>
+#include <QMenu>
 
 GridGameWidget::GridGameWidget(QString gameName, int hours, QWidget* parent)
     : QWidget(parent)
@@ -45,6 +46,11 @@ GridGameWidget::GridGameWidget(QString gameName, int hours, QWidget* parent)
     hoursLabel->setContentsMargins(0, 0, 0, 0);
     hoursLabel->setWordWrap(true);
     otherLayout->addWidget(hoursLabel, Qt::AlignBottom | Qt::AlignLeft);
+
+    this->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(this,
+        &GridGameWidget::customContextMenuRequested,
+        this, &GridGameWidget::showContextMenu);
 }
 
 /** Overridden mouse press event.
@@ -62,4 +68,27 @@ void GridGameWidget::mousePressEvent(QMouseEvent* event)
         Q_EMIT rightClick();
     }
     QWidget::mousePressEvent(event);
+}
+
+/** Slot to show the right click (context) menu */
+void GridGameWidget::showContextMenu(const QPoint& pos)
+{
+    QPoint globalPos = mapToGlobal(pos);
+
+    QMenu contextMenu;
+    contextMenu.addAction("Change launch options");
+    contextMenu.addAction("Remove game from Library");
+
+    QAction* selected = contextMenu.exec(globalPos);
+    if (selected)
+    {
+        if (selected->text() == "Change launch options")
+        {
+            Q_EMIT changeLaunchOpts();
+        }
+        else if (selected->text() == "Remove game from Library")
+        {
+            Q_EMIT removeGame();
+        }
+    }
 }

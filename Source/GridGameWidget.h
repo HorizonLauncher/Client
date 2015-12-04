@@ -18,10 +18,16 @@ public:
 private:
     void init();
 
+public slots:
+    void showContextMenu(const QPoint& pos);
+
 signals:
     void clicked();
     void leftClick();
     void rightClick();
+
+    void changeLaunchOpts();
+    void removeGame();
 };
 
 #endif
