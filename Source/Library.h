@@ -36,4 +36,5 @@ private:
 
     void init(QSettings* p);
     void launchGame(QString gameName);
+    void changeLaunchOpts(QString gameName);
 };
