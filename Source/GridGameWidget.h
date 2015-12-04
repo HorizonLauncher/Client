@@ -20,6 +20,8 @@ private:
 
 signals:
     void clicked();
+    void leftClick();
+    void rightClick();
 };
 
 #endif

@@ -2,6 +2,7 @@
 
 #include <QLabel>
 #include <QBoxLayout>
+#include <QMouseEvent>
 
 GridGameWidget::GridGameWidget(QString gameName, int hours, QWidget* parent)
     : QWidget(parent)
@@ -52,5 +53,13 @@ GridGameWidget::GridGameWidget(QString gameName, int hours, QWidget* parent)
 void GridGameWidget::mousePressEvent(QMouseEvent* event)
 {
     Q_EMIT clicked();
+    if (event->button() == Qt::LeftButton)
+    {
+        Q_EMIT leftClick();
+    }
+    else if (event->button() == Qt::RightButton)
+    {
+        Q_EMIT rightClick();
+    }
     QWidget::mousePressEvent(event);
 }
