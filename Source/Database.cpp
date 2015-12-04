@@ -264,3 +264,59 @@ unsigned int Database::getGameCount() const
 
     return query.value(0).toUInt();
 }
+
+/** Sets the launch options of a game by ID.
+ * \param id The ID of the game
+ * \param launchOpts The new launch options
+ * \return Success (true)/Failure (false) of the operation.
+*/
+bool Database::setLaunchOptionsById(unsigned int id, QString launchOpts)
+{
+    if (std::get<0>(isExistant(id)))
+    {
+        QSqlQuery query(db);
+        query.prepare("UPDATE games SET `ARGUMENTS` = :newOpts WHERE ID = :id;");
+        query.bindValue(":newOpts", launchOpts);
+        query.bindValue(":id", id);
+        bool rtn = query.exec();
+
+        if (rtn)
+        {
+            emit dbChanged();
+        }
+
+        return rtn;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+/** Sets the launch options of a game by name.
+ * \param name The name of the game (as stored in the database)
+ * \param launchOpts The new launch options
+ * \return Success (true)/Failure (false) of the operation.
+*/
+bool Database::setLaunchOptionsByName(QString name, QString launchOpts)
+{
+    if (std::get<0>(isExistant(name)))
+    {
+        QSqlQuery query(db);
+        query.prepare("UPDATE games SET `ARGUMENTS` = :newOpts WHERE GAMENAME = :name;");
+        query.bindValue(":newOpts", launchOpts);
+        query.bindValue(":name", name);
+        bool rtn = query.exec();
+
+        if (rtn)
+        {
+            emit dbChanged();
+        }
+
+        return rtn;
+    }
+    else
+    {
+        return false;
+    }
+}

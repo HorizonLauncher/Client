@@ -44,6 +44,8 @@ public:
     std::pair<bool, Game> isExistant(QString name);
     QList<Game> getGames();
     unsigned int getGameCount() const;
+    bool setLaunchOptionsById(unsigned int id, QString launchOpts);
+    bool setLaunchOptionsByName(QString name, QString launchOpts);
 
 signals:
     void dbChanged();
