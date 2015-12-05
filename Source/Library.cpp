@@ -237,8 +237,9 @@ void Library::refreshGames()
 
         GridGameWidget* gameWidget = new GridGameWidget(displayedName, 999);
         gamesLayout->addWidget(gameWidget, row, col);
-        connect(gameWidget, &GridGameWidget::leftClick, [=] (){ launchGame(game.gameName); });
+        connect(gameWidget, &GridGameWidget::leftClick, [=] { launchGame(game.gameName); });
         connect(gameWidget, &GridGameWidget::changeLaunchOpts, [=]{ changeLaunchOpts(game.gameName); });
+        connect(gameWidget, &GridGameWidget::removeGame, [=]{ Library::db.removeGameByName(game.gameName); });
         gamesWidgets.append(gameWidget);
 
         if (col == 3)
