@@ -120,8 +120,8 @@ void DRMPage::checkOriginExists()
     if (settings.contains("ClientPath"))
     {
         originRoot = QFileInfo(settings.value("ClientPath").toString()).dir();
-        originFolder = QDir("C:\\Program Files (x86)\\Origin Games\\");
     }
+    originFolder = QDir("C:\\Program Files (x86)\\Origin Games\\");
 #else
     originRoot = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation).append("/Origin/");
 #endif
