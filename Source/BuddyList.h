@@ -2,15 +2,16 @@
 #define BUDDYLIST_H
 
 #include <QWidget>
+#include <QSettings>
 
 class BuddyList : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit BuddyList(QWidget *parent = 0);
+    explicit BuddyList(QSettings* p, QWidget *parent = 0);
 private:
-    void init();
+    void init(QSettings* p);
 };
 
 #endif // BUDDYLIST_H
