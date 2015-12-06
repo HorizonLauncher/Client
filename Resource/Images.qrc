@@ -2,5 +2,6 @@
     <qresource prefix="/SystemMenu">
         <file>Images/TitleBarPattern.png</file>
         <file>Images/LibraryGridPlaceholder.png</file>
+        <file>Images/ProfilePlaceholder.png</file>
     </qresource>
 </RCC>

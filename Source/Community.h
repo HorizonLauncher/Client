@@ -12,10 +12,10 @@ public:
     explicit Community(QSettings* p, QWidget* parent = 0);
 
 private slots:
-    void openBuddyList();
+    void openBuddyList(QSettings* p);
 
 private:
-    void init();
+    void init(QSettings* p);
 };
 
 #endif // COMMUNITY_H

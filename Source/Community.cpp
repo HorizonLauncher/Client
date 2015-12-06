@@ -18,10 +18,10 @@ Community::Community(QSettings* p, QWidget* parent) :
                         "background-color: " + p->value("Primary/InactiveSelection").toString() + ";} "
                         "color: " + p->value("Primary/LightText").toString() + ";");
 
-    init();
+    init(p);
 }
 
-void Community::init()
+void Community::init(QSettings* p)
 {
     QHBoxLayout* mainLayout = new QHBoxLayout(this);
 
@@ -31,11 +31,11 @@ void Community::init()
     buddyButton->setStyleSheet("padding: 5px;");
     buddyButton->setFont(buttonFont);
     mainLayout->addWidget(buddyButton, Qt::AlignCenter);
-    connect(buddyButton, &QPushButton::clicked, this, &Community::openBuddyList);
+    connect(buddyButton, &QPushButton::clicked, [=] { openBuddyList(p); });
 }
 
-void Community::openBuddyList()
+void Community::openBuddyList(QSettings* p)
 {
-    QWidget *buddyL = new BuddyList();
+    QWidget *buddyL = new BuddyList(p);
     buddyL->show();
 }
