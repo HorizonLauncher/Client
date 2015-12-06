@@ -116,31 +116,18 @@ void DRMPage::checkOriginExists()
     QDir originRoot;
     QDir originFolder;
 #if defined(_WIN32) || defined(_WIN64)
-    originRoot = QDir(qgetenv("APPDATA").append("/Origin"));
+    QSettings settings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Origin", QSettings::NativeFormat);
+    if (settings.contains("ClientPath"))
+    {
+        originRoot = QFileInfo(settings.value("ClientPath").toString()).dir();
+    }
 #else
     originRoot = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation).append("/Origin/");
 #endif
 
-
-    if (originRoot.exists())
+    if (originFolder == QDir("."))
     {
-        pt::ptree originTree;
-        read_xml(originRoot.filePath("local.xml").toLocal8Bit().constData(), originTree);
-
-
-        for (auto &xmlIter : originTree.get_child("Settings"))
-        {
-            if (xmlIter.second.get<std::string>("<xmlattr>.key") == "DownloadInPlaceDir")
-            {
-                originFolder = QString::fromStdString(xmlIter.second.get<std::string>("<xmlattr>.value"));
-                break;
-            }
-        }
-
-        if (originFolder == QDir("."))
-        {
-            originFolder = QDir("C:\\Program Files (x86)\\Origin Games\\");
-        }
+        originFolder = QDir("C:\\Program Files (x86)\\Origin Games\\");
     }
     else
     {
