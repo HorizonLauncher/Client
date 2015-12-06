@@ -67,6 +67,7 @@ set(TRANSLATIONS
     Translations/horizon_nb.ts
     Translations/horizon_pt_BR.ts
     Translations/horizon_fr.ts
+    Translations/horizon_de.ts
 )
 
 if(WIN32)
