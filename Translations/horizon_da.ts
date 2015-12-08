@@ -96,35 +96,35 @@ Understøttet: Steam, uPlay, Origin</translation>
         <translation>og Uplay.</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="154"/>
+        <location filename="../Source/DRMSetupWizard.cpp" line="133"/>
         <source>Origin found in %1</source>
         <extracomment>%1 will be replaced with the path to Origin.</extracomment>
         <translation>Origin fundet ved %1</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="207"/>
+        <location filename="../Source/DRMSetupWizard.cpp" line="186"/>
         <source>Steam found in %1</source>
         <extracomment>%1 will be replaced with the path to Steam.</extracomment>
         <translation>Steam fundet ved %1</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="272"/>
+        <location filename="../Source/DRMSetupWizard.cpp" line="251"/>
         <source>Uplay found in %1</source>
         <extracomment>%1 will be replaced with the path to uPlay.</extracomment>
         <translation>uPlay fundet ved %1</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="161"/>
+        <location filename="../Source/DRMSetupWizard.cpp" line="140"/>
         <source>Origin not found. Verify installation and try again.</source>
         <translation>Origin var ikke fundet. Kontroller installationen og prøv igen.</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="214"/>
+        <location filename="../Source/DRMSetupWizard.cpp" line="193"/>
         <source>Steam not found. Verify installation and try again.</source>
         <translation>Steam var ikke fundet. Kontroller installationen og prøv igen.</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="279"/>
+        <location filename="../Source/DRMSetupWizard.cpp" line="258"/>
         <source>Uplay not found on the system. Verify installation and try again.</source>
         <translation>uPlay var ikke fundet. Kontroller installationen og prøv igen.</translation>
     </message>
@@ -153,7 +153,7 @@ Understøttet: Steam, uPlay, Origin</translation>
         <translation>Færdig</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="842"/>
+        <location filename="../Source/DRMSetupWizard.cpp" line="821"/>
         <source>Added %1 games to the database. Click finish to complete the wizard.</source>
         <oldsource>Added %d games to the database. Click finish to complete the wizard.</oldsource>
         <translation>Tilføjet %1 spil til databasen. Tryk på udfør for at fuldføre guiden.</translation>
@@ -419,70 +419,70 @@ Understøttet: Steam, uPlay, Origin</translation>
         <translation>Vi fandt følgende på dit system.</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="303"/>
+        <location filename="../Source/DRMSetupWizard.cpp" line="282"/>
         <source>Install Steam, Origin and/or Uplay to find games with this wizard, or check current installation(s).</source>
         <translation>Installer Steam, Origin og/eller Uplay for at finde spil med denne guide, eller tjek nuværende installation(er).</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="307"/>
-        <location filename="../Source/DRMSetupWizard.cpp" line="539"/>
+        <location filename="../Source/DRMSetupWizard.cpp" line="286"/>
+        <location filename="../Source/DRMSetupWizard.cpp" line="518"/>
         <source>Change the title for each game by clicking the text box and editing.</source>
         <translation>Ændre titlen for hvert spil ved at klikke på tekstfeltet og rediger teksten.</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="323"/>
+        <location filename="../Source/DRMSetupWizard.cpp" line="302"/>
         <source>Executable not found</source>
         <translation>Eksekverbar fil ikke fundet</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="332"/>
+        <location filename="../Source/DRMSetupWizard.cpp" line="311"/>
         <source>Executable:  </source>
         <translation>Eksekverbar:  </translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="344"/>
+        <location filename="../Source/DRMSetupWizard.cpp" line="323"/>
         <source>Steam</source>
         <translation>Steam</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="302"/>
+        <location filename="../Source/DRMSetupWizard.cpp" line="281"/>
         <source>We found no games.</source>
         <translation>Ingen fundne spil.</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="422"/>
+        <location filename="../Source/DRMSetupWizard.cpp" line="401"/>
         <source>We found %1 Steam games, %2 Origin games, and %3 uPlay games.</source>
         <extracomment>%1, %2, and %3 will be replaced with the number of Steam, Origin, and uPlay games, respectively</extracomment>
         <translation>Vi fandt %1 Steam spil, %2 Origin spil og %3 uPlay spil.</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="425"/>
+        <location filename="../Source/DRMSetupWizard.cpp" line="404"/>
         <source>Select all</source>
         <translation>Vælg alle</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="426"/>
+        <location filename="../Source/DRMSetupWizard.cpp" line="405"/>
         <source>Deselect all</source>
         <translation>Fravælg alle</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="427"/>
+        <location filename="../Source/DRMSetupWizard.cpp" line="406"/>
         <source>Invert selection</source>
         <translation>Omvendt markering</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="467"/>
-        <location filename="../Source/DRMSetupWizard.cpp" line="486"/>
+        <location filename="../Source/DRMSetupWizard.cpp" line="446"/>
+        <location filename="../Source/DRMSetupWizard.cpp" line="465"/>
         <source>Executable: </source>
         <translation>Eksekverbar: </translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="535"/>
+        <location filename="../Source/DRMSetupWizard.cpp" line="514"/>
         <source>Change the title for each game by clicking the text box and editing. Choose which executable to use from the tree view.</source>
         <translation>Ændre titlen for hvert spil ved at trykke på tekstboksen og rediger teksten. Vælg hvilken eksekverbar fil at bruge fra visning.</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="787"/>
+        <location filename="../Source/DRMSetupWizard.cpp" line="766"/>
         <source>Select Executable</source>
         <translation>Vælg eksekverbar fil</translation>
     </message>

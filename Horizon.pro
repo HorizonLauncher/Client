@@ -4,14 +4,15 @@ SOURCES = Source/Main.cpp \
     Source/MainPanel.cpp \
     Source/Database.cpp \
     Source/DRMSetupWizard.cpp \
-    Source/Navbar.cpp  \
+    Source/Navbar.cpp \
     Source/Homepage.cpp \
     Source/BuddyList.cpp \
     Source/Community.cpp \
     Source/AddGameWizard.cpp \
     Source/Settings.cpp \
     Source/GameLauncher.cpp \
-    Source/SetupWizard.cpp
+    Source/SetupWizard.cpp \
+    Source/GridGameWidget.cpp \
 
 HEADERS = Source/TabWidget.h \
     Source/Library.h \
@@ -28,12 +29,8 @@ HEADERS = Source/TabWidget.h \
     Source/Settings.h \
     Source/GameLauncher.h \
     Source.SetupWizard.h \
-    Source/Defines.h
-
-FORMS = Resource/UI/Library.ui \
-    Resource/UI/BuddyList.ui \
-    Resource/UI/Community.ui \
-    Resource/UI/Settings.ui \
+    Source/Defines.h \
+    Source/GridGameWidget.h \
 
 TRANSLATIONS = Translations/horizon_en.ts \
     Translations/horizon_da.ts \
