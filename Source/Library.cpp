@@ -157,23 +157,14 @@ void Library::init(QSettings* p)
 */
 void Library::launchGame(QString gameName)
 {
-    if (!gl.isProcessRunning())
+    Game game = Library::db.getGameByName(gameName);
+    if (game.arguments.trimmed() == "")
     {
-        Game game = Library::db.getGameByName(gameName);
-        if (game.arguments.trimmed() == "")
-        {
-            gl.runProcess(game.executablePath, game.gameDirectory);
-        }
-        else
-        {
-            gl.runProcessWithArgs(game.executablePath, game.gameDirectory, game.arguments);
-        }
+        gl.runProcess(game.executablePath, game.gameDirectory);
     }
     else
     {
-        QMessageBox messageBox;
-        messageBox.setText(tr("Error: an application is already running."));
-        messageBox.exec();
+        gl.runProcessWithArgs(game.executablePath, game.gameDirectory, game.arguments);
     }
 }
 

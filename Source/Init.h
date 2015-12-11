@@ -17,9 +17,11 @@ void initSettings(QApplication &application)
     QSettings config(QSettings::IniFormat, QSettings::UserScope, "HorizonLauncher", "config");
     QSettings palette(QSettings::IniFormat, QSettings::UserScope, "HorizonLauncher", "palette");
 
-    if (!QFile("config.ini").exists() && config.isWritable())
+    if (!QFile(config.fileName()).exists() && config.isWritable())
     {
-        // TODO: Set default config settings.
+        config.beginGroup("GameLauncher");
+        config.setValue("MultipleExec", false);
+        config.endGroup();
     }
 
     if (!QFile(palette.fileName()).exists() && palette.isWritable())

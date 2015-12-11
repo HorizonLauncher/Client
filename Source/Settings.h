@@ -13,6 +13,7 @@ class Settings : public QWidget
 private:
     void pickSetColor(int id);
     void init(QSettings* p);
+    void setMultipleExec(bool multipleExec);
 
     QPushButton* bodyColor;
     QPushButton* navbarBG;

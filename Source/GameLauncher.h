@@ -13,9 +13,6 @@ class GameLauncher : public QWidget
     Q_OBJECT
 
 public:
-    GameLauncher();
-    ~GameLauncher();
-    bool isProcessRunning() const;
     void runProcess(QString file, QString workingDirectory);
     void runProcessWithArgs(QString file, QString workingDirectory, QString args);
 
@@ -24,7 +21,7 @@ private slots:
     void finished(int exitCode, QProcess::ExitStatus exitStatus);
 
 private:
-    QProcess* runningProcess;
+    QSettings config;
 };
 
 #endif //GAMELAUNCHER_H

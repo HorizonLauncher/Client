@@ -19,6 +19,9 @@ Settings::Settings(QSettings* p, QWidget* parent) :
         "border: none; margin: 0px; padding: 0px;} "
         "QPushButton:hover {"
         "background-color: " + p->value("Primary/InactiveSelection").toString() + ";} "
+        "QCheckBox {"
+        "border-color: white;"
+        "color: " + p->value("Primary/ActiveElement").toString() + ";}"
         "color: " + p->value("Primary/LightText").toString() + ";");
 
     init(p);
@@ -26,6 +29,8 @@ Settings::Settings(QSettings* p, QWidget* parent) :
 
 void Settings::init(QSettings* p)
 {
+    QSettings config(QSettings::IniFormat, QSettings::UserScope, "HorizonLauncher", "config");
+
     QGridLayout* mainLayout = new QGridLayout(this);
 
     QFont buttonFont("SourceSansPro", 9);
@@ -70,6 +75,17 @@ void Settings::init(QSettings* p)
     clearLaunchBtn->setStyleSheet("padding: 5px;");
     clearLaunchBtn->setFont(buttonFont);
     clientGroupLayout->addWidget(clearLaunchBtn);
+
+    qDebug() << config.value("GameLauncher/MultipleExec").toBool();
+    QWidget* multipleGamesWidget = new QWidget();
+    QHBoxLayout* multipleGamesLayout = new QHBoxLayout(multipleGamesWidget);
+    QCheckBox* multipleGamesCB = new QCheckBox();
+    multipleGamesCB->setCheckState((config.value("GameLauncher/MultipleExec").toBool() ? Qt::Checked : Qt::Unchecked));
+    QLabel* multipleGamesLbl = new QLabel(tr("Allow launching\nof multiple games"));
+    multipleGamesLayout->addWidget(multipleGamesCB);
+    multipleGamesLayout->addWidget(multipleGamesLbl);
+    clientGroupLayout->addWidget(multipleGamesWidget);
+    connect(multipleGamesCB, &QCheckBox::stateChanged, [=] (int state) { setMultipleExec(state == Qt::Checked); });
 
     /* STYLE SETTINGS GROUP */
     QGroupBox* styleGroup = new QGroupBox(tr("Style Settings"));
@@ -313,6 +329,17 @@ void Settings::resetColors()
     secondaryBase->setStyleSheet("background-color: " + palette.value("Primary/SecondaryBase").toString() + ";}");
     tertiaryBase->setStyleSheet("background-color: " + palette.value("Primary/TertiaryBase").toString() + ";}");
     darkestBase->setStyleSheet("background-color: " + palette.value("Primary/DarkestBase").toString() + ";}");
+}
+
+void Settings::setMultipleExec(bool multipleExec)
+{
+    QSettings config(QSettings::IniFormat, QSettings::UserScope, "HorizonLauncher", "config");
+
+    qDebug() << multipleExec;
+
+    config.beginGroup("GameLauncher");
+    config.setValue("MultipleExec", multipleExec);
+    config.endGroup();
 }
 
 void Settings::pickSetColor(int id)

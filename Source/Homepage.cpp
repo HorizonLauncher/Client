@@ -52,28 +52,19 @@ void Homepage::init()
 
 void Homepage::playRandomGame()
 {
-    if (!gl.isProcessRunning())
+    if(noGames)
     {
-        if(noGames)
-        {
-            return;
-        }
+        return;
+    }
 
-        Game game = Library::db.getGameByName(curRandom);
-        if (game.arguments.trimmed() == "")
-        {
-            gl.runProcess(game.executablePath, game.gameDirectory);
-        }
-        else
-        {
-            gl.runProcessWithArgs(game.executablePath, game.gameDirectory, game.arguments);
-        }
+    Game game = Library::db.getGameByName(curRandom);
+    if (game.arguments.trimmed() == "")
+    {
+        gl.runProcess(game.executablePath, game.gameDirectory);
     }
     else
     {
-        QMessageBox messageBox;
-        messageBox.setText(tr("Error: an application is already running."));
-        messageBox.exec();
+        gl.runProcessWithArgs(game.executablePath, game.gameDirectory, game.arguments);
     }
 }
 
