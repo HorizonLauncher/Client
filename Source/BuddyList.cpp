@@ -49,6 +49,19 @@ void BuddyList::init(QSettings* p)
     friendSearchBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     vLayout->addWidget(friendSearchBox, 0, Qt::AlignTop);
 
+    ingame = new BuddyListExpandable(tr("In-game"), false, p);
+    ingame->addWidget(new QLabel("topCyder"));
+    vLayout->addWidget(ingame);
+
+    online = new BuddyListExpandable(tr("Online"), true, p);
+    online->addWidget(new QLabel("thomasross"));
+    vLayout->addWidget(online);
+
+    offline = new BuddyListExpandable(tr("Offline"), false, p);
+    offline->addWidget(new QLabel("mySelfLuls"));
+    vLayout->addWidget(offline);
+
+
     vLayout->addStretch();
 
     QLabel* onlineFriends = new QLabel(QString(tr("%1 friends online.")).arg(0));

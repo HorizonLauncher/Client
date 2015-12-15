@@ -1,6 +1,8 @@
 #ifndef BUDDYLIST_H
 #define BUDDYLIST_H
 
+#include "BuddyListExpandable.h"
+
 #include <QWidget>
 #include <QSettings>
 
@@ -12,6 +14,9 @@ public:
     explicit BuddyList(QSettings* p, QWidget *parent = 0);
 private:
     void init(QSettings* p);
+    BuddyListExpandable* online;
+    BuddyListExpandable* ingame;
+    BuddyListExpandable* offline;
 };
 
 #endif // BUDDYLIST_H

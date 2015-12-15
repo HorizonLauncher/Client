@@ -13,6 +13,7 @@ SOURCES = Source/Main.cpp \
     Source/GameLauncher.cpp \
     Source/SetupWizard.cpp \
     Source/GridGameWidget.cpp \
+    Source/BuddyListExpandable.cpp
 
 HEADERS = Source/TabWidget.h \
     Source/Library.h \
@@ -31,6 +32,7 @@ HEADERS = Source/TabWidget.h \
     Source.SetupWizard.h \
     Source/Defines.h \
     Source/GridGameWidget.h \
+    Source/BuddyListExpandable.h
 
 TRANSLATIONS = Translations/horizon_en.ts \
     Translations/horizon_da.ts \

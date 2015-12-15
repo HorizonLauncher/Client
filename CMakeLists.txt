@@ -30,6 +30,7 @@ set(SOURCE
     Source/GameLauncher.cpp
     Source/SetupWizard.cpp
     Source/GridGameWidget.cpp
+    Source/BuddyListExpandable.cpp
 )
 
 set(HEADERS
@@ -50,6 +51,7 @@ set(HEADERS
     Source.SetupWizard.h
     Source/Defines.h
     Source/GridGameWidget.h
+    Source/BuddyListExpandable.h
 )
 
 set(RESOURCES

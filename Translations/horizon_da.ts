@@ -50,6 +50,7 @@ Understøttet: Steam, uPlay, Origin</translation>
     </message>
     <message>
         <location filename="../Source/BuddyList.cpp" line="42"/>
+        <location filename="../Source/BuddyList.cpp" line="56"/>
         <source>Online</source>
         <translation type="unfinished"></translation>
     </message>
@@ -59,7 +60,17 @@ Understøttet: Steam, uPlay, Origin</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/BuddyList.cpp" line="54"/>
+        <location filename="../Source/BuddyList.cpp" line="52"/>
+        <source>In-game</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/BuddyList.cpp" line="60"/>
+        <source>Offline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/BuddyList.cpp" line="67"/>
         <source>%1 friends online.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -162,32 +173,32 @@ Understøttet: Steam, uPlay, Origin</translation>
 <context>
     <name>GameLauncher</name>
     <message>
-        <location filename="../Source/GameLauncher.cpp" line="72"/>
+        <location filename="../Source/GameLauncher.cpp" line="51"/>
         <source>Warning</source>
         <translation>Advarsel</translation>
     </message>
     <message>
-        <location filename="../Source/GameLauncher.cpp" line="72"/>
+        <location filename="../Source/GameLauncher.cpp" line="51"/>
         <source>The game finished, but it claims to have encountered an error</source>
         <translation>Spillet lukkede med en fejl</translation>
     </message>
     <message>
-        <location filename="../Source/GameLauncher.cpp" line="84"/>
+        <location filename="../Source/GameLauncher.cpp" line="63"/>
         <source>Error</source>
         <translation>Fejl</translation>
     </message>
     <message>
-        <location filename="../Source/GameLauncher.cpp" line="84"/>
+        <location filename="../Source/GameLauncher.cpp" line="63"/>
         <source>Could not start the game. Please double check that you are using the correct file to launch it.</source>
         <translation>Spillet kunne ikke starte. Venligst dobbelttjek at du benytter den rigtige fil til at starte det.</translation>
     </message>
     <message>
-        <location filename="../Source/GameLauncher.cpp" line="87"/>
+        <location filename="../Source/GameLauncher.cpp" line="66"/>
         <source>Crash!</source>
         <translation>Fejl!</translation>
     </message>
     <message>
-        <location filename="../Source/GameLauncher.cpp" line="87"/>
+        <location filename="../Source/GameLauncher.cpp" line="66"/>
         <source>The launched game has crashed</source>
         <translation>Spillet lukkede</translation>
     </message>
@@ -195,7 +206,7 @@ Understøttet: Steam, uPlay, Origin</translation>
 <context>
     <name>Homepage</name>
     <message>
-        <location filename="../Source/Homepage.cpp" line="95"/>
+        <location filename="../Source/Homepage.cpp" line="86"/>
         <source>Random Game: </source>
         <translation>Tilfældig spil: </translation>
     </message>
@@ -218,12 +229,11 @@ Understøttet: Steam, uPlay, Origin</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Homepage.cpp" line="75"/>
         <source>Error: an application is already running.</source>
-        <translation>Fejl: En applikation kører allerede.</translation>
+        <translation type="vanished">Fejl: En applikation kører allerede.</translation>
     </message>
     <message>
-        <location filename="../Source/Homepage.cpp" line="92"/>
+        <location filename="../Source/Homepage.cpp" line="83"/>
         <source>No games!</source>
         <translation>Ingen spil!</translation>
     </message>
@@ -345,17 +355,16 @@ Understøttet: Steam, uPlay, Origin</translation>
         <translation type="unfinished">Tilføj spil</translation>
     </message>
     <message>
-        <location filename="../Source/Library.cpp" line="175"/>
         <source>Error: an application is already running.</source>
-        <translation>Fejl: En applikation kører allerede.</translation>
+        <translation type="vanished">Fejl: En applikation kører allerede.</translation>
     </message>
     <message>
-        <location filename="../Source/Library.cpp" line="186"/>
+        <location filename="../Source/Library.cpp" line="177"/>
         <source>Change Launch Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Library.cpp" line="187"/>
+        <location filename="../Source/Library.cpp" line="178"/>
         <source>Launch Options: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -490,118 +499,124 @@ Understøttet: Steam, uPlay, Origin</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../Source/Settings.cpp" line="51"/>
+        <location filename="../Source/Settings.cpp" line="56"/>
         <source>Client Settings</source>
         <translation>Klient indstillinger</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="75"/>
+        <location filename="../Source/Settings.cpp" line="91"/>
         <source>Style Settings</source>
         <translation>Visuelle indstillinger</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="57"/>
+        <location filename="../Source/Settings.cpp" line="62"/>
         <source>Add games to Horizon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="63"/>
+        <location filename="../Source/Settings.cpp" line="68"/>
         <source>Clear database</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="69"/>
+        <location filename="../Source/Settings.cpp" line="74"/>
         <source>Clear launch options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="88"/>
+        <location filename="../Source/Settings.cpp" line="84"/>
+        <source>Allow launching
+of multiple games</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/Settings.cpp" line="104"/>
         <source>Body Background</source>
         <translation>Hovedbaggrund</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="98"/>
+        <location filename="../Source/Settings.cpp" line="114"/>
         <source>Navbar Background</source>
         <translation>Navigationsbaggrund</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="108"/>
+        <location filename="../Source/Settings.cpp" line="124"/>
         <source>Navbar Hover</source>
         <translation>Navigationsbar markørfarve</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="118"/>
+        <location filename="../Source/Settings.cpp" line="134"/>
         <source>Navbar Selected</source>
         <translation>Navigationsbar valgt farve</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="128"/>
+        <location filename="../Source/Settings.cpp" line="144"/>
         <source>Titlebar Color</source>
         <translation>Titelbar Farve</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="138"/>
+        <location filename="../Source/Settings.cpp" line="154"/>
         <source>Active Element</source>
         <translation>Aktivt objekt</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="148"/>
+        <location filename="../Source/Settings.cpp" line="164"/>
         <source>Inactive Selection</source>
         <translation>Inaktivt selektion</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="158"/>
+        <location filename="../Source/Settings.cpp" line="174"/>
         <source>Hover Selection</source>
         <translation>Markørfarve selektion</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="168"/>
+        <location filename="../Source/Settings.cpp" line="184"/>
         <source>Dark Element</source>
         <translation>Mørkt element</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="178"/>
+        <location filename="../Source/Settings.cpp" line="194"/>
         <source>Light Text</source>
         <translation>Lys tekst</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="188"/>
+        <location filename="../Source/Settings.cpp" line="204"/>
         <source>Dark Text</source>
         <translation>Mørk Tekst</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="198"/>
+        <location filename="../Source/Settings.cpp" line="214"/>
         <source>Sub Text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="208"/>
+        <location filename="../Source/Settings.cpp" line="224"/>
         <source>Primary Base</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="218"/>
+        <location filename="../Source/Settings.cpp" line="234"/>
         <source>Secondary Base</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="228"/>
+        <location filename="../Source/Settings.cpp" line="244"/>
         <source>Tertiary Base</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="238"/>
+        <location filename="../Source/Settings.cpp" line="254"/>
         <source>Darkest Base</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="34"/>
+        <location filename="../Source/Settings.cpp" line="39"/>
         <source>User Settings</source>
         <translation>Brugerindstillinger</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="40"/>
         <location filename="../Source/Settings.cpp" line="45"/>
+        <location filename="../Source/Settings.cpp" line="50"/>
         <source>Change Username</source>
         <translation>Skift brugernavn</translation>
     </message>
