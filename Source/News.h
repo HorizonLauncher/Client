@@ -39,7 +39,6 @@ public:
 
 public slots:
     void onFetchComplete();
-    void refreshRequested();
 
 private:
     void loadXMLfromUrls();

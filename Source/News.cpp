@@ -5,6 +5,12 @@
 #include <QListWidgetItem>
 #include <QtNetwork>
 #include <QShortcut>
+
+/**
+ * News constructor
+ * @param p The color palette for the UI
+ * @param parent The parent widget
+ */
 News::News(QSettings* p, QWidget* parent) :
     QWidget(parent)
 {
@@ -25,18 +31,20 @@ News::News(QSettings* p, QWidget* parent) :
                            );
 
     this->settings = p;
+
     QShortcut* shortcut = new QShortcut(QKeySequence("R"), parent);
-    connect(shortcut, SIGNAL(activated()), this, SLOT(refreshRequested()));
+    connect(shortcut, &QShortcut::activated, [this] {
+        loadFeeds();
+    });
 
     setupUI();
     loadFeeds();
 }
 
-void News::refreshRequested() {
-    qDebug() << "Refresh" << endl;
-    loadFeeds();
-}
-
+/**
+ *  Clears the columns and calls functions to fill them with new headlines
+ *
+ */
 void News::loadFeeds() {
     headlines.clear();
     clearLayout(firstColumn);
@@ -45,6 +53,11 @@ void News::loadFeeds() {
     loadFeedUrlsFromSettings();
     loadXMLfromUrls();
 }
+
+/**
+ * Sends fetch requests to the urls defined by the user
+ *
+ */
 void News::loadXMLfromUrls()
 {
     for (auto urlString : feedUrls)
@@ -54,10 +67,13 @@ void News::loadXMLfromUrls()
         QNetworkRequest* req = new QNetworkRequest(url);
         req->setRawHeader("User-Agent", "Horizon Launcher");
         QNetworkReply* reply = manager->get(*req);
-        QObject::connect(reply, SIGNAL(finished()), this, SLOT(onFetchComplete()));
+        QObject::connect(reply, &QNetworkReply::finished, this, &News::onFetchComplete);
     }
 }
 
+/**
+ * Loads the user-defined XML urls from the settings file
+ */
 void News::loadFeedUrlsFromSettings()
 {
     feedUrls.clear();
@@ -71,6 +87,10 @@ void News::loadFeedUrlsFromSettings()
         feedUrls.append(current);
     }
 }
+
+/**
+ * Destructor
+ */
 News::~News()
 {
     for (int i = 0; i < headlines.size(); ++i)
@@ -83,6 +103,10 @@ News::~News()
     delete thirdColumn;
     delete mainLayout;
 }
+
+/**
+ * Creates the main layout and the columns
+ */
 
 void News::setupUI() {
 
@@ -97,6 +121,10 @@ void News::setupUI() {
 
 }
 
+/**
+ * Called when the the fetches from the XML urls are finished.
+ * Parses the XML and stores the headlines.
+ */
 void News::onFetchComplete()
 {
     QNetworkReply *reply = (QNetworkReply*)sender();
@@ -151,6 +179,9 @@ void News::onFetchComplete()
     reloadHeadlines();
 }
 
+/**
+ * Displays the headlines onto the columns
+ */
 void News::reloadHeadlines()
 {
     int size = headlines.size();

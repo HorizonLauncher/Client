@@ -76,7 +76,10 @@ void Settings::init(QSettings* p)
     manageNewsFeedButton->setStyleSheet("padding: 5px;");
     manageNewsFeedButton->setFont(buttonFont);
     clientGroupLayout->addWidget(manageNewsFeedButton);
-    connect (manageNewsFeedButton, &QPushButton::clicked, this, &Settings::manageNewsFeed);
+    connect (manageNewsFeedButton, &QPushButton::clicked, [] {
+        NewsFeedChooserWindow* window = new NewsFeedChooserWindow();
+        window->show();
+    });
     /* STYLE SETTINGS GROUP */
     QGroupBox* styleGroup = new QGroupBox(tr("Style Settings"));
     styleGroup->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
@@ -451,9 +454,4 @@ void Settings::confirmClearDb()
         default:
             break;
     }
-}
-
-void Settings::manageNewsFeed() {
-    NewsFeedChooserWindow* window = new NewsFeedChooserWindow();
-    window->show();
 }
