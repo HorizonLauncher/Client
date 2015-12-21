@@ -128,9 +128,12 @@ void MainPanel::init()
     community->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     settings = new Settings(p, stack);
     settings->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+    news = new News(p, stack);
+    news->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     stack->addWidget(home);
     stack->addWidget(library);
     stack->addWidget(community);
+    stack->addWidget(news);
     stack->addWidget(settings);
     stack->setCurrentWidget(library);
 
@@ -145,7 +148,7 @@ void MainPanel::init()
     // connect(navbar->storeTab, &TabWidget::clicked, this, &MainPanel::setStore);
     connect(navbar->gamesTab, &TabWidget::clicked, this, &MainPanel::setGames);
     connect(navbar->communityTab, &TabWidget::clicked, this, &MainPanel::setCommunity);
-    // connect(navbar->newsTab, &TabWidget::clicked, this, &MainPanel::setNews);
+    connect(navbar->newsTab, &TabWidget::clicked, this, &MainPanel::setNews);
     // connect(navbar->modsTab, &TabWidget::clicked, this, &MainPanel::setMods);
     connect(navbar->settingsTab, &TabWidget::clicked, this, &MainPanel::setSettings);
 

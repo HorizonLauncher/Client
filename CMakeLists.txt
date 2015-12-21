@@ -13,7 +13,6 @@ project(HorizonLauncher C CXX)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-
 set(SOURCE
     Source/Main.cpp
     Source/TabWidget.cpp
@@ -28,9 +27,12 @@ set(SOURCE
     Source/AddGameWizard.cpp
     Source/Settings.cpp
     Source/GameLauncher.cpp
+    Source/News.cpp
+    Source/NewsItemWidget.cpp
     Source/SetupWizard.cpp
     Source/GridGameWidget.cpp
     Source/BuddyListExpandable.cpp
+    Source/NewsFeedChooserWindow.cpp
 )
 
 set(HEADERS
@@ -48,10 +50,13 @@ set(HEADERS
     Source/AddGameWizard.h
     Source/Settings.h
     Source/GameLauncher.h
+    Source/News.h
+    Source/NewsItemWidget.h
     Source.SetupWizard.h
     Source/Defines.h
     Source/GridGameWidget.h
     Source/BuddyListExpandable.h
+    Source/NewsFeedChooserWindow.h
 )
 
 set(RESOURCES
@@ -118,7 +123,7 @@ endif()
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Gui REQUIRED)
-# find_package(Qt5Network REQUIRED)
+find_package(Qt5Network REQUIRED)
 # find_package(Qt5WebKit REQUIRED)
 # find_package(Qt5WebKitWidgets REQUIRED)
 find_package(Qt5Sql REQUIRED)
@@ -134,7 +139,7 @@ include_directories(
     ${Qt5Gui_PRIVATE_INCLUDE_DIRS}
     ${Qt5Widgets_INCLUDE_DIRS}
     ${Qt5Core_INCLUDE_DIRS}
-#   ${Qt5Network_INCLUDE_DIRS}
+    ${Qt5Network_INCLUDE_DIRS}
 #   ${Qt5WebKit_INCLUDE_DIRS}
 #   ${Qt5WebKitWidgets_INCLUDE_DIRS}
     ${Qt5Sql_INCLUDE_DIRS}
@@ -153,7 +158,7 @@ target_link_libraries(HorizonLauncher
     Qt5::Widgets
     Qt5::Core
     Qt5::Gui
-#	Qt5::Network
+  	Qt5::Network
 #	Qt5::WebKit
 #	Qt5::WebkitWidgets
     Qt5::Sql
@@ -210,7 +215,7 @@ if(WIN32)
         Qt5Widgetsd.dll
         Qt5Guid.dll
         Qt5Cored.dll
-#       Qt5Networkd.dll
+        Qt5Networkd.dll
 #       Qt5WebKitd.dll
 #       Qt5WebKitWidgetsd.dll
         Qt5Sqld.dll

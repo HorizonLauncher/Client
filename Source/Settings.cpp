@@ -1,5 +1,6 @@
 #include "Settings.h"
 #include "DRMSetupWizard.h"
+#include "NewsFeedChooserWindow.h"
 
 /** Settings constructor
 * Initialize the settings UI
@@ -75,6 +76,16 @@ void Settings::init(QSettings* p)
     clearLaunchBtn->setStyleSheet("padding: 5px;");
     clearLaunchBtn->setFont(buttonFont);
     clientGroupLayout->addWidget(clearLaunchBtn);
+
+    QPushButton* manageNewsFeedButton = new QPushButton(tr("Manage News Feeds"));
+    manageNewsFeedButton->setStyleSheet("padding: 5px;");
+    manageNewsFeedButton->setFont(buttonFont);
+    clientGroupLayout->addWidget(manageNewsFeedButton);
+    connect (manageNewsFeedButton, &QPushButton::clicked, []
+    {
+        NewsFeedChooserWindow* window = new NewsFeedChooserWindow();
+        window->show();
+    });
 
     qDebug() << config.value("GameLauncher/MultipleExec").toBool();
     QWidget* multipleGamesWidget = new QWidget();

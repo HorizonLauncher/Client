@@ -6,6 +6,7 @@
 #include "Homepage.h"
 #include "BuddyList.h"
 #include "Community.h"
+#include "News.h"
 
 #include <QStackedWidget>
 #include <QApplication>
@@ -47,6 +48,7 @@ private:
     QWidget* community;
     Library* library;
 	QWidget* settings;
+    QWidget* news;
 
 private slots:
     void setHome()
@@ -93,6 +95,7 @@ private slots:
         if (!(activeTab == navbar->newsTab))
         {
             activeTab->toggleInactive();
+            stack->setCurrentWidget(news);
             activeTab = navbar->newsTab;
             activeTab->toggleActive();
         }
