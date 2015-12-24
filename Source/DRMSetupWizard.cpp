@@ -126,7 +126,7 @@ void DRMPage::checkOriginExists()
     originRoot = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation).append("/Origin/");
 #endif
 
-    if (originFolder.filePath("").trimmed() != "" && originFolder.exists())
+    if (originFolder.cleanPath("").trimmed() != "" && originFolder.exists())
     {
         statusLabel->setPixmap(QPixmap(":/SystemMenu/Icons/Tick.svg"));
         //: %1 will be replaced with the path to Origin.
