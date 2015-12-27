@@ -23,7 +23,7 @@ NewsFeedChooserWindow::NewsFeedChooserWindow(QWidget *parent) : QDialog(parent)
 
 void NewsFeedChooserWindow::loadURLsFromSettings()
 {
-    QSettings settings ("Horizon Launcher", "Launcher");
+    QSettings settings ("HorizonLauncher", "news");
     int size = settings.beginReadArray ("URLs");
     for (int i = 0; i < size; ++i)
     {
@@ -35,7 +35,7 @@ void NewsFeedChooserWindow::loadURLsFromSettings()
 
 void NewsFeedChooserWindow::saveURLs()
 {
-    QSettings settings ("Horizon Launcher", "Launcher");
+    QSettings settings ("HorizonLauncher", "news");
     settings.beginWriteArray("URLs");
 
     for (int i = 0; i < urls.size(); ++i)

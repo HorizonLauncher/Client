@@ -82,7 +82,7 @@ void News::loadXMLfromUrls()
 void News::loadFeedUrlsFromSettings()
 {
     feedUrls.clear();
-    QSettings settings ("Horizon Launcher", "Launcher");
+    QSettings settings ("HorizonLauncher", "news");
     int size = settings.beginReadArray ("URLs");
     for (int i = 0; i < size; ++i)
     {
