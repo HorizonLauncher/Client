@@ -14,22 +14,21 @@ class NewsFeedChooserWindow : public QDialog
 public:
     explicit NewsFeedChooserWindow(QWidget *parent = 0);
 
-signals:
-
 public slots:
     void onAddURLButtonClicked();
 
 private:
-  QString newsSettingsFilePath;
-  void loadURLsFromSettings();
-  void saveURLs();
-  void createURLLabels();
-  QList<QString> urls;
-  QList<QString> newUrls;
-  QWidget* labels;
-  QVBoxLayout* labelLayout;
-  QVBoxLayout* layout;
-  void closeEvent(QCloseEvent* event) override;
+    QString newsSettingsFilePath;
+    void loadURLsFromSettings();
+    void saveURLs();
+    void createURLLabels();
+    QList<QString> urls;
+    QList<QString> newUrls;
+    QWidget* labels;
+    QVBoxLayout* labelLayout;
+    QVBoxLayout* layout;
+    QList<QWidget*> labelWidgets;
+    void closeEvent(QCloseEvent* event) override;
 
 };
 

@@ -1,7 +1,5 @@
 #include "NewsFeedChooserWindow.h"
-#include <QVBoxLayout>
 #include <QPushButton>
-#include <QApplication>
 #include <QLabel>
 #include <QCloseEvent>
 #include <QtWidgets>
@@ -64,9 +62,36 @@ void NewsFeedChooserWindow::onAddURLButtonClicked()
 
 void NewsFeedChooserWindow::createURLLabels()
 {
+    for (int i = 0; i < this->labelWidgets.size(); i++)
+    {
+        QWidget* widget = this->labelWidgets[i];
+        this->labelLayout->removeWidget(widget);
+        widget->deleteLater();
+    }
+    this->labelWidgets.clear();
+
     for (int i = 0; i < this->urls.size(); ++i)
     {
-        this->labelLayout->addWidget(new QLabel(this->urls[i]));
+        QPixmap cross(":/SystemMenu/Icons/cross.png");
+        QIcon crossIcon(cross);
+
+        QWidget* labelWidget = new QWidget();
+        QHBoxLayout* hLabelLayout = new QHBoxLayout(labelWidget);
+        hLabelLayout->addWidget(new QLabel(this->urls[i]));
+
+        QPushButton* deleteBtn = new QPushButton();
+        deleteBtn->setIcon(crossIcon);
+        deleteBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        hLabelLayout->addWidget(deleteBtn);
+        connect(deleteBtn, &QPushButton::clicked, [=]
+        {
+            this->urls.removeAll(this->urls[i]);
+            this->saveURLs();
+            this->createURLLabels();
+        });
+
+        this->labelLayout->addWidget(labelWidget);
+        this->labelWidgets.append(labelWidget);
     }
 }
 
