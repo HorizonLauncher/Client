@@ -109,14 +109,8 @@ private slots:
             activeTab->toggleActive();
         }
     }
-    void setSettings()
+    void openSettings()
     {
-        if (!(activeTab == navbar->settingsTab))
-        {
-            activeTab->toggleInactive();
-			stack->setCurrentWidget(settings);
-            activeTab = navbar->settingsTab;
-            activeTab->toggleActive();
-        }
+        settings->show();
     }
 };

@@ -126,15 +126,12 @@ void MainPanel::init()
     library->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     community = new Community(p, stack);
     community->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
-    settings = new Settings(p, stack);
-    settings->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     news = new News(p, stack);
     news->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     stack->addWidget(home);
     stack->addWidget(library);
     stack->addWidget(community);
     stack->addWidget(news);
-    stack->addWidget(settings);
     stack->setCurrentWidget(library);
 
     connect(stack, &QStackedWidget::currentChanged, this, &MainPanel::onStackedChanged);
@@ -150,7 +147,9 @@ void MainPanel::init()
     connect(navbar->communityTab, &TabWidget::clicked, this, &MainPanel::setCommunity);
     connect(navbar->newsTab, &TabWidget::clicked, this, &MainPanel::setNews);
     // connect(navbar->modsTab, &TabWidget::clicked, this, &MainPanel::setMods);
-    connect(navbar->settingsTab, &TabWidget::clicked, this, &MainPanel::setSettings);
+
+    settings = new Settings(p);
+    connect(navbar->settingsTab, &TabWidget::clicked, this, &MainPanel::openSettings);
 
     // Show
     show();
