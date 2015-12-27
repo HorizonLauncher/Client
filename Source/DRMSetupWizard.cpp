@@ -176,7 +176,7 @@ void DRMPage::checkSteamExists()
     }
 #elif defined(__APPLE__)
     steamFolder = QDir(QDir::home().filePath("Library/Application Support/Steam"));
-    steamExists = steamFolder.exits()
+    steamExists = steamFolder.exists();
 #endif
 
     if (steamFolder.filePath("").trimmed() != "" && steamFolder.exists() && steamExists)

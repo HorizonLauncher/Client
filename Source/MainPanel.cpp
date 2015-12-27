@@ -150,7 +150,7 @@ void MainPanel::init()
 
     settings = new Settings(p);
     connect(navbar->settingsTab, &TabWidget::clicked, this, &MainPanel::openSettings);
-
+    connect(settings, &Settings::didUpdateFeedURLs, news, &News::loadFeeds);
     // Show
     show();
 }

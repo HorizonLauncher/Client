@@ -38,4 +38,7 @@ public slots:
     void updateColor(int id, QColor color);
 public:
     explicit Settings(QSettings* p, QWidget* parent = 0);
+
+signals:
+    void didUpdateFeedURLs();
 };

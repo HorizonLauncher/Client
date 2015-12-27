@@ -7,6 +7,7 @@
 #include "BuddyList.h"
 #include "Community.h"
 #include "News.h"
+#include "Settings.h"
 
 #include <QStackedWidget>
 #include <QApplication>
@@ -44,11 +45,11 @@ private:
     Navbar* navbar;
     TabWidget* activeTab;
 
-    QWidget* home;
-    QWidget* community;
+    Homepage* home;
+    Community* community;
     Library* library;
-	QWidget* settings;
-    QWidget* news;
+    Settings* settings;
+    News* news;
 
 private slots:
     void setHome()

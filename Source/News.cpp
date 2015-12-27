@@ -43,11 +43,14 @@ News::News(QSettings* p, QWidget* parent) :
 }
 
 /**
- *  Clears the columns and calls functions to fill them with new headlines
+ *  Clears the columns and calls functions to fill them with new headlines.
+ *  Can also be called to
  *
  */
 void News::loadFeeds()
 {
+    
+    qDebug() << "load called" << endl; 
     headlines.clear();
     clearLayout(firstColumn);
     clearLayout(secondColumn);
@@ -81,7 +84,6 @@ void News::loadFeedUrlsFromSettings()
     feedUrls.clear();
     QSettings settings ("Horizon Launcher", "Launcher");
     int size = settings.beginReadArray ("URLs");
-
     for (int i = 0; i < size; ++i)
     {
         settings.setArrayIndex(i);

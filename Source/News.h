@@ -39,13 +39,13 @@ public:
 
 public slots:
     void onFetchComplete();
+    void loadFeeds();
 
 private:
     void loadXMLfromUrls();
     void setupUI();
     void reloadHeadlines();
     void loadFeedUrlsFromSettings();
-    void loadFeeds();
     void clearLayout(QLayout* layout);
     QSettings* settings;
     QVector<NewsItemWidget*> headlines;

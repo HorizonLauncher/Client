@@ -17,6 +17,9 @@ public:
 public slots:
     void onAddURLButtonClicked();
 
+signals:
+    void shouldRefreshRSSFeeds();
+
 private:
     QString newsSettingsFilePath;
     void loadURLsFromSettings();
@@ -29,6 +32,8 @@ private:
     QVBoxLayout* layout;
     QList<QWidget*> labelWidgets;
     void closeEvent(QCloseEvent* event) override;
+
+
 
 };
 

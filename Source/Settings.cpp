@@ -81,9 +81,11 @@ void Settings::init(QSettings* p)
     manageNewsFeedButton->setStyleSheet("padding: 5px;");
     manageNewsFeedButton->setFont(buttonFont);
     clientGroupLayout->addWidget(manageNewsFeedButton);
-    connect (manageNewsFeedButton, &QPushButton::clicked, []
+    
+    connect (manageNewsFeedButton, &QPushButton::clicked, [&]
     {
         NewsFeedChooserWindow* window = new NewsFeedChooserWindow();
+        connect(window, &NewsFeedChooserWindow::shouldRefreshRSSFeeds, this, &Settings::didUpdateFeedURLs);
         window->show();
     });
 
