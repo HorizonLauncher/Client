@@ -22,5 +22,6 @@
         <file>Icons/DetailedListViewInverted.png</file>
         <file>Icons/CarouselViewInverted.png</file>
         <file>Icons/FileSearch.png</file>
+        <file>Icons/cross.png</file>
     </qresource>
 </RCC>
