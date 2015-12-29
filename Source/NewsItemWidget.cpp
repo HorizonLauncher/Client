@@ -14,8 +14,9 @@ NewsItemWidget::NewsItemWidget(QSettings* p, QWidget* parent = 0) : QWidget(pare
     this->setStyleSheet(
                 "QLabel {"
                 "color: " + p->value("Primary/LightText").toString() + ";"
-                "font-family: SourceSansPro;" +
-                "}" +
+                "font-family: SourceSansPro;"
+                "font-size: 16px;"
+                "}"
                 "*:hover { background: "  + p->value("Primary/HoverSelection").toString() + "}"
                 );
     titleLabel = new QLabel ("1 ");
