@@ -4,28 +4,34 @@
 #include <QUrl>
 
 /**
-* NewsItemWidget constructor
-* \param p The color palette for the UI
-* \param parent The parent QWidget
-*/
-NewsItemWidget::NewsItemWidget(QSettings* p, QWidget* parent = 0) : QWidget(parent)
+ * NewsItemWidget constructor
+ * \param p The color palette for the UI
+ * \param URL The URL to the RSS article
+ * \param source The RSS feed the headline came from (unused)
+ * \param title The headline to be displayed
+ * \param parent The parent QWidget
+ */
+NewsItemWidget::NewsItemWidget(QSettings* p, QString URL, QString source, QString title, QWidget* parent) : QWidget(parent)
 {
-    QVBoxLayout* layout = new QVBoxLayout(this);
     this->setStyleSheet(
                 "QLabel {"
                 "color: " + p->value("Primary/LightText").toString() + ";"
                 "font-family: SourceSansPro;"
                 "font-size: 16px;"
                 "}"
-                "*:hover { background: "  + p->value("Primary/HoverSelection").toString() + "}"
-                );
-    titleLabel = new QLabel ("1 ");
+                "*:hover { background: "  + p->value("Primary/HoverSelection").toString() + "}");
+
+    QVBoxLayout* layout = new QVBoxLayout(this);
+
+    titleLabel = new QLabel (title);
     titleLabel->setWordWrap(true);
-    contentLabel = new QLabel ("1 ");
-    contentLabel->setWordWrap(true);
     layout->addWidget(titleLabel);
-    this->setLayout(layout);
-    source = "";
+
+    sourceLabel = new QLabel (source);
+    sourceLabel->setWordWrap(true);
+    //layout->addWidget(titleLabel); TODO: Add a source to the widget
+
+    this->urlString = URL;
 }
 
 

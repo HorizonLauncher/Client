@@ -160,18 +160,14 @@ void News::onFetchComplete()
                     reader.readNext();
                }
 
-               NewsItemWidget* currentItemWidget = new NewsItemWidget(settings, nullptr);
                QString title = reader.readElementText();
-               QListWidgetItem* item = new QListWidgetItem(" ");
-               currentItemWidget->titleLabel->setText(title);
-               QString text = "";
-
                while (reader.name() != "link")
                {
                    reader.readNext();
                }
+               QString urlString = reader.readElementText();
 
-               currentItemWidget->urlString = reader.readElementText();
+               NewsItemWidget* currentItemWidget = new NewsItemWidget(settings, urlString, "", title);
                headlines.append(currentItemWidget);
             }
 
