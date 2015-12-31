@@ -7,7 +7,7 @@
  * NewsItemWidget constructor
  * \param p The color palette for the UI
  * \param URL The URL to the RSS article
- * \param source The RSS feed the headline came from (unused)
+ * \param source The RSS feed the headline came from
  * \param title The headline to be displayed
  * \param parent The parent QWidget
  */
@@ -29,7 +29,8 @@ NewsItemWidget::NewsItemWidget(QSettings* p, QString URL, QString source, QStrin
 
     sourceLabel = new QLabel (source);
     sourceLabel->setWordWrap(true);
-    //layout->addWidget(titleLabel); TODO: Add a source to the widget
+    sourceLabel->setStyleSheet("font-size: 10px;");
+    layout->addWidget(sourceLabel);
 
     this->urlString = URL;
 }

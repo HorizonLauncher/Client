@@ -72,7 +72,33 @@ void News::loadXMLfromUrls()
         QNetworkRequest* req = new QNetworkRequest(url);
         req->setRawHeader("User-Agent", "Horizon Launcher");
         QNetworkReply* reply = manager->get(*req);
-        QObject::connect(reply, &QNetworkReply::finished, this, &News::onFetchComplete);
+        QObject::connect(reply, &QNetworkReply::finished, this, [=]
+        {
+            QString feedLabel;
+
+            QRegExp getSubreddit("^[\\w\\d]+:\\/\\/[\\w\\d]+\\.reddit\\.com\\/r\\/(.+)\\/.rss$");
+            QRegExp getDomain("^[\\w\\d]+:\\/\\/([\\w\\d]+\\.)+([\\w\\d]+\\.)[\\w\\d]+");
+            if (urlString.contains(getSubreddit))
+            {
+                getSubreddit.indexIn(urlString);
+                feedLabel = "/r/" + getSubreddit.cap(1);
+            }
+            else if (urlString.contains(getDomain))
+            {
+                getDomain.indexIn(urlString);
+                QString sortaDomain = getDomain.cap(2);
+                feedLabel = sortaDomain.left(sortaDomain.length() - 1);
+            }
+
+            QNetworkReply *reply = (QNetworkReply*)sender();
+            qDebug() << "Fetch compete";
+            if (reply->error())
+            {
+                qDebug("Error with network request");
+            }
+
+            onFetchComplete(reply, feedLabel);
+        });
     }
 }
 
@@ -130,15 +156,8 @@ void News::setupUI()
  * Called when the the fetches from the XML urls are finished.
  * Parses the XML and stores the headlines.
  */
-void News::onFetchComplete()
+void News::onFetchComplete(QNetworkReply *reply, QString sourceLabel)
 {
-    QNetworkReply *reply = (QNetworkReply*)sender();
-    qDebug() << "Fetch compete" << endl;
-    if (reply->error())
-    {
-        qDebug("Error with network request");
-    }
-
     QByteArray array = reply->readAll();
     QXmlStreamReader reader(array);
 
@@ -167,7 +186,7 @@ void News::onFetchComplete()
                }
                QString urlString = reader.readElementText();
 
-               NewsItemWidget* currentItemWidget = new NewsItemWidget(settings, urlString, "", title);
+               NewsItemWidget* currentItemWidget = new NewsItemWidget(settings, urlString, sourceLabel, title);
                headlines.append(currentItemWidget);
             }
 

@@ -38,7 +38,6 @@ public:
     ~News();
 
 public slots:
-    void onFetchComplete();
     void loadFeeds();
 
 private:
@@ -47,6 +46,7 @@ private:
     void reloadHeadlines();
     void loadFeedUrlsFromSettings();
     void clearLayout(QLayout* layout);
+    void onFetchComplete(QNetworkReply *reply, QString sourceLabel);
     QSettings* settings;
     QVector<NewsItemWidget*> headlines;
     QVector<QString> feedUrls;
