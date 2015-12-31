@@ -72,7 +72,8 @@ void News::loadXMLfromUrls()
         QNetworkRequest* req = new QNetworkRequest(url);
         req->setRawHeader("User-Agent", "Horizon Launcher");
         QNetworkReply* reply = manager->get(*req);
-        QObject::connect(reply, &QNetworkReply::finished, this, [=]
+
+        QObject::connect(reply, &QNetworkReply::finished, [=]
         {
             QString feedLabel;
 
@@ -90,7 +91,6 @@ void News::loadXMLfromUrls()
                 feedLabel = sortaDomain.left(sortaDomain.length() - 1);
             }
 
-            QNetworkReply *reply = (QNetworkReply*)sender();
             qDebug() << "Fetch compete";
             if (reply->error())
             {
