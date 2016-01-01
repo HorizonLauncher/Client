@@ -6,27 +6,12 @@
 #include <QVector>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
-
-/*
- * Networking headers for consuming RSS
- */
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkRequest>
 #include <QtNetwork/QNetworkReply>
 #include <QByteArray>
 #include <QUrl>
-
-/*
- * XML Headers
- *
- */
-
 #include <qxmlstream.h>
-
-/*
- * Custom Widget Headers
- */
-
 #include "NewsItemWidget.h"
 
 class News : public QWidget
