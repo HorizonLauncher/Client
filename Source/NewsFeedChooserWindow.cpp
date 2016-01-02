@@ -98,6 +98,6 @@ void NewsFeedChooserWindow::createURLLabels()
 void NewsFeedChooserWindow::closeEvent(QCloseEvent* event)
 {
     this->saveURLs();
-    emit shouldRefreshRSSFeeds(); 
+    emit shouldRefreshRSSFeeds();
     event->accept();
 }

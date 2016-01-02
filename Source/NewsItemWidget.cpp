@@ -41,7 +41,6 @@ NewsItemWidget::NewsItemWidget(QSettings* p, QString URL, QString source, QStrin
     this->descriptionString = descriptionString;
 }
 
-
 void NewsItemWidget::mousePressEvent(QMouseEvent *)
 {
     QDesktopServices::openUrl(QUrl(this->urlString));

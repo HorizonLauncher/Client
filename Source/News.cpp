@@ -27,8 +27,7 @@ News::News(QSettings* p, QWidget* parent) :
                         "background-color: " + p->value("Primary/InactiveSelection").toString() + ";} "
                         "QVBoxLayout {"
                         "background-color: " + p->value("Primary/TertiaryBase").toString() + "; "
-                        "color: " + p->value("Primary/LightText").toString() + ";}"
-                           );
+                        "color: " + p->value("Primary/LightText").toString() + "; }");
 
     this->settings = p;
 
@@ -49,8 +48,8 @@ News::News(QSettings* p, QWidget* parent) :
  */
 void News::loadFeeds()
 {
-    
-    qDebug() << "load called" << endl; 
+
+    qDebug() << "load called" << endl;
     headlines.clear();
     clearLayout(firstColumn);
     clearLayout(secondColumn);
@@ -140,7 +139,6 @@ News::~News()
  */
 void News::setupUI()
 {
-
     mainLayout = new QHBoxLayout();
     firstColumn = new QVBoxLayout();
     secondColumn = new QVBoxLayout();
@@ -149,7 +147,6 @@ void News::setupUI()
     mainLayout->addLayout(secondColumn);
     mainLayout->addLayout(thirdColumn);
     this->setLayout(mainLayout);
-
 }
 
 /**
