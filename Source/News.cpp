@@ -178,15 +178,22 @@ void News::onFetchComplete(QNetworkReply *reply, QString sourceLabel)
                {
                     reader.readNext();
                }
-
                QString title = reader.readElementText();
+
                while (reader.name() != "link")
                {
                    reader.readNext();
                }
                QString urlString = reader.readElementText();
 
-               NewsItemWidget* currentItemWidget = new NewsItemWidget(settings, urlString, sourceLabel, title);
+               while (reader.name() != "description")
+               {
+                reader.readNext();
+               }
+               QString descriptionRawString = reader.readElementText(QXmlStreamReader::SkipChildElements);
+               QString descriptionString = cleanDescriptionString(descriptionRawString);
+
+                              NewsItemWidget* currentItemWidget = new NewsItemWidget(settings, urlString, sourceLabel, title, descriptionString);
                headlines.append(currentItemWidget);
             }
 
@@ -198,6 +205,18 @@ void News::onFetchComplete(QNetworkReply *reply, QString sourceLabel)
     reply->deleteLater();
     reloadHeadlines();
 }
+
+/**
+  * Removes garbage characters and html tags from the description string for each headline
+  * @param descriptionRawString The string to clean up
+  * @retval The raw string cleaned up for display
+  */
+
+QString News::cleanDescriptionString(QString rawString) {
+    if (rawString.contains("<")) return rawString.left(rawString.indexOf("<"));
+    return rawString;
+}
+
 
 /**
  * Displays the headlines onto the columns

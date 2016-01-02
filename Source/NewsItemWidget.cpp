@@ -11,7 +11,7 @@
  * \param title The headline to be displayed
  * \param parent The parent QWidget
  */
-NewsItemWidget::NewsItemWidget(QSettings* p, QString URL, QString source, QString title, QWidget* parent) : QWidget(parent)
+NewsItemWidget::NewsItemWidget(QSettings* p, QString URL, QString source, QString title, QString descriptionString, QWidget* parent) : QWidget(parent)
 {
     this->setStyleSheet(
                 "QLabel {"
@@ -27,12 +27,18 @@ NewsItemWidget::NewsItemWidget(QSettings* p, QString URL, QString source, QStrin
     titleLabel->setWordWrap(true);
     layout->addWidget(titleLabel);
 
+    descriptionLabel = new QLabel(descriptionString);
+    descriptionLabel->setWordWrap(true);
+    descriptionLabel->setStyleSheet("font-size: 12px");
+    layout->addWidget(descriptionLabel);
+
     sourceLabel = new QLabel (source);
     sourceLabel->setWordWrap(true);
     sourceLabel->setStyleSheet("font-size: 10px;");
     layout->addWidget(sourceLabel);
 
     this->urlString = URL;
+    this->descriptionString = descriptionString;
 }
 
 

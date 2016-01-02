@@ -9,7 +9,7 @@ class NewsItemWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit NewsItemWidget(QSettings* p, QString URL, QString source, QString title, QWidget *parent = 0);
+    explicit NewsItemWidget(QSettings* p, QString URL, QString source, QString title, QString descriptionString, QWidget *parent = 0);
     void mousePressEvent(QMouseEvent *) override;
 
 signals:
@@ -19,7 +19,9 @@ public slots:
 private:
     QLabel* titleLabel;
     QLabel* sourceLabel;
+    QLabel* descriptionLabel;
     QString urlString;
+    QString descriptionString;
 };
 
 #endif // NEWSITEM_WIDGET_H
