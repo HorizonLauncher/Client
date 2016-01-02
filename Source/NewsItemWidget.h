@@ -5,6 +5,11 @@
 #include <QWidget>
 #include <QLabel>
 #include <QSettings>
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkRequest>
+#include <QtNetwork/QNetworkReply>
+#include <QByteArray>
+#include <QUrl>
 
 class NewsItemWidget : public QWidget
 {
@@ -19,11 +24,14 @@ signals:
 public slots:
 
 private:
+    QLabel* imageLabel;
     QLabel* titleLabel;
     QLabel* sourceLabel;
     QLabel* descriptionLabel;
     QString urlString;
     QString descriptionString;
+    QNetworkAccessManager* manager;
+    void sourceCodeFetchComplete(QNetworkReply*);
 };
 
 #endif // NEWSITEM_WIDGET_H

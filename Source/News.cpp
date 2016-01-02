@@ -27,7 +27,8 @@ News::News(QSettings* p, QWidget* parent) :
                         "background-color: " + p->value("Primary/InactiveSelection").toString() + ";} "
                         "QVBoxLayout {"
                         "background-color: " + p->value("Primary/TertiaryBase").toString() + "; "
-                        "color: " + p->value("Primary/LightText").toString() + "; }");
+                        "color: " + p->value("Primary/LightText").toString() + "; }" +
+                        "NewsItemWidget:hover { background: "  + p->value("Primary/HoverSelection").toString() + "}");
 
     this->settings = p;
 
