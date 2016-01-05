@@ -36,6 +36,11 @@ public slots:
     void confirmClearDb();
     void resetColors();
     void updateColor(int id, QColor color);
+
+private slots:
+    void exportTheme();
+    void importTheme();
+
 public:
     explicit Settings(QSettings* p, QWidget* parent = 0);
 

@@ -81,7 +81,7 @@ void Settings::init(QSettings* p)
     manageNewsFeedButton->setStyleSheet("padding: 5px;");
     manageNewsFeedButton->setFont(buttonFont);
     clientGroupLayout->addWidget(manageNewsFeedButton);
-    
+
     connect (manageNewsFeedButton, &QPushButton::clicked, [&]
     {
         NewsFeedChooserWindow* window = new NewsFeedChooserWindow();
@@ -267,11 +267,23 @@ void Settings::init(QSettings* p)
     darkestBaseLayout->addWidget(new QLabel(tr("Darkest Base")));
     styleGroupLayout->addWidget(darkestBaseWidget, 3, 3);
 
-    QPushButton* resetColorsBtn = new QPushButton("Reset Colors to Default");
+    QPushButton* resetColorsBtn = new QPushButton(tr("Reset Colors to Default"));
     resetColorsBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     resetColorsBtn->setStyleSheet("padding: 5px;");
     connect(resetColorsBtn, &QPushButton::clicked, this, &Settings::resetColors);
     styleGroupLayout->addWidget(resetColorsBtn, 4, 0);
+
+    QPushButton* exportThemeBtn = new QPushButton(tr("Export Theme"));
+    exportThemeBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    exportThemeBtn->setStyleSheet("padding: 5px;");
+    connect(exportThemeBtn, &QPushButton::clicked, this, &Settings::exportTheme);
+    styleGroupLayout->addWidget(exportThemeBtn, 4, 1);
+
+    QPushButton* importThemeBtn = new QPushButton(tr("Import Theme"));
+    importThemeBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    importThemeBtn->setStyleSheet("padding: 5px;");
+    connect(importThemeBtn, &QPushButton::clicked, this, &Settings::importTheme);
+    styleGroupLayout->addWidget(importThemeBtn, 4, 2);
 
     connect(bodyColor, &QPushButton::clicked, [=]() { pickSetColor(1); });
     connect(navbarBG, &QPushButton::clicked, [=]() { pickSetColor(2); });
@@ -342,6 +354,76 @@ void Settings::resetColors()
     secondaryBase->setStyleSheet("background-color: " + palette.value("Primary/SecondaryBase").toString() + ";}");
     tertiaryBase->setStyleSheet("background-color: " + palette.value("Primary/TertiaryBase").toString() + ";}");
     darkestBase->setStyleSheet("background-color: " + palette.value("Primary/DarkestBase").toString() + ";}");
+}
+
+void Settings::exportTheme()
+{
+    QSettings palette(QSettings::IniFormat, QSettings::UserScope, "HorizonLauncher", "palette");
+
+    QFileDialog* dlg = new QFileDialog();
+    dlg->setFileMode(QFileDialog::AnyFile);
+
+    if (dlg->exec())
+    {
+        QString filename = dlg->selectedFiles().at(0);
+        QFile file(filename);
+
+        if (!file.open(QIODevice::WriteOnly))
+        {
+            qDebug() << "Couldn't open " << filename << " for writing.";
+            return;
+        }
+
+        QTextStream fileStream(&file);
+
+        QStringList keys = palette.allKeys();
+        for (int i; i < keys.size(); i++)
+        {
+            QString key = keys[i];
+            QString value = palette.value(key).toString();
+
+            fileStream << key << "=" << value << "\n";
+        }
+    }
+}
+
+void Settings::importTheme()
+{
+    QSettings palette(QSettings::IniFormat, QSettings::UserScope, "HorizonLauncher", "palette");
+
+    QRegExp properLineFormat("^[\\w\\/]+=#\\w+$");
+
+    QFileDialog* dlg = new QFileDialog();
+    dlg->setFileMode(QFileDialog::ExistingFile);
+
+    if (dlg->exec())
+    {
+        QString filename = dlg->selectedFiles().at(0);
+        QFile file(filename);
+
+        if (!file.open(QIODevice::ReadOnly))
+        {
+            qDebug() << "Couldn't open " << filename << " for reading.";
+            return;
+        }
+
+        QTextStream fileStream(&file);
+
+        while (!fileStream.atEnd())
+        {
+            QString line = fileStream.readLine();
+            if (!line.contains(properLineFormat))
+            {
+                qDebug() << "Error: Line doesn't contain proper format.";
+                continue;
+            };
+
+            int eqPos = line.indexOf("=");
+            QString leftSide = line.left(eqPos);
+            QString rightSide = line.mid(eqPos + 1);
+            palette.setValue(leftSide, rightSide);
+        }
+    }
 }
 
 void Settings::setMultipleExec(bool multipleExec)
