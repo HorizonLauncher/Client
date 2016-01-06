@@ -1,7 +1,6 @@
 #include "Store.h"
 
 #include <QVBoxLayout>
-#include <QWebView>
 #include <QUrl>
 
 Store::Store(QWidget* parent)

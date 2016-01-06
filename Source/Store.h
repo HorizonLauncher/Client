@@ -2,6 +2,7 @@
 #define _STORE_H_
 
 #include <QWidget>
+#include <QWebView>
 
 class Store : public QWidget
 {
