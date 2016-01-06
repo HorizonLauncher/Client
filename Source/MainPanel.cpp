@@ -128,10 +128,13 @@ void MainPanel::init()
     community->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     news = new News(p, stack);
     news->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+    store = new Store(stack);
+    store->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     stack->addWidget(home);
     stack->addWidget(library);
     stack->addWidget(community);
     stack->addWidget(news);
+    stack->addWidget(store);
     stack->setCurrentWidget(library);
 
     connect(stack, &QStackedWidget::currentChanged, this, &MainPanel::onStackedChanged);
@@ -142,7 +145,7 @@ void MainPanel::init()
 
     // Connect signals
     connect(navbar->homeTab, &TabWidget::clicked, this, &MainPanel::setHome);
-    // connect(navbar->storeTab, &TabWidget::clicked, this, &MainPanel::setStore);
+    connect(navbar->storeTab, &TabWidget::clicked, this, &MainPanel::setStore);
     connect(navbar->gamesTab, &TabWidget::clicked, this, &MainPanel::setGames);
     connect(navbar->communityTab, &TabWidget::clicked, this, &MainPanel::setCommunity);
     connect(navbar->newsTab, &TabWidget::clicked, this, &MainPanel::setNews);

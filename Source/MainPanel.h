@@ -8,6 +8,7 @@
 #include "Community.h"
 #include "News.h"
 #include "Settings.h"
+#include "Store.h"
 
 #include <QStackedWidget>
 #include <QApplication>
@@ -50,6 +51,7 @@ private:
     Library* library;
     Settings* settings;
     News* news;
+    Store* store;
 
 private slots:
     void setHome()
@@ -67,6 +69,7 @@ private slots:
         if (!(activeTab == navbar->storeTab))
         {
             activeTab->toggleInactive();
+            stack->setCurrentWidget(store);
             activeTab = navbar->storeTab;
             activeTab->toggleActive();
         }
