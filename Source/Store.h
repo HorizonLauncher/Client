@@ -3,17 +3,23 @@
 
 #include <QWidget>
 #include <QWebView>
+#include <QLabel>
+#include <QSettings>
 
 class Store : public QWidget
 {
     Q_OBJECT
 
 public:
-    Store(QWidget* parent = 0);
+    Store(QSettings* p, QWidget* parent = 0);
 
 private:
     void init();
+    QLabel* urlLabel;
     QWebView* webView;
+
+private slots:
+    void changeUrlLabel();
 };
 
 #endif

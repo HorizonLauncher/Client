@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/SystemMenu">
+        <file>Icons/ArrowLeft.png</file>
+        <file>Icons/ArrowRight.png</file>
         <file>Icons/Close.png</file>
         <file>Icons/CloseHover.png</file>
         <file>Icons/Maximize.png</file>

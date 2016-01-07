@@ -128,7 +128,7 @@ void MainPanel::init()
     community->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     news = new News(p, stack);
     news->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
-    store = new Store(stack);
+    store = new Store(p, stack);
     store->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     stack->addWidget(home);
     stack->addWidget(library);
