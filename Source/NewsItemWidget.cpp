@@ -18,7 +18,8 @@ NewsItemWidget::NewsItemWidget(QSettings* p, QString URL, QString source, QStrin
                 "color: " + p->value("Primary/LightText").toString() + ";"
                 "font-family: SourceSansPro;"
                 "font-size: 16px;"
-                "}");
+                "}"
+                "");
 
     QVBoxLayout* layout = new QVBoxLayout(this);
 
@@ -91,13 +92,13 @@ void NewsItemWidget::sourceCodeFetchComplete(QNetworkReply* reply)
     QNetworkRequest* req = new QNetworkRequest(url);
     req->setRawHeader("User-Agent", "Horizon Launcher");
     QNetworkReply* imageReply = manager->get(*req);
-    connect (imageReply, &QNetworkReply::finished, [=] {
-
+    connect (imageReply, &QNetworkReply::finished, [=]
+    {
         QByteArray jpegData = imageReply->readAll();
         QPixmap pixmap;
         pixmap.loadFromData(jpegData);
+        if (!pixmap) { return; }
         imageLabel->setPixmap(pixmap.scaledToWidth(imageLabel->width()));
-
     });
 
 
