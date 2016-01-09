@@ -10,17 +10,13 @@
  * current working directory.
  */
 Database::Database(QObject* parent)
-    : db(QSqlDatabase::addDatabase("QSQLITE"))
 {
-    db.setHostName("localhost");
-    db.setDatabaseName(QDir(CONFIG_FOLDER).filePath("horizon.db"));
+    this->path = QDir(CONFIG_FOLDER).filePath("horizon.db");
 }
 
 Database::Database(QString path, QObject* parent)
-    : db(QSqlDatabase::addDatabase("QSQLITE"))
 {
-    db.setHostName("localhost");
-    db.setDatabaseName(path);
+    this->path = path;
 }
 
 /** Initialize the actual database, if it hasn't been done already.
@@ -28,6 +24,10 @@ Database::Database(QString path, QObject* parent)
 */
 bool Database::init()
 {
+    db = QSqlDatabase(QSqlDatabase::addDatabase("QSQLITE"));
+    db.setHostName("localhost");
+    db.setDatabaseName(this->path);
+
     bool status = db.open();
     qDebug() << db.lastError();
     if (!status)

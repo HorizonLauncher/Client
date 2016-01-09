@@ -23,6 +23,8 @@
 
 int main(int argc, char* argv[])
 {
+    QCoreApplication::addLibraryPath("./");
+
     QApplication::setStyle("fusion");
     QApplication* application = new QApplication(argc, argv);
 

@@ -52,4 +52,6 @@ signals:
 
 private:
     QSqlDatabase db;
+
+    QString path;
 };
