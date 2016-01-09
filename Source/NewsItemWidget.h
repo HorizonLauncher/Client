@@ -32,6 +32,9 @@ private:
     QString descriptionString;
     QNetworkAccessManager* manager;
     void sourceCodeFetchComplete(QNetworkReply*);
+    void enterEvent(QEvent*) override;
+    void leaveEvent(QEvent*) override;
+    QSettings* palette;
 };
 
 #endif // NEWSITEM_WIDGET_H

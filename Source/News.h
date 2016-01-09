@@ -13,6 +13,7 @@
 #include <QUrl>
 #include <qxmlstream.h>
 #include "NewsItemWidget.h"
+#include <QEvent>
 
 class News : public QWidget
 {

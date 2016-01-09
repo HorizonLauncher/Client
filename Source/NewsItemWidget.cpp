@@ -16,26 +16,33 @@ NewsItemWidget::NewsItemWidget(QSettings* p, QString URL, QString source, QStrin
     this->setStyleSheet(
                 "QLabel {"
                 "color: " + p->value("Primary/LightText").toString() + ";"
-                "font-family: SourceSansPro;"
+                "font-family: Arial;"
                 "font-size: 16px;"
                 "}"
-                "");
+                );
+
+    this->palette = p;
 
     QVBoxLayout* layout = new QVBoxLayout(this);
-
+    layout->setSpacing(0);
     imageLabel = new QLabel (""); //TODO: Change this to default image
+    imageLabel->setContentsMargins(5,5,5,5);
     layout->addWidget(imageLabel);
 
+
     titleLabel = new QLabel (title);
+    titleLabel->setContentsMargins(0,0,5,5);
     titleLabel->setWordWrap(true);
     layout->addWidget(titleLabel);
 
     descriptionLabel = new QLabel(descriptionString);
+    descriptionLabel->setContentsMargins(0,0,5,5);
     descriptionLabel->setWordWrap(true);
     descriptionLabel->setStyleSheet("font-size: 12px");
     layout->addWidget(descriptionLabel);
 
     sourceLabel = new QLabel (source);
+    sourceLabel->setContentsMargins(0,0,5,5);
     sourceLabel->setWordWrap(true);
     sourceLabel->setStyleSheet("font-size: 10px;");
     layout->addWidget(sourceLabel);
@@ -100,6 +107,28 @@ void NewsItemWidget::sourceCodeFetchComplete(QNetworkReply* reply)
         if (!pixmap) { return; }
         imageLabel->setPixmap(pixmap.scaledToWidth(imageLabel->width()));
     });
+}
 
+void NewsItemWidget::enterEvent(QEvent* event)
+{
+   titleLabel->setStyleSheet("background-color: " + this->palette->value("Primary/HoverSelection").toString() + ";");
+   descriptionLabel->setStyleSheet("font-size: 12px;"
+                                   "background-color: " + this->palette->value("Primary/HoverSelection").toString() + ";");
+   sourceLabel->setStyleSheet("font-size: 10px; "
+                              "background-color: " + this->palette->value("Primary/HoverSelection").toString() + ";");
+   imageLabel->setStyleSheet("background-color: " + this->palette->value("Primary/HoverSelection").toString() + ";");
+   this->setCursor(Qt::PointingHandCursor);
+
+}
+
+void NewsItemWidget::leaveEvent(QEvent* event)
+{
+   titleLabel->setStyleSheet("background-color: " + this->palette->value("Primary/SecondaryBase").toString() + ";");
+   descriptionLabel->setStyleSheet("font-size: 12px;"
+                                   "background-color: " + this->palette->value("Primary/SecondaryBase").toString() + ";");
+   sourceLabel->setStyleSheet("font-size: 10px; "
+                              "background-color: " + this->palette->value("Primary/SecondaryBase").toString() + ";");
+   imageLabel->setStyleSheet("background-color: " + this->palette->value("Primary/SecondaryBase").toString() + ";");
+   this->setCursor(Qt::ArrowCursor);
 
 }
