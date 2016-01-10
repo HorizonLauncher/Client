@@ -383,6 +383,7 @@ void Settings::exportTheme()
             QString value = palette.value(key).toString();
 
             fileStream << key << "=" << value << "\n";
+            fileStream.flush();
         }
     }
 }
