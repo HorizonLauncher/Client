@@ -1,8 +1,11 @@
 #pragma once
 
+class LibraryGridView;
+
 #include "Database.h"
 #include "GameLauncher.h"
 #include "BuddyList.h"
+#include "LibraryGridView.h"
 
 #include <QWidget>
 #include <QProcess>
@@ -21,20 +24,16 @@ class Library : public QWidget
 public:
     Library(QSettings* p, QWidget* parent = 0);
 
-    static Database db;
+    void launchGame(QString gameName);
+    void changeLaunchOpts(QString gameName);
 
-private slots:
-    void addGame();
-    void refreshGames();
+    static Database db;
 
 private:
     GameLauncher gl;
 
-    QGridLayout* gamesLayout;
-    QList<QWidget*> gamesWidgets;
+    LibraryGridView* gridView;
     QLineEdit* searchBox;
 
     void init(QSettings* p);
-    void launchGame(QString gameName);
-    void changeLaunchOpts(QString gameName);
 };

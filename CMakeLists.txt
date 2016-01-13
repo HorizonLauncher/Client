@@ -18,6 +18,7 @@ set(SOURCE
     Source/Main.cpp
     Source/TabWidget.cpp
     Source/Library.cpp
+    Source/LibraryGridView.cpp
     Source/MainPanel.cpp
     Source/Database.cpp
     Source/DRMSetupWizard.cpp
@@ -40,6 +41,7 @@ set(SOURCE
 set(HEADERS
     Source/TabWidget.h
     Source/Library.h
+    Source/LibraryGridView.h
     Source/MainPanel.h
     Source/Database.h
     Source/Init.h

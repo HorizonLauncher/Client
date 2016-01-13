@@ -1,7 +1,5 @@
 #include "Library.h"
-#include "AddGameWizard.h"
 #include "Defines.h"
-#include "GridGameWidget.h"
 
 #include <QFileDialog>
 #include <QInputDialog>
@@ -35,16 +33,6 @@ Library::Library(QSettings* p, QWidget* parent)
                         "QComboBox::down-arrow { image: url(:/SystemMenu/Icons/DropdownArrow.png); }");
 
     init(p);
-
-    QList<Game> games = Library::db.getGames();
-    for (auto game : games)
-    {
-        qDebug() << game.id << game.gameName << game.gameDirectory << game.executablePath;
-    }
-
-    connect(&db, &Database::dbChanged, this, &Library::refreshGames);
-
-    refreshGames();
 }
 
 void Library::init(QSettings* p)
@@ -67,7 +55,10 @@ void Library::init(QSettings* p)
     searchBox->setMinimumWidth(225);
     searchBox->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     searchLayout->addWidget(searchBox);
-    connect(searchBox, &QLineEdit::returnPressed, this, &Library::refreshGames);
+    connect(searchBox, &QLineEdit::returnPressed, [=]
+    {
+        gridView->filterGames(searchBox->text().trimmed());
+    });
 
     QPixmap search(":/SystemMenu/Icons/SearchInverted.png");
     QIcon searchIcon(search);
@@ -78,7 +69,10 @@ void Library::init(QSettings* p)
     searchBtn->setStyleSheet("background-color: transparent;");
     searchBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     searchLayout->addWidget(searchBtn);
-    connect(searchBtn, &QPushButton::clicked, this, &Library::refreshGames);
+    connect(searchBtn, &QPushButton::clicked, [=]
+    {
+        gridView->filterGames(searchBox->text().trimmed());
+    });
 
     QColor* selectedColor = new QColor(p->value("Navbar/SelectedColor").toString());
     QColor lineColor = selectedColor->lighter(120); //#9e5eee
@@ -137,18 +131,8 @@ void Library::init(QSettings* p)
     carouselBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     searchLayout->addWidget(carouselBtn);
 
-    QPushButton* addGameBtn = new QPushButton(tr("Add game"));
-    addGameBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    addGameBtn->setStyleSheet("margin: 11px 0 0 11px; padding: 5px;");
-    mainLayout->addWidget(addGameBtn, 1, 0);
-    connect(addGameBtn, &QPushButton::clicked, this, &Library::addGame);
-
-    QWidget* gamesWidget = new QWidget();
-    mainLayout->addWidget(gamesWidget, 2, 0);
-
-    gamesLayout = new QGridLayout();
-    gamesLayout->setSpacing(12);
-    gamesWidget->setLayout(gamesLayout);
+    gridView = new LibraryGridView(p, this);
+    mainLayout->addWidget(gridView, 2, 0);
 }
 
 /** Function to launch a game.
@@ -183,60 +167,5 @@ void Library::changeLaunchOpts(QString gameName)
     if (ok)
     {
         Library::db.setLaunchOptionsByName(gameName, newLaunchOpts);
-    }
-}
-
-/** Event handler for adding a game.
- * Prompts the user for various paths, and adds the final game to the database.
-*/
-void Library::addGame()
-{
-    AddGameWizard* wiz = new AddGameWizard();
-    wiz->show();
-}
-
-/** Recreate the list of games displayed in the main widget.
-* Sort the list alphabetically by name
-*/
-void Library::refreshGames()
-{
-    for (int i = 0; i < gamesWidgets.size(); i++)
-    {
-        QWidget* widget = gamesWidgets[i];
-        gamesLayout->removeWidget(widget);
-        widget->deleteLater();
-    }
-    gamesWidgets.clear();
-
-    QList<Game> gameList = Library::db.getGames();
-    std::sort(gameList.begin(), gameList.end(), [&](const Game& g1, const Game& g2){return g1.gameName < g2.gameName; });
-    int row = 0, col = 0;
-    for (auto game : gameList)
-    {
-        QString lowerGameName = game.gameName.toLower();
-        QString searchString = searchBox->text().trimmed();
-        if (!searchString.isEmpty() && !lowerGameName.contains(searchString.toLower()))
-        {
-            continue;
-        }
-
-        QString displayedName = game.gameName;
-        if (displayedName.length() > 20)
-        {
-            displayedName = displayedName.left(20) + "...";
-        }
-
-        GridGameWidget* gameWidget = new GridGameWidget(displayedName, 999);
-        gamesLayout->addWidget(gameWidget, row, col);
-        connect(gameWidget, &GridGameWidget::leftClick, [=] { launchGame(game.gameName); });
-        connect(gameWidget, &GridGameWidget::changeLaunchOpts, [=]{ changeLaunchOpts(game.gameName); });
-        connect(gameWidget, &GridGameWidget::removeGame, [=]{ Library::db.removeGameByName(game.gameName); });
-        gamesWidgets.append(gameWidget);
-
-        if (col == 3)
-        {
-            row++;
-        }
-        col = (col < 3 ? col + 1 : 0);
     }
 }
