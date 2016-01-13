@@ -16,12 +16,12 @@ Store::Store(QSettings* p, QWidget* parent)
 void Store::init()
 {
     QVBoxLayout* layout = new QVBoxLayout(this);
-
+    layout->setMargin(0);
     QWidget* controlsWidget = new QWidget();
     layout->addWidget(controlsWidget);
 
     QHBoxLayout* controlsLayout = new QHBoxLayout(controlsWidget);
-    controlsLayout->setMargin(0);
+    //controlsLayout->setMargin(5);
 
     QPixmap back(":/SystemMenu/Icons/ArrowLeft.png");
     QIcon backIcon(back);
@@ -44,6 +44,7 @@ void Store::init()
     controlsLayout->addWidget(urlLabel);
 
     webView = new QWebView();
+    webView->setContentsMargins(0,0,0,0);
     webView->load(QUrl("http://store.launchhorizon.com/"));
     webView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     layout->addWidget(webView);
