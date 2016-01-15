@@ -37,7 +37,7 @@ while/if (a > 3)
 - Use only spaces, and indent 4 spaces at a time. We use spaces for indentation. Do not use tabs in your code. You should set your editor to emit spaces when you hit the tab key.
 
 ### Precautions
-- Every header file must have the #pragma once directive as a multiple inclusion guard (header guard).
+- Every header file must have a `#ifndef/#define <header>` include guard.
 - Avoid multiple inheritance if at all possible, especially with Qt classes.
 - Keep your code well documented, but don't go overboard. Classes and involved functions should be **described** in the interface and **explained** in the implementation.
 - Try to keep functions short -- if a given function reaches 100 lines in length, consider splitting it up into smaller pieces.

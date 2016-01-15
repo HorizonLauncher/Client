@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _SETTINGS_H_
+#define _SETTINGS_H_
+
 #include "Library.h"
 
 #include <QtWidgets>
@@ -48,3 +50,5 @@ public:
 signals:
     void didUpdateFeedURLs();
 };
+
+#endif

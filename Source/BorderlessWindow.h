@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _BORDERLESSWINDOW_H_
+#define _BORDERLESSWINDOW_H_
 
 #include "WinWindow.h"
 
@@ -66,3 +67,5 @@ private:
     SizeType minimumSize;
     SizeType maximumSize;
 };
+
+#endif

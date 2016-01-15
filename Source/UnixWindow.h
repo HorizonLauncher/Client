@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _UNIXWINDOW_H_
+#define _UNIXWINDOW_H_
 
 #include "UnixPanel.h"
 
@@ -23,3 +24,5 @@ private:
     void mouseReleaseEvent(QMouseEvent* evt);
     void mouseMoveEvent(QMouseEvent* evt);
 };
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _DRMSETUPWIZARD_H_
+#define _DRMSETUPWIZARD_H_
+
 #include "Database.h"
 #include "Defines.h"
 
@@ -138,3 +140,5 @@ protected:
 public:
     FinalPage(QWidget* parent = 0);
 };
+
+#endif

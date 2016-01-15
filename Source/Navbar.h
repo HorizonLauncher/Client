@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _NAVBAR_H_
+#define _NAVBAR_H_
 
 #include "TabWidget.h"
 
@@ -21,3 +22,5 @@ public:
 protected:
     void paintEvent(QPaintEvent* event);
 };
+
+#endif

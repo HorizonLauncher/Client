@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _ADDGAMEWIZARD_H_
+#define _ADDGAMEWIZARD_H_
+
 #include "Database.h"
 #include "Defines.h"
 #include <QWizard>
@@ -55,3 +57,5 @@ protected:
 public:
     LastPage(QWidget* parent = 0);
 };
+
+#endif

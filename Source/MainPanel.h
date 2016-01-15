@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _MAINPANEL_H_
+#define _MAINPANEL_H_
 
 #include "TabWidget.h"
 #include "Navbar.h"
@@ -118,3 +119,5 @@ private slots:
         settings->show();
     }
 };
+
+#endif

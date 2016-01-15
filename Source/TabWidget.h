@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _TABWIDGET_H_
+#define _TABWIDGET_H_
 
 #include <QWidget>
 #include <QSettings>
@@ -56,3 +57,5 @@ private slots:
     void toggleHovered();
     void toggleUnhovered();
 };
+
+#endif

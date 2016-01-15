@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _WINWINDOW_H_
+#define _WINWINDOW_H_
 
 #include "QWinWidget.h"
 #include "WinPanel.h"
@@ -23,3 +24,5 @@ private:
     HWND windowHandle;
     WinPanel* mainPanel;
 };
+
+#endif

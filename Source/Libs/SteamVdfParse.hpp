@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _STEAMVDFPARSE_H_
+#define _STEAMVDFPARSE_H_
 
 #include <boost/property_tree/ptree.hpp>
 
@@ -222,3 +223,4 @@ inline std::unordered_map<int, GameHeader> parseVdf(std::string location)
 }
 }
 
+#endif
