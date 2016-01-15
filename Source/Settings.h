@@ -14,6 +14,7 @@ private:
     void pickSetColor(int id);
     void init(QSettings* p);
     void setMultipleExec(bool multipleExec);
+    void setFulltab(bool fulltab);
 
     QPushButton* bodyColor;
     QPushButton* navbarBG;
