@@ -36,6 +36,8 @@ set(SOURCE
     Source/BuddyListExpandable.cpp
     Source/NewsFeedChooserWindow.cpp
     Source/Store.cpp
+    Source/LibraryDetailView.cpp
+    Source/DetailGameWidget.cpp
 )
 
 set(HEADERS
@@ -62,6 +64,8 @@ set(HEADERS
     Source/BuddyListExpandable.h
     Source/NewsFeedChooserWindow.h
     Source/Store.h
+    Source/LibraryDetailView.h
+    Source/DetailGameWidget.h
 )
 
 set(RESOURCES

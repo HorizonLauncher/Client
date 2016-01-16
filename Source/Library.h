@@ -6,6 +6,7 @@ class LibraryGridView;
 #include "GameLauncher.h"
 #include "BuddyList.h"
 #include "LibraryGridView.h"
+#include "LibraryDetailView.h"
 
 #include <QWidget>
 #include <QProcess>
@@ -31,8 +32,8 @@ public:
 
 private:
     GameLauncher gl;
-
     LibraryGridView* gridView;
+    LibraryDetailView* detailView;
     QLineEdit* searchBox;
 
     void init(QSettings* p);
