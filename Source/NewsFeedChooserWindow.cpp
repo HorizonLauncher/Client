@@ -78,6 +78,7 @@ void NewsFeedChooserWindow::onAddSubredditButtonClicked()
 
     if (!newSubreddit.isEmpty())
     {
+        // https://github.com/reddit/reddit/blob/fc2841ad2d45bb48433da4481046291a7f9394f4/r2/r2/models/subreddit.py#L385
         QRegExp subredditRegex("^[A-Za-z0-9][A-Za-z0-9_]{2,20}$");
 
         if (newSubreddit.contains(subredditRegex))
