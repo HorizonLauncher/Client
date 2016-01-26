@@ -1,1 +1,1 @@
-#define CONFIG_FOLDER QStandardPaths::writableLocation(QStandardPaths::DataLocation)
+#define CONFIG_FOLDER QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QDir::separator() + "HorizonLauncher"
