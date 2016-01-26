@@ -3,15 +3,30 @@
 
 #include <QWidget>
 #include <Database.h>
+
+#include <QWidget>
+
+/** Grid Game Widget class.
+ * Widget for each game on the grid game list
+*/
 class DetailGameWidget : public QWidget
 {
+    Q_OBJECT
+
 public:
-    DetailGameWidget(Game game, QWidget* parent = 0);
+    DetailGameWidget(Game game, QSettings* palette, QWidget* parent = 0);
+
 private:
     QHBoxLayout* mainLayout;
     QLabel* imageLabel;
     QWidget* gameTitleWidget;
     QWidget* gameDetailsWidget;
+
+
+public slots:
+
+signals:
+
 };
 
 #endif // DETAILGAMEWIDGET_H

@@ -134,7 +134,7 @@ void Library::init(QSettings* p)
     gridView = new LibraryGridView(p, this);
     //mainLayout->addWidget(gridView, 2, 0);
 
-    detailView = new LibraryDetailView(this);
+    detailView = new LibraryDetailView(p, this);
     mainLayout->addWidget(detailView, 2, 0);
 
 }

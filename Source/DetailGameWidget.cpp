@@ -1,27 +1,43 @@
 #include "DetailGameWidget.h"
 
-DetailGameWidget::DetailGameWidget(Game game, QWidget* parent) : QWidget(parent)
+DetailGameWidget::DetailGameWidget(Game game, QSettings* palette, QWidget* parent) : QWidget(parent)
 {
-  mainLayout = new QHBoxLayout();
+  //mainLayout = new QHBoxLayout(this);
 
-  imageLabel = new QLabel("test");
-  mainLayout->addWidget(imageLabel);
-  this->setLayout(mainLayout);
-//  //Create the main title label and sublabels
-//  gameTitleWidget = new QWidget(this);
-//  QVBoxLayout* gameTitleLayout = new QVBoxLayout();
+  QHBoxLayout* widgetLayout = new QHBoxLayout(this);
+  QLabel* imageLabel = new QLabel("");
+  imageLabel->setStyleSheet("background-image: url();");
 
-//  QLabel* titleLabel = new QLabel(game.gameName);
-//  titleLabel->setStyleSheet("background-color: red");
-//  gameTitleLayout->addWidget(titleLabel);
-//    gameTitleWidget->setLayout(gameTitleLayout);
-//  mainLayout->addWidget(gameTitleWidget);
+  QPixmap imageMap(":SystemMenu/Images/LibraryGridPlaceholder.png");
+  imageLabel->setPixmap(imageMap.scaledToHeight(this->height()));
+  widgetLayout->addWidget(imageLabel);
 
-//  this->gameDetailsWidget = new QWidget(this);
-//  QGridLayout* detailsLayout = new QGridLayout();
-//  gameDetailsWidget->setLayout(detailsLayout);
-//  QLabel* someLabel = new QLabel(game.gameDirectory);
-//  detailsLayout->addWidget(someLabel, 0, 0, 1, 1);
-//  mainLayout->addWidget(gameDetailsWidget);
+        //Create the main title label and sublabels
+        gameTitleWidget = new QWidget(this);
+        QVBoxLayout* gameTitleWidgetLayout = new QVBoxLayout(gameTitleWidget);
+        QLabel* titleLabel = new QLabel(game.gameName);
+        QLabel* hoursLabel = new QLabel("999 Hours");
+        gameTitleWidgetLayout->addWidget(titleLabel);
+        gameTitleWidget->setLayout(gameTitleWidgetLayout);
+
+        widgetLayout->addWidget(gameTitleWidget);
+        widgetLayout->addStretch();
+
+         this->gameDetailsWidget = new QWidget(this);
+         QVBoxLayout* detailsLayout = new QVBoxLayout(gameDetailsWidget);
+         gameDetailsWidget->setLayout(detailsLayout);
+
+         QLabel* directoryLabel = new QLabel(game.gameDirectory);
+        QLabel* DRMLabel = new QLabel("DRM: " + QString::number(game.drm));
+         detailsLayout->addWidget(directoryLabel);
+        detailsLayout->addWidget(DRMLabel);
+        widgetLayout->addWidget(gameDetailsWidget);
+
+   this->setLayout(widgetLayout);
+
+   //this->setMinimumSize(1000, 200);
+   //this->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+
+
 }
 
