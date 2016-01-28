@@ -21,6 +21,7 @@ private:
     QLabel* imageLabel;
     QWidget* gameTitleWidget;
     QWidget* gameDetailsWidget;
+    QWidget* gameSupportInfoWidget;
 
 
 public slots:

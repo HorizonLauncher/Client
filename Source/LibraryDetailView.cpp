@@ -3,6 +3,7 @@
 #include "Library.h"
 #include <QPixmap>
 #include "DetailGameWidget.h"
+
 LibraryDetailView::LibraryDetailView(QSettings* p, QWidget *parent) : QWidget(parent)
 {
     this->mainLayout = new QVBoxLayout(this);
@@ -17,12 +18,9 @@ void LibraryDetailView::refreshGames() {
     for (int i = 0; i < 5; ++i) {
         Game game = games.at(i);
         DetailGameWidget* gameWidget = new DetailGameWidget(game, this->palette, this);
-
         mainLayout->addWidget(gameWidget);
+    }
 
-
-     }
-
-     this->setLayout(mainLayout);
+    this->setLayout(mainLayout);
 
 }
