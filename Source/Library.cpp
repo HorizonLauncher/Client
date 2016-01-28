@@ -134,8 +134,20 @@ void Library::init(QSettings* p)
     gridView = new LibraryGridView(p, this);
     //mainLayout->addWidget(gridView, 2, 0);
 
+    QScrollArea* scrollArea = new QScrollArea(this);
     detailView = new LibraryDetailView(p, this);
-    mainLayout->addWidget(detailView, 2, 0);
+    scrollArea->setWidgetResizable(false);
+    scrollArea->setWidget(detailView);
+    scrollArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    mainLayout->addWidget(scrollArea, 2, 0);
+
+    /*
+     * The following line is the magic that makes this layout
+     * hold. QScrollArea ignores SizePolicies for some reason
+     * and relies on correctly setting the sizeHint.
+     * TODO: Make this less jank.
+     */
+    detailView->setMinimumWidth(1150);
 
 }
 

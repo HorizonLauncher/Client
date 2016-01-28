@@ -4,10 +4,7 @@
 DetailGameWidget::DetailGameWidget(Game game, QSettings* palette, QWidget* parent) : QWidget(parent)
 {
     this->palette = palette;
-    this->setStyleSheet("background-color: " + palette->value("Primary/SecondaryBase").toString() + ";"
-                        "QLayoutItem {"
-                        "background-color : red"
-                        "}");
+    this->setStyleSheet("background-color: " + palette->value("Primary/SecondaryBase").toString() + ";");
     QHBoxLayout* widgetLayout = new QHBoxLayout(this);
     widgetLayout->setSpacing(0);
     QLabel* imageLabel = new QLabel("");
@@ -57,11 +54,6 @@ DetailGameWidget::DetailGameWidget(Game game, QSettings* palette, QWidget* paren
     widgetLayout->addWidget(gameSupportInfoWidget);
 
     this->setLayout(widgetLayout);
-
-    //this->setMinimumSize(1000, 200);
-    //this->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-
-
 }
 
 void DetailGameWidget::enterEvent(QEvent* event)
