@@ -1,15 +1,21 @@
 #include "DetailGameWidget.h"
+#include <QSpacerItem>
 
 DetailGameWidget::DetailGameWidget(Game game, QSettings* palette, QWidget* parent) : QWidget(parent)
 {
-    //mainLayout = new QHBoxLayout(this);
-
+    this->palette = palette;
+    this->setStyleSheet("background-color: " + palette->value("Primary/SecondaryBase").toString() + ";"
+                        "QLayoutItem {"
+                        "background-color : red"
+                        "}");
     QHBoxLayout* widgetLayout = new QHBoxLayout(this);
+    widgetLayout->setSpacing(0);
     QLabel* imageLabel = new QLabel("");
     imageLabel->setStyleSheet("background-image: url();");
 
     QPixmap imageMap(":SystemMenu/Images/LibraryGridPlaceholder.png");
-    imageLabel->setPixmap(imageMap.scaledToHeight(this->height()));
+    imageLabel->setPixmap(imageMap.scaledToHeight(100));
+    imageLabel->setContentsMargins(5,5,5,5);
     widgetLayout->addWidget(imageLabel);
 
     //Create the main title label and sublabels
@@ -22,7 +28,12 @@ DetailGameWidget::DetailGameWidget(Game game, QSettings* palette, QWidget* paren
     gameTitleWidget->setLayout(gameTitleWidgetLayout);
     widgetLayout->addWidget(gameTitleWidget);
 
-    widgetLayout->addStretch();
+    QWidget* spacerWidget = new QWidget(this);
+    QHBoxLayout* layout = new QHBoxLayout(spacerWidget);
+    layout->addWidget(new QLabel (""));
+    //spacerWidget->setStyleSheet("background-color: red");
+    spacerWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    widgetLayout->addWidget(spacerWidget);
 
     //Create the detailswidget
     this->gameDetailsWidget = new QWidget(this);
@@ -50,6 +61,20 @@ DetailGameWidget::DetailGameWidget(Game game, QSettings* palette, QWidget* paren
     //this->setMinimumSize(1000, 200);
     //this->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
+
+}
+
+void DetailGameWidget::enterEvent(QEvent* event)
+{
+   this->setStyleSheet("background-color: " + this->palette->value("Primary/HoverSelection").toString());
+   this->setCursor(Qt::PointingHandCursor);
+
+}
+
+void DetailGameWidget::leaveEvent(QEvent* event)
+{
+    this->setStyleSheet("background-color: " + this->palette->value("Primary/SecondaryBase").toString());
+     this->setCursor(Qt::ArrowCursor);
 
 }
 

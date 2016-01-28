@@ -22,7 +22,9 @@ private:
     QWidget* gameTitleWidget;
     QWidget* gameDetailsWidget;
     QWidget* gameSupportInfoWidget;
-
+    void enterEvent(QEvent*) override;
+    void leaveEvent(QEvent*) override;
+    QSettings* palette;
 
 public slots:
 
