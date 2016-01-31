@@ -132,7 +132,8 @@ void Library::init(QSettings* p)
     searchLayout->addWidget(carouselBtn);
 
     gridView = new LibraryGridView(p, this);
-    mainLayout->addWidget(gridView, 2, 0);
+    carouselView = new LibraryCarouselView(p, this);
+    mainLayout->addWidget(carouselView, 2, 0);
 }
 
 /** Function to launch a game.

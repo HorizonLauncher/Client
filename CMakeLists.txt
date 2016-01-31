@@ -40,6 +40,7 @@ set(SOURCE
 
     # LIBRARY VIEWS
     Source/LibraryGridView.cpp
+    Source/LibraryCarouselView.cpp
 
     # WIZARDS
     Source/DRMSetupWizard.cpp
@@ -77,6 +78,7 @@ set(HEADERS
 
     # LIBRARY VIEWS
     Source/LibraryGridView.h
+    Source/LibraryCarouselView.h
 
     # WIZARDS
     Source/DRMSetupWizard.h

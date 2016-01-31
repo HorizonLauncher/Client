@@ -2,11 +2,13 @@
 #define _LIBRARY_H_
 
 class LibraryGridView;
+class LibraryCarouselView;
 
 #include "Database.h"
 #include "GameLauncher.h"
 #include "BuddyList.h"
 #include "LibraryGridView.h"
+#include "LibraryCarouselView.h"
 
 #include <QWidget>
 #include <QProcess>
@@ -34,6 +36,7 @@ private:
     GameLauncher gl;
 
     LibraryGridView* gridView;
+    LibraryCarouselView* carouselView;
     QLineEdit* searchBox;
 
     void init(QSettings* p);
