@@ -135,6 +135,7 @@ void Library::init(QSettings* p)
     //mainLayout->addWidget(gridView, 2, 0);
 
     QScrollArea* scrollArea = new QScrollArea(this);
+    scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     detailView = new LibraryDetailView(p, this);
     scrollArea->setWidgetResizable(false);
     scrollArea->setWidget(detailView);

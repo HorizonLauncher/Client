@@ -17,8 +17,7 @@ LibraryDetailView::LibraryDetailView(QSettings* p, QWidget *parent) : QWidget(pa
 void LibraryDetailView::refreshGames() {
     QList<Game> games = Library::db.getGames();
 
-    for (int i = 0; i < 10; ++i) {
-        Game game = games.at(i);
+    for (auto game : games) {
         DetailGameWidget* gameWidget = new DetailGameWidget(game, this->palette, this);
         mainLayout->addWidget(gameWidget);
     }

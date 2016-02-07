@@ -25,6 +25,7 @@ private:
     void enterEvent(QEvent*) override;
     void leaveEvent(QEvent*) override;
     QSettings* palette;
+    void styleLabel(QLabel* label);
 
 public slots:
 

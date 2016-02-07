@@ -19,9 +19,14 @@ DetailGameWidget::DetailGameWidget(Game game, QSettings* palette, QWidget* paren
     gameTitleWidget = new QWidget(this);
     QVBoxLayout* gameTitleWidgetLayout = new QVBoxLayout(gameTitleWidget);
     QLabel* titleLabel = new QLabel(game.gameName);
+    titleLabel->setStyleSheet("font-family: Roboto; font-style: normal; font-size: 16pt");
     QLabel* hoursLabel = new QLabel("999 Hours");
+    styleLabel(hoursLabel);
     gameTitleWidgetLayout->addWidget(titleLabel);
     gameTitleWidgetLayout->addWidget(hoursLabel);
+    QWidget* titleSpacerWidget = new QWidget(this);
+    titleSpacerWidget->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
+    gameTitleWidgetLayout->addWidget(titleSpacerWidget);
     gameTitleWidget->setLayout(gameTitleWidgetLayout);
     widgetLayout->addWidget(gameTitleWidget);
 
@@ -29,6 +34,7 @@ DetailGameWidget::DetailGameWidget(Game game, QSettings* palette, QWidget* paren
     QHBoxLayout* layout = new QHBoxLayout(spacerWidget);
     layout->addWidget(new QLabel (""));
     //spacerWidget->setStyleSheet("background-color: red");
+    //spacerWidget->setMinimumWidth(200 - game.gameName.length()); //Yay hacks!
     spacerWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     widgetLayout->addWidget(spacerWidget);
 
@@ -38,8 +44,13 @@ DetailGameWidget::DetailGameWidget(Game game, QSettings* palette, QWidget* paren
     gameDetailsWidget->setLayout(detailsLayout);
     QLabel* reviewsLabel = new QLabel("Reviews: 7.5/10");
     QLabel* releaseDateLabel = new QLabel("Release Date: 10/20/30");
+    QWidget* detailsSpacerWidget = new QWidget(this);
+    styleLabel(reviewsLabel);
+    styleLabel(releaseDateLabel);
+    detailsSpacerWidget->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
     detailsLayout->addWidget(reviewsLabel);
     detailsLayout->addWidget(releaseDateLabel);
+    detailsLayout->addWidget(detailsSpacerWidget);
     widgetLayout->addWidget(gameDetailsWidget);
 
     //Create mod/achievement support widget
@@ -47,10 +58,16 @@ DetailGameWidget::DetailGameWidget(Game game, QSettings* palette, QWidget* paren
     QLabel* gameModeLabel = new QLabel("Mode: SinglePlayer");
     QLabel* modSupportLabel = new QLabel ("Mods: Supported");
     QLabel* achievementSupportLabel = new QLabel ("Achievements: Supported");
+    styleLabel(gameModeLabel);
+    styleLabel(modSupportLabel);
+    styleLabel(achievementSupportLabel);
     QVBoxLayout* supportWidgetLayout = new QVBoxLayout(this->gameSupportInfoWidget);
+    QWidget* gameSupportInfoSpacerWidget = new QWidget (this);
+    gameSupportInfoSpacerWidget->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
     supportWidgetLayout->addWidget(gameModeLabel);
     supportWidgetLayout->addWidget(modSupportLabel);
     supportWidgetLayout->addWidget(achievementSupportLabel);
+    supportWidgetLayout->addWidget(gameSupportInfoSpacerWidget);
     widgetLayout->addWidget(gameSupportInfoWidget);
 
     this->setLayout(widgetLayout);
@@ -68,5 +85,13 @@ void DetailGameWidget::leaveEvent(QEvent* event)
     this->setStyleSheet("background-color: " + this->palette->value("Primary/SecondaryBase").toString());
      this->setCursor(Qt::ArrowCursor);
 
+}
+
+/**
+  Applies default font and color styling to a label for display
+  @param label The label to style
+  */
+void DetailGameWidget::styleLabel(QLabel *label){
+    label->setStyleSheet("font-family: Roboto; font-style: normal; font-size: 10pt");
 }
 
