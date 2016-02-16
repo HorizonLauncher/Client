@@ -29,7 +29,6 @@ private:
 
     QGridLayout* gamesLayout;
     QList<QWidget*> gamesWidgets;
-    QLineEdit* searchBox;
     Library* library;
 
     QString searchString;

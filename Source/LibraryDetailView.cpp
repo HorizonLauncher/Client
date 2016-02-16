@@ -9,7 +9,7 @@ LibraryDetailView::LibraryDetailView(QSettings* p, QWidget *parent) : QWidget(pa
 {
 
     this->mainLayout = new QVBoxLayout(this);
-    mainLayout->setSpacing(1);
+    mainLayout->setSpacing(10);
     this->palette = p;
     refreshGames();
 }

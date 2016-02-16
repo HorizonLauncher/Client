@@ -24,6 +24,7 @@ private:
     QWidget* gameSupportInfoWidget;
     void enterEvent(QEvent*) override;
     void leaveEvent(QEvent*) override;
+    void paintEvent(QPaintEvent *) override;
     QSettings* palette;
     void styleLabel(QLabel* label);
 

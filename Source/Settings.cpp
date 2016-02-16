@@ -89,7 +89,6 @@ void Settings::init(QSettings* p)
         window->show();
     });
 
-    qDebug() << config.value("GameLauncher/MultipleExec").toBool();
     QWidget* multipleGamesWidget = new QWidget();
     QHBoxLayout* multipleGamesLayout = new QHBoxLayout(multipleGamesWidget);
     QCheckBox* multipleGamesCB = new QCheckBox();
@@ -99,6 +98,16 @@ void Settings::init(QSettings* p)
     multipleGamesLayout->addWidget(multipleGamesLbl);
     clientGroupLayout->addWidget(multipleGamesWidget);
     connect(multipleGamesCB, &QCheckBox::stateChanged, [=] (int state) { setMultipleExec(state == Qt::Checked); });
+
+    QWidget* fulltabWidget = new QWidget();
+    QHBoxLayout* fulltabLayout = new QHBoxLayout(fulltabWidget);
+    QCheckBox* fulltabCB = new QCheckBox();
+    fulltabCB->setCheckState((p->value("TitleBar/Fulltab").toBool() ? Qt::Checked : Qt::Unchecked));
+    QLabel* fulltabLbl = new QLabel(tr("Full-tab highlighting"));
+    fulltabLayout->addWidget(fulltabCB);
+    fulltabLayout->addWidget(fulltabLbl);
+    clientGroupLayout->addWidget(fulltabWidget);
+    connect(fulltabCB, &QCheckBox::stateChanged, [=] (int state) { setFulltab(state == Qt::Checked); });
 
     /* STYLE SETTINGS GROUP */
     QGroupBox* styleGroup = new QGroupBox(tr("Style Settings"));
@@ -383,7 +392,6 @@ void Settings::exportTheme()
             QString value = palette.value(key).toString();
 
             fileStream << key << "=" << value << "\n";
-            fileStream.flush();
         }
     }
 }
@@ -431,11 +439,19 @@ void Settings::setMultipleExec(bool multipleExec)
 {
     QSettings config(QSettings::IniFormat, QSettings::UserScope, "HorizonLauncher", "config");
 
-    qDebug() << multipleExec;
-
     config.beginGroup("GameLauncher");
     config.setValue("MultipleExec", multipleExec);
     config.endGroup();
+}
+
+void Settings::setFulltab(bool fulltab)
+{
+    QSettings palette(QSettings::IniFormat, QSettings::UserScope, "HorizonLauncher", "palette");
+    // palette so that you can export it in a theme!
+
+    palette.beginGroup("TitleBar");
+    palette.setValue("Fulltab", fulltab);
+    palette.endGroup();
 }
 
 void Settings::pickSetColor(int id)

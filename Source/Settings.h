@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _SETTINGS_H_
+#define _SETTINGS_H_
+
 #include "Library.h"
 
 #include <QtWidgets>
@@ -14,6 +16,7 @@ private:
     void pickSetColor(int id);
     void init(QSettings* p);
     void setMultipleExec(bool multipleExec);
+    void setFulltab(bool fulltab);
 
     QPushButton* bodyColor;
     QPushButton* navbarBG;
@@ -47,3 +50,5 @@ public:
 signals:
     void didUpdateFeedURLs();
 };
+
+#endif

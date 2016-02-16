@@ -1,8 +1,10 @@
 #include "NewsFeedChooserWindow.h"
+
 #include <QPushButton>
 #include <QLabel>
 #include <QCloseEvent>
 #include <QtWidgets>
+#include <QMessageBox>
 
 NewsFeedChooserWindow::NewsFeedChooserWindow(QWidget *parent) : QDialog(parent)
 {
@@ -15,10 +17,20 @@ NewsFeedChooserWindow::NewsFeedChooserWindow(QWidget *parent) : QDialog(parent)
     this->loadURLsFromSettings();
     this->createURLLabels();
 
-    QPushButton* addURLButton = new QPushButton("Add");
     layout->addWidget(labels);
-    layout->addWidget(addURLButton);
+
+    QWidget* buttonsWidget = new QWidget();
+    layout->addWidget(buttonsWidget);
+
+    QHBoxLayout* buttonsLayout = new QHBoxLayout(buttonsWidget);
+
+    QPushButton* addURLButton = new QPushButton("Add");
+    buttonsLayout->addWidget(addURLButton);
     connect(addURLButton, &QPushButton::clicked, this, &NewsFeedChooserWindow::onAddURLButtonClicked);
+
+    QPushButton* addSubredditButton = new QPushButton("Add subreddit");
+    buttonsLayout->addWidget(addSubredditButton);
+    connect(addSubredditButton, &QPushButton::clicked, this, &NewsFeedChooserWindow::onAddSubredditButtonClicked);
 }
 
 void NewsFeedChooserWindow::loadURLsFromSettings()
@@ -60,6 +72,34 @@ void NewsFeedChooserWindow::onAddURLButtonClicked()
     }
 }
 
+void NewsFeedChooserWindow::onAddSubredditButtonClicked()
+{
+    QString newSubreddit = QInputDialog::getText(this, tr("Add a new subreddit"), tr("/r/"));
+
+    if (!newSubreddit.isEmpty())
+    {
+        // https://github.com/reddit/reddit/blob/fc2841ad2d45bb48433da4481046291a7f9394f4/r2/r2/models/subreddit.py#L385
+        QRegExp subredditRegex("^[A-Za-z0-9][A-Za-z0-9_]{2,20}$");
+
+        if (newSubreddit.contains(subredditRegex))
+        {
+            QString urlString = "https://www.reddit.com/r/" + newSubreddit + "/.rss";
+            qDebug() << urlString;
+
+            newUrls.append(urlString);
+            urls.append(urlString);
+            this->labelLayout->addWidget(new QLabel("/r/" + newSubreddit));
+        }
+        else
+        {
+            QMessageBox errorBox;
+            errorBox.setText("Invalid subreddit name!");
+            errorBox.setIcon(QMessageBox::Warning);
+            errorBox.exec();
+        }
+    }
+}
+
 void NewsFeedChooserWindow::createURLLabels()
 {
     for (int i = 0; i < this->labelWidgets.size(); i++)
@@ -77,7 +117,17 @@ void NewsFeedChooserWindow::createURLLabels()
 
         QWidget* labelWidget = new QWidget();
         QHBoxLayout* hLabelLayout = new QHBoxLayout(labelWidget);
-        hLabelLayout->addWidget(new QLabel(this->urls[i]));
+
+        QRegExp getSubreddit("^[\\w\\d]+:\\/\\/[\\w\\d]+\\.reddit\\.com\\/r\\/(.+)\\/.rss$");
+        if (this->urls[i].contains(getSubreddit))
+        {
+            getSubreddit.indexIn(this->urls[i]);
+            hLabelLayout->addWidget(new QLabel("/r/" + getSubreddit.cap(1)));
+        }
+        else
+        {
+            hLabelLayout->addWidget(new QLabel(this->urls[i]));
+        }
 
         QPushButton* deleteBtn = new QPushButton();
         deleteBtn->setIcon(crossIcon);

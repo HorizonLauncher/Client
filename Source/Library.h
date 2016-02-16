@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _LIBRARY_H_
+#define _LIBRARY_H_
 
 class LibraryGridView;
 
@@ -38,3 +39,5 @@ private:
 
     void init(QSettings* p);
 };
+
+#endif

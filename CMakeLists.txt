@@ -15,57 +15,89 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 set(SOURCE
+    # MAIN
     Source/Main.cpp
-    Source/TabWidget.cpp
-    Source/Library.cpp
-    Source/LibraryGridView.cpp
     Source/MainPanel.cpp
-    Source/Database.cpp
-    Source/DRMSetupWizard.cpp
+
+    # NAVBAR
     Source/Navbar.cpp
+    Source/TabWidget.cpp
+
+    # STACKED WIDGETS
+    Source/Library.cpp
     Source/Homepage.cpp
-    Source/BuddyList.cpp
-    Source/Community.cpp
-    Source/AddGameWizard.cpp
-    Source/Settings.cpp
-    Source/GameLauncher.cpp
     Source/News.cpp
+    Source/Community.cpp
+    Source/Store.cpp
+
+    # OTHER WIDGETS
+    Source/Settings.cpp
     Source/NewsItemWidget.cpp
-    Source/SetupWizard.cpp
     Source/GridGameWidget.cpp
     Source/BuddyListExpandable.cpp
     Source/NewsFeedChooserWindow.cpp
-    Source/Store.cpp
-    Source/LibraryDetailView.cpp
     Source/DetailGameWidget.cpp
+    Source/Store.cpp
+    Source/BuddyList.cpp
+
+    # LIBRARY VIEWS
+    Source/LibraryGridView.cpp
+    Source/LibraryDetailView.cpp
+
+
+    # WIZARDS
+    Source/DRMSetupWizard.cpp
+    Source/AddGameWizard.cpp
+    Source/SetupWizard.cpp
+
+    # MISC
+    Source/Database.cpp
+    Source/GameLauncher.cpp
 )
 
 set(HEADERS
-    Source/TabWidget.h
-    Source/Library.h
-    Source/LibraryGridView.h
+    # MAIN
     Source/MainPanel.h
-    Source/Database.h
     Source/Init.h
+
+    # NAVBAR
     Source/Navbar.h
-    Source/Libs/SteamVdfParse.hpp
-    Source/DRMSetupWizard.h
+    Source/TabWidget.h
+
+    # STACKED WIDGETS
+    Source/Library.h
     Source/Homepage.h
-    Source/BuddyList.h
-    Source/Community.h
-    Source/AddGameWizard.h
-    Source/Settings.h
-    Source/GameLauncher.h
     Source/News.h
+    Source/Community.h
+    Source/Store.h
+
+    # OTHER WIDGETS
+    Source/Settings.h
     Source/NewsItemWidget.h
-    Source.SetupWizard.h
-    Source/Defines.h
     Source/GridGameWidget.h
     Source/BuddyListExpandable.h
     Source/NewsFeedChooserWindow.h
+<<<<<<< HEAD
     Source/Store.h
     Source/LibraryDetailView.h
     Source/DetailGameWidget.h
+=======
+    Source/BuddyList.h
+
+    # LIBRARY VIEWS
+    Source/LibraryGridView.h
+
+    # WIZARDS
+    Source/DRMSetupWizard.h
+    Source/AddGameWizard.h
+    Source/SetupWizard.h
+
+    # MISC
+    Source/Database.h
+    Source/GameLauncher.h
+    Source/Libs/SteamVdfParse.hpp
+    Source/Defines.h
+>>>>>>> 9356bf84edc59d7d8c2789c7a5333e19c30fc2e8
 )
 
 set(RESOURCES

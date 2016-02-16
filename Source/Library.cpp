@@ -137,6 +137,7 @@ void Library::init(QSettings* p)
     QScrollArea* scrollArea = new QScrollArea(this);
     scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     detailView = new LibraryDetailView(p, this);
+    detailView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     scrollArea->setWidgetResizable(false);
     scrollArea->setWidget(detailView);
     scrollArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
@@ -146,7 +147,7 @@ void Library::init(QSettings* p)
      * The following line is the magic that makes this layout
      * hold. QScrollArea ignores SizePolicies for some reason
      * and relies on correctly setting the sizeHint.
-     * TODO: Make this less jank.
+     * TODO: Make this less hacky.
      */
     detailView->setMinimumWidth(1150);
 

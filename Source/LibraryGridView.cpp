@@ -6,12 +6,13 @@
 /** LibraryGridView constructor
  * Initialize the grid UI and generate an initial list of all the games available.
  * \param p Inherited palette configuration for setting StyleSheets.
+ * \param library Pointer to the parent library (used for launching games etc)
  * \param parent Pointer to parent widget.
 */
 LibraryGridView::LibraryGridView(QSettings* p, Library* library, QWidget* parent)
     : QWidget(parent)
 {
-    this->setObjectName("libraryUI");
+    this->setObjectName("libraryGridUI");
     this->setStyleSheet("QPushButton {"
                         "color: " + p->value("Primary/LightText").toString() + "; "
                         "background-color: " + p->value("Primary/DarkElement").toString() + "; "

@@ -1,4 +1,5 @@
- #pragma once
+#ifndef _DATABASE_H_
+#define _DATABASE_H_
 
 #include <QSqlQuery>
 #include <QtWidgets>
@@ -55,3 +56,5 @@ private:
 
     QString path;
 };
+
+#endif

@@ -4,11 +4,13 @@
 DetailGameWidget::DetailGameWidget(Game game, QSettings* palette, QWidget* parent) : QWidget(parent)
 {
     this->palette = palette;
-    this->setStyleSheet("background-color: " + palette->value("Primary/SecondaryBase").toString() + ";");
+    this->setObjectName("DetailGameWidget");
+    this->setStyleSheet("background-color: rgba(0,0,0,0)");
+
     QHBoxLayout* widgetLayout = new QHBoxLayout(this);
     widgetLayout->setSpacing(0);
     QLabel* imageLabel = new QLabel("");
-    imageLabel->setStyleSheet("background-image: url();");
+
 
     QPixmap imageMap(":SystemMenu/Images/LibraryGridPlaceholder.png");
     imageLabel->setPixmap(imageMap.scaledToHeight(100));
@@ -17,6 +19,7 @@ DetailGameWidget::DetailGameWidget(Game game, QSettings* palette, QWidget* paren
 
     //Create the main title label and sublabels
     gameTitleWidget = new QWidget(this);
+    gameTitleWidget->setAutoFillBackground(false);
     QVBoxLayout* gameTitleWidgetLayout = new QVBoxLayout(gameTitleWidget);
     QLabel* titleLabel = new QLabel(game.gameName);
     titleLabel->setStyleSheet("font-family: Roboto; font-style: normal; font-size: 16pt");
@@ -75,14 +78,14 @@ DetailGameWidget::DetailGameWidget(Game game, QSettings* palette, QWidget* paren
 
 void DetailGameWidget::enterEvent(QEvent* event)
 {
-   this->setStyleSheet("background-color: " + this->palette->value("Primary/HoverSelection").toString());
+   //this->setStyleSheet("background-color: " + this->palette->value("Primary/HoverSelection").toString());
    this->setCursor(Qt::PointingHandCursor);
 
 }
 
 void DetailGameWidget::leaveEvent(QEvent* event)
 {
-    this->setStyleSheet("background-color: " + this->palette->value("Primary/SecondaryBase").toString());
+    //this->setStyleSheet("background-color: " + this->palette->value("Primary/SecondaryBase").toString());
      this->setCursor(Qt::ArrowCursor);
 
 }
@@ -93,5 +96,12 @@ void DetailGameWidget::leaveEvent(QEvent* event)
   */
 void DetailGameWidget::styleLabel(QLabel *label){
     label->setStyleSheet("font-family: Roboto; font-style: normal; font-size: 10pt");
+}
+
+void DetailGameWidget::paintEvent(QPaintEvent* event)
+{
+    QPainter painter(this);
+    QPixmap imageMap("C:/LibraryListPlaceholderBG.png");
+    painter.drawPixmap(0,0,this->width(), this->height(), imageMap);
 }
 

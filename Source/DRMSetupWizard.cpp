@@ -532,8 +532,17 @@ void ResultsPage::findSteamGames()
     {
         steamAppsDir = steamRoot.filePath("SteamApps");
     }
+
+    QString libraryFoldersPath = steamAppsDir.filePath("libraryfolders.vdf");
+    QFileInfo* libraryFoldersInfo = new QFileInfo(libraryFoldersPath);
+
+    if (!libraryFoldersInfo->isReadable())
+    {
+        return;
+    }
+
     pt::ptree libraryFolders;
-    pt::read_info(steamAppsDir.filePath("libraryfolders.vdf").toLocal8Bit().constData(), libraryFolders);
+    pt::read_info(libraryFoldersPath.toLocal8Bit().constData(), libraryFolders);
     steamDirectoryList.append(steamRoot.filePath(""));
     QString pathString = "" + steamDirectoryList.at(0) + "\n";
 

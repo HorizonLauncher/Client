@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _WINPANEL_H_
+#define _WINPANEL_H_
 
 #include "MainPanel.h"
 
@@ -18,5 +19,6 @@ public slots:
 
 private:
     WinWindow* winPanel;
-
 };
+
+#endif

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _UNIXPANEL_H_
+#define _UNIXPANEL_H_
 
 #include "MainPanel.h"
 
@@ -20,3 +21,5 @@ private:
     UnixWindow* unixPanel;
 
 };
+
+#endif
