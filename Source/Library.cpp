@@ -37,7 +37,7 @@ Library::Library(QSettings* p, QWidget* parent)
 
 void Library::init(QSettings* p)
 {
-    QGridLayout* mainLayout = new QGridLayout(this);
+    mainLayout = new QGridLayout(this);
     mainLayout->setMargin(0);
 
     QWidget* searchBar = new QWidget();
@@ -116,6 +116,7 @@ void Library::init(QSettings* p)
     gridBtn->setStyleSheet("background-color: transparent;");
     gridBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     searchLayout->addWidget(gridBtn);
+    connect(gridBtn, &QPushButton::clicked, this, &Library::setGridView);
 
     QPushButton* listBtn = new QPushButton("");
     listBtn->setIcon(listIcon);
@@ -123,6 +124,7 @@ void Library::init(QSettings* p)
     listBtn->setStyleSheet("background-color: transparent;");
     listBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     searchLayout->addWidget(listBtn);
+    connect(listBtn, &QPushButton::clicked, this, &Library::setDetailView);
 
     QPushButton* carouselBtn = new QPushButton("");
     carouselBtn->setIcon(carouselIcon);
@@ -141,7 +143,12 @@ void Library::init(QSettings* p)
     scrollArea->setWidgetResizable(false);
     scrollArea->setWidget(detailView);
     scrollArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-    mainLayout->addWidget(scrollArea, 2, 0);
+
+    //Put the two views in a stack for easy changing
+    stackWidget = new QStackedWidget(this);
+    stackWidget->addWidget(gridView);
+    stackWidget->addWidget(scrollArea);
+    mainLayout->addWidget(stackWidget, 2, 0);
 
     /*
      * The following line is the magic that makes this layout
@@ -186,4 +193,22 @@ void Library::changeLaunchOpts(QString gameName)
     {
         Library::db.setLaunchOptionsByName(gameName, newLaunchOpts);
     }
+}
+
+
+/**
+  Sets the current games layout to the grid view
+ */
+void Library::setGridView()
+{
+    stackWidget->setCurrentIndex(0);
+}
+
+/**
+  Sets the current games layout to the list (detail) view
+ */
+void Library::setDetailView()
+{
+    stackWidget->setCurrentIndex(1);
+
 }

@@ -34,7 +34,7 @@ LibraryGridView::LibraryGridView(QSettings* p, Library* library, QWidget* parent
     QList<Game> games = Library::db.getGames();
     for (auto game : games)
     {
-        qDebug() << game.id << game.gameName << game.gameDirectory << game.executablePath;
+        //qDebug() << game.id << game.gameName << game.gameDirectory << game.executablePath;
     }
 
     connect(&Library::db, &Database::dbChanged, this, &LibraryGridView::refreshGames);

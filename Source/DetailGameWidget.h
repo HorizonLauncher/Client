@@ -27,6 +27,7 @@ private:
     void paintEvent(QPaintEvent *) override;
     QSettings* palette;
     void styleLabel(QLabel* label);
+    bool currentlyHoveredOver;
 
 public slots:
 

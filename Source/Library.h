@@ -15,6 +15,7 @@ class LibraryGridView;
 #include <QDir>
 #include <QGridLayout>
 #include <QList>
+#include <QStackedWidget>
 
 /** Library class.
  * Class to handle the library section of the launcher
@@ -31,8 +32,14 @@ public:
 
     static Database db;
 
+public slots:
+    void setGridView();
+    void setDetailView();
+
 private:
     GameLauncher gl;
+    QGridLayout* mainLayout;
+    QStackedWidget* stackWidget;
     LibraryGridView* gridView;
     LibraryDetailView* detailView;
     QLineEdit* searchBox;
