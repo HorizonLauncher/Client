@@ -134,17 +134,17 @@ void Library::init(QSettings* p)
     searchLayout->addWidget(carouselBtn);
 
     gridView = new LibraryGridView(p, this);
+    detailView = new LibraryDetailView(p, this);
     //mainLayout->addWidget(gridView, 2, 0);
+
+    detailView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     QScrollArea* scrollArea = new QScrollArea(this);
     scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    detailView = new LibraryDetailView(p, this);
-    detailView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     scrollArea->setWidgetResizable(false);
     scrollArea->setWidget(detailView);
     scrollArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
-    //Put the two views in a stack for easy changing
     stackWidget = new QStackedWidget(this);
     stackWidget->addWidget(gridView);
     stackWidget->addWidget(scrollArea);
