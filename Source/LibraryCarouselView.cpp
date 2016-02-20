@@ -39,29 +39,35 @@ LibraryCarouselView::LibraryCarouselView(QSettings* p, Library* library, QWidget
 
     connect(&Library::db, &Database::dbChanged, this, &LibraryCarouselView::refreshGames);
 
+    launchConnection = connect(launchBtn, &QPushButton::clicked, [=]{});
+
     refreshGames();
 }
 
 void LibraryCarouselView::init(QSettings* p)
 {
-    QVBoxLayout* mainLayout = new QVBoxLayout(this);
+    QGridLayout* mainGrid = new QGridLayout(this);
+
+    QWidget* contentWidget = new QWidget();
+    QVBoxLayout* contentLayout = new QVBoxLayout(contentWidget);
+    mainGrid->addWidget(contentWidget, 0, 0);
 
     QPushButton* addGameBtn = new QPushButton(tr("Add game"));
     addGameBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     addGameBtn->setStyleSheet("margin: 11px 0 0 11px; padding: 5px;");
-    mainLayout->addWidget(addGameBtn, 0, 0);
+    contentLayout->addWidget(addGameBtn, 0, 0);
     connect(addGameBtn, &QPushButton::clicked, this, &LibraryCarouselView::addGame);
 
-    QLabel* nameLabel = new QLabel("Grey Goo"); //todo: globalize
+    nameLabel = new QLabel("Grey Goo");
     nameLabel->setStyleSheet("font-size: 20pt;");
     nameLabel->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    mainLayout->addWidget(nameLabel);
+    contentLayout->addWidget(nameLabel);
 
     QWidget* hoursLaunchWidget = new QWidget();
     hoursLaunchWidget->setStyleSheet("background-color: " + p->value("Primary/DarkestBase").toString() + ";");
     hoursLaunchWidget->setMinimumWidth(350);
     hoursLaunchWidget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    mainLayout->addWidget(hoursLaunchWidget);
+    contentLayout->addWidget(hoursLaunchWidget);
 
     QGridLayout* hoursLaunchLayout = new QGridLayout(hoursLaunchWidget);
 
@@ -71,12 +77,12 @@ void LibraryCarouselView::init(QSettings* p)
     QVBoxLayout* hoursLastLayout = new QVBoxLayout(hoursLastWidget);
     hoursLastLayout->setMargin(0);
 
-    QLabel* hoursPlayedLbl = new QLabel("Hours played: 999");
+    hoursPlayedLbl = new QLabel("Hours played: 999");
     hoursLastLayout->addWidget(hoursPlayedLbl, 0, 0);//todo: not a grid
-    QLabel* lastPlayedLbl = new QLabel("Last played: 1 hour ago");
+    lastPlayedLbl = new QLabel("Last played: 1 hour ago");
     hoursLastLayout->addWidget(lastPlayedLbl, 1, 0);//todo: not a grid
 
-    QPushButton* launchBtn = new QPushButton("Launch Game");
+    launchBtn = new QPushButton("Launch Game");
     launchBtn->setStyleSheet("background-color: #E82218; padding: 5px;");
     launchBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     hoursLaunchLayout->addWidget(launchBtn, 0, 1);
@@ -85,11 +91,11 @@ void LibraryCarouselView::init(QSettings* p)
     friendsPlayingWidget->setStyleSheet("background-color: " + p->value("Primary/DarkestBase").toString() + ";");
     friendsPlayingWidget->setMinimumWidth(350);
     friendsPlayingWidget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    mainLayout->addWidget(friendsPlayingWidget);
+    contentLayout->addWidget(friendsPlayingWidget);
 
     QGridLayout* friendsPlayingLayout = new QGridLayout(friendsPlayingWidget);
 
-    QLabel* friendsPlayingTitle = new QLabel("Friends playing Grey Goo");
+    friendsPlayingTitle = new QLabel("Friends playing Grey Goo");
     friendsPlayingLayout->addWidget(friendsPlayingTitle, 0, 0);
     friendsPlayingLayout->addWidget(new QLabel("View all friends"), 0, 1, Qt::AlignRight);
     friendsPlayingLayout->addWidget(new QLabel("None"), 1, 0);
@@ -118,7 +124,7 @@ void LibraryCarouselView::init(QSettings* p)
         "}");
     gameInfoTabs->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
     gameInfoTabs->setMinimumWidth(350);
-    mainLayout->addWidget(gameInfoTabs);
+    contentLayout->addWidget(gameInfoTabs);
 
     QWidget* gameInfoPage = new QWidget();
 
@@ -151,7 +157,26 @@ void LibraryCarouselView::init(QSettings* p)
     gameInfoTabs->addTab(modsPage, "Mods");
 
     QWidget* filler = new QWidget();
-    mainLayout->addWidget(filler);
+    contentLayout->addWidget(filler);
+
+    QWidget* gamesWidget = new QWidget();
+    gamesLayout = new QVBoxLayout(gamesWidget);
+    mainGrid->addWidget(gamesWidget, 0, 1, Qt::AlignRight);
+}
+
+void LibraryCarouselView::filterGames(QString searchString)
+{
+    this->searchString = searchString;
+}
+
+
+/** Event handler for adding a game.
+ * Prompts the user for various paths, and adds the final game to the database.
+*/
+void LibraryCarouselView::addGame()
+{
+    AddGameWizard* wiz = new AddGameWizard();
+    wiz->show();
 }
 
 /** Recreate the list of games displayed in the main widget.
@@ -168,48 +193,58 @@ void LibraryCarouselView::refreshGames()
     gamesWidgets.clear();
 
     QList<Game> gameList = Library::db.getGames();
-    std::sort(gameList.begin(), gameList.end(), [&](const Game& g1, const Game& g2){return g1.gameName < g2.gameName; });
-    int row = 0, col = 0;
+    std::sort(gameList.begin(), gameList.end(),
+        [&](const Game& g1, const Game& g2)
+        {
+            return g1.gameName < g2.gameName;
+        }
+    );
+
+    int i = 0;
     for (auto game : gameList)
     {
-        QString lowerGameName = game.gameName.toLower();
-        if (!searchString.isEmpty() && !lowerGameName.contains(searchString.toLower()))
-        {
-            continue;
-        }
-
         QString displayedName = game.gameName;
         if (displayedName.length() > 20)
         {
             displayedName = displayedName.left(20) + "...";
         }
 
-        GridGameWidget* gameWidget = new GridGameWidget(displayedName, 999);
-        //gamesLayout->addWidget(gameWidget, row, col);
-        /*connect(gameWidget, &GridGameWidget::leftClick, [=] { library->launchGame(game.gameName); });
-        connect(gameWidget, &GridGameWidget::changeLaunchOpts, [=]{ library->changeLaunchOpts(game.gameName); });
-        connect(gameWidget, &GridGameWidget::removeGame, [=]{ Library::db.removeGameByName(game.gameName); });*/
-        //gamesWidgets.append(gameWidget);
-
-        if (col == 3)
+        if (i == 0)
         {
-            row++;
+            nameLabel->setText(game.gameName);
+            friendsPlayingTitle->setText("Friends playing " + displayedName);
+            disconnect(launchConnection);
+            launchConnection = connect(launchBtn, &QPushButton::clicked,
+                [=]
+                {
+                    library->launchGame(game.gameName);
+                }
+            );
+            i = 1;
         }
-        col = (col < 3 ? col + 1 : 0);
+        QString lowerGameName = game.gameName.toLower();
+        if (!searchString.isEmpty() && !lowerGameName.contains(searchString.toLower()))
+        {
+            continue;
+        }
+
+        GridGameWidget* gameWidget = new GridGameWidget(displayedName, 999);
+        gamesLayout->addWidget(gameWidget);
+        gamesWidgets.append(gameWidget);
+
+        connect(gameWidget, &GridGameWidget::leftClick,
+            [=]
+            {
+                nameLabel->setText(game.gameName);
+                friendsPlayingTitle->setText("Friends playing " + displayedName);
+                disconnect(launchConnection);
+                launchConnection = connect(launchBtn, &QPushButton::clicked,
+                    [=]
+                    {
+                        library->launchGame(game.gameName);
+                    }
+                );
+            }
+        );
     }
-}
-
-void LibraryCarouselView::filterGames(QString searchString)
-{
-    this->searchString = searchString;
-}
-
-
-/** Event handler for adding a game.
- * Prompts the user for various paths, and adds the final game to the database.
-*/
-void LibraryCarouselView::addGame()
-{
-    AddGameWizard* wiz = new AddGameWizard();
-    wiz->show();
 }

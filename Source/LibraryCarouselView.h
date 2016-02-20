@@ -27,10 +27,16 @@ private slots:
 private:
     void init(QSettings* p);
 
-    QGridLayout* gamesLayout;
+    QVBoxLayout* gamesLayout;
     QList<QWidget*> gamesWidgets;
     Library* library;
 
+    QLabel* nameLabel;
+    QLabel* hoursPlayedLbl;
+    QLabel* lastPlayedLbl;
+    QPushButton* launchBtn;
+    QMetaObject::Connection launchConnection;
+    QLabel* friendsPlayingTitle;
     QString searchString;
 };
 
