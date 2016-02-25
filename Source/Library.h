@@ -14,6 +14,7 @@ class LibraryGridView;
 #include <QDir>
 #include <QGridLayout>
 #include <QList>
+#include <QStackedWidget>
 
 /** Library class.
  * Class to handle the library section of the launcher
@@ -35,6 +36,7 @@ private:
 
     LibraryGridView* gridView;
     QLineEdit* searchBox;
+    QStackedWidget* viewStack;
 
     void init(QSettings* p);
 };

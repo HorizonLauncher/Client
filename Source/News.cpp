@@ -5,6 +5,7 @@
 #include <QListWidgetItem>
 #include <QtNetwork>
 #include <QShortcut>
+#include <QScrollArea>
 
 /**
  * News constructor
@@ -130,7 +131,7 @@ News::~News()
     delete firstColumn;
     delete secondColumn;
     delete thirdColumn;
-    delete mainLayout;
+    delete columnLayout;
 }
 
 /**
@@ -138,14 +139,25 @@ News::~News()
  */
 void News::setupUI()
 {
-    mainLayout = new QHBoxLayout();
+    QVBoxLayout* thisLayout = new QVBoxLayout(this);
+    QWidget* mainWidget = new QWidget();
+
+    columnLayout = new QHBoxLayout(mainWidget);
     firstColumn = new QVBoxLayout();
     secondColumn = new QVBoxLayout();
     thirdColumn = new QVBoxLayout();
-    mainLayout->addLayout(firstColumn);
-    mainLayout->addLayout(secondColumn);
-    mainLayout->addLayout(thirdColumn);
-    this->setLayout(mainLayout);
+    columnLayout->addLayout(firstColumn);
+    columnLayout->addLayout(secondColumn);
+    columnLayout->addLayout(thirdColumn);
+
+    QScrollArea* scrollArea = new QScrollArea(this);
+    scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    scrollArea->setWidgetResizable(false);
+    scrollArea->setWidget(mainWidget);
+    scrollArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+
+    thisLayout->addWidget(scrollArea);
 }
 
 /**

@@ -6,6 +6,7 @@
 #include <QMessageBox>
 #include <QDebug>
 #include <QFileSystemWatcher>
+#include <QScrollArea>
 
 Database Library::db(QDir(CONFIG_FOLDER).filePath("horizon.db"));
 
@@ -132,7 +133,18 @@ void Library::init(QSettings* p)
     searchLayout->addWidget(carouselBtn);
 
     gridView = new LibraryGridView(p, this);
-    mainLayout->addWidget(gridView, 2, 0);
+
+    viewStack = new QStackedWidget(this);
+    viewStack->addWidget(gridView);
+
+    QScrollArea* scrollArea = new QScrollArea(this);
+    scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    scrollArea->setWidgetResizable(false);
+    scrollArea->setWidget(viewStack);
+    scrollArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+
+    mainLayout->addWidget(scrollArea, 2, 0);
 }
 
 /** Function to launch a game.
