@@ -75,9 +75,9 @@ DetailGameWidget::DetailGameWidget(Game game, QSettings* palette, QWidget* paren
 
     //Create Button
     QPushButton* playButton = new QPushButton();
-    playButton->setStyleSheet("background-image: url(:SystemMenu/Icons/LaunchIcon.png);"
+    playButton->setStyleSheet("background-image: url(:SystemMenu/Icons/LaunchIconInverted.png);"
                               "background-repeat: no-repeat;"
-                              "background-color: white");
+                              "background-color: transparent;");
     playButton->setMinimumSize(40, 40);
     widgetLayout->addWidget(playButton);
 
@@ -110,9 +110,8 @@ void DetailGameWidget::styleLabel(QLabel *label){
 
 void DetailGameWidget::paintEvent(QPaintEvent* event)
 {
-    QPainter painter(this);  
+    QPainter painter(this);
     QString imageString;
     QPixmap imageMap(":SystemMenu/Images/LibraryListPlaceholderBG.png");
     painter.drawPixmap(0,0,this->width(), this->height(), imageMap);
 }
-
