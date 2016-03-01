@@ -38,7 +38,7 @@ Library::Library(QSettings* p, QWidget* parent)
 
 void Library::init(QSettings* p)
 {
-    QGridLayout* mainLayout = new QGridLayout(this);
+    mainLayout = new QGridLayout(this);
     mainLayout->setMargin(0);
 
     QWidget* searchBar = new QWidget();
@@ -117,6 +117,7 @@ void Library::init(QSettings* p)
     gridBtn->setStyleSheet("background-color: transparent;");
     gridBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     searchLayout->addWidget(gridBtn);
+    connect(gridBtn, &QPushButton::clicked, this, &Library::setGridView);
 
     QPushButton* listBtn = new QPushButton("");
     listBtn->setIcon(listIcon);
@@ -124,6 +125,7 @@ void Library::init(QSettings* p)
     listBtn->setStyleSheet("background-color: transparent;");
     listBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     searchLayout->addWidget(listBtn);
+    connect(listBtn, &QPushButton::clicked, this, &Library::setDetailView);
 
     QPushButton* carouselBtn = new QPushButton("");
     carouselBtn->setIcon(carouselIcon);
@@ -133,18 +135,32 @@ void Library::init(QSettings* p)
     searchLayout->addWidget(carouselBtn);
 
     gridView = new LibraryGridView(p, this);
+    detailView = new LibraryDetailView(p, this);
+    detailView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     viewStack = new QStackedWidget(this);
-    viewStack->addWidget(gridView);
 
-    QScrollArea* scrollArea = new QScrollArea(this);
-    scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    scrollArea->setWidgetResizable(false);
-    scrollArea->setWidget(viewStack);
-    scrollArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    QScrollArea* gridScrollArea = new QScrollArea(this);
+    gridScrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    gridScrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    gridScrollArea->setFrameShape(QFrame::NoFrame);
+    gridScrollArea->setWidgetResizable(true);
+    gridScrollArea->setWidget(gridView);
+    gridScrollArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
-    mainLayout->addWidget(scrollArea, 2, 0);
+    viewStack->addWidget(gridScrollArea);
+
+    QScrollArea* detailScrollArea = new QScrollArea(this);
+    detailScrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    detailScrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    detailScrollArea->setFrameShape(QFrame::NoFrame);
+    detailScrollArea->setWidgetResizable(true);
+    detailScrollArea->setWidget(detailView);
+    detailScrollArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+
+    viewStack->addWidget(detailScrollArea);
+
+    mainLayout->addWidget(viewStack, 2, 0);
 }
 
 /** Function to launch a game.
@@ -180,4 +196,21 @@ void Library::changeLaunchOpts(QString gameName)
     {
         Library::db.setLaunchOptionsByName(gameName, newLaunchOpts);
     }
+}
+
+
+/**
+  Sets the current games layout to the grid view
+ */
+void Library::setGridView()
+{
+    viewStack->setCurrentIndex(0);
+}
+
+/**
+  Sets the current games layout to the list (detail) view
+ */
+void Library::setDetailView()
+{
+    viewStack->setCurrentIndex(1);
 }

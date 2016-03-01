@@ -36,10 +36,13 @@ set(SOURCE
     Source/GridGameWidget.cpp
     Source/BuddyListExpandable.cpp
     Source/NewsFeedChooserWindow.cpp
+    Source/DetailGameWidget.cpp
+    Source/Store.cpp
     Source/BuddyList.cpp
 
     # LIBRARY VIEWS
     Source/LibraryGridView.cpp
+    Source/LibraryDetailView.cpp
 
     # WIZARDS
     Source/DRMSetupWizard.cpp
@@ -73,10 +76,13 @@ set(HEADERS
     Source/GridGameWidget.h
     Source/BuddyListExpandable.h
     Source/NewsFeedChooserWindow.h
+    Source/Store.h
+    Source/DetailGameWidget.h
     Source/BuddyList.h
 
     # LIBRARY VIEWS
     Source/LibraryGridView.h
+    Source/LibraryDetailView.h
 
     # WIZARDS
     Source/DRMSetupWizard.h

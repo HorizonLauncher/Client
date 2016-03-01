@@ -3,5 +3,8 @@
         <file>Images/TitleBarPattern.png</file>
         <file>Images/LibraryGridPlaceholder.png</file>
         <file>Images/ProfilePlaceholder.png</file>
+        <file>Images/LibraryCarouselPlaceholder.png</file>
+        <file>Images/LibraryCarouselPlaceholderActive.png</file>
+        <file>Images/LibraryListPlaceholderBG.png</file>
     </qresource>
 </RCC>

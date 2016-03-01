@@ -7,6 +7,7 @@ class LibraryGridView;
 #include "GameLauncher.h"
 #include "BuddyList.h"
 #include "LibraryGridView.h"
+#include "LibraryDetailView.h"
 
 #include <QWidget>
 #include <QProcess>
@@ -31,10 +32,16 @@ public:
 
     static Database db;
 
+public slots:
+    void setGridView();
+    void setDetailView();
+
 private:
     GameLauncher gl;
-
+    QGridLayout* mainLayout;
+    QStackedWidget* stackWidget;
     LibraryGridView* gridView;
+    LibraryDetailView* detailView;
     QLineEdit* searchBox;
     QStackedWidget* viewStack;
 
