@@ -133,10 +133,12 @@ void Library::init(QSettings* p)
     carouselBtn->setStyleSheet("background-color: transparent;");
     carouselBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     searchLayout->addWidget(carouselBtn);
+    connect(carouselBtn, &QPushButton::clicked, this, &Library::setCarouselView);
 
     gridView = new LibraryGridView(p, this);
     detailView = new LibraryDetailView(p, this);
     detailView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    carouselView = new LibraryCarouselView(p, this);
 
     viewStack = new QStackedWidget(this);
 
@@ -159,6 +161,16 @@ void Library::init(QSettings* p)
     detailScrollArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
     viewStack->addWidget(detailScrollArea);
+
+    QScrollArea* carouselScrollArea = new QScrollArea(this);
+    carouselScrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    carouselScrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    carouselScrollArea->setFrameShape(QFrame::NoFrame);
+    carouselScrollArea->setWidgetResizable(true);
+    carouselScrollArea->setWidget(carouselView);
+    carouselScrollArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+
+    viewStack->addWidget(carouselScrollArea);
 
     mainLayout->addWidget(viewStack, 2, 0);
 }
@@ -213,4 +225,12 @@ void Library::setGridView()
 void Library::setDetailView()
 {
     viewStack->setCurrentIndex(1);
+}
+
+/**
+  Sets the current games layout to the carousel view
+ */
+void Library::setCarouselView()
+{
+    viewStack->setCurrentIndex(2);
 }

@@ -2,12 +2,14 @@
 #define _LIBRARY_H_
 
 class LibraryGridView;
+class LibraryCarouselView;
 
 #include "Database.h"
 #include "GameLauncher.h"
 #include "BuddyList.h"
 #include "LibraryGridView.h"
 #include "LibraryDetailView.h"
+#include "LibraryCarouselView.h"
 
 #include <QWidget>
 #include <QProcess>
@@ -35,12 +37,14 @@ public:
 public slots:
     void setGridView();
     void setDetailView();
+    void setCarouselView();
 
 private:
     GameLauncher gl;
     QGridLayout* mainLayout;
     LibraryGridView* gridView;
     LibraryDetailView* detailView;
+    LibraryCarouselView* carouselView;
     QLineEdit* searchBox;
     QStackedWidget* viewStack;
 
