@@ -39,7 +39,6 @@ public slots:
 private:
     GameLauncher gl;
     QGridLayout* mainLayout;
-    QStackedWidget* stackWidget;
     LibraryGridView* gridView;
     LibraryDetailView* detailView;
     QLineEdit* searchBox;
