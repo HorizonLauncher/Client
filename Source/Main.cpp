@@ -37,7 +37,6 @@ int main(int argc, char* argv[])
     {
         configFolder.cdUp();
         configFolder.mkdir("HorizonLauncher");
-        qDebug() << "DSFSDF";
     }
 
     bool dbExists = QFile(QDir(CONFIG_FOLDER).filePath("horizon.db")).exists();
