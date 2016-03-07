@@ -32,6 +32,16 @@ int main(int argc, char* argv[])
     horizonTranslator.load("horizon_" + QLocale::system().name());
     application->installTranslator(&horizonTranslator);
 
+    QDir configFolder(CONFIG_FOLDER);
+    if (!configFolder.exists())
+    {
+        configFolder.cdUp();
+        configFolder.mkdir("HorizonLauncher");
+        qDebug() << "DSFSDF";
+    }
+
+    bool dbExists = QFile(QDir(CONFIG_FOLDER).filePath("horizon.db")).exists();
+
     if (!Library::db.init())
     {
         QMessageBox error;
@@ -39,14 +49,6 @@ int main(int argc, char* argv[])
         exit(EXIT_FAILURE);
     }
 
-    QDir configFolder(CONFIG_FOLDER);
-    if (!configFolder.exists())
-    {
-        configFolder.cdUp();
-        configFolder.mkdir("HorizonLauncher");
-    }
-
-    bool dbExists = QFile(QDir(CONFIG_FOLDER).filePath("horizon.db")).exists();
     SetupWizard* wiz = new SetupWizard();
 
     #ifndef Q_OS_WIN
