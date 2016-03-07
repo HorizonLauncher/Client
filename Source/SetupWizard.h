@@ -35,4 +35,16 @@ private slots:
     void openAddGameWizard();
     void openDRMWizard();
 };
+
+class AddNewsFeedsPage : public QWizardPage
+{
+    Q_OBJECT
+
+public:
+    AddNewsFeedsPage(QWidget* parent = 0);
+    bool validatePage() Q_DECL_OVERRIDE;
+
+private:
+    QMap<QCheckBox*, QString> checkboxes;
+};
 #endif
