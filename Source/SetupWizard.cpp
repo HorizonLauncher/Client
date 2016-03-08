@@ -129,6 +129,22 @@ AddNewsFeedsPage::AddNewsFeedsPage(QWidget* parent)
     newsFeeds.append(*new QList<QString>({"GameInformer", "http://www.gameinformer.com/feeds/thefeedrss.aspx"}));
     newsFeeds.append(*new QList<QString>({"Gamespot", "http://www.gamespot.com/feeds/mashup/"}));
     newsFeeds.append(*new QList<QString>({"Destructoid", "http://feeds.feedburner.com/Destructoid"}));
+    newsFeeds.append(*new QList<QString>({"EuroGamer PC", "http://www.eurogamer.net/?format=rss&platform=PC"}));
+    newsFeeds.append(*new QList<QString>({"Games Revolution", "http://www.gamerevolution.com/rss/rss_everything.xml"}));
+    newsFeeds.append(*new QList<QString>({"GamesIndistry.biz", "http://www.gamesindustry.biz/rss/gamesindustry_news_feed.rss"}));
+    newsFeeds.append(*new QList<QString>({"Indiegames.com", "http://feeds.feedburner.com/IndependentGaming"}));
+    newsFeeds.append(*new QList<QString>({"Kotaku", "http://feeds.gawker.com/kotaku/full"}));
+    newsFeeds.append(*new QList<QString>({"MP 1st", "http://mp1st.com/feed"}));
+    newsFeeds.append(*new QList<QString>({"Nintendojo", "http://www.nintendojo.com/category/news/feed"}));
+    newsFeeds.append(*new QList<QString>({"PC Gamer", "http://www.pcgamer.com/feed/rss2/"}));
+    newsFeeds.append(*new QList<QString>({"PCGamesN", "http://www.pcgamesn.com/mainrss.xml"}));
+    newsFeeds.append(*new QList<QString>({"Player Theory", "http://playertheory.com/rss"}));
+    newsFeeds.append(*new QList<QString>({"Pocket Gamer", "http://www.pocketgamer.co.uk/rss.asp?t=news"}));
+    newsFeeds.append(*new QList<QString>({"Polygon News", "http://www.polygon.com/rss/group/news/index.xml"}));
+    newsFeeds.append(*new QList<QString>({"Rock, Paper, Shotgun", "http://feeds.feedburner.com/RockPaperShotgun"}));
+    newsFeeds.append(*new QList<QString>({"Siliconera", "http://www.siliconera.com/feed/"}));
+    newsFeeds.append(*new QList<QString>({"VG274", "https://www.vg247.com/feed/"}));
+
 
     for (QList<QString> feed : newsFeeds)
     {
