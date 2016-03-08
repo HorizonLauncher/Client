@@ -1,5 +1,5 @@
 #include "Settings.h"
-#include "DRMSetupWizard.h"
+#include "SetupWizard.h"
 #include "NewsFeedChooserWindow.h"
 
 /** Settings constructor
@@ -60,11 +60,15 @@ void Settings::init(QSettings* p)
 
     QVBoxLayout* clientGroupLayout = new QVBoxLayout(clientGroup);
 
-    QPushButton* addGamesBtn = new QPushButton(tr("Add games to Horizon"));
-    addGamesBtn->setStyleSheet("padding: 5px;");
-    addGamesBtn->setFont(buttonFont);
-    clientGroupLayout->addWidget(addGamesBtn);
-    connect(addGamesBtn, &QPushButton::clicked, [=] { DRMSetupWizard* wiz = new DRMSetupWizard(); wiz->show(); });
+    QPushButton* setupWizardBtn = new QPushButton(tr("Open Setup Wizard"));
+    setupWizardBtn->setStyleSheet("padding: 5px;");
+    setupWizardBtn->setFont(buttonFont);
+    clientGroupLayout->addWidget(setupWizardBtn);
+    connect(setupWizardBtn, &QPushButton::clicked, [=]
+    {
+        SetupWizard* wiz = new SetupWizard();
+        wiz->show();
+    });
 
     QPushButton* clearDBBtn = new QPushButton(tr("Clear database"));
     clearDBBtn->setStyleSheet("padding: 5px;");
