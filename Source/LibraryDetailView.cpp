@@ -11,6 +11,9 @@ LibraryDetailView::LibraryDetailView(QSettings* p, QWidget *parent) : QWidget(pa
     this->mainLayout = new QVBoxLayout(this);
     mainLayout->setSpacing(10);
     this->palette = p;
+
+    connect(&Library::db, &Database::dbChanged, this, &LibraryDetailView::refreshGames);
+
     refreshGames();
 }
 
