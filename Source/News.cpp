@@ -48,7 +48,6 @@ News::News(QSettings* p, QWidget* parent) :
 void News::loadFeeds()
 {
 
-    qDebug() << "load called" << endl;
     headlines.clear();
     clearLayout(firstColumn);
     clearLayout(secondColumn);
@@ -89,7 +88,6 @@ void News::loadXMLfromUrls()
                 feedLabel = sortaDomain.left(sortaDomain.length() - 1);
             }
 
-            qDebug() << "Fetch compete";
             if (reply->error())
             {
                 qDebug("Error with network request");
@@ -112,7 +110,6 @@ void News::loadFeedUrlsFromSettings()
     {
         settings.setArrayIndex(i);
         QString current = settings.value("url").toString();
-        qDebug() << "Read URL " << current << endl;
         feedUrls.append(current);
     }
 }
@@ -221,7 +218,6 @@ void News::reloadHeadlines()
 {
     int size = headlines.size();
     if (size == 0) return;
-    qDebug() << "Total Size " << size << endl;
     //Initialize an array to keep track of which items were already inserted into the view
     bool* inserted = new bool[size];
     for (int i = 0; i < size; ++i)

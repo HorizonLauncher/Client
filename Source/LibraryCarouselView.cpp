@@ -32,10 +32,6 @@ LibraryCarouselView::LibraryCarouselView(QSettings* p, Library* library, QWidget
     init(p);
 
     QList<Game> games = Library::db.getGames();
-    for (auto game : games)
-    {
-        qDebug() << game.id << game.gameName << game.gameDirectory << game.executablePath;
-    }
 
     connect(&Library::db, &Database::dbChanged, this, &LibraryCarouselView::refreshGames);
 
