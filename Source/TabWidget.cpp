@@ -1,5 +1,5 @@
 #include "TabWidget.h"
-
+#include "TabLabel.h"
 #include <QLayout>
 #include <QPainter>
 #include <QStyleOption>
@@ -20,7 +20,7 @@ TabWidget::TabWidget(const QString &name, const QString &text, QSettings* palett
     this->setMinimumHeight(34);
     this->setMaximumHeight(34);
     this->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    this->setStyleSheet("border-top-left-radius: 2px; border-top-right-radius: 2px;");
+    //this->setStyleSheet("border-top-left-radius: 2px; border-top-right-radius: 2px;");
 
     p = palette;
 
@@ -49,7 +49,7 @@ TabWidget::TabWidget(const QString &name, const QString &text, QSettings* palett
     font.setBold(true);
 
     // Tab text
-    tabText = new QLabel(this);
+    tabText = new TabLabel(this, palette);
     tabText->setObjectName("tabText");
     tabText->setStyleSheet("color: #7d8f94;");
     tabText->setFont(font);
@@ -110,12 +110,11 @@ void TabWidget::paintEvent(QPaintEvent* event)
 {
     // Default paint event
     QWidget::paintEvent(event);
-
-    // Style-aware drawing
-    QStyleOption option;
     QPainter p(this);
+    QStyleOption option;
     option.init(this);
     style()->drawPrimitive(QStyle::PE_Widget, &option, &p, this);
+
 }
 
 /** Starts the hover colorization animation.
@@ -149,12 +148,24 @@ void TabWidget::toggleUnhovered()
 void TabWidget::toggleActive()
 {
     isActive = true;
-    effect->setColor(QColor(p->value("Navbar/SelectedColor").toString()));
+
+    this->update();
+    if (p->value("TitleBar/Fulltab").toBool())
+    {
+        effect->setColor(QColor(p->value("Navbar/SelectedColor").toString()));
+    }
+
+    else {
+        effect->setColor(QColor(p->value("Navbar/BackgroundColor").toString()));
+    }
+
     this->setStyleSheet("border-top-left-radius: 2px;"
                         "border-top-right-radius: 2px;"
                         "background-color: #000000;");
     tabText->setStyleSheet("color: #ffffff;");
     setOpacity(1.0);
+    tabText->isActive = true;
+    tabText->update();
 }
 
 /** Sets this tab inactive on the navbar.
@@ -167,5 +178,6 @@ void TabWidget::toggleInactive()
                         "border-top-right-radius: 2px;"
                         "background-color: " + p->value("Navbar/Background").toString() + ";");
     tabText->setStyleSheet("color: #7d8f94");
+    tabText->isActive = false;
     setOpacity(0.0);
 }

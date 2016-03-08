@@ -6,6 +6,7 @@
 #include <QLabel>
 #include <QGraphicsEffect>
 #include <QPropertyAnimation>
+#include "TabLabel.h"
 
 /** TabWidget class.
 * Class to handle the construction and behavior of navbar tabs.
@@ -40,7 +41,7 @@ protected:
 
 private:
     QLabel* tabIcon;
-    QLabel* tabText;
+    TabLabel* tabText;
     QGraphicsColorizeEffect* effect;
     QPropertyAnimation* animation;
     qreal opacity;
