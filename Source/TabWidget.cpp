@@ -155,7 +155,8 @@ void TabWidget::toggleActive()
         effect->setColor(QColor(p->value("Navbar/SelectedColor").toString()));
     }
 
-    else {
+    else
+    {
         effect->setColor(QColor(p->value("Navbar/BackgroundColor").toString()));
     }
 
@@ -163,7 +164,7 @@ void TabWidget::toggleActive()
                         "border-top-right-radius: 2px;"
                         "background-color: #000000;");
     tabText->setStyleSheet("color: #ffffff;");
-    setOpacity(1.0);
+    setOpacity(0.0);
     tabText->isActive = true;
     tabText->update();
 }

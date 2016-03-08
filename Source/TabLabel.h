@@ -15,7 +15,9 @@ public:
 protected:
     void paintEvent(QPaintEvent*);
 
-QSettings* palette;
+private:
+    QSettings* palette;
+    QString lineColor;
 };
 
 #endif // TABLABEL_H
