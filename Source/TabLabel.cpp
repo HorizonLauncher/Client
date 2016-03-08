@@ -9,12 +9,15 @@ TabLabel::TabLabel(QWidget* parent = 0, QSettings* palette = 0) : QLabel(parent)
     this->isActive = false;
 }
 
-void TabLabel::paintEvent(QPaintEvent* event) {
+void TabLabel::paintEvent(QPaintEvent* event)
+{
     QLabel::paintEvent(event);
     QColor color(Qt::white);
-    if (isActive) {
-        if (!palette->value("TitleBar/Fulltab").toBool()) {
-         color.setNamedColor(palette->value("Navbar/SelectedColor").toString());
+    if (isActive)
+    {
+        if (!palette->value("TitleBar/Fulltab").toBool())
+        {
+            color.setNamedColor(palette->value("Navbar/SelectedColor").toString());
         }
 
         QLabel::paintEvent(event);
