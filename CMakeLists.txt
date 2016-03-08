@@ -22,6 +22,7 @@ set(SOURCE
     # NAVBAR
     Source/Navbar.cpp
     Source/TabWidget.cpp
+    Source/TabLabel.cpp
 
     # STACKED WIDGETS
     Source/Library.cpp
@@ -63,6 +64,7 @@ set(HEADERS
     # NAVBAR
     Source/Navbar.h
     Source/TabWidget.h
+    Source/TabLabel.h
 
     # STACKED WIDGETS
     Source/Library.h
