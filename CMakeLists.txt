@@ -112,10 +112,10 @@ set(GUI_TYPE "")
 set(TRANSLATIONS
     Translations/horizon_da.ts
     Translations/horizon_nb.ts
-    Translations/horizon_nb.ts
     Translations/horizon_pt_BR.ts
     Translations/horizon_fr.ts
     Translations/horizon_de.ts
+    Translations/horizon_es.ts
 )
 
 if(WIN32)
