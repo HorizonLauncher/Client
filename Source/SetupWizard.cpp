@@ -82,9 +82,9 @@ AddNewsFeedsPage::AddNewsFeedsPage(QWidget* parent)
     label->setWordWrap(true);
     layout->addWidget(label);
 
-    QPushButton* selectAllBtn = new QPushButton("Select all");
+    QPushButton* selectAllBtn = new QPushButton(tr("Select all"));
     selectAllBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    QPushButton* selectNoneBtn = new QPushButton("Select none");
+    QPushButton* selectNoneBtn = new QPushButton(tr("Select none"));
     selectNoneBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     connect(selectAllBtn, &QPushButton::clicked, [=]

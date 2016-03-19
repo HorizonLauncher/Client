@@ -76,17 +76,17 @@ void GridGameWidget::showContextMenu(const QPoint& pos)
     QPoint globalPos = mapToGlobal(pos);
 
     QMenu contextMenu;
-    contextMenu.addAction("Change launch options");
-    contextMenu.addAction("Remove game from Library");
+    contextMenu.addAction(tr("Change launch options"));
+    contextMenu.addAction(tr("Remove game from Library"));
 
     QAction* selected = contextMenu.exec(globalPos);
     if (selected)
     {
-        if (selected->text() == "Change launch options")
+        if (selected->text() == tr("Change launch options"))
         {
             Q_EMIT changeLaunchOpts();
         }
-        else if (selected->text() == "Remove game from Library")
+        else if (selected->text() == tr("Remove game from Library"))
         {
             Q_EMIT removeGame();
         }

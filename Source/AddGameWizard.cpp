@@ -41,7 +41,7 @@ void InfoPage::pickFile(QLineEdit* edit, QFileDialog::FileMode mode)
  */
 InitPage::InitPage(QWidget* parent) : QWizardPage(parent)
 {
-    setTitle("Intro");
+    setTitle(tr("Intro"));
     QLabel* label = new QLabel(tr("This wizard will help you easily add games to your database."));
     label->setWordWrap(true);
     QVBoxLayout* layout = new QVBoxLayout;

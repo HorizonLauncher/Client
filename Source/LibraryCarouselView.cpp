@@ -54,7 +54,7 @@ void LibraryCarouselView::init(QSettings* p)
     contentLayout->addWidget(addGameBtn, 0, 0);
     connect(addGameBtn, &QPushButton::clicked, this, &LibraryCarouselView::addGame);
 
-    nameLabel = new QLabel("Grey Goo");
+    nameLabel = new QLabel("");
     nameLabel->setStyleSheet("font-size: 20pt;");
     nameLabel->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     contentLayout->addWidget(nameLabel);
@@ -73,9 +73,11 @@ void LibraryCarouselView::init(QSettings* p)
     QVBoxLayout* hoursLastLayout = new QVBoxLayout(hoursLastWidget);
     hoursLastLayout->setMargin(0);
 
-    hoursPlayedLbl = new QLabel("Hours played: 999");
+    //: 999 refers to the number of hours played. In the future, this will be dynamic.
+    hoursPlayedLbl = new QLabel(tr("Hours played: 999"));
     hoursLastLayout->addWidget(hoursPlayedLbl, 0, 0);//todo: not a grid
-    lastPlayedLbl = new QLabel("Last played: 1 hour ago");
+    //: 1 refers to the number of hours ago the game was last played. In the future, this will be dynamic.
+    lastPlayedLbl = new QLabel(tr("Last played: 1 hour ago"));
     hoursLastLayout->addWidget(lastPlayedLbl, 1, 0);//todo: not a grid
 
     launchBtn = new QPushButton("Launch Game");

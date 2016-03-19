@@ -23,7 +23,7 @@ DetailGameWidget::DetailGameWidget(Game game, QSettings* palette, QWidget* paren
     QVBoxLayout* gameTitleWidgetLayout = new QVBoxLayout(gameTitleWidget);
     QLabel* titleLabel = new QLabel(game.gameName);
     titleLabel->setStyleSheet("font-family: Roboto; font-style: normal; font-size: 16pt");
-    QLabel* hoursLabel = new QLabel("999 Hours");
+    QLabel* hoursLabel = new QLabel(tr("999 Hours"));
     styleLabel(hoursLabel);
     gameTitleWidgetLayout->addWidget(titleLabel);
     gameTitleWidgetLayout->addWidget(hoursLabel);
