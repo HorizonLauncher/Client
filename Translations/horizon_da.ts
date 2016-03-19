@@ -4,27 +4,27 @@
 <context>
     <name>AddGamePage</name>
     <message>
-        <location filename="../Source/SetupWizard.cpp" line="42"/>
+        <location filename="../Source/SetupWizard.cpp" line="45"/>
         <source>Add your games</source>
         <translation>Tilføj dine spil</translation>
     </message>
     <message>
-        <location filename="../Source/SetupWizard.cpp" line="44"/>
+        <location filename="../Source/SetupWizard.cpp" line="47"/>
         <source>Add game</source>
         <translation>Tilføj spil</translation>
     </message>
     <message>
-        <location filename="../Source/SetupWizard.cpp" line="45"/>
+        <location filename="../Source/SetupWizard.cpp" line="48"/>
         <source>Add DRM</source>
         <translation>Tilføj DRM</translation>
     </message>
     <message>
-        <location filename="../Source/SetupWizard.cpp" line="47"/>
+        <location filename="../Source/SetupWizard.cpp" line="50"/>
         <source>Use this for adding games that aren&apos;t attached to a DRM.</source>
         <translation>Brug denne for at tilføje spil, der ikke er tilknyttet DRM.</translation>
     </message>
     <message>
-        <location filename="../Source/SetupWizard.cpp" line="49"/>
+        <location filename="../Source/SetupWizard.cpp" line="52"/>
         <source>Use this for adding games that are managed by a DRM, such as Steam.
 The wizard will attempt to automatically add all games found.
 Supported: Steam, uPlay, Origin</source>
@@ -39,6 +39,29 @@ Understøttet: Steam, uPlay, Origin</translation>
         <location filename="../Source/AddGameWizard.cpp" line="19"/>
         <source>Add game wizard</source>
         <translation>Tilføj spil guide</translation>
+    </message>
+</context>
+<context>
+    <name>AddNewsFeedsPage</name>
+    <message>
+        <location filename="../Source/SetupWizard.cpp" line="74"/>
+        <source>Add News Feeds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/SetupWizard.cpp" line="79"/>
+        <source>Choose what news feeds you would like on your news page. You can change these at any time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/SetupWizard.cpp" line="85"/>
+        <source>Select all</source>
+        <translation type="unfinished">Vælg alle</translation>
+    </message>
+    <message>
+        <location filename="../Source/SetupWizard.cpp" line="87"/>
+        <source>Select none</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -147,14 +170,6 @@ Understøttet: Steam, uPlay, Origin</translation>
         <source>Horizon Launcher Setup</source>
         <translation>Horizon Launcher Opsætning</translation>
     </message>
-    <message>
-        <source>Error!</source>
-        <translation type="vanished">Fejl!</translation>
-    </message>
-    <message>
-        <source>An error occurred while trying to load the database.</source>
-        <translation type="vanished">Der opstod en fejl under indlæsning af databasen.</translation>
-    </message>
 </context>
 <context>
     <name>FinalPage</name>
@@ -164,7 +179,7 @@ Understøttet: Steam, uPlay, Origin</translation>
         <translation>Færdig</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="821"/>
+        <location filename="../Source/DRMSetupWizard.cpp" line="830"/>
         <source>Added %1 games to the database. Click finish to complete the wizard.</source>
         <oldsource>Added %d games to the database. Click finish to complete the wizard.</oldsource>
         <translation>Tilføjet %1 spil til databasen. Tryk på udfør for at fuldføre guiden.</translation>
@@ -204,6 +219,21 @@ Understøttet: Steam, uPlay, Origin</translation>
     </message>
 </context>
 <context>
+    <name>GridGameWidget</name>
+    <message>
+        <location filename="../Source/GridGameWidget.cpp" line="79"/>
+        <location filename="../Source/GridGameWidget.cpp" line="85"/>
+        <source>Change launch options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/GridGameWidget.cpp" line="80"/>
+        <location filename="../Source/GridGameWidget.cpp" line="89"/>
+        <source>Remove game from Library</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Homepage</name>
     <message>
         <location filename="../Source/Homepage.cpp" line="86"/>
@@ -216,21 +246,9 @@ Understøttet: Steam, uPlay, Origin</translation>
         <translation>SPIL</translation>
     </message>
     <message>
-        <source>Error!</source>
-        <translation type="vanished">Fejl!</translation>
-    </message>
-    <message>
-        <source>An error occurred while trying to load the database.</source>
-        <translation type="vanished">Der opstod en fejl under indlæsning af databasen.</translation>
-    </message>
-    <message>
         <location filename="../Source/Homepage.cpp" line="28"/>
         <source>Random game: </source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error: an application is already running.</source>
-        <translation type="vanished">Fejl: En applikation kører allerede.</translation>
     </message>
     <message>
         <location filename="../Source/Homepage.cpp" line="83"/>
@@ -265,13 +283,14 @@ Understøttet: Steam, uPlay, Origin</translation>
         <source>Arguments (optional): </source>
         <translation>Parametre (Valgfrit): </translation>
     </message>
-    <message>
-        <source>Browse</source>
-        <translation type="vanished">Gennemse</translation>
-    </message>
 </context>
 <context>
     <name>InitPage</name>
+    <message>
+        <location filename="../Source/AddGameWizard.cpp" line="44"/>
+        <source>Intro</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <location filename="../Source/AddGameWizard.cpp" line="45"/>
         <source>This wizard will help you easily add games to your database.</source>
@@ -317,54 +336,37 @@ Understøttet: Steam, uPlay, Origin</translation>
 <context>
     <name>Library</name>
     <message>
-        <source>Error!</source>
-        <translation type="vanished">Fejl!</translation>
-    </message>
-    <message>
-        <source>An error occurred while trying to load the database.</source>
-        <translation type="vanished">Der opstod en fejl under indlæsning af databasen.</translation>
-    </message>
-    <message>
-        <location filename="../Source/Library.cpp" line="64"/>
+        <location filename="../Source/Library.cpp" line="53"/>
         <source>Search games</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Library.cpp" line="94"/>
+        <location filename="../Source/Library.cpp" line="89"/>
         <source>Filter by: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Library.cpp" line="99"/>
+        <location filename="../Source/Library.cpp" line="94"/>
         <source>All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Library.cpp" line="103"/>
+        <location filename="../Source/Library.cpp" line="98"/>
         <source>Action</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Library.cpp" line="107"/>
+        <location filename="../Source/Library.cpp" line="102"/>
         <source>Rating</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Library.cpp" line="140"/>
-        <source>Add game</source>
-        <translation type="unfinished">Tilføj spil</translation>
-    </message>
-    <message>
-        <source>Error: an application is already running.</source>
-        <translation type="vanished">Fejl: En applikation kører allerede.</translation>
-    </message>
-    <message>
-        <location filename="../Source/Library.cpp" line="177"/>
+        <location filename="../Source/Library.cpp" line="201"/>
         <source>Change Launch Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Library.cpp" line="178"/>
+        <location filename="../Source/Library.cpp" line="202"/>
         <source>Launch Options: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -410,12 +412,12 @@ Understøttet: Steam, uPlay, Origin</translation>
 <context>
     <name>QWidget</name>
     <message>
-        <location filename="../Source/Main.cpp" line="36"/>
+        <location filename="../Source/Main.cpp" line="47"/>
         <source>Error!</source>
         <translation type="unfinished">Fejl!</translation>
     </message>
     <message>
-        <location filename="../Source/Main.cpp" line="36"/>
+        <location filename="../Source/Main.cpp" line="47"/>
         <source>An error occurred while trying to load the database.</source>
         <translation type="unfinished">Der opstod en fejl under indlæsning af databasen.</translation>
     </message>
@@ -491,7 +493,7 @@ Understøttet: Steam, uPlay, Origin</translation>
         <translation>Ændre titlen for hvert spil ved at trykke på tekstboksen og rediger teksten. Vælg hvilken eksekverbar fil at bruge fra visning.</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="766"/>
+        <location filename="../Source/DRMSetupWizard.cpp" line="775"/>
         <source>Select Executable</source>
         <translation>Vælg eksekverbar fil</translation>
     </message>
@@ -504,114 +506,134 @@ Understøttet: Steam, uPlay, Origin</translation>
         <translation>Klient indstillinger</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="104"/>
+        <location filename="../Source/Settings.cpp" line="63"/>
+        <source>Open Setup Wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/Settings.cpp" line="117"/>
         <source>Style Settings</source>
         <translation>Visuelle indstillinger</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="63"/>
-        <source>Add games to Horizon</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Source/Settings.cpp" line="69"/>
+        <location filename="../Source/Settings.cpp" line="73"/>
         <source>Clear database</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="75"/>
+        <location filename="../Source/Settings.cpp" line="79"/>
         <source>Clear launch options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="80"/>
+        <location filename="../Source/Settings.cpp" line="84"/>
         <source>Manage News Feeds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="97"/>
+        <location filename="../Source/Settings.cpp" line="100"/>
         <source>Allow launching
 of multiple games</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="117"/>
+        <location filename="../Source/Settings.cpp" line="110"/>
+        <source>Full-tab highlighting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/Settings.cpp" line="130"/>
         <source>Body Background</source>
         <translation>Hovedbaggrund</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="127"/>
+        <location filename="../Source/Settings.cpp" line="140"/>
         <source>Navbar Background</source>
         <translation>Navigationsbaggrund</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="137"/>
+        <location filename="../Source/Settings.cpp" line="150"/>
         <source>Navbar Hover</source>
         <translation>Navigationsbar markørfarve</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="147"/>
+        <location filename="../Source/Settings.cpp" line="160"/>
         <source>Navbar Selected</source>
         <translation>Navigationsbar valgt farve</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="157"/>
+        <location filename="../Source/Settings.cpp" line="170"/>
         <source>Titlebar Color</source>
         <translation>Titelbar Farve</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="167"/>
+        <location filename="../Source/Settings.cpp" line="180"/>
         <source>Active Element</source>
         <translation>Aktivt objekt</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="177"/>
+        <location filename="../Source/Settings.cpp" line="190"/>
         <source>Inactive Selection</source>
         <translation>Inaktivt selektion</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="187"/>
+        <location filename="../Source/Settings.cpp" line="200"/>
         <source>Hover Selection</source>
         <translation>Markørfarve selektion</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="197"/>
+        <location filename="../Source/Settings.cpp" line="210"/>
         <source>Dark Element</source>
         <translation>Mørkt element</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="207"/>
+        <location filename="../Source/Settings.cpp" line="220"/>
         <source>Light Text</source>
         <translation>Lys tekst</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="217"/>
+        <location filename="../Source/Settings.cpp" line="230"/>
         <source>Dark Text</source>
         <translation>Mørk Tekst</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="227"/>
+        <location filename="../Source/Settings.cpp" line="240"/>
         <source>Sub Text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="237"/>
+        <location filename="../Source/Settings.cpp" line="250"/>
         <source>Primary Base</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="247"/>
+        <location filename="../Source/Settings.cpp" line="260"/>
         <source>Secondary Base</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="257"/>
+        <location filename="../Source/Settings.cpp" line="270"/>
         <source>Tertiary Base</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="267"/>
+        <location filename="../Source/Settings.cpp" line="280"/>
         <source>Darkest Base</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/Settings.cpp" line="283"/>
+        <source>Reset Colors to Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/Settings.cpp" line="289"/>
+        <source>Export Theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/Settings.cpp" line="295"/>
+        <source>Import Theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -625,19 +647,11 @@ of multiple games</source>
         <source>Change Username</source>
         <translation>Skift brugernavn</translation>
     </message>
-    <message>
-        <source>Error!</source>
-        <translation type="vanished">Fejl!</translation>
-    </message>
-    <message>
-        <source>An error occurred while trying to load the database.</source>
-        <translation type="vanished">Der opstod en fejl under indlæsning af databasen.</translation>
-    </message>
 </context>
 <context>
     <name>SetupWizard</name>
     <message>
-        <location filename="../Source/SetupWizard.cpp" line="12"/>
+        <location filename="../Source/SetupWizard.cpp" line="15"/>
         <source>Horizon Setup Wizard</source>
         <translation>Horizon Opsætningsguide</translation>
     </message>
@@ -645,7 +659,7 @@ of multiple games</source>
 <context>
     <name>WelcomePage</name>
     <message>
-        <location filename="../Source/SetupWizard.cpp" line="19"/>
+        <location filename="../Source/SetupWizard.cpp" line="22"/>
         <source>This wizard will help you set up Horizon.</source>
         <translation>Denne guide vil hjælpe dig sætte Horizon op.</translation>
     </message>
