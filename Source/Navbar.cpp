@@ -58,11 +58,12 @@ Navbar::Navbar(QSettings* p, QWidget* parent)
     // Mods tab
     modsTab = new TabWidget("modsTab", tr("MODS"), p, this);
     upperLayout->addWidget(modsTab);
-    upperLayout->addStretch();
 
     // Settings tab
     settingsTab = new TabWidget("settingsTab", tr("SETTINGS"), p, this);
     upperLayout->addWidget(settingsTab);
+
+    upperLayout->addStretch();
 
     show();
 }

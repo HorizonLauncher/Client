@@ -130,11 +130,14 @@ void MainPanel::init()
     news->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     store = new Store(p, stack);
     store->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+    settings = new Settings(p);
+    settings->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     stack->addWidget(home);
     stack->addWidget(library);
     stack->addWidget(community);
     stack->addWidget(news);
     stack->addWidget(store);
+    stack->addWidget(settings);
     stack->setCurrentWidget(library);
 
     connect(stack, &QStackedWidget::currentChanged, this, &MainPanel::onStackedChanged);
@@ -149,10 +152,9 @@ void MainPanel::init()
     connect(navbar->gamesTab, &TabWidget::clicked, this, &MainPanel::setGames);
     connect(navbar->communityTab, &TabWidget::clicked, this, &MainPanel::setCommunity);
     connect(navbar->newsTab, &TabWidget::clicked, this, &MainPanel::setNews);
+    connect(navbar->settingsTab, &TabWidget::clicked, this, &MainPanel::setSettings);
     // connect(navbar->modsTab, &TabWidget::clicked, this, &MainPanel::setMods);
 
-    settings = new Settings(p);
-    connect(navbar->settingsTab, &TabWidget::clicked, this, &MainPanel::openSettings);
     connect(settings, &Settings::didUpdateFeedURLs, news, &News::loadFeeds);
     // Show
     show();
