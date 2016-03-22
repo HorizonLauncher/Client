@@ -54,7 +54,7 @@ bool Database::init()
 bool Database::reset()
 {
     QSqlQuery query(db);
-    bool rtn = query.exec("DROP TABLE IF EXISTS games");
+    bool rtn = query.exec("DROP TABLE IF EXISTS games") && query.exec("CREATE TABLE IF NOT EXISTS games(ID INTEGER PRIMARY KEY ASC, GAMENAME TEXT NOT NULL, GAMEDIRECTORY TEXT NOT NULL, GAMEEXECUTABLE TEXT NOT NULL, ARGUMENTS TEXT NOT NULL, DRM INT DEFAULT 0);");
 
     if (rtn)
     {
