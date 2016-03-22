@@ -120,21 +120,21 @@ void MainPanel::init()
     scrollArea->setWidget(stack);
 
     // Stack widgets
-    home = new Homepage(p, stack);
-    home->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+    //home = new Homepage(p, stack);
+    //home->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     library = new Library(p, stack);
     library->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
-    community = new Community(p, stack);
-    community->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+    //community = new Community(p, stack);
+    //community->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     news = new News(p, stack);
     news->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     store = new Store(p, stack);
     store->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     settings = new Settings(p);
     settings->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
-    stack->addWidget(home);
+    //stack->addWidget(home);
     stack->addWidget(library);
-    stack->addWidget(community);
+    //stack->addWidget(community);
     stack->addWidget(news);
     stack->addWidget(store);
     stack->addWidget(settings);
@@ -147,10 +147,10 @@ void MainPanel::init()
     activeTab->toggleActive();
 
     // Connect signals
-    connect(navbar->homeTab, &TabWidget::clicked, this, &MainPanel::setHome);
+    //connect(navbar->homeTab, &TabWidget::clicked, this, &MainPanel::setHome);
     connect(navbar->storeTab, &TabWidget::clicked, this, &MainPanel::setStore);
     connect(navbar->gamesTab, &TabWidget::clicked, this, &MainPanel::setGames);
-    connect(navbar->communityTab, &TabWidget::clicked, this, &MainPanel::setCommunity);
+    //connect(navbar->communityTab, &TabWidget::clicked, this, &MainPanel::setCommunity);
     connect(navbar->newsTab, &TabWidget::clicked, this, &MainPanel::setNews);
     connect(navbar->settingsTab, &TabWidget::clicked, this, &MainPanel::setSettings);
     // connect(navbar->modsTab, &TabWidget::clicked, this, &MainPanel::setMods);
