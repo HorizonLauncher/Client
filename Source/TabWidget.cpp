@@ -150,7 +150,7 @@ void TabWidget::toggleActive()
     isActive = true;
 
     this->update();
-    if (p->value("TitleBar/Fulltab").toBool())
+    if (true) //if (p->value("TitleBar/Fulltab").toBool())
     {
         effect->setColor(QColor(p->value("Navbar/SelectedColor").toString()));
     }

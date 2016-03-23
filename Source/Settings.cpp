@@ -110,7 +110,7 @@ void Settings::init(QSettings* p)
     QLabel* fulltabLbl = new QLabel(tr("Full-tab highlighting"));
     fulltabLayout->addWidget(fulltabCB);
     fulltabLayout->addWidget(fulltabLbl);
-    clientGroupLayout->addWidget(fulltabWidget);
+    //clientGroupLayout->addWidget(fulltabWidget);
     connect(fulltabCB, &QCheckBox::stateChanged, [=] (int state) { setFulltab(state == Qt::Checked); });
 
     /* STYLE SETTINGS GROUP */
