@@ -55,10 +55,15 @@ GamesFoundPage::GamesFoundPage(QWidget* parent)
     infoLabel->setStyleSheet("font-size: 14px; font-weight: 600;");
     layout->addWidget(infoLabel);
 
-    gamesLayout = new QVBoxLayout();
-    layout->addLayout(gamesLayout);
+    QWidget* gamesWidget = new QWidget();
+    gamesLayout = new QVBoxLayout(gamesWidget);
 
     QScrollArea* scrollArea = new QScrollArea();
+    scrollArea->setFrameShape(QFrame::NoFrame);
+    scrollArea->setWidgetResizable(true);
+    scrollArea->setWidget(gamesWidget);
+    scrollArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+
     layout->addWidget(scrollArea);
 }
 
