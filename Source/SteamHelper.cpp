@@ -132,9 +132,20 @@ QMap<QString, QString> SteamHelper::getGamesInFolder(QString folderPath)
     for (QFileInfo appmanifest : appmanifests)
     {
         QMap<QString, QString> keyVals = getVdfKeyVals(appmanifest.canonicalFilePath());
-        if (!keyVals.contains("appid") || !keyVals.contains("name")) { continue; }
 
-        games[keyVals["name"]] = keyVals["appid"];
+        if (!keyVals.contains("name")) { continue; }
+        if (keyVals.contains("appid"))
+        {
+            games[keyVals["name"]] = keyVals["appid"];
+        }
+        else if (keyVals.contains("appID"))
+        {
+            games[keyVals["name"]] = keyVals["appID"];
+        }
+        else
+        {
+            continue;
+        }
     }
 
     return games;
