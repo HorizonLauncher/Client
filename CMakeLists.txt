@@ -54,6 +54,7 @@ set(SOURCE
     # MISC
     Source/Database.cpp
     Source/GameLauncher.cpp
+    Source/SteamHelper.cpp
 )
 
 set(HEADERS
@@ -96,6 +97,7 @@ set(HEADERS
     # MISC
     Source/Database.h
     Source/GameLauncher.h
+    Source/SteamHelper.cpp
     Source/Libs/SteamVdfParse.hpp
     Source/Defines.h
 )

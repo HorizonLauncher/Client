@@ -1,144 +1,52 @@
-#ifndef _DRMSETUPWIZARD_H_
-#define _DRMSETUPWIZARD_H_
+#ifndef DRMSETUPWIZARD_H
+#define DRMSETUPWIZARD_H
 
-#include "Database.h"
-#include "Defines.h"
-
+#include <QWizard>
 #include <QtWidgets>
-#include <vector>
-#include <boost/property_tree/ptree.hpp>
 
-namespace pt = boost::property_tree;
-
-class IntroPage;
-class ResultsPage;
-class DRMPage;
-class FinalPage;
-
-/** Pages enum, makes state transfer possible */
-enum pages
-{
-    INTRO, /**< First page the user navigates to */
-    DRM, /**< Page showing the results of whether Steam, Origin and Uplay are installed */
-    RESULTS, /**< Page showing all the found games */
-    FINAL /**< Games are added to the db and a message is displayed to the user */
-};
-
-/** DRMSetupWizard class.
- * Class to handle overall wizard.
+/** DRMSetupWizard Class
+ * Class help the user add all of their games to Horizon
 */
+
 class DRMSetupWizard : public QWizard
 {
     Q_OBJECT
-public:
-    DRMSetupWizard(QWidget* parent = 0);
-    DRMPage* drmPage;
-    ResultsPage* resultsPage;
-    FinalPage* finalPage;
-};
-
-/** IntroPage class.
- * Class to handle the initial page.
-*/
-class IntroPage : public QWizardPage
-{
-    Q_OBJECT
-public:
-    IntroPage(QWidget* parent = 0);
-    int nextId() const Q_DECL_OVERRIDE;
-};
-
-/** DRMPage class.
- * Class to handle the results of whether Steam, Origin and Uplay have been discovered..
-*/
-class DRMPage : public QWizardPage
-{
-    Q_OBJECT
-    QGridLayout* layout;
-
-    QCheckBox* steamBox;
-    QCheckBox* originBox;
-    QCheckBox* uplayBox;
-
-    QLabel* statusLabel;
-    QLabel* platformLabel;
-    QLabel* descLabel;
-
-    void checkSteamExists();
-    void checkUplayExists();
-    void checkOriginExists();
 
 public:
-    QString steamPath;
-    QString originPath;
-    QString uplayPath;
-    DRMPage(QWidget* parent = 0);
-    int nextId() const Q_DECL_OVERRIDE;
+    DRMSetupWizard(QWidget* parent = 0, Qt::WindowFlags flags = 0);
 };
 
-/** ResultsPage class.
- * Class to handle the results of which games have been found.
-*/
-class ResultsPage : public QWizardPage
+class StartPage : public QWizardPage
 {
     Q_OBJECT
 
-    QStringList recursiveFindFiles(QDir dir);
-    void parseAcf(QDir steamRoot);
+public:
+    StartPage(QWidget* parent = 0);
+};
 
-    QWidget* steamViewport;
-    QWidget* originViewport;
-    QWidget* uplayViewport;
-    QTabWidget* tabWidget;
-    QGridLayout* top_layout;
-    QButtonGroup* btnGroup;
-    QGridLayout* steamLayout;
-    QGridLayout* originLayout;
-    QGridLayout* uplayLayout;
-    QScrollArea* steamScrollArea;
-    QScrollArea* originScrollArea;
-    QScrollArea* uplayScrollArea;
-    QStringList steamDirectoryList;
+class DRMsFoundPage : public QWizardPage
+{
+    Q_OBJECT
 
-    QDir steamRoot;
-    QDir uplayRoot;
-    QDir originRoot;
+public:
+    DRMsFoundPage(QWidget* parent = 0);
+};
 
-    GameList steamVector;
-    pt::ptree originTree;
-    pt::ptree uplayTree;
+class GamesFoundPage : public QWizardPage
+{
+    Q_OBJECT
 
-    void printTree(boost::property_tree::ptree& pt, int level);
+public:
+    GamesFoundPage(QWidget* parent = 0);
 
-public slots:
-    void tabSelected();
-    void selectAll();
-    void deselectAll();
-    void invert();
+    bool validatePage() Q_DECL_OVERRIDE;
+
+private:
+    QVBoxLayout* gamesLayout;
+    QMap<QString, QString> addGames;
 
 protected:
     void initializePage() Q_DECL_OVERRIDE;
-
-public:
-    ResultsPage(DRMPage& drmPage, QWidget* parent = 0);
-    void findOriginGames();
-    void findUplayGames();
-    void findSteamGames();
-    int nextId() const Q_DECL_OVERRIDE;
-};
-
-/** FinalPage class.
- * Class to handle the final page.
-*/
-class FinalPage : public QWizardPage
-{
-    Q_OBJECT
-
-protected:
-    void initializePage() Q_DECL_OVERRIDE;
-
-public:
-    FinalPage(QWidget* parent = 0);
 };
 
 #endif
