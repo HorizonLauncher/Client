@@ -116,6 +116,7 @@ set(TRANSLATIONS
     Translations/horizon_fr.ts
     Translations/horizon_de.ts
     Translations/horizon_es.ts
+    Translations/horizon_pl.ts
 )
 
 if(WIN32)
