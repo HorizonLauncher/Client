@@ -79,7 +79,18 @@ QList<QString> SteamHelper::getLibFolders()
     }
 
     QDir steamappsPath = QDir(getFolder());
-    steamappsPath.cd("steamapps");
+    if (steamappsPath.exists("steamapps"))
+    {
+        steamappsPath.cd("steamapps");
+    }
+    else if (steamappsPath.exists("SteamApps"))
+    {
+        steamappsPath.cd("SteamApps");
+    }
+    else
+    {
+        return QList<QString>();
+    }
     QString libraryFoldersPath = steamappsPath.filePath("libraryfolders.vdf");
 
     QMap<QString, QString> keyVals = getVdfKeyVals(libraryFoldersPath);
@@ -100,8 +111,15 @@ QList<QString> SteamHelper::getLibFolders()
 QMap<QString, QString> SteamHelper::getGamesInFolder(QString folderPath)
 {
     QDir folder(folderPath);
-    folder.cd("steamapps");
-    if (!folder.exists())
+    if (folder.exists("steamapps"))
+    {
+        folder.cd("steamapps");
+    }
+    else if (folder.exists("SteamApps"))
+    {
+        folder.cd("SteamApps");
+    }
+    else
     {
         return QMap<QString, QString>();
     }
@@ -131,7 +149,18 @@ QMap<QString, QString> SteamHelper::getGames()
 
     QString steamPath = getFolder();
     QDir steamappsPath(steamPath);
-    steamappsPath.cd("steamapps");
+    if (steamappsPath.exists("steamapps"))
+    {
+        steamappsPath.cd("steamapps");
+    }
+    else if (steamappsPath.exists("SteamApps"))
+    {
+        steamappsPath.cd("SteamApps");
+    }
+    else
+    {
+        return QMap<QString, QString>();
+    }
 
     QMap<QString, QString> gamesList;
 
