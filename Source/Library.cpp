@@ -58,7 +58,18 @@ void Library::init(QSettings* p)
     searchLayout->addWidget(searchBox);
     connect(searchBox, &QLineEdit::returnPressed, [=]
     {
-        gridView->filterGames(searchBox->text().trimmed());
+        if (currentView == 1)
+        {
+            gridView->filterGames(searchBox->text().trimmed());
+        }
+        else if (currentView == 2)
+        {
+            detailView->filterGames(searchBox->text().trimmed());
+        }
+        else if (currentView == 3)
+        {
+            carouselView->filterGames(searchBox->text().trimmed());
+        }
     });
 
     QPixmap search(":/SystemMenu/Icons/SearchInverted.png");
@@ -72,7 +83,18 @@ void Library::init(QSettings* p)
     searchLayout->addWidget(searchBtn);
     connect(searchBtn, &QPushButton::clicked, [=]
     {
-        gridView->filterGames(searchBox->text().trimmed());
+        if (currentView == 1)
+        {
+            gridView->filterGames(searchBox->text().trimmed());
+        }
+        else if (currentView == 2)
+        {
+            detailView->filterGames(searchBox->text().trimmed());
+        }
+        else if (currentView == 3)
+        {
+            carouselView->filterGames(searchBox->text().trimmed());
+        }
     });
 
     QColor* selectedColor = new QColor(p->value("Navbar/SelectedColor").toString());
@@ -141,6 +163,7 @@ void Library::init(QSettings* p)
     carouselView = new LibraryCarouselView(p, this);
 
     viewStack = new QStackedWidget(this);
+    currentView = 1;
 
     QScrollArea* gridScrollArea = new QScrollArea(this);
     gridScrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -217,6 +240,7 @@ void Library::changeLaunchOpts(QString gameName)
 void Library::setGridView()
 {
     viewStack->setCurrentIndex(0);
+    currentView = 1;
 }
 
 /**
@@ -225,6 +249,7 @@ void Library::setGridView()
 void Library::setDetailView()
 {
     viewStack->setCurrentIndex(1);
+    currentView = 2;
 }
 
 /**
@@ -233,4 +258,5 @@ void Library::setDetailView()
 void Library::setCarouselView()
 {
     viewStack->setCurrentIndex(2);
+    currentView = 3;
 }

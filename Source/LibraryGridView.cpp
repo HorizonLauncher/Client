@@ -104,6 +104,7 @@ void LibraryGridView::refreshGames()
 void LibraryGridView::filterGames(QString searchString)
 {
     this->searchString = searchString;
+    refreshGames();
 }
 
 

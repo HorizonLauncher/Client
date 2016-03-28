@@ -165,6 +165,7 @@ void LibraryCarouselView::init(QSettings* p)
 void LibraryCarouselView::filterGames(QString searchString)
 {
     this->searchString = searchString;
+    refreshGames();
 }
 
 
@@ -201,6 +202,12 @@ void LibraryCarouselView::refreshGames()
     int i = 0;
     for (auto game : gameList)
     {
+        QString lowerGameName = game.gameName.toLower();
+        if (!searchString.isEmpty() && !lowerGameName.contains(searchString.toLower()))
+        {
+            continue;
+        }
+
         QString displayedName = game.gameName;
         if (displayedName.length() > 20)
         {
@@ -219,11 +226,6 @@ void LibraryCarouselView::refreshGames()
                 }
             );
             i = 1;
-        }
-        QString lowerGameName = game.gameName.toLower();
-        if (!searchString.isEmpty() && !lowerGameName.contains(searchString.toLower()))
-        {
-            continue;
         }
 
         GridGameWidget* gameWidget = new GridGameWidget(displayedName, 999);

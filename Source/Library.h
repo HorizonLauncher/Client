@@ -48,6 +48,8 @@ private:
     QLineEdit* searchBox;
     QStackedWidget* viewStack;
 
+    int currentView;
+
     void init(QSettings* p);
 };
 

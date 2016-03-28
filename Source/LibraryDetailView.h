@@ -10,14 +10,15 @@ class LibraryDetailView : public QWidget
 public:
     LibraryDetailView(QSettings* p, QWidget *parent = 0);
 
-signals:
-
-public slots:
+    void filterGames(QString searchString);
 
 private:
     QVBoxLayout* mainLayout;
     void refreshGames();
     QSettings* palette;
+    QList<QWidget*> gamesWidgets;
+
+    QString searchString;
 };
 
 #endif // LIBRARYDETAILVIEW_H
