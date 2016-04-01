@@ -477,7 +477,7 @@ Disponible: Steam, uPlay, Origin.</translation>
     <message>
         <location filename="../Source/Settings.cpp" line="73"/>
         <source>Clear database</source>
-        <translation>Vacíar la base de datos</translation>
+        <translation>Vaciar la base de datos</translation>
     </message>
     <message>
         <location filename="../Source/Settings.cpp" line="79"/>
