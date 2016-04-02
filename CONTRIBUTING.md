@@ -51,6 +51,7 @@ while/if (a > 3)
     - If your changes are OS-dependent, or you suspect that there may be conflict in that regard, please make that clear.
     - Please don’t open a pull request that adds entirely new features or aesthetic - most of this will be decided by the UI team. PRs should extend or complement existing functionality.
 - Official releases will be reviewed by members of all teams, and confirmed to function properly on several different operating systems and desktop environments.    
+- Any pull requests relating to the localization of the client will be closed. The [OneSky service](http://horizon.oneskyapp.com/collaboration/project?id=111884) must be used for localization.
 
 ## Comments
 - Any new functions ___must___ contain full Qt-style doxygen comments. See [here](http://www.stack.nl/~dimitri/doxygen/manual/docblocks.html#cppblock) and scroll down for an example.
