@@ -7,7 +7,7 @@
  */
 DRMSetupWizard::DRMSetupWizard(QWidget* parent, Qt::WindowFlags flags)
 {
-    addPage(new StartPage());
+    //addPage(new StartPage());
     addPage(new DRMsFoundPage());
     addPage(new GamesFoundPage());
 
