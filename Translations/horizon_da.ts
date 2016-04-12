@@ -109,80 +109,90 @@ Understøttet: Steam, uPlay, Origin</translation>
 <context>
     <name>DRMPage</name>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="59"/>
         <source>Checking for Steam</source>
         <translatorcomment>This one could be changed</translatorcomment>
-        <translation>Leder efter Steam</translation>
+        <translation type="vanished">Leder efter Steam</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="67"/>
         <source>&lt;b&gt;Steam&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Steam&lt;/b&gt;</translation>
+        <translation type="vanished">&lt;b&gt;Steam&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="74"/>
         <source>, Origin</source>
-        <translation>, Origin</translation>
+        <translation type="vanished">, Origin</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="81"/>
         <source> and Uplay.</source>
-        <translation>og Uplay.</translation>
+        <translation type="vanished">og Uplay.</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="133"/>
         <source>Origin found in %1</source>
         <extracomment>%1 will be replaced with the path to Origin.</extracomment>
-        <translation>Origin fundet ved %1</translation>
+        <translation type="vanished">Origin fundet ved %1</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="186"/>
         <source>Steam found in %1</source>
         <extracomment>%1 will be replaced with the path to Steam.</extracomment>
-        <translation>Steam fundet ved %1</translation>
+        <translation type="vanished">Steam fundet ved %1</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="251"/>
         <source>Uplay found in %1</source>
         <extracomment>%1 will be replaced with the path to uPlay.</extracomment>
-        <translation>uPlay fundet ved %1</translation>
+        <translation type="vanished">uPlay fundet ved %1</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="140"/>
         <source>Origin not found. Verify installation and try again.</source>
-        <translation>Origin var ikke fundet. Kontroller installationen og prøv igen.</translation>
+        <translation type="vanished">Origin var ikke fundet. Kontroller installationen og prøv igen.</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="193"/>
         <source>Steam not found. Verify installation and try again.</source>
-        <translation>Steam var ikke fundet. Kontroller installationen og prøv igen.</translation>
+        <translation type="vanished">Steam var ikke fundet. Kontroller installationen og prøv igen.</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="258"/>
         <source>Uplay not found on the system. Verify installation and try again.</source>
-        <translation>uPlay var ikke fundet. Kontroller installationen og prøv igen.</translation>
+        <translation type="vanished">uPlay var ikke fundet. Kontroller installationen og prøv igen.</translation>
     </message>
 </context>
 <context>
     <name>DRMSetupWizard</name>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="34"/>
         <source>Horizon Launcher Setup</source>
-        <translation>Horizon Launcher Opsætning</translation>
+        <translation type="vanished">Horizon Launcher Opsætning</translation>
+    </message>
+    <message>
+        <location filename="../Source/DRMSetupWizard.cpp" line="14"/>
+        <source>DRM Setup Wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DRMsFoundPage</name>
+    <message>
+        <location filename="../Source/DRMSetupWizard.cpp" line="30"/>
+        <source>DRMs Found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/DRMSetupWizard.cpp" line="37"/>
+        <source>Steam was found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/DRMSetupWizard.cpp" line="41"/>
+        <source>Steam was not found.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>FinalPage</name>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="106"/>
         <source>Done</source>
-        <translation>Færdig</translation>
+        <translation type="vanished">Færdig</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="830"/>
         <source>Added %1 games to the database. Click finish to complete the wizard.</source>
         <oldsource>Added %d games to the database. Click finish to complete the wizard.</oldsource>
-        <translation>Tilføjet %1 spil til databasen. Tryk på udfør for at fuldføre guiden.</translation>
+        <translation type="vanished">Tilføjet %1 spil til databasen. Tryk på udfør for at fuldføre guiden.</translation>
     </message>
 </context>
 <context>
@@ -216,6 +226,19 @@ Understøttet: Steam, uPlay, Origin</translation>
         <location filename="../Source/GameLauncher.cpp" line="66"/>
         <source>The launched game has crashed</source>
         <translation>Spillet lukkede</translation>
+    </message>
+</context>
+<context>
+    <name>GamesFoundPage</name>
+    <message>
+        <location filename="../Source/DRMSetupWizard.cpp" line="50"/>
+        <source>Games Found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/DRMSetupWizard.cpp" line="54"/>
+        <source>The following games will be added:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -300,19 +323,16 @@ Understøttet: Steam, uPlay, Origin</translation>
 <context>
     <name>IntroPage</name>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="45"/>
         <source>Finding games</source>
-        <translation>Leder efter spil</translation>
+        <translation type="vanished">Leder efter spil</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="46"/>
         <source>This wizard will try to find all your games.</source>
-        <translation>Denne guide vil forsøge at finde alle dine spil.</translation>
+        <translation type="vanished">Denne guide vil forsøge at finde alle dine spil.</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="48"/>
         <source>Click next to attempt to find Steam, Origin and Uplay games where applicable.</source>
-        <translation>Klik på næste for at forsøge at finde Steam, Origin og uPlay spil.</translation>
+        <translation type="vanished">Klik på næste for at forsøge at finde Steam, Origin og uPlay spil.</translation>
     </message>
 </context>
 <context>
@@ -341,32 +361,32 @@ Understøttet: Steam, uPlay, Origin</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Library.cpp" line="89"/>
+        <location filename="../Source/Library.cpp" line="111"/>
         <source>Filter by: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Library.cpp" line="94"/>
+        <location filename="../Source/Library.cpp" line="116"/>
         <source>All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Library.cpp" line="98"/>
+        <location filename="../Source/Library.cpp" line="120"/>
         <source>Action</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Library.cpp" line="102"/>
+        <location filename="../Source/Library.cpp" line="124"/>
         <source>Rating</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Library.cpp" line="201"/>
+        <location filename="../Source/Library.cpp" line="224"/>
         <source>Change Launch Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Library.cpp" line="202"/>
+        <location filename="../Source/Library.cpp" line="225"/>
         <source>Launch Options: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -374,24 +394,22 @@ Understøttet: Steam, uPlay, Origin</translation>
 <context>
     <name>Navbar</name>
     <message>
-        <location filename="../Source/Navbar.cpp" line="39"/>
         <source>HOME</source>
-        <translation>HJEM</translation>
+        <translation type="vanished">HJEM</translation>
     </message>
     <message>
-        <location filename="../Source/Navbar.cpp" line="43"/>
+        <location filename="../Source/Navbar.cpp" line="47"/>
         <source>STORE</source>
         <translation>BUTIK</translation>
     </message>
     <message>
-        <location filename="../Source/Navbar.cpp" line="47"/>
+        <location filename="../Source/Navbar.cpp" line="43"/>
         <source>GAMES</source>
         <translation>BIBLIOTEK</translation>
     </message>
     <message>
-        <location filename="../Source/Navbar.cpp" line="51"/>
         <source>COMMUNITY</source>
-        <translation>FÆLLESSKAB</translation>
+        <translation type="vanished">FÆLLESSKAB</translation>
     </message>
     <message>
         <location filename="../Source/Navbar.cpp" line="55"/>
@@ -399,12 +417,11 @@ Understøttet: Steam, uPlay, Origin</translation>
         <translation>NYHEDER</translation>
     </message>
     <message>
-        <location filename="../Source/Navbar.cpp" line="59"/>
         <source>MODS</source>
-        <translation>MODS</translation>
+        <translation type="vanished">MODS</translation>
     </message>
     <message>
-        <location filename="../Source/Navbar.cpp" line="64"/>
+        <location filename="../Source/Navbar.cpp" line="63"/>
         <source>SETTINGS</source>
         <translation>INDSTILLINGER</translation>
     </message>
@@ -425,77 +442,61 @@ Understøttet: Steam, uPlay, Origin</translation>
 <context>
     <name>ResultsPage</name>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="95"/>
         <source>We found the following on your system.</source>
-        <translation>Vi fandt følgende på dit system.</translation>
+        <translation type="vanished">Vi fandt følgende på dit system.</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="282"/>
         <source>Install Steam, Origin and/or Uplay to find games with this wizard, or check current installation(s).</source>
-        <translation>Installer Steam, Origin og/eller Uplay for at finde spil med denne guide, eller tjek nuværende installation(er).</translation>
+        <translation type="vanished">Installer Steam, Origin og/eller Uplay for at finde spil med denne guide, eller tjek nuværende installation(er).</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="286"/>
-        <location filename="../Source/DRMSetupWizard.cpp" line="518"/>
         <source>Change the title for each game by clicking the text box and editing.</source>
-        <translation>Ændre titlen for hvert spil ved at klikke på tekstfeltet og rediger teksten.</translation>
+        <translation type="vanished">Ændre titlen for hvert spil ved at klikke på tekstfeltet og rediger teksten.</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="302"/>
         <source>Executable not found</source>
-        <translation>Eksekverbar fil ikke fundet</translation>
+        <translation type="vanished">Eksekverbar fil ikke fundet</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="311"/>
         <source>Executable:  </source>
-        <translation>Eksekverbar:  </translation>
+        <translation type="vanished">Eksekverbar:  </translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="323"/>
         <source>Steam</source>
-        <translation>Steam</translation>
+        <translation type="vanished">Steam</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="281"/>
         <source>We found no games.</source>
-        <translation>Ingen fundne spil.</translation>
+        <translation type="vanished">Ingen fundne spil.</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="401"/>
         <source>We found %1 Steam games, %2 Origin games, and %3 uPlay games.</source>
         <extracomment>%1, %2, and %3 will be replaced with the number of Steam, Origin, and uPlay games, respectively</extracomment>
-        <translation>Vi fandt %1 Steam spil, %2 Origin spil og %3 uPlay spil.</translation>
+        <translation type="vanished">Vi fandt %1 Steam spil, %2 Origin spil og %3 uPlay spil.</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="404"/>
         <source>Select all</source>
-        <translation>Vælg alle</translation>
+        <translation type="vanished">Vælg alle</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="405"/>
         <source>Deselect all</source>
-        <translation>Fravælg alle</translation>
+        <translation type="vanished">Fravælg alle</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="406"/>
         <source>Invert selection</source>
-        <translation>Omvendt markering</translation>
+        <translation type="vanished">Omvendt markering</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="446"/>
-        <location filename="../Source/DRMSetupWizard.cpp" line="465"/>
         <source>Executable: </source>
-        <translation>Eksekverbar: </translation>
+        <translation type="vanished">Eksekverbar: </translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="514"/>
         <source>Change the title for each game by clicking the text box and editing. Choose which executable to use from the tree view.</source>
-        <translation>Ændre titlen for hvert spil ved at trykke på tekstboksen og rediger teksten. Vælg hvilken eksekverbar fil at bruge fra visning.</translation>
+        <translation type="vanished">Ændre titlen for hvert spil ved at trykke på tekstboksen og rediger teksten. Vælg hvilken eksekverbar fil at bruge fra visning.</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="775"/>
         <source>Select Executable</source>
-        <translation>Vælg eksekverbar fil</translation>
+        <translation type="vanished">Vælg eksekverbar fil</translation>
     </message>
 </context>
 <context>
@@ -654,6 +655,19 @@ of multiple games</source>
         <location filename="../Source/SetupWizard.cpp" line="15"/>
         <source>Horizon Setup Wizard</source>
         <translation>Horizon Opsætningsguide</translation>
+    </message>
+</context>
+<context>
+    <name>StartPage</name>
+    <message>
+        <location filename="../Source/DRMSetupWizard.cpp" line="19"/>
+        <source>Welcome</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/DRMSetupWizard.cpp" line="23"/>
+        <source>This wizard will help you add all of your games to Horizon.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -42,79 +42,26 @@ Unterstützt: Steam, uPlay, Origin</translation>
     </message>
 </context>
 <context>
-    <name>ResultsPage</name>
+    <name>AddNewsFeedsPage</name>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="404"/>
+        <location filename="../Source/SetupWizard.cpp" line="74"/>
+        <source>Add News Feeds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/SetupWizard.cpp" line="79"/>
+        <source>Choose what news feeds you would like on your news page. You can change these at any time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/SetupWizard.cpp" line="85"/>
         <source>Select all</source>
-        <translation>Alles auswählen</translation>
+        <translation type="unfinished">Alles auswählen</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="446"/>
-        <location filename="../Source/DRMSetupWizard.cpp" line="465"/>
-        <source>Executable: </source>
-        <translation>Programmdatei: </translation>
-    </message>
-    <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="95"/>
-        <source>We found the following on your system.</source>
-        <translation>Wir haben folgendes auf deinem System gefunden.</translation>
-    </message>
-    <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="281"/>
-        <source>We found no games.</source>
-        <translation>Wir konnten keine Spiele finden.</translation>
-    </message>
-    <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="282"/>
-        <source>Install Steam, Origin and/or Uplay to find games with this wizard, or check current installation(s).</source>
-        <translation>Um mit diesem Assistenten Spiele zu finden, installiere oder überprüfe die korrekte installation von Steam, Origin und/oder Uplay.</translation>
-    </message>
-    <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="286"/>
-        <location filename="../Source/DRMSetupWizard.cpp" line="518"/>
-        <source>Change the title for each game by clicking the text box and editing.</source>
-        <translation>Bearbeite den Titel einzelner Spiele indem du zunächst auf die Textbox und anschließend auf editieren klickst.</translation>
-    </message>
-    <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="302"/>
-        <source>Executable not found</source>
-        <translation>Programmdatei nicht gefunden</translation>
-    </message>
-    <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="311"/>
-        <source>Executable:  </source>
-        <translation>Programmdatei: </translation>
-    </message>
-    <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="323"/>
-        <source>Steam</source>
-        <translation>Steam</translation>
-    </message>
-    <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="401"/>
-        <source>We found %1 Steam games, %2 Origin games, and %3 uPlay games.</source>
-        <extracomment>%1, %2, and %3 will be replaced with the number of Steam, Origin, and uPlay games, respectively</extracomment>
-        <translation>Wir haben %1 Steam Spiele, %2 Origin Spiele und %3 uPlay Spiele gefunden.</translation>
-    </message>
-    <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="405"/>
-        <source>Deselect all</source>
-        <translation>Auswahl aufheben</translation>
-    </message>
-    <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="406"/>
-        <source>Invert selection</source>
-        <translation>Auswahl umkehren</translation>
-    </message>
-    <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="514"/>
-        <source>Change the title for each game by clicking the text box and editing. Choose which executable to use from the tree view.</source>
-        <translation>Bearbeite den Titel einzelner Spiele indem du auf die Textbox klickst. Wähle die zu verwendende Programmdatei in der Baumansicht aus.</translation>
-    </message>
-    <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="775"/>
-        <source>Select Executable</source>
-        <translation>Programmdatei auswählen</translation>
+        <location filename="../Source/SetupWizard.cpp" line="87"/>
+        <source>Select none</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -162,96 +109,88 @@ Unterstützt: Steam, uPlay, Origin</translation>
 <context>
     <name>DRMPage</name>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="59"/>
         <source>Checking for Steam</source>
-        <translation>Suche nach Steam</translation>
+        <translation type="vanished">Suche nach Steam</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="67"/>
         <source>&lt;b&gt;Steam&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Steam&lt;/b&gt;</translation>
+        <translation type="vanished">&lt;b&gt;Steam&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="74"/>
         <source>, Origin</source>
-        <translation>, Origin</translation>
+        <translation type="vanished">, Origin</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="81"/>
         <source> and Uplay.</source>
-        <translation> und Uplay.</translation>
+        <translation type="vanished"> und Uplay.</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="133"/>
         <source>Origin found in %1</source>
         <extracomment>%1 will be replaced with the path to Origin.</extracomment>
-        <translation>Origin gefunden in %1</translation>
+        <translation type="vanished">Origin gefunden in %1</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="140"/>
         <source>Origin not found. Verify installation and try again.</source>
-        <translation>Origin wurde nicht gefunden. Vergewisser dich, dass es installiert ist und versuch es noch einmal.</translation>
+        <translation type="vanished">Origin wurde nicht gefunden. Vergewisser dich, dass es installiert ist und versuch es noch einmal.</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="186"/>
         <source>Steam found in %1</source>
         <extracomment>%1 will be replaced with the path to Steam.</extracomment>
-        <translation>Steam gefunden in %1</translation>
+        <translation type="vanished">Steam gefunden in %1</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="193"/>
         <source>Steam not found. Verify installation and try again.</source>
-        <translation>Steam wurde nicht gefunden. Vergewisser dich, dass es installiert ist und versuch es noch einmal.</translation>
+        <translation type="vanished">Steam wurde nicht gefunden. Vergewisser dich, dass es installiert ist und versuch es noch einmal.</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="251"/>
         <source>Uplay found in %1</source>
         <extracomment>%1 will be replaced with the path to uPlay.</extracomment>
-        <translation>Uplay gefunden in %1</translation>
+        <translation type="vanished">Uplay gefunden in %1</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="258"/>
         <source>Uplay not found on the system. Verify installation and try again.</source>
-        <translation>Uplay wurde nicht gefunden. Vergewisser dich, dass es installiert ist und versuch es noch einmal.</translation>
+        <translation type="vanished">Uplay wurde nicht gefunden. Vergewisser dich, dass es installiert ist und versuch es noch einmal.</translation>
     </message>
 </context>
 <context>
     <name>DRMSetupWizard</name>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="34"/>
         <source>Horizon Launcher Setup</source>
-        <translation>Horizon Launcher Installation</translation>
+        <translation type="vanished">Horizon Launcher Installation</translation>
+    </message>
+    <message>
+        <location filename="../Source/DRMSetupWizard.cpp" line="14"/>
+        <source>DRM Setup Wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DRMsFoundPage</name>
+    <message>
+        <location filename="../Source/DRMSetupWizard.cpp" line="30"/>
+        <source>DRMs Found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/DRMSetupWizard.cpp" line="37"/>
+        <source>Steam was found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/DRMSetupWizard.cpp" line="41"/>
+        <source>Steam was not found.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>FinalPage</name>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="106"/>
         <source>Done</source>
-        <translation>Fertig</translation>
+        <translation type="vanished">Fertig</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="830"/>
         <source>Added %1 games to the database. Click finish to complete the wizard.</source>
-        <translation>%1 Spiele in die Datenbank hinzugefügt. Auf fertig klicken um die Installation abzuschließen.</translation>
-    </message>
-</context>
-<context>
-    <name>LastPage</name>
-    <message>
-        <location filename="../Source/AddGameWizard.cpp" line="106"/>
-        <source>Done</source>
-        <translation>Fertig</translation>
-    </message>
-    <message>
-        <location filename="../Source/AddGameWizard.cpp" line="123"/>
-        <source>Game added successfully.</source>
-        <translation>Spiel erfolgreich hinzugefügt.</translation>
-    </message>
-    <message>
-        <location filename="../Source/AddGameWizard.cpp" line="128"/>
-        <source>Game already exists.</source>
-        <translation>Spiel existiert bereits.</translation>
+        <translation type="vanished">%1 Spiele in die Datenbank hinzugefügt. Auf fertig klicken um die Installation abzuschließen.</translation>
     </message>
 </context>
 <context>
@@ -285,6 +224,34 @@ Unterstützt: Steam, uPlay, Origin</translation>
         <location filename="../Source/GameLauncher.cpp" line="66"/>
         <source>The launched game has crashed</source>
         <translation>Das gestartete Spiel ist abgestürzt</translation>
+    </message>
+</context>
+<context>
+    <name>GamesFoundPage</name>
+    <message>
+        <location filename="../Source/DRMSetupWizard.cpp" line="50"/>
+        <source>Games Found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/DRMSetupWizard.cpp" line="54"/>
+        <source>The following games will be added:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GridGameWidget</name>
+    <message>
+        <location filename="../Source/GridGameWidget.cpp" line="79"/>
+        <location filename="../Source/GridGameWidget.cpp" line="85"/>
+        <source>Change launch options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/GridGameWidget.cpp" line="80"/>
+        <location filename="../Source/GridGameWidget.cpp" line="89"/>
+        <source>Remove game from Library</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -341,6 +308,11 @@ Unterstützt: Steam, uPlay, Origin</translation>
 <context>
     <name>InitPage</name>
     <message>
+        <location filename="../Source/AddGameWizard.cpp" line="44"/>
+        <source>Intro</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../Source/AddGameWizard.cpp" line="45"/>
         <source>This wizard will help you easily add games to your database.</source>
         <translation>Dieser Assistent wird dir dabei helfen schnell und einfach Spiele in deine Datenbank hinzuzufügen.</translation>
@@ -349,19 +321,34 @@ Unterstützt: Steam, uPlay, Origin</translation>
 <context>
     <name>IntroPage</name>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="45"/>
         <source>Finding games</source>
-        <translation>Spiele finden</translation>
+        <translation type="vanished">Spiele finden</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="46"/>
         <source>This wizard will try to find all your games.</source>
-        <translation>Dieser Assistent wird versuchen alle deine Spiele zu finden.</translation>
+        <translation type="vanished">Dieser Assistent wird versuchen alle deine Spiele zu finden.</translation>
     </message>
     <message>
-        <location filename="../Source/DRMSetupWizard.cpp" line="48"/>
         <source>Click next to attempt to find Steam, Origin and Uplay games where applicable.</source>
-        <translation>Klicke auf weiter, um zu versuchen Spiele von Steam, Origin und Uplay automatisch zu finden.</translation>
+        <translation type="vanished">Klicke auf weiter, um zu versuchen Spiele von Steam, Origin und Uplay automatisch zu finden.</translation>
+    </message>
+</context>
+<context>
+    <name>LastPage</name>
+    <message>
+        <location filename="../Source/AddGameWizard.cpp" line="106"/>
+        <source>Done</source>
+        <translation>Fertig</translation>
+    </message>
+    <message>
+        <location filename="../Source/AddGameWizard.cpp" line="123"/>
+        <source>Game added successfully.</source>
+        <translation>Spiel erfolgreich hinzugefügt.</translation>
+    </message>
+    <message>
+        <location filename="../Source/AddGameWizard.cpp" line="128"/>
+        <source>Game already exists.</source>
+        <translation>Spiel existiert bereits.</translation>
     </message>
 </context>
 <context>
@@ -372,32 +359,32 @@ Unterstützt: Steam, uPlay, Origin</translation>
         <translation>Spiele suchen</translation>
     </message>
     <message>
-        <location filename="../Source/Library.cpp" line="89"/>
+        <location filename="../Source/Library.cpp" line="111"/>
         <source>Filter by: </source>
         <translation>Filtern: </translation>
     </message>
     <message>
-        <location filename="../Source/Library.cpp" line="94"/>
+        <location filename="../Source/Library.cpp" line="116"/>
         <source>All</source>
         <translation>Alle</translation>
     </message>
     <message>
-        <location filename="../Source/Library.cpp" line="98"/>
+        <location filename="../Source/Library.cpp" line="120"/>
         <source>Action</source>
         <translation>Aktion</translation>
     </message>
     <message>
-        <location filename="../Source/Library.cpp" line="102"/>
+        <location filename="../Source/Library.cpp" line="124"/>
         <source>Rating</source>
         <translation>Bewertung</translation>
     </message>
     <message>
-        <location filename="../Source/Library.cpp" line="201"/>
+        <location filename="../Source/Library.cpp" line="224"/>
         <source>Change Launch Options</source>
         <translation>Startoptionen ändern</translation>
     </message>
     <message>
-        <location filename="../Source/Library.cpp" line="202"/>
+        <location filename="../Source/Library.cpp" line="225"/>
         <source>Launch Options: </source>
         <translation>Startoptionen: </translation>
     </message>
@@ -405,24 +392,22 @@ Unterstützt: Steam, uPlay, Origin</translation>
 <context>
     <name>Navbar</name>
     <message>
-        <location filename="../Source/Navbar.cpp" line="39"/>
         <source>HOME</source>
-        <translation>START</translation>
+        <translation type="vanished">START</translation>
     </message>
     <message>
-        <location filename="../Source/Navbar.cpp" line="43"/>
+        <location filename="../Source/Navbar.cpp" line="47"/>
         <source>STORE</source>
         <translation>SHOP</translation>
     </message>
     <message>
-        <location filename="../Source/Navbar.cpp" line="47"/>
+        <location filename="../Source/Navbar.cpp" line="43"/>
         <source>GAMES</source>
         <translation>SPIELE</translation>
     </message>
     <message>
-        <location filename="../Source/Navbar.cpp" line="51"/>
         <source>COMMUNITY</source>
-        <translation>COMMUNITY</translation>
+        <translation type="vanished">COMMUNITY</translation>
     </message>
     <message>
         <location filename="../Source/Navbar.cpp" line="55"/>
@@ -430,12 +415,11 @@ Unterstützt: Steam, uPlay, Origin</translation>
         <translation>[ NEWS / NEUIGKEITEN ]</translation>
     </message>
     <message>
-        <location filename="../Source/Navbar.cpp" line="59"/>
         <source>MODS</source>
-        <translation>[ MODS / MODIFIKATIONEN ]</translation>
+        <translation type="vanished">[ MODS / MODIFIKATIONEN ]</translation>
     </message>
     <message>
-        <location filename="../Source/Navbar.cpp" line="64"/>
+        <location filename="../Source/Navbar.cpp" line="63"/>
         <source>SETTINGS</source>
         <translation>EINSTELLUNGEN</translation>
     </message>
@@ -451,6 +435,66 @@ Unterstützt: Steam, uPlay, Origin</translation>
         <location filename="../Source/Main.cpp" line="47"/>
         <source>An error occurred while trying to load the database.</source>
         <translation>Beim Laden der Datenbank ist ein Fehler aufgetreten.</translation>
+    </message>
+</context>
+<context>
+    <name>ResultsPage</name>
+    <message>
+        <source>Select all</source>
+        <translation type="vanished">Alles auswählen</translation>
+    </message>
+    <message>
+        <source>Executable: </source>
+        <translation type="vanished">Programmdatei: </translation>
+    </message>
+    <message>
+        <source>We found the following on your system.</source>
+        <translation type="vanished">Wir haben folgendes auf deinem System gefunden.</translation>
+    </message>
+    <message>
+        <source>We found no games.</source>
+        <translation type="vanished">Wir konnten keine Spiele finden.</translation>
+    </message>
+    <message>
+        <source>Install Steam, Origin and/or Uplay to find games with this wizard, or check current installation(s).</source>
+        <translation type="vanished">Um mit diesem Assistenten Spiele zu finden, installiere oder überprüfe die korrekte installation von Steam, Origin und/oder Uplay.</translation>
+    </message>
+    <message>
+        <source>Change the title for each game by clicking the text box and editing.</source>
+        <translation type="vanished">Bearbeite den Titel einzelner Spiele indem du zunächst auf die Textbox und anschließend auf editieren klickst.</translation>
+    </message>
+    <message>
+        <source>Executable not found</source>
+        <translation type="vanished">Programmdatei nicht gefunden</translation>
+    </message>
+    <message>
+        <source>Executable:  </source>
+        <translation type="vanished">Programmdatei: </translation>
+    </message>
+    <message>
+        <source>Steam</source>
+        <translation type="vanished">Steam</translation>
+    </message>
+    <message>
+        <source>We found %1 Steam games, %2 Origin games, and %3 uPlay games.</source>
+        <extracomment>%1, %2, and %3 will be replaced with the number of Steam, Origin, and uPlay games, respectively</extracomment>
+        <translation type="vanished">Wir haben %1 Steam Spiele, %2 Origin Spiele und %3 uPlay Spiele gefunden.</translation>
+    </message>
+    <message>
+        <source>Deselect all</source>
+        <translation type="vanished">Auswahl aufheben</translation>
+    </message>
+    <message>
+        <source>Invert selection</source>
+        <translation type="vanished">Auswahl umkehren</translation>
+    </message>
+    <message>
+        <source>Change the title for each game by clicking the text box and editing. Choose which executable to use from the tree view.</source>
+        <translation type="vanished">Bearbeite den Titel einzelner Spiele indem du auf die Textbox klickst. Wähle die zu verwendende Programmdatei in der Baumansicht aus.</translation>
+    </message>
+    <message>
+        <source>Select Executable</source>
+        <translation type="vanished">Programmdatei auswählen</translation>
     </message>
 </context>
 <context>
@@ -470,6 +514,11 @@ Unterstützt: Steam, uPlay, Origin</translation>
         <location filename="../Source/Settings.cpp" line="57"/>
         <source>Client Settings</source>
         <translation>Programmeinstellungen</translation>
+    </message>
+    <message>
+        <location filename="../Source/Settings.cpp" line="63"/>
+        <source>Open Setup Wizard</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../Source/Settings.cpp" line="73"/>
@@ -492,6 +541,11 @@ Unterstützt: Steam, uPlay, Origin</translation>
 of multiple games</source>
         <translation>Das Starten von 
 mehreren Spielen erlauben</translation>
+    </message>
+    <message>
+        <location filename="../Source/Settings.cpp" line="110"/>
+        <source>Full-tab highlighting</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../Source/Settings.cpp" line="117"/>
@@ -578,6 +632,21 @@ mehreren Spielen erlauben</translation>
         <source>Darkest Base</source>
         <translation>Dunkelste Fläche</translation>
     </message>
+    <message>
+        <location filename="../Source/Settings.cpp" line="283"/>
+        <source>Reset Colors to Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/Settings.cpp" line="289"/>
+        <source>Export Theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/Settings.cpp" line="295"/>
+        <source>Import Theme</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SetupWizard</name>
@@ -585,6 +654,19 @@ mehreren Spielen erlauben</translation>
         <location filename="../Source/SetupWizard.cpp" line="15"/>
         <source>Horizon Setup Wizard</source>
         <translation>Horizon Installations Assistent</translation>
+    </message>
+</context>
+<context>
+    <name>StartPage</name>
+    <message>
+        <location filename="../Source/DRMSetupWizard.cpp" line="19"/>
+        <source>Welcome</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/DRMSetupWizard.cpp" line="23"/>
+        <source>This wizard will help you add all of your games to Horizon.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
