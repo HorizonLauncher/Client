@@ -159,7 +159,16 @@ void LibraryCarouselView::init(QSettings* p)
 
     QWidget* gamesWidget = new QWidget();
     gamesLayout = new QVBoxLayout(gamesWidget);
-    mainGrid->addWidget(gamesWidget, 0, 1, Qt::AlignRight);
+
+    QScrollArea* scrollArea = new QScrollArea();
+    scrollArea->setFrameShape(QFrame::NoFrame);
+    scrollArea->setWidgetResizable(true);
+    scrollArea->setWidget(gamesWidget);
+    scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    scrollArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+
+    mainGrid->addWidget(scrollArea, 0, 1, Qt::AlignRight);
 }
 
 void LibraryCarouselView::filterGames(QString searchString)
