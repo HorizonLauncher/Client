@@ -39,8 +39,6 @@ NewsItemWidget::NewsItemWidget(QSettings* p, QString URL, QString source, QStrin
     imageLabel->setContentsMargins(5,5,5,5);
     layout->addWidget(imageLabel);
 
-    qDebug() << QFontDatabase().families() << endl;
-
     titleLabel = new QLabel (title);
     QFont titleFont("Gill Sans MT", 12, 5);\
     titleLabel->setFont(titleFont);
