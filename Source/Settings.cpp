@@ -40,7 +40,7 @@ void Settings::init(QSettings* p)
 
     QWidget* sectionTabsWidget = new QWidget();
     sectionTabsWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    sectionTabsWidget->setStyleSheet("font-size: 10pt;");
+    sectionTabsWidget->setStyleSheet("font-size: 10pt; background-color: transparent;");
     mainLayout->addWidget(sectionTabsWidget, Qt::AlignLeft | Qt::AlignTop);
 
     QVBoxLayout* sectionTabsLayout = new QVBoxLayout(sectionTabsWidget);
