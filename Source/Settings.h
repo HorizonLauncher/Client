@@ -18,6 +18,8 @@ private:
     void setMultipleExec(bool multipleExec);
     void setFulltab(bool fulltab);
 
+    QStackedWidget* stack;
+
     QPushButton* bodyColor;
     QPushButton* navbarBG;
     QPushButton* navbarHover;

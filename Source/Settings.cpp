@@ -2,6 +2,8 @@
 #include "SetupWizard.h"
 #include "NewsFeedChooserWindow.h"
 
+#include <QTabWidget>
+
 /** Settings constructor
 * Initialize the settings UI
 * \param p Inherited palette configuration for setting StyleSheets.
@@ -32,37 +34,60 @@ void Settings::init(QSettings* p)
 {
     QSettings config(QSettings::IniFormat, QSettings::UserScope, "HorizonLauncher", "config");
 
-    QGridLayout* mainLayout = new QGridLayout(this);
+    QHBoxLayout* mainLayout = new QHBoxLayout(this);
 
     QFont buttonFont("SourceSansPro", 9);
 
-    /* USER SETTINGS GROUP */
+    QWidget* sectionTabsWidget = new QWidget();
+    sectionTabsWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    sectionTabsWidget->setStyleSheet("font-size: 10pt;");
+    mainLayout->addWidget(sectionTabsWidget, Qt::AlignLeft | Qt::AlignTop);
+
+    QVBoxLayout* sectionTabsLayout = new QVBoxLayout(sectionTabsWidget);
+
+    QPushButton* clientSettingsLabel = new QPushButton(tr("General"));
+    clientSettingsLabel->setStyleSheet("font-size: 12pt; background: none;");
+    QPushButton* styleSettingsLabel = new QPushButton(tr("Appearance"));
+    styleSettingsLabel->setStyleSheet("font-size: 12pt; background: none;");
+    sectionTabsLayout->addSpacing(20);
+    sectionTabsLayout->addWidget(clientSettingsLabel, Qt::AlignLeft);
+    sectionTabsLayout->addWidget(styleSettingsLabel, Qt::AlignLeft);
+    sectionTabsLayout->addStretch();
+
+    stack = new QStackedWidget();
+    stack->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    mainLayout->addWidget(stack, Qt::AlignHCenter);
+
+    /*// USER SETTINGS GROUP
     QGroupBox* userGroup = new QGroupBox(tr("User Settings"));
     userGroup->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    mainLayout->addWidget(userGroup, 0, 0, Qt::AlignTop);
+    stack->addWidget(userGroup);
 
     QVBoxLayout* userGroupLayout = new QVBoxLayout(userGroup);
 
     QPushButton* changeUsernameBtn = new QPushButton(tr("Change Username"));
     changeUsernameBtn->setStyleSheet("padding: 5px;");
     changeUsernameBtn->setFont(buttonFont);
-    userGroupLayout->addWidget(changeUsernameBtn);
+    changeUsernameBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    userGroupLayout->addWidget(changeUsernameBtn, Qt::AlignTop);
 
-    QPushButton* changePwdBtn = new QPushButton(tr("Change Username"));
+    QPushButton* changePwdBtn = new QPushButton(tr("Change Password"));
     changePwdBtn->setStyleSheet("padding: 5px;");
     changePwdBtn->setFont(buttonFont);
-    userGroupLayout->addWidget(changePwdBtn);
+    changePwdBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    userGroupLayout->addWidget(changePwdBtn, Qt::AlignTop);*/
 
-    /* CLIENT SETTINGS GROUP */
-    QGroupBox* clientGroup = new QGroupBox(tr("Client Settings"));
+    // CLIENT SETTINGS GROUP
+    QGroupBox* clientGroup = new QGroupBox(tr("General"));
     clientGroup->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    mainLayout->addWidget(clientGroup, 1, 0, Qt::AlignTop);
+    stack->addWidget(clientGroup);
 
     QVBoxLayout* clientGroupLayout = new QVBoxLayout(clientGroup);
 
     QPushButton* setupWizardBtn = new QPushButton(tr("Open Setup Wizard"));
     setupWizardBtn->setStyleSheet("padding: 5px;");
     setupWizardBtn->setFont(buttonFont);
+    setupWizardBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     clientGroupLayout->addWidget(setupWizardBtn);
     connect(setupWizardBtn, &QPushButton::clicked, [=]
     {
@@ -73,17 +98,20 @@ void Settings::init(QSettings* p)
     QPushButton* clearDBBtn = new QPushButton(tr("Clear database"));
     clearDBBtn->setStyleSheet("padding: 5px;");
     clearDBBtn->setFont(buttonFont);
+    clearDBBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     clientGroupLayout->addWidget(clearDBBtn);
     connect(clearDBBtn, &QPushButton::clicked, this, &Settings::confirmClearDb);
 
     QPushButton* clearLaunchBtn = new QPushButton(tr("Clear launch options"));
     clearLaunchBtn->setStyleSheet("padding: 5px;");
     clearLaunchBtn->setFont(buttonFont);
+    clearLaunchBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     clientGroupLayout->addWidget(clearLaunchBtn);
 
     QPushButton* manageNewsFeedButton = new QPushButton(tr("Manage News Feeds"));
     manageNewsFeedButton->setStyleSheet("padding: 5px;");
     manageNewsFeedButton->setFont(buttonFont);
+    manageNewsFeedButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     clientGroupLayout->addWidget(manageNewsFeedButton);
 
     connect (manageNewsFeedButton, &QPushButton::clicked, [&]
@@ -97,9 +125,10 @@ void Settings::init(QSettings* p)
     QHBoxLayout* multipleGamesLayout = new QHBoxLayout(multipleGamesWidget);
     QCheckBox* multipleGamesCB = new QCheckBox();
     multipleGamesCB->setCheckState((config.value("GameLauncher/MultipleExec").toBool() ? Qt::Checked : Qt::Unchecked));
-    QLabel* multipleGamesLbl = new QLabel(tr("Allow launching\nof multiple games"));
+    QLabel* multipleGamesLbl = new QLabel(tr("Allow launching of multiple games"));
     multipleGamesLayout->addWidget(multipleGamesCB);
     multipleGamesLayout->addWidget(multipleGamesLbl);
+    multipleGamesWidget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     clientGroupLayout->addWidget(multipleGamesWidget);
     connect(multipleGamesCB, &QCheckBox::stateChanged, [=] (int state) { setMultipleExec(state == Qt::Checked); });
 
@@ -113,10 +142,10 @@ void Settings::init(QSettings* p)
     //clientGroupLayout->addWidget(fulltabWidget);
     connect(fulltabCB, &QCheckBox::stateChanged, [=] (int state) { setFulltab(state == Qt::Checked); });
 
-    /* STYLE SETTINGS GROUP */
-    QGroupBox* styleGroup = new QGroupBox(tr("Style Settings"));
+    // STYLE SETTINGS GROUP
+    QGroupBox* styleGroup = new QGroupBox(tr("Appearance"));
     styleGroup->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-    mainLayout->addWidget(styleGroup, 1, 1, Qt::AlignLeft);
+    stack->addWidget(styleGroup);
 
     QGridLayout* styleGroupLayout = new QGridLayout(styleGroup);
 
@@ -314,6 +343,21 @@ void Settings::init(QSettings* p)
     connect(secondaryBase, &QPushButton::clicked, [=]() { pickSetColor(14); });
     connect(tertiaryBase, &QPushButton::clicked, [=]() { pickSetColor(15); });
     connect(darkestBase, &QPushButton::clicked, [=]() { pickSetColor(16); });
+
+
+    connect(clientSettingsLabel, &QPushButton::clicked,
+        [=]()
+        {
+            stack->setCurrentWidget(clientGroup);
+            //clientSettingsLabel->
+        });
+
+    connect(styleSettingsLabel, &QPushButton::clicked,
+        [=]()
+        {
+            stack->setCurrentWidget(styleGroup);
+            //clientSettingsLabel->
+        });
 }
 
 void Settings::resetColors()
