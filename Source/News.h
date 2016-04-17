@@ -42,6 +42,7 @@ private:
     QVBoxLayout* firstColumn;
     QVBoxLayout* secondColumn;
     QVBoxLayout* thirdColumn;
+    QVBoxLayout* fourthColumn;
     QHBoxLayout* mainLayout;
 };
 

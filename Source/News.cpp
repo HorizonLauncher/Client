@@ -27,7 +27,9 @@ News::News(QSettings* p, QWidget* parent) :
                         "background-color: " + p->value("Primary/InactiveSelection").toString() + ";} "
                         "QVBoxLayout {"
                         "background-color: " + p->value("Primary/TertiaryBase").toString() + "; "
-                        "color: " + p->value("Primary/LightText").toString() + "; }" );
+                        "color: " + p->value("Primary/LightText").toString() + ";"
+                        "}"
+                        );
     this->settings = p;
 
     QShortcut* shortcut = new QShortcut(QKeySequence("R"), parent);
@@ -52,6 +54,7 @@ void News::loadFeeds()
     clearLayout(firstColumn);
     clearLayout(secondColumn);
     clearLayout(thirdColumn);
+    clearLayout(fourthColumn);
     loadFeedUrlsFromSettings();
     loadXMLfromUrls();
 }
@@ -139,9 +142,11 @@ void News::setupUI()
     firstColumn = new QVBoxLayout();
     secondColumn = new QVBoxLayout();
     thirdColumn = new QVBoxLayout();
+    fourthColumn = new QVBoxLayout();
     mainLayout->addLayout(firstColumn);
     mainLayout->addLayout(secondColumn);
     mainLayout->addLayout(thirdColumn);
+    mainLayout->addLayout(fourthColumn);
     this->setLayout(mainLayout);
 }
 
@@ -230,6 +235,7 @@ void News::reloadHeadlines()
     int c1 = 0;
     int c2 = 0;
     int c3 = 0;
+    int c4 = 0;
     int insertedCount = 0;
     while(!done)
     {
@@ -251,9 +257,14 @@ void News::reloadHeadlines()
                 thirdColumn->addWidget(headlines.at(indexOfNewItem));
                 c3++;
             }
+
+            else if (columnToInsert == 4) {
+                fourthColumn->addWidget(headlines.at(indexOfNewItem));
+                c4++;
+            }
             inserted[indexOfNewItem] = true;
             columnToInsert++;
-            if (columnToInsert > 3) columnToInsert = 1;
+            if (columnToInsert > 4) columnToInsert = 1;
             insertedCount++;
         }
 

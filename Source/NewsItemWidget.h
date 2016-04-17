@@ -27,6 +27,8 @@ private:
     QLabel* imageLabel;
     QLabel* titleLabel;
     QLabel* sourceLabel;
+    QString titleLabelStyleSheet;
+    QString descriptionLabelStyleSheet;
     QLabel* descriptionLabel;
     QString urlString;
     QString descriptionString;

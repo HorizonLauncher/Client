@@ -2,6 +2,7 @@
 #include <QVBoxLayout>
 #include <QDesktopServices>
 #include <QUrl>
+#include <QFontDatabase>
 
 /**
  * NewsItemWidget constructor
@@ -13,38 +14,50 @@
  */
 NewsItemWidget::NewsItemWidget(QSettings* p, QString URL, QString source, QString title, QString descriptionString, QWidget* parent) : QWidget(parent)
 {
-    this->setStyleSheet(
-                "QLabel {"
-                "color: " + p->value("Primary/LightText").toString() + ";"
-                "font-family: Arial;"
-                "font-size: 16px;"
-                "}"
-                );
 
+    this->setObjectName("NewsItemWidget");
+   // this->setMaximumHeight(200);
     this->palette = p;
-
+    this->setStyleSheet(
+                "#imageLabel {"
+                "border-top-right-radius: 4px; "
+                "border-top-left-radius: 4px; "
+                "}"
+                "#sourceLabel {"
+                "border-bottom-right-radius: 4px; "
+                "border-bottom-left-radius: 4px; "
+                "}"
+                "QLabel {"
+                "padding: 3px; "
+                "color: " + p->value("Primary/LightText").toString() + ";"
+                "}");
     QVBoxLayout* layout = new QVBoxLayout(this);
     layout->setSpacing(0);
+
     imageLabel = new QLabel (""); //TODO: Change this to default image
+    imageLabel->setObjectName("imageLabel");
     imageLabel->setContentsMargins(5,5,5,5);
     layout->addWidget(imageLabel);
 
+    qDebug() << QFontDatabase().families() << endl;
 
     titleLabel = new QLabel (title);
+    QFont titleFont("Gill Sans MT", 12, 5);\
+    titleLabel->setFont(titleFont);
     titleLabel->setContentsMargins(0,0,5,5);
     titleLabel->setWordWrap(true);
     layout->addWidget(titleLabel);
 
+
     descriptionLabel = new QLabel(descriptionString);
     descriptionLabel->setContentsMargins(0,0,5,5);
     descriptionLabel->setWordWrap(true);
-    descriptionLabel->setStyleSheet("font-size: 12px");
     layout->addWidget(descriptionLabel);
 
     sourceLabel = new QLabel (source);
     sourceLabel->setContentsMargins(0,0,5,5);
     sourceLabel->setWordWrap(true);
-    sourceLabel->setStyleSheet("font-size: 10px;");
+    sourceLabel->setObjectName("sourceLabel");
     layout->addWidget(sourceLabel);
 
     this->urlString = URL;
@@ -111,11 +124,9 @@ void NewsItemWidget::sourceCodeFetchComplete(QNetworkReply* reply)
 
 void NewsItemWidget::enterEvent(QEvent* event)
 {
-   titleLabel->setStyleSheet("background-color: " + this->palette->value("Primary/HoverSelection").toString() + ";");
-   descriptionLabel->setStyleSheet("font-size: 12px;"
-                                   "background-color: " + this->palette->value("Primary/HoverSelection").toString() + ";");
-   sourceLabel->setStyleSheet("font-size: 10px; "
-                              "background-color: " + this->palette->value("Primary/HoverSelection").toString() + ";");
+   titleLabel->setStyleSheet( "background-color: " + this->palette->value("Primary/HoverSelection").toString() + ";");
+   descriptionLabel->setStyleSheet("background-color: " + this->palette->value("Primary/HoverSelection").toString() + ";");
+   sourceLabel->setStyleSheet("background-color: " + this->palette->value("Primary/HoverSelection").toString() + ";");
    imageLabel->setStyleSheet("background-color: " + this->palette->value("Primary/HoverSelection").toString() + ";");
    this->setCursor(Qt::PointingHandCursor);
 
@@ -124,10 +135,8 @@ void NewsItemWidget::enterEvent(QEvent* event)
 void NewsItemWidget::leaveEvent(QEvent* event)
 {
    titleLabel->setStyleSheet("background-color: " + this->palette->value("Primary/SecondaryBase").toString() + ";");
-   descriptionLabel->setStyleSheet("font-size: 12px;"
-                                   "background-color: " + this->palette->value("Primary/SecondaryBase").toString() + ";");
-   sourceLabel->setStyleSheet("font-size: 10px; "
-                              "background-color: " + this->palette->value("Primary/SecondaryBase").toString() + ";");
+   descriptionLabel->setStyleSheet("background-color: " + this->palette->value("Primary/SecondaryBase").toString() + ";");
+   sourceLabel->setStyleSheet("background-color: " + this->palette->value("Primary/SecondaryBase").toString() + ";");
    imageLabel->setStyleSheet("background-color: " + this->palette->value("Primary/SecondaryBase").toString() + ";");
    this->setCursor(Qt::ArrowCursor);
 
