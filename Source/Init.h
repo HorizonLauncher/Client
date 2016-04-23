@@ -33,7 +33,7 @@ void initSettings(QApplication &application)
         palette.setValue("HoverSelection", "#ADADAD");
         palette.setValue("DarkElement", "#4D5250");
         palette.setValue("LightText", "#FFFFFF");
-        palette.setValue("DarkText", "#242424");
+        palette.setValue("DarkText", "#7D8F94");
         palette.setValue("SubText", "#B2B4B3");
         palette.setValue("PrimaryBase", "#282828");
         palette.setValue("SecondaryBase", "#1F1F1F");

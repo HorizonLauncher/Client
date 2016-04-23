@@ -46,9 +46,17 @@ void Settings::init(QSettings* p)
     QVBoxLayout* sectionTabsLayout = new QVBoxLayout(sectionTabsWidget);
 
     QPushButton* clientSettingsLabel = new QPushButton(tr("General"));
-    clientSettingsLabel->setStyleSheet("font-size: 12pt; background: none;");
+    clientSettingsLabel->setStyleSheet("font-size: 15pt;"
+                                       "font-family: Roboto;"
+                                       "font-weight: 700;"
+                                       "color: " + p->value("Primary/DarkText").toString() + ";"
+                                       "background: none;");
     QPushButton* styleSettingsLabel = new QPushButton(tr("Appearance"));
-    styleSettingsLabel->setStyleSheet("font-size: 12pt; background: none;");
+    styleSettingsLabel->setStyleSheet("font-size: 15pt;"
+                                       "font-family: Roboto;"
+                                       "font-weight: 700;"
+                                       "color: " + p->value("Primary/DarkText").toString() + ";"
+                                       "background: none;");
     sectionTabsLayout->addSpacing(20);
     sectionTabsLayout->addWidget(clientSettingsLabel, Qt::AlignLeft);
     sectionTabsLayout->addWidget(styleSettingsLabel, Qt::AlignLeft);
@@ -372,7 +380,7 @@ void Settings::resetColors()
         palette.setValue("HoverSelection", "#ADADAD");
         palette.setValue("DarkElement", "#4D5250");
         palette.setValue("LightText", "#FFFFFF");
-        palette.setValue("DarkText", "#242424");
+        palette.setValue("DarkText", "#7D8F94");
         palette.setValue("SubText", "#B2B4B3");
         palette.setValue("PrimaryBase", "#282828");
         palette.setValue("SecondaryBase", "#1F1F1F");
