@@ -51,7 +51,7 @@ TabWidget::TabWidget(const QString &name, const QString &text, QSettings* palett
     // Tab text
     tabText = new TabLabel(this, palette);
     tabText->setObjectName("tabText");
-    tabText->setStyleSheet("color: #7d8f94;");
+    tabText->setStyleSheet("color: " + p->value("Primary/DarkText").toString() + ";");
     tabText->setFont(font);
     tabText->setText(text);
     tabText->setAlignment(Qt::AlignCenter);
@@ -162,7 +162,7 @@ void TabWidget::toggleActive()
     this->setStyleSheet("border-top-left-radius: 2px;"
                         "border-top-right-radius: 2px;"
                         "background-color: #000000;");
-    tabText->setStyleSheet("color: #ffffff;");
+    tabText->setStyleSheet("color: " + p->value("Primary/LightText").toString() + ";");
     setOpacity(1.0);
     tabText->isActive = true;
     tabText->update();
@@ -177,7 +177,7 @@ void TabWidget::toggleInactive()
     this->setStyleSheet("border-top-left-radius: 2px;"
                         "border-top-right-radius: 2px;"
                         "background-color: " + p->value("Navbar/Background").toString() + ";");
-    tabText->setStyleSheet("color: #7d8f94");
+    tabText->setStyleSheet("color: " + p->value("Primary/DarkText").toString() + ";");
     tabText->isActive = false;
     setOpacity(0.0);
 }
