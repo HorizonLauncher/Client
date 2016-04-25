@@ -47,7 +47,7 @@ void initSettings(QApplication &application)
 
         palette.beginGroup("Navbar");
         palette.setValue("Background", "#111111");
-        palette.setValue("SelectedColor", "#9351E5");
+        palette.setValue("SelectedColor", "#4384FD");
         palette.setValue("HoverColor", "#ADADAD");
         palette.endGroup();
 
