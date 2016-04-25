@@ -500,149 +500,155 @@ Supporte : Steam, uPlay, Origin</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../Source/Settings.cpp" line="40"/>
         <source>User Settings</source>
-        <translation>Paramètres Utilisateur</translation>
+        <translation type="vanished">Paramètres Utilisateur</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="46"/>
-        <location filename="../Source/Settings.cpp" line="51"/>
         <source>Change Username</source>
-        <translation>Changer le Nom d&apos;Utilisateur</translation>
+        <translation type="vanished">Changer le Nom d&apos;Utilisateur</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="57"/>
         <source>Client Settings</source>
-        <translation>Paramètres du Client</translation>
+        <translation type="vanished">Paramètres du Client</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="63"/>
+        <location filename="../Source/Settings.cpp" line="95"/>
         <source>Open Setup Wizard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="73"/>
+        <location filename="../Source/Settings.cpp" line="106"/>
         <source>Clear database</source>
         <translation>Vider la base de données</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="79"/>
+        <location filename="../Source/Settings.cpp" line="113"/>
         <source>Clear launch options</source>
         <translation>Effacer les options de lancement</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="84"/>
+        <location filename="../Source/Settings.cpp" line="119"/>
         <source>Manage News Feeds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="100"/>
-        <source>Allow launching
-of multiple games</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Source/Settings.cpp" line="110"/>
+        <location filename="../Source/Settings.cpp" line="147"/>
         <source>Full-tab highlighting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="117"/>
         <source>Style Settings</source>
-        <translation>Paramètres de style </translation>
+        <translation type="vanished">Paramètres de style </translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="130"/>
+        <location filename="../Source/Settings.cpp" line="48"/>
+        <location filename="../Source/Settings.cpp" line="89"/>
+        <source>General</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/Settings.cpp" line="54"/>
+        <location filename="../Source/Settings.cpp" line="154"/>
+        <source>Appearance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/Settings.cpp" line="136"/>
+        <source>Allow launching of multiple games</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Source/Settings.cpp" line="167"/>
         <source>Body Background</source>
         <translation>Arrière-plan de corps</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="140"/>
+        <location filename="../Source/Settings.cpp" line="177"/>
         <source>Navbar Background</source>
         <translation>Arrière-Plan de la Barre de Navigation</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="150"/>
+        <location filename="../Source/Settings.cpp" line="187"/>
         <source>Navbar Hover</source>
         <translation>Liste de la Barre de Navigation</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="160"/>
+        <location filename="../Source/Settings.cpp" line="197"/>
         <source>Navbar Selected</source>
         <translation>Barre de Navigation Sélectionné</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="170"/>
+        <location filename="../Source/Settings.cpp" line="207"/>
         <source>Titlebar Color</source>
         <translation>Couleur de la Barre de titre</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="180"/>
+        <location filename="../Source/Settings.cpp" line="217"/>
         <source>Active Element</source>
         <translation>Élément Actif</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="190"/>
+        <location filename="../Source/Settings.cpp" line="227"/>
         <source>Inactive Selection</source>
         <translation>Sélection Inactive</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="200"/>
+        <location filename="../Source/Settings.cpp" line="237"/>
         <source>Hover Selection</source>
         <translation>Sélection de la Liste</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="210"/>
+        <location filename="../Source/Settings.cpp" line="247"/>
         <source>Dark Element</source>
         <translation>Élément Foncé</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="220"/>
+        <location filename="../Source/Settings.cpp" line="257"/>
         <source>Light Text</source>
         <translation>Texte Clair</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="230"/>
+        <location filename="../Source/Settings.cpp" line="267"/>
         <source>Dark Text</source>
         <translation>Texte Foncé</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="240"/>
+        <location filename="../Source/Settings.cpp" line="277"/>
         <source>Sub Text</source>
         <translation>Sous-texte</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="250"/>
+        <location filename="../Source/Settings.cpp" line="287"/>
         <source>Primary Base</source>
         <translation>Base Primaire</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="260"/>
+        <location filename="../Source/Settings.cpp" line="297"/>
         <source>Secondary Base</source>
         <translation>Base Secondaire</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="270"/>
+        <location filename="../Source/Settings.cpp" line="307"/>
         <source>Tertiary Base</source>
         <translation>Base Tertiare</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="280"/>
+        <location filename="../Source/Settings.cpp" line="317"/>
         <source>Darkest Base</source>
         <translation>Base Sombre</translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="283"/>
+        <location filename="../Source/Settings.cpp" line="320"/>
         <source>Reset Colors to Default</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="289"/>
+        <location filename="../Source/Settings.cpp" line="326"/>
         <source>Export Theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Source/Settings.cpp" line="295"/>
+        <location filename="../Source/Settings.cpp" line="332"/>
         <source>Import Theme</source>
         <translation type="unfinished"></translation>
     </message>
