@@ -1,5 +1,5 @@
-#ifndef _BUDDYLISTEXPANDABLE_H_
-#define _BUDDYLISTEXPANDABLE_H_
+#ifndef BUDDYLISTEXPANDABLE_H
+#define BUDDYLISTEXPANDABLE_H
 
 #include <QWidget>
 #include <QSettings>

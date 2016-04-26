@@ -1,5 +1,5 @@
-#ifndef _NAVBAR_H_
-#define _NAVBAR_H_
+#ifndef NAVBAR_H
+#define NAVBAR_H
 
 #include "TabWidget.h"
 

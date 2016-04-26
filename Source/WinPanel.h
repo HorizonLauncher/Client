@@ -1,5 +1,5 @@
-#ifndef _WINPANEL_H_
-#define _WINPANEL_H_
+#ifndef WINPANEL_H
+#define WINPANEL_H
 
 #include "MainPanel.h"
 

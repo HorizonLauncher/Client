@@ -1,5 +1,5 @@
-#ifndef _WINWINDOW_H_
-#define _WINWINDOW_H_
+#ifndef WINWINDOW_H
+#define WINWINDOW_H
 
 #include "QWinWidget.h"
 #include "WinPanel.h"

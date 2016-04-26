@@ -1,5 +1,5 @@
-#ifndef _TABWIDGET_H_
-#define _TABWIDGET_H_
+#ifndef TABWIDGET_H
+#define TABWIDGET_H
 
 #include <QWidget>
 #include <QSettings>

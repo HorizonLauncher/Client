@@ -1,5 +1,5 @@
-#ifndef _STORE_H_
-#define _STORE_H_
+#ifndef STORE_H
+#define STORE_H
 
 #include <QWidget>
 #include <QWebView>

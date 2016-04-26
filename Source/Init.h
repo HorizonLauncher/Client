@@ -1,5 +1,5 @@
-#ifndef _INIT_H_
-#define _INIT_H_
+#ifndef INIT_H
+#define INIT_H
 
 #include <QApplication>
 #include <QFontDatabase>

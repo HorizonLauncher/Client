@@ -1,5 +1,5 @@
-#ifndef _LIBRARYGRIDVIEW_H_
-#define _LIBRARYGRIDVIEW_H_
+#ifndef LIBRARYGRIDVIEW_H
+#define LIBRARYGRIDVIEW_H
 
 class Library;
 

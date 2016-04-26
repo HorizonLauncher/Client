@@ -1,5 +1,5 @@
-#ifndef _BORDERLESSWINDOW_H_
-#define _BORDERLESSWINDOW_H_
+#ifndef BORDERLESSWINDOW_H
+#define BORDERLESSWINDOW_H
 
 #include "WinWindow.h"
 

@@ -1,5 +1,5 @@
-#ifndef _MAINPANEL_H_
-#define _MAINPANEL_H_
+#ifndef MAINPANEL_H
+#define MAINPANEL_H
 
 #include "TabWidget.h"
 #include "Navbar.h"

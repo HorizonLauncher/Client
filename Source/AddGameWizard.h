@@ -1,5 +1,5 @@
-#ifndef _ADDGAMEWIZARD_H_
-#define _ADDGAMEWIZARD_H_
+#ifndef ADDGAMEWIZARD_H
+#define ADDGAMEWIZARD_H
 
 #include "Database.h"
 #include "Defines.h"

@@ -1,5 +1,5 @@
-#ifndef _LIBRARY_H_
-#define _LIBRARY_H_
+#ifndef LIBRARY_H
+#define LIBRARY_H
 
 class LibraryGridView;
 class LibraryCarouselView;

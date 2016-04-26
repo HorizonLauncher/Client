@@ -1,5 +1,5 @@
-#ifndef _UNIXPANEL_H_
-#define _UNIXPANEL_H_
+#ifndef UNIXPANEL_H
+#define UNIXPANEL_H
 
 #include "MainPanel.h"
 

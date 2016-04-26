@@ -1,5 +1,5 @@
-#ifndef _GRIDGAMEWIDGET_H_
-#define _GRIDGAMEWIDGET_H_
+#ifndef GRIDGAMEWIDGET_H
+#define GRIDGAMEWIDGET_H
 
 #include <QWidget>
 
