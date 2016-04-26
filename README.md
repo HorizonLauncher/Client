@@ -1,15 +1,14 @@
-#Horizon Launcher Client Repo 
+#Horizon Launcher Client Repository
 
 [![Slack Status](http://horizonlauncher-slack.herokuapp.com/badge.svg)](http://slack.launchhorizon.com)
+[![Chat on Freenode](https://img.shields.io/badge/chat-on%20freenode-brightgreen.svg?style=flat)](https://kiwiirc.com/client/chat.freenode.net/#horizonlauncher)
 [![Build Status](https://travis-ci.org/HorizonLauncher/Client.svg?branch=dev)](https://travis-ci.org/HorizonLauncher/Client)
 
-You're in the official repo for the Horizon Launcher client interface. The Borderless window system for WinAPI is pulled from deimos1877's [BorderlessWindow](http://github.com/deimos1877/BorderlessWindow).
+Welcome to the Horizon Launcher client repository!
 
-Horizon Launcher contains code from its predescessor [Project Ascension](https://github.com/Proj-Ascension).
+The borderless window system for Windows is pulled from deimos1877's [BorderlessWindow](http://github.com/deimos1877/BorderlessWindow). Horizon Launcher also contains code from its predescessor [Project Ascension](https://github.com/Proj-Ascension).
 
-If you have any questions, feel free to join our Slack chatroom (it's like IRC but uses Slack for the chat) by using the little button above or [just clicking here](http://horizonlauncher-slack.herokuapp.com)!
-
-We also have an IRC channel which you can access online [here](https://kiwiirc.com/client/irc.freenode.net/horizonlauncher).
+If you have any questions, feel free to join us on [Slack](http://slack.launchhorizon.com) or [IRC](https://kiwiirc.com/client/chat.freenode.net/#horizonlauncher).
 
 # License
 This project is licensed under the MIT License.
