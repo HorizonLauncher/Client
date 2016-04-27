@@ -136,7 +136,6 @@ AddNewsFeedsPage::AddNewsFeedsPage(QWidget* parent)
     newsFeeds.append(*new QList<QString>({"Kotaku", "http://feeds.gawker.com/kotaku/full"}));
     newsFeeds.append(*new QList<QString>({"MP 1st", "http://mp1st.com/feed"}));
     newsFeeds.append(*new QList<QString>({"Nintendojo", "http://www.nintendojo.com/category/news/feed"}));
-    newsFeeds.append(*new QList<QString>({"PC Gamer", "http://www.pcgamer.com/feed/rss2/"}));
     newsFeeds.append(*new QList<QString>({"PCGamesN", "http://www.pcgamesn.com/mainrss.xml"}));
     newsFeeds.append(*new QList<QString>({"Player Theory", "http://playertheory.com/rss"}));
     newsFeeds.append(*new QList<QString>({"Pocket Gamer", "http://www.pocketgamer.co.uk/rss.asp?t=news"}));
