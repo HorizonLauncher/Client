@@ -1,1 +1,15 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 611.49 611.49"><title>LibCarouselView</title><path id="path3018" d="M306.57,436.45H483.65V171H306.57V436.45ZM217.65,401h71.09V206.38H217.65V401ZM501.23,206.38V401H571.8V206.38H501.23Z" transform="translate(-90.25 -0.25)" fill="#fff"/><path id="path3020" d="M90.25,0.25H701.75V611.75H90.25V0.25Z" transform="translate(-90.25 -0.25)" fill="none"/><rect id="rect3022" x="25.22" y="25.22" width="561.04" height="561.04" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2"/></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 611.5 611.5" style="enable-background:new 0 0 611.5 611.5;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:none;}
+	.st2{fill:none;stroke:#FFFFFF;stroke-width:33;stroke-miterlimit:10;}
+</style>
+<title>LibCarouselView</title>
+<path id="path3018" class="st0" d="M216.3,436.2h177.1V170.8H216.3V436.2z M127.4,400.8h71.1V206.1h-71.1V400.8z M411,206.1v194.6
+	h70.6V206.1H411z"/>
+<path id="path3020" class="st1" d="M0,0h611.5v611.5H0V0z"/>
+<rect id="rect3022" x="25.2" y="25.2" class="st2" width="561" height="561"/>
+</svg>

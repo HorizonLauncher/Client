@@ -1,1 +1,16 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 612"><title>LibGridView</title><path id="path9" d="M217.5,295.55H322.56V169.83H217.5V295.55Zm0,146.63H322.56V316.45H217.5V442.17Zm125.72,0H448V316.45H343.72V442.17h-0.51Zm125.72,0H574.5V316.45H469.44V442.17h-0.51ZM343.72,295.55h104.8V169.83H343.72V295.55ZM469.44,169.83V295.55H574.5V169.83H469.44Z" transform="translate(-90)" fill="#fff"/><path id="path11" d="M90,0H702V612H90V0Z" transform="translate(-90)" fill="none"/><rect id="rect13" x="25.5" y="25.5" width="561" height="561" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2"/></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 612 612" style="enable-background:new 0 0 612 612;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:none;}
+	.st2{fill:none;stroke:#FFFFFF;stroke-width:33;stroke-miterlimit:10;}
+</style>
+<title>LibGridView</title>
+<path id="path9" class="st0" d="M127.5,295.5h105.1V169.8H127.5V295.5z M127.5,442.2h105.1V316.5H127.5V442.2L127.5,442.2z
+	 M253.2,442.2H358V316.5H253.7v125.7L253.2,442.2L253.2,442.2z M378.9,442.2h105.6V316.5H379.4v125.7L378.9,442.2L378.9,442.2z
+	 M253.7,295.5h104.8V169.8H253.7V295.5z M379.4,169.8v125.7h105.1V169.8H379.4z"/>
+<path id="path11" class="st1" d="M0,0h612v612H0V0z"/>
+<rect id="rect13" x="25.5" y="25.5" class="st2" width="561" height="561"/>
+</svg>
