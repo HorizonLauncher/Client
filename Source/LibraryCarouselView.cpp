@@ -25,7 +25,7 @@ LibraryCarouselView::LibraryCarouselView(QSettings* p, Library* library, QWidget
                         "QLabel {"
                         "color: " + p->value("Primary/LightText").toString() + ";"
                         "font-family: SourceSansPro; }"
-                        "QComboBox::down-arrow { image: url(:/SystemMenu/Icons/DropdownArrow.png); }");
+                        "QComboBox::down-arrow { image: url(:/SystemMenu/Icons/Material/Dropdown.svg); }");
 
     this->library = library;
 

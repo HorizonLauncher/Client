@@ -75,7 +75,7 @@ DetailGameWidget::DetailGameWidget(Game game, QSettings* palette, QWidget* paren
 
     //Create Button
     QPushButton* playButton = new QPushButton();
-    playButton->setStyleSheet("background-image: url(:SystemMenu/Icons/LaunchIconInverted.png);"
+    playButton->setStyleSheet("background-image: url(:SystemMenu/Icons/Material/Launch.svg);"
                               "background-repeat: no-repeat;"
                               "background-color: transparent;");
     playButton->setMinimumSize(40, 40);

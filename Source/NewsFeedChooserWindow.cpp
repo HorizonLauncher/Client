@@ -112,7 +112,7 @@ void NewsFeedChooserWindow::createURLLabels()
 
     for (int i = 0; i < this->urls.size(); ++i)
     {
-        QPixmap cross(":/SystemMenu/Icons/cross.png");
+        QPixmap cross(":/SystemMenu/Icons/Material/delete.svg");
         QIcon crossIcon(cross);
 
         QWidget* labelWidget = new QWidget();

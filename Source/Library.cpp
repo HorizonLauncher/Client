@@ -31,7 +31,7 @@ Library::Library(QSettings* p, QWidget* parent)
                         "QLabel {"
                         "color: " + p->value("Primary/LightText").toString() + ";"
                         "font-family: SourceSansPro; }"
-                        "QComboBox::down-arrow { image: url(:/SystemMenu/Icons/DropdownArrow.png); }");
+                        "QComboBox::down-arrow { image: url(:/SystemMenu/Icons/Material/Dropdown.svg); }");
 
     init(p);
 }
@@ -72,7 +72,7 @@ void Library::init(QSettings* p)
         }
     });
 
-    QPixmap search(":/SystemMenu/Icons/SearchInverted.png");
+    QPixmap search(":/SystemMenu/Icons/Material/Search.svg");
     QIcon searchIcon(search);
 
     QPushButton* searchBtn = new QPushButton("");
@@ -126,17 +126,18 @@ void Library::init(QSettings* p)
 
     searchLayout->addStretch();
 
-    QPixmap grid(":/SystemMenu/Icons/GridViewInverted.png");
+    QPixmap grid(":/SystemMenu/Icons/Material/LibGridView.svg");
     QIcon gridIcon(grid);
-    QPixmap listImg(":/SystemMenu/Icons/DetailedListViewInverted.png");
+    QPixmap listImg(":/SystemMenu/Icons/Material/LibDetailedListView.svg");
     QIcon listIcon(listImg);
-    QPixmap carousel(":/SystemMenu/Icons/CarouselViewInverted.png");
+    QPixmap carousel(":/SystemMenu/Icons/Material/LibCarouselView.svg");
     QIcon carouselIcon(carousel);
 
     QPushButton* gridBtn = new QPushButton("");
     gridBtn->setIcon(gridIcon);
     gridBtn->setIconSize(QSize(16, 16));
     gridBtn->setStyleSheet("background-color: transparent;");
+    gridBtn->setIconSize(QSize(24, 24));
     gridBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     searchLayout->addWidget(gridBtn);
     connect(gridBtn, &QPushButton::clicked, this, &Library::setGridView);
@@ -145,6 +146,7 @@ void Library::init(QSettings* p)
     listBtn->setIcon(listIcon);
     listBtn->setIconSize(QSize(16, 16));
     listBtn->setStyleSheet("background-color: transparent;");
+    listBtn->setIconSize(QSize(24, 24));
     listBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     searchLayout->addWidget(listBtn);
     connect(listBtn, &QPushButton::clicked, this, &Library::setDetailView);
@@ -153,6 +155,7 @@ void Library::init(QSettings* p)
     carouselBtn->setIcon(carouselIcon);
     carouselBtn->setIconSize(QSize(16, 16));
     carouselBtn->setStyleSheet("background-color: transparent;");
+    carouselBtn->setIconSize(QSize(24, 24));
     carouselBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     searchLayout->addWidget(carouselBtn);
     connect(carouselBtn, &QPushButton::clicked, this, &Library::setCarouselView);
