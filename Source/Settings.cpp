@@ -419,6 +419,8 @@ void Settings::resetColors()
     secondaryBase->setStyleSheet("background-color: " + palette.value("Primary/SecondaryBase").toString() + ";}");
     tertiaryBase->setStyleSheet("background-color: " + palette.value("Primary/TertiaryBase").toString() + ";}");
     darkestBase->setStyleSheet("background-color: " + palette.value("Primary/DarkestBase").toString() + ";}");
+
+    QMessageBox(QMessageBox::Information, "Updated Theme", "You must restart Horizon Launcher for the appearance changes to take effect.", QMessageBox::Close).exec();
 }
 
 void Settings::exportTheme()
