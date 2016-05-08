@@ -621,9 +621,9 @@ void Settings::updateColor(int id, QColor color)
                 palette.setValue("DarkestBase", color.name());
                 darkestBase->setStyleSheet("background-color: " + color.name() + ";}");
             }
-
             palette.endGroup();
         }
+        QMessageBox(QMessageBox::Information, "Updated Theme", "You must restart Horizon Launcher for the appearance changes to take effect.", QMessageBox::Close).exec();
     }
 }
 
