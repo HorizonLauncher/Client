@@ -490,6 +490,7 @@ void Settings::importTheme()
             QString rightSide = line.mid(eqPos + 1);
             palette.setValue(leftSide, rightSide);
         }
+        QMessageBox(QMessageBox::Information, "Updated Theme", "You must restart Horizon Launcher for the appearance changes to take effect.", QMessageBox::Close).exec();
     }
 }
 
