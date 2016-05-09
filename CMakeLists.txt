@@ -224,22 +224,6 @@ if(WIN32)
     endif(MSVC)
 endif()
 
-if(WITH_TESTS)
-    enable_testing()
-    add_executable(test_runner
-        Source/Database.cpp
-        Tests/Test.cpp)
-    target_link_libraries(test_runner
-        Qt5::Sql)
-    add_test(test_runner test_runner)
-    foreach(FILE
-            appinfo.vdf
-            game)
-    add_custom_command(TARGET HorizonLauncher POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/Tests/${FILE} $<TARGET_FILE_DIR:HorizonLauncher>)
-        endforeach()
-endif(WITH_TESTS)
-
 # --- RUNTIME DEPENDENCIES ---
 # Only necessary on Windows.
 
