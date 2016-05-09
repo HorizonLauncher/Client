@@ -71,11 +71,11 @@ int main(int argc, char* argv[])
 
         // Create a Win window
         BorderlessWindow window(application, windowBackground, 1152, 648);
-        window.setMinimumSize(830, 550);
+        window.setMinimumSize(1152, 648);
     #else
         // Create a Unix window
         UnixWindow window;
-        window.setMinimumSize(830, 550);
+        window.setMinimumSize(1152, 648);
     #endif
 
     if (!dbExists)
