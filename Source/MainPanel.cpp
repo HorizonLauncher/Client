@@ -50,36 +50,43 @@ void MainPanel::init()
     verticalLayout1->setAlignment(Qt::AlignHCenter);
     coreWidget->setLayout(verticalLayout1);
 
-    // Title bar widget
-    QWidget* borderWidget = new QWidget;
-    borderWidget->setStyleSheet("background-color: " + p->value("TitleBar/Color").toString() + ";"
-                                "background-image: url(:SystemMenu/Images/TitleBarPattern.png);"
-                                "background-repeat: repeat-x;");
-    verticalLayout1->addWidget(borderWidget);
+    #ifndef Q_OS_WIN
+    if (p->value("TitleBar/CustomTitleBar").toBool())
+    {
+    #endif
+        // Title bar widget
+        QWidget* borderWidget = new QWidget;
+        borderWidget->setStyleSheet("background-color: " + p->value("TitleBar/Color").toString() + ";"
+                                    "background-image: url(:SystemMenu/Images/TitleBarPattern.png);"
+                                    "background-repeat: repeat-x;");
+        verticalLayout1->addWidget(borderWidget);
 
-    // Window Control Horizontal Layout
-    QHBoxLayout* windowControlLayout = new QHBoxLayout;
-    windowControlLayout->setSpacing(0);
-    windowControlLayout->setMargin(8);
-    borderWidget->setLayout(windowControlLayout);
-    windowControlLayout->addStretch();
+        // Window Control Horizontal Layout
+        QHBoxLayout* windowControlLayout = new QHBoxLayout;
+        windowControlLayout->setSpacing(0);
+        windowControlLayout->setMargin(8);
+        borderWidget->setLayout(windowControlLayout);
+        windowControlLayout->addStretch();
 
-    // Window controls
-    // Minimize
-    QPushButton* pushButtonMinimize = new QPushButton("", coreWidget);
-    pushButtonMinimize->setObjectName("pushButtonMinimize");
-    windowControlLayout->addWidget(pushButtonMinimize);
-    QObject::connect(pushButtonMinimize, &QPushButton::clicked, this, &MainPanel::pushButtonMinimize);
-    // Maximize
-    QPushButton* pushButtonMaximize = new QPushButton("", coreWidget);
-    pushButtonMaximize->setObjectName("pushButtonMaximize");
-    windowControlLayout->addWidget(pushButtonMaximize);
-    QObject::connect(pushButtonMaximize, &QPushButton::clicked, this, &MainPanel::pushButtonMaximize);
-    // Close
-    QPushButton* pushButtonClose = new QPushButton("", coreWidget);
-    pushButtonClose->setObjectName("pushButtonClose");
-    windowControlLayout->addWidget(pushButtonClose);
-    QObject::connect(pushButtonClose, &QPushButton::clicked, this, &MainPanel::pushButtonClose);
+        // Window controls
+        // Minimize
+        QPushButton* pushButtonMinimize = new QPushButton("", coreWidget);
+        pushButtonMinimize->setObjectName("pushButtonMinimize");
+        windowControlLayout->addWidget(pushButtonMinimize);
+        QObject::connect(pushButtonMinimize, &QPushButton::clicked, this, &MainPanel::pushButtonMinimize);
+        // Maximize
+        QPushButton* pushButtonMaximize = new QPushButton("", coreWidget);
+        pushButtonMaximize->setObjectName("pushButtonMaximize");
+        windowControlLayout->addWidget(pushButtonMaximize);
+        QObject::connect(pushButtonMaximize, &QPushButton::clicked, this, &MainPanel::pushButtonMaximize);
+        // Close
+        QPushButton* pushButtonClose = new QPushButton("", coreWidget);
+        pushButtonClose->setObjectName("pushButtonClose");
+        windowControlLayout->addWidget(pushButtonClose);
+        QObject::connect(pushButtonClose, &QPushButton::clicked, this, &MainPanel::pushButtonClose);
+    #ifndef Q_OS_WIN
+    }
+    #endif
 
     // Navbar
     navbar = new Navbar(p, coreWidget);

@@ -18,6 +18,7 @@ private:
     UnixPanel* mainPanel;
     QPoint oldWindowPos;
     bool dragging;
+    bool customTB;
 
     void mousePressEvent(QMouseEvent* evt);
     void mouseDoubleClickEvent(QMouseEvent* evt);

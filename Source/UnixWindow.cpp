@@ -11,6 +11,9 @@ UnixWindow::UnixWindow()
 {
     setObjectName("unixWindow");
 
+    QSettings palette(QSettings::IniFormat, QSettings::UserScope, "HorizonLauncher", "palette");
+    customTB = palette.value("TitleBar/CustomTitleBar").toBool();
+
     mainPanel = new UnixPanel(this);
 
     QVBoxLayout* layout = new QVBoxLayout();
@@ -18,7 +21,11 @@ UnixWindow::UnixWindow()
     setLayout(layout);
     layout->addWidget(mainPanel);
 
-    this->setWindowFlags(Qt::FramelessWindowHint);
+    if (customTB)
+    {
+        this->setWindowFlags(Qt::FramelessWindowHint);
+    }
+
     mainPanel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     // Center window at runtime
@@ -56,6 +63,7 @@ void UnixWindow::closeWindow()
 
 void UnixWindow::mousePressEvent(QMouseEvent* evt)
 {
+    if (!customTB) { return; }
     oldWindowPos = evt->globalPos();
     if (evt->pos().y() < 32)
     {
@@ -68,6 +76,7 @@ void UnixWindow::mousePressEvent(QMouseEvent* evt)
 
 void UnixWindow::mouseDoubleClickEvent(QMouseEvent* evt)
 {
+    if (!customTB) { return; }
     if (evt->pos().y() < 32)
     {
         if (evt->button() == Qt::LeftButton)
@@ -84,6 +93,7 @@ void UnixWindow::mouseReleaseEvent(QMouseEvent* evt)
 
 void UnixWindow::mouseMoveEvent(QMouseEvent* evt)
 {
+    if (!customTB) { return; }
     const QPoint c_delta = evt->globalPos() - oldWindowPos;
     if (dragging)
     {

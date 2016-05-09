@@ -335,6 +335,18 @@ void Settings::init(QSettings* p)
     connect(importThemeBtn, &QPushButton::clicked, this, &Settings::importTheme);
     styleGroupLayout->addWidget(importThemeBtn, 4, 2);
 
+    #ifndef Q_OS_WIN
+        QWidget* customTBWidget = new QWidget();
+        QHBoxLayout* customTBLayout = new QHBoxLayout(customTBWidget);
+        QCheckBox* customTBCB = new QCheckBox();
+        customTBCB->setCheckState((p->value("TitleBar/CustomTitleBar").toBool() ? Qt::Checked : Qt::Unchecked));
+        QLabel* customTBLbl = new QLabel(tr("Use custom titelbar"));
+        customTBLayout->addWidget(customTBCB);
+        customTBLayout->addWidget(customTBLbl);
+        styleGroupLayout->addWidget(customTBWidget, 5, 0);
+        connect(customTBCB, &QCheckBox::stateChanged, [=] (int state) { setCustomTB(state == Qt::Checked); });
+    #endif
+
     connect(bodyColor, &QPushButton::clicked, [=]() { pickSetColor(1); });
     connect(navbarBG, &QPushButton::clicked, [=]() { pickSetColor(2); });
     connect(navbarHover, &QPushButton::clicked, [=]() { pickSetColor(3); });
@@ -511,6 +523,17 @@ void Settings::setFulltab(bool fulltab)
     palette.beginGroup("TitleBar");
     palette.setValue("Fulltab", fulltab);
     palette.endGroup();
+}
+
+void Settings::setCustomTB(bool customTB)
+{
+    QSettings palette(QSettings::IniFormat, QSettings::UserScope, "HorizonLauncher", "palette");
+
+    palette.beginGroup("TitleBar");
+    palette.setValue("CustomTitleBar", customTB);
+    palette.endGroup();
+
+    QMessageBox(QMessageBox::Information, "Updated Theme", "You must restart Horizon Launcher for the appearance changes to take effect.", QMessageBox::Close).exec();
 }
 
 void Settings::pickSetColor(int id)

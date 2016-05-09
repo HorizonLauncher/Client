@@ -17,6 +17,7 @@ private:
     void init(QSettings* p);
     void setMultipleExec(bool multipleExec);
     void setFulltab(bool fulltab);
+    void setCustomTB(bool customTB);
 
     QStackedWidget* stack;
 

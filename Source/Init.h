@@ -53,6 +53,7 @@ void initSettings(QApplication &application)
 
         palette.beginGroup("TitleBar");
         palette.setValue("Color", "#F5F6F7");
+        palette.setValue("CustomTitleBar", true);
         palette.endGroup();
     }
 }

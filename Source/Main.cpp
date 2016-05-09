@@ -11,8 +11,6 @@
 #include <iostream>
 #include <QIcon>
 
-
-
 #ifdef Q_OS_WIN
 #include "BorderlessWindow.h"
 
