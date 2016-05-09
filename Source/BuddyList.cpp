@@ -25,7 +25,7 @@ void BuddyList::init(QSettings* p)
     QGridLayout* userDetailsLayout = new QGridLayout(userDetails);
 
     QWidget* profilePicWidget = new QWidget();
-    profilePicWidget->setStyleSheet("border-image: url(:/SystemMenu/Images/ProfilePlaceholder.png) 0 0 0 0 stretch stretch;");
+    profilePicWidget->setStyleSheet("border-image: url(:/Resource/Images/ProfilePlaceholder.png) 0 0 0 0 stretch stretch;");
     profilePicWidget->setMinimumSize(64, 64);
     profilePicWidget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     userDetailsLayout->addWidget(profilePicWidget, 0, 0, Qt::AlignLeft);

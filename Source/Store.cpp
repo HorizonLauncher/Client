@@ -23,9 +23,9 @@ void Store::init()
     QHBoxLayout* controlsLayout = new QHBoxLayout(controlsWidget);
     //controlsLayout->setMargin(5);
 
-    QPixmap back(":/SystemMenu/Icons/Material/NavArrowLeft.svg");
+    QPixmap back(":/Resource/Icons/Material/NavArrowLeft.svg");
     QIcon backIcon(back);
-    QPixmap forward(":/SystemMenu/Icons/Material/NavArrowRight.svg");
+    QPixmap forward(":/Resource/Icons/Material/NavArrowRight.svg");
     QIcon forwardIcon(forward);
 
     QPushButton* backBtn = new QPushButton("");

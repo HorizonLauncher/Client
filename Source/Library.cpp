@@ -31,7 +31,7 @@ Library::Library(QSettings* p, QWidget* parent)
                         "QLabel {"
                         "color: " + p->value("Primary/LightText").toString() + ";"
                         "font-family: SourceSansPro; }"
-                        "QComboBox::down-arrow { image: url(:/SystemMenu/Icons/Material/Dropdown.svg); }");
+                        "QComboBox::down-arrow { image: url(:/Resource/Icons/Material/Dropdown.svg); }");
 
     init(p);
 }
@@ -72,7 +72,7 @@ void Library::init(QSettings* p)
         }
     });
 
-    QPixmap search(":/SystemMenu/Icons/Material/Search.svg");
+    QPixmap search(":/Resource/Icons/Material/Search.svg");
     QIcon searchIcon(search);
 
     QPushButton* searchBtn = new QPushButton("");
@@ -126,11 +126,11 @@ void Library::init(QSettings* p)
 
     searchLayout->addStretch();
 
-    QPixmap grid(":/SystemMenu/Icons/Material/LibGridView.svg");
+    QPixmap grid(":/Resource/Icons/Material/LibGridView.svg");
     QIcon gridIcon(grid);
-    QPixmap listImg(":/SystemMenu/Icons/Material/LibDetailedListView.svg");
+    QPixmap listImg(":/Resource/Icons/Material/LibDetailedListView.svg");
     QIcon listIcon(listImg);
-    QPixmap carousel(":/SystemMenu/Icons/Material/LibCarouselView.svg");
+    QPixmap carousel(":/Resource/Icons/Material/LibCarouselView.svg");
     QIcon carouselIcon(carousel);
 
     QPushButton* gridBtn = new QPushButton("");

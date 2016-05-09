@@ -12,7 +12,7 @@ DetailGameWidget::DetailGameWidget(Game game, QSettings* palette, QWidget* paren
     QLabel* imageLabel = new QLabel("");
 
 
-    QPixmap imageMap(":SystemMenu/Images/LibraryGridPlaceholder.png");
+    QPixmap imageMap(":Resource/Images/LibraryGridPlaceholder.png");
     imageLabel->setPixmap(imageMap.scaledToHeight(100));
     imageLabel->setContentsMargins(5,5,5,5);
     widgetLayout->addWidget(imageLabel);
@@ -75,7 +75,7 @@ DetailGameWidget::DetailGameWidget(Game game, QSettings* palette, QWidget* paren
 
     //Create Button
     QPushButton* playButton = new QPushButton();
-    playButton->setStyleSheet("background-image: url(:SystemMenu/Icons/Material/Launch.svg);"
+    playButton->setStyleSheet("background-image: url(:Resource/Icons/Material/Launch.svg);"
                               "background-repeat: no-repeat;"
                               "background-color: transparent;");
     playButton->setMinimumSize(40, 40);
@@ -112,6 +112,6 @@ void DetailGameWidget::paintEvent(QPaintEvent* event)
 {
     QPainter painter(this);
     QString imageString;
-    QPixmap imageMap(":SystemMenu/Images/LibraryListPlaceholderBG.png");
+    QPixmap imageMap(":Resource/Images/LibraryListPlaceholderBG.png");
     painter.drawPixmap(0,0,this->width(), this->height(), imageMap);
 }

@@ -25,27 +25,27 @@
 
 #pushButtonMaximize {
     padding: 0 8px 0 8px;
-    image: url(:/SystemMenu/Icons/Material/WinMaximize.svg);
+    image: url(:/Resource/Icons/Material/WinMaximize.svg);
 }
 
 #pushButtonMaximize:hover {
-    image: url(:/SystemMenu/Icons/Material/WinMaximizeHover.svg);
+    image: url(:/Resource/Icons/Material/WinMaximizeHover.svg);
 }
 
 #pushButtonMinimize {
     padding: 0 7px 0 0;
-    image: url(:/SystemMenu/Icons/Material/WinMinimize.svg);
+    image: url(:/Resource/Icons/Material/WinMinimize.svg);
 }
 
 #pushButtonMinimize:hover {
-    image: url(:/SystemMenu/Icons/Material/WinMinimizeHover.svg);
+    image: url(:/Resource/Icons/Material/WinMinimizeHover.svg);
 }
 
 #pushButtonClose {
     padding: 0 0 0 7px;
-    image: url(:/SystemMenu/Icons/Material/WinClose.svg);
+    image: url(:/Resource/Icons/Material/WinClose.svg);
 }
 
 #pushButtonClose:hover {
-    image: url(:/SystemMenu/Icons/Material/WinCloseHover.svg);
+    image: url(:/Resource/Icons/Material/WinCloseHover.svg);
 }

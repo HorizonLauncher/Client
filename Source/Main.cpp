@@ -50,7 +50,7 @@ int main(int argc, char* argv[])
 
     #ifndef Q_OS_WIN
         // dynamic loading of the icon under Linux/UNIX
-        application->setWindowIcon(QIcon(":/SystemMenu/Icons/Horizon.ico"));
+        application->setWindowIcon(QIcon(":/Resource/Icons/Horizon.ico"));
     #endif
 
     // Global stylesheet

@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/SystemMenu">
+    <qresource prefix="/Resource">
         <!-- Logo -->
         <file>Icons/Horizon.png</file>
         <file>Icons/Horizon.ico</file>

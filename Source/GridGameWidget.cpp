@@ -14,7 +14,7 @@ GridGameWidget::GridGameWidget(QString gameName, int hours, QWidget* parent)
     QGridLayout* coreLayout = new QGridLayout(this);
 
     QFrame* backgroundWidget = new QFrame();
-    backgroundWidget->setStyleSheet("background-image: url(:SystemMenu/Images/LibraryGridPlaceholder.png);"
+    backgroundWidget->setStyleSheet("background-image: url(:Resource/Images/LibraryGridPlaceholder.png);"
                                     "background-repeat: none;"
                                     "background-color: #232323;");
     backgroundWidget->setMinimumSize(270, 170);

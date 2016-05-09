@@ -240,13 +240,27 @@ LRESULT CALLBACK BorderlessWindow::WndProc(HWND hWnd, UINT message, WPARAM wPara
         if (wp.showCmd == SW_MAXIMIZE)
         {
             QPushButton* pushButtonMaximize = mainPanel->findChild<QPushButton*>("pushButtonMaximize");
-            pushButtonMaximize->setStyleSheet("#pushButtonMaximize {image: url(:/SystemMenu/Icons/Restore.png);} #pushButtonMaximize:hover { image: url(:/SystemMenu/Icons/RestoreHover.png); }");
+            pushButtonMaximize->setStyleSheet(
+                "#pushButtonMaximize {"
+                    "image: url(:/Resource/Icons/Restore.png);
+                }"
+                "#pushButtonMaximize:hover {"
+                    "image: url(:/Resource/Icons/RestoreHover.png);"
+                "}"
+            );
             mainPanel->setGeometry(8, 8, winrect.right - 16, winrect.bottom - 16);
         }
         else
         {
             QPushButton* pushButtonMaximize = mainPanel->findChild<QPushButton*>("pushButtonMaximize");
-            pushButtonMaximize->setStyleSheet("#pushButtonMaximize {image: url(:/SystemMenu/Icons/Maximize.png);} #pushButtonMaximize:hover { image: url(:/SystemMenu/Icons/MaximizeHover.png); }");
+            pushButtonMaximize->setStyleSheet(
+                "#pushButtonMaximize {"
+                    "image: url(:/Resource/Icons/Maximize.png);"
+                "}"
+                "#pushButtonMaximize:hover {"
+                    "image: url(:/Resource/Icons/MaximizeHover.png);"
+                "}"
+            );
             mainPanel->setGeometry(0, 0, winrect.right, winrect.bottom);
         }
         break;
@@ -386,4 +400,3 @@ int BorderlessWindow::getMaximumHeight()
 {
     return maximumSize.height;
 }
-

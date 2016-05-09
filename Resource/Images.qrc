@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/SystemMenu">
+    <qresource prefix="/Resource">
         <file>Images/TitleBarPattern.png</file>
         <file>Images/LibraryGridPlaceholder.png</file>
         <file>Images/ProfilePlaceholder.png</file>

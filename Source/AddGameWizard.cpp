@@ -66,7 +66,7 @@ InfoPage::InfoPage(QWidget* parent) : QWizardPage(parent)
     QLabel* exeLabel = new QLabel(tr("Executable: "));
     QLabel* argsLabel = new QLabel(tr("Arguments (optional): "));
 
-    QPixmap browsePixmap(":/SystemMenu/Icons/Material/File.svg");
+    QPixmap browsePixmap(":/Resource/Icons/Material/File.svg");
     QIcon browseIcon(browsePixmap);
 
     QPushButton* dirFileBtn = new QPushButton();
