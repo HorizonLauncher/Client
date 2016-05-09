@@ -78,7 +78,6 @@ int main(int argc, char* argv[])
         window.setMinimumSize(830, 550);
     #endif
 
-    // Launch
     if (!dbExists)
     {
         wiz->show();
