@@ -49,7 +49,7 @@ void Settings::init(QSettings* p)
     clientSettingsLabel->setStyleSheet("font-size: 15pt;"
                                        "font-family: Roboto;"
                                        "font-weight: 700;"
-                                       "color: " + p->value("Primary/DarkText").toString() + ";"
+                                       "color: " + p->value("Primary/LightText").toString() + ";"
                                        "background: none;");
     QPushButton* styleSettingsLabel = new QPushButton(tr("Appearance"));
     styleSettingsLabel->setStyleSheet("font-size: 15pt;"
@@ -364,19 +364,36 @@ void Settings::init(QSettings* p)
     connect(tertiaryBase, &QPushButton::clicked, [=]() { pickSetColor(15); });
     connect(darkestBase, &QPushButton::clicked, [=]() { pickSetColor(16); });
 
-
     connect(clientSettingsLabel, &QPushButton::clicked,
         [=]()
         {
             stack->setCurrentWidget(clientGroup);
-            //clientSettingsLabel->
+            clientSettingsLabel->setStyleSheet("font-size: 15pt;"
+                                               "font-family: Roboto;"
+                                               "font-weight: 700;"
+                                               "color: " + p->value("Primary/LightText").toString() + ";"
+                                               "background: none;");
+           styleSettingsLabel->setStyleSheet("font-size: 15pt;"
+                                              "font-family: Roboto;"
+                                              "font-weight: 700;"
+                                              "color: " + p->value("Primary/DarkText").toString() + ";"
+                                              "background: none;");
         });
 
     connect(styleSettingsLabel, &QPushButton::clicked,
         [=]()
         {
             stack->setCurrentWidget(styleGroup);
-            //clientSettingsLabel->
+            styleSettingsLabel->setStyleSheet("font-size: 15pt;"
+                                               "font-family: Roboto;"
+                                               "font-weight: 700;"
+                                               "color: " + p->value("Primary/LightText").toString() + ";"
+                                               "background: none;");
+           clientSettingsLabel->setStyleSheet("font-size: 15pt;"
+                                              "font-family: Roboto;"
+                                              "font-weight: 700;"
+                                              "color: " + p->value("Primary/DarkText").toString() + ";"
+                                              "background: none;");
         });
 }
 
