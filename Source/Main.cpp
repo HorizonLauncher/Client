@@ -7,8 +7,6 @@
 
 #include <QApplication>
 #include <QFile>
-#include <QDebug>
-#include <iostream>
 #include <QIcon>
 
 #ifdef Q_OS_WIN

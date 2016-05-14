@@ -8,7 +8,6 @@
 #include <QFile>
 #include <QDir>
 #include <QStandardPaths>
-#include <QDebug>
 
 /** Namespace for entry point initialization functions. */
 namespace entryPoint

@@ -5,7 +5,7 @@
 #include <QDir>
 #include <QFile>
 #include <QRegExp>
-#include <QDebug>
+#include <QTextStream>
 
 bool SteamHelper::doesExist()
 {
@@ -46,7 +46,6 @@ QMap<QString, QString> SteamHelper::getVdfKeyVals(QString vdfPath)
 
     if (!vdfFile.open(QIODevice::ReadOnly))
     {
-        qDebug() << "Couldn't open " << vdfPath << " for reading.";
         return QMap<QString, QString>();
     }
 

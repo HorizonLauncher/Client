@@ -84,7 +84,6 @@ void NewsFeedChooserWindow::onAddSubredditButtonClicked()
         if (newSubreddit.contains(subredditRegex))
         {
             QString urlString = "https://www.reddit.com/r/" + newSubreddit + "/.rss";
-            qDebug() << urlString;
 
             newUrls.append(urlString);
             urls.append(urlString);

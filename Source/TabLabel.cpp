@@ -1,6 +1,5 @@
 #include "TabLabel.h"
 #include <QPainter>
-#include <QDebug>
 #include <QColor>
 
 TabLabel::TabLabel(QWidget* parent = 0, QSettings* palette = 0) : QLabel(parent)

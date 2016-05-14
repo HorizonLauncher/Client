@@ -195,7 +195,6 @@ bool AddNewsFeedsPage::validatePage()
     {
         newsSettings.setArrayIndex(i);
         newsSettings.setValue("url", feeds[i]);
-        qDebug() << feeds[i];
     }
     newsSettings.endArray();
 

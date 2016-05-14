@@ -466,7 +466,8 @@ void Settings::exportTheme()
 
         if (!file.open(QIODevice::WriteOnly))
         {
-            qDebug() << "Couldn't open " << filename << " for writing.";
+            QMessageBox(QMessageBox::Warning, tr("File I/O Error"),
+                                              tr(QString("Couldn't open " + filename + " for writing.").toUtf8().constData())).exec();
             return;
         }
 
@@ -499,7 +500,8 @@ void Settings::importTheme()
 
         if (!file.open(QIODevice::ReadOnly))
         {
-            qDebug() << "Couldn't open " << filename << " for reading.";
+            QMessageBox(QMessageBox::Warning, tr("File I/O Error"),
+                                              tr(QString("Couldn't open " + filename + " for reading.").toUtf8().constData())).exec();
             return;
         }
 
@@ -510,7 +512,6 @@ void Settings::importTheme()
             QString line = fileStream.readLine();
             if (!line.contains(properLineFormat))
             {
-                qDebug() << "Error: Line doesn't contain proper format.";
                 continue;
             };
 

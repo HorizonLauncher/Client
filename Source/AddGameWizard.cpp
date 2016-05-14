@@ -2,7 +2,6 @@
 #include "Database.h"
 #include "Library.h"
 
-#include <QDebug>
 #include <QString>
 
 /** AddGameWizard constructor
@@ -113,10 +112,6 @@ LastPage::LastPage(QWidget* parent) : QWizardPage(parent)
 void LastPage::initializePage()
 {
     QLabel* label = new QLabel();
-    qDebug() << field("nameEdit").toString();
-    qDebug() << field("dirEdit").toString();
-    qDebug() << field("exeEdit").toString();
-    qDebug() << field("argsEdit").toString();
 
     if (!std::get<0>(Library::db.isExistant(field("nameEdit").toString())))
     {

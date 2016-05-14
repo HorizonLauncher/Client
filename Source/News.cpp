@@ -1,7 +1,6 @@
 #include "News.h"
 #include <QSettings>
 #include <string>
-#include <QDebug>
 #include <QListWidgetItem>
 #include <QtNetwork>
 #include <QShortcut>
@@ -88,11 +87,6 @@ void News::loadXMLfromUrls()
                 feedLabel = sortaDomain.left(sortaDomain.length() - 1);
             }
 
-            if (reply->error())
-            {
-                qDebug("Error with network request");
-            }
-
             onFetchComplete(reply, feedLabel);
         });
     }
@@ -156,7 +150,7 @@ void News::onFetchComplete(QNetworkReply *reply, QString sourceLabel)
 
     if (reader.hasError())
     {
-        qDebug("Error parsing XML");
+        return;
     }
 
     reader.readNext();

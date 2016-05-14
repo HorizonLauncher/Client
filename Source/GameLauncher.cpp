@@ -1,6 +1,5 @@
 #include "GameLauncher.h"
 
-#include <QDebug>
 #include <QMessageBox>
 
 /** Launch a new QProcess using the passed exe and working directory.
@@ -10,7 +9,6 @@
 void GameLauncher::runProcess(QString file, QString workingDirectory)
 {
     // TODO: Implement some threading
-    qDebug() << "Launching:" << file << ", at" << workingDirectory;
     QProcess* runningProcess = new QProcess(this);
     connect(runningProcess, (void (QProcess::*) (int, QProcess::ExitStatus)) &QProcess::finished, this, &GameLauncher::finished);
     connect(runningProcess, (void (QProcess::*) (QProcess::ProcessError)) &QProcess::error, this, &GameLauncher::onLaunchError);
@@ -29,7 +27,6 @@ void GameLauncher::runProcess(QString file, QString workingDirectory)
 void GameLauncher::runProcessWithArgs(QString file, QString workingDirectory, QString args)
 {
     // TODO: Implement some threading
-    qDebug() << "Launching:" << file << ", at" << workingDirectory << "with " << args;
     QProcess* runningProcess = new QProcess(this);
     connect(runningProcess, (void (QProcess::*) (int, QProcess::ExitStatus)) &QProcess::finished, this, &GameLauncher::finished);
     connect(runningProcess, (void (QProcess::*) (QProcess::ProcessError)) &QProcess::error, this, &GameLauncher::onLaunchError);

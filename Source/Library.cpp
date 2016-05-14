@@ -4,7 +4,6 @@
 #include <QFileDialog>
 #include <QInputDialog>
 #include <QMessageBox>
-#include <QDebug>
 #include <QFileSystemWatcher>
 #include <QScrollArea>
 

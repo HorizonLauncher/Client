@@ -1,7 +1,6 @@
 #include "Database.h"
 #include "Defines.h"
 
-#include <QDebug>
 #include <QSqlError>
 
 /** Database constructor
@@ -29,10 +28,10 @@ bool Database::init()
     db.setDatabaseName(this->path);
 
     bool status = db.open();
-    qDebug() << db.lastError();
     if (!status)
     {
-        qDebug("Couldn't connect to the database!");
+        QMessageBox(QMessageBox::Critical, tr("Database Error"),
+                                           tr("Could not connect to the database!")).exec();
         return false;
     }
 
