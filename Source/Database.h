@@ -48,6 +48,8 @@ public:
     bool setLaunchOptionsById(unsigned int id, QString launchOpts);
     bool setLaunchOptionsByName(QString name, QString launchOpts);
 
+    static QString getDRMString(int drmID);
+
 signals:
     void dbChanged();
 

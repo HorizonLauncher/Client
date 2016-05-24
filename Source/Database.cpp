@@ -319,3 +319,27 @@ bool Database::setLaunchOptionsByName(QString name, QString launchOpts)
         return false;
     }
 }
+
+/** Returns the name of a DRM ID
+ * \param drmID The drm ID
+ * \return The localized DRM name
+*/
+QString Database::getDRMString(int drmID)
+{
+    if (drmID == 0)
+    {
+        return tr("None");
+    }
+    else if (drmID == 1)
+    {
+        return tr("Steam");
+    }
+    else if (drmID == 2)
+    {
+        return tr("Origin");
+    }
+    else if (drmID == 3)
+    {
+        return tr("uPlay");
+    }
+}
