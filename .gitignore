@@ -53,3 +53,6 @@ Makefile*
 *.pyc
 test
 .idea/
+
+# CTags
+.tags*
