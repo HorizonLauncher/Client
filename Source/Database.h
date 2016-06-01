@@ -17,6 +17,11 @@ typedef struct
     QString executablePath; /**< Path to the executable */
     QString arguments; /**< Arguments to pass to the executable */
     int drm; /**< DRM the game came from, where 0 = None, 1 = Steam, 2 = Origin, 3 = uPlay */
+    QString developer;
+    QString publisher;
+    QString releaseDate;
+    QString genre;
+    QString bannerPath;
 } Game;
 
 typedef std::vector<Game> GameList;
@@ -32,19 +37,25 @@ class Database : public QObject
 public:
     Database(QObject* parent = 0);
     Database(QString name, QObject* parent = 0);
+
     bool init();
     bool reset();
 
     bool addGame(QString gameName, QString gameDirectory, QString executablePath, QString arguments, int drm = 0);
     void addGames(GameList games);
+
     bool removeGameById(unsigned int id);
     bool removeGameByName(QString name);
+
     Game getGameById(unsigned int id);
     Game getGameByName(QString name);
+
     std::pair<bool, Game> isExistant(unsigned int id);
     std::pair<bool, Game> isExistant(QString name);
+
     QList<Game> getGames();
     unsigned int getGameCount() const;
+
     bool setLaunchOptionsById(unsigned int id, QString launchOpts);
     bool setLaunchOptionsByName(QString name, QString launchOpts);
 

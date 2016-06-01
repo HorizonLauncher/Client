@@ -1,8 +1,6 @@
 #include "Database.h"
 #include "Defines.h"
 
-#include <QSqlError>
-
 /** Database constructor
  * Constructs the local database.
  * Currently no interface to handle remote databases, just creates one in the
@@ -35,13 +33,48 @@ bool Database::init()
         return false;
     }
 
-    QSqlQuery createQuery(db);
+    QSqlQuery existsQuery(db);
+    existsQuery.exec("SELECT name FROM sqlite_master WHERE type=\"table\" AND name=\"games\";");
 
-    bool rtn = createQuery.exec("CREATE TABLE IF NOT EXISTS games(ID INTEGER PRIMARY KEY ASC, GAMENAME TEXT NOT NULL, GAMEDIRECTORY TEXT NOT NULL, GAMEEXECUTABLE TEXT NOT NULL, ARGUMENTS TEXT NOT NULL, DRM INT DEFAULT 0);");
+    bool rtn = true;
 
-    if (rtn)
+    if(!existsQuery.next())
     {
-        emit dbChanged();
+        QSqlQuery createQuery(db);
+        rtn = createQuery.exec("CREATE TABLE IF NOT EXISTS games ("
+                               "ID INTEGER PRIMARY KEY ASC, "
+                               "GAMENAME TEXT NOT NULL, "
+                               "GAMEDIRECTORY TEXT NOT NULL, "
+                               "GAMEEXECUTABLE TEXT NOT NULL, "
+                               "ARGUMENTS TEXT NOT NULL, "
+                               "DRM INT DEFAULT 0,"
+                               "DEVELOPER TEXT,"
+                               "PUBLISHER TEXT,"
+                               "RELEASEDATE TEXT,"
+                               "GENRE TEXT,"
+                               "BANNERPATH TEXT);");
+
+        createQuery.exec("PRAGMA user_version = 1;");
+
+        if (rtn)
+        {
+            emit dbChanged();
+        }
+    }
+
+    QSqlQuery query(db);
+    query.exec("PRAGMA user_version;");
+    query.next();
+    int userVersion = query.value(0).toInt();
+
+    if (userVersion == 0)
+    {
+        query.exec("ALTER TABLE games ADD COLUMN DEVELOPER TEXT;");
+        query.exec("ALTER TABLE games ADD COLUMN PUBLISHER TEXT;");
+        query.exec("ALTER TABLE games ADD COLUMN RELEASEDATE TEXT;");
+        query.exec("ALTER TABLE games ADD COLUMN GENRE TEXT;");
+        query.exec("ALTER TABLE games ADD COLUMN BANNERPATH TEXT;");
+        query.exec("PRAGMA user_version = 1;");
     }
 
     return rtn;
@@ -53,7 +86,19 @@ bool Database::init()
 bool Database::reset()
 {
     QSqlQuery query(db);
-    bool rtn = query.exec("DROP TABLE IF EXISTS games") && query.exec("CREATE TABLE IF NOT EXISTS games(ID INTEGER PRIMARY KEY ASC, GAMENAME TEXT NOT NULL, GAMEDIRECTORY TEXT NOT NULL, GAMEEXECUTABLE TEXT NOT NULL, ARGUMENTS TEXT NOT NULL, DRM INT DEFAULT 0);");
+    bool rtn = query.exec("DROP TABLE IF EXISTS games") &&
+               query.exec("CREATE TABLE IF NOT EXISTS games("
+                          "ID INTEGER PRIMARY KEY ASC,"
+                          "GAMENAME TEXT NOT NULL,"
+                          "GAMEDIRECTORY TEXT NOT NULL,"
+                          "GAMEEXECUTABLE TEXT NOT NULL,"
+                          "ARGUMENTS TEXT NOT NULL,"
+                          "DRM INT DEFAULT 0,"
+                          "DEVELOPER TEXT,"
+                          "PUBLISHER TEXT,"
+                          "RELEASEDATE TEXT,"
+                          "GENRE TEXT,"
+                          "BANNERPATH TEXT);");
 
     if (rtn)
     {
@@ -179,7 +224,18 @@ Game Database::getGameByName(QString name)
 std::pair<bool, Game> Database::isExistant(unsigned int id)
 {
     QSqlQuery query(db);
-    query.prepare("SELECT ID, GAMENAME, GAMEDIRECTORY, GAMEEXECUTABLE, ARGUMENTS, DRM FROM GAMES WHERE ID = :id;");
+    query.prepare("SELECT ID,"
+                      "GAMENAME,"
+                      "GAMEDIRECTORY,"
+                      "GAMEEXECUTABLE,"
+                      "ARGUMENTS,"
+                      "DRM,"
+                      "DEVELOPER,"
+                      "PUBLISHER,"
+                      "RELEASEDATE,"
+                      "GENRE,"
+                      "BANNERPATH"
+                      " FROM GAMES WHERE ID = :id;");
     query.bindValue(":id", id);
     query.exec();
 
@@ -190,8 +246,23 @@ std::pair<bool, Game> Database::isExistant(unsigned int id)
         QString exe = query.value(3).toString();
         QString args = query.value(4).toString();
         int drm = query.value(5).toInt();
+        QString developer = query.value(6).toString();
+        QString publisher = query.value(7).toString();
+        QString releaseDate = query.value(8).toString();
+        QString genre = query.value(9).toString();
+        QString bannerPath = query.value(10).toString();
 
-        return std::make_pair(true, Game {id, name, path, exe, args, drm});
+        return std::make_pair(true, Game {id,
+                                          name,
+                                          path,
+                                          exe,
+                                          args,
+                                          drm,
+                                          developer,
+                                          publisher,
+                                          releaseDate,
+                                          genre,
+                                          bannerPath});
     }
     else
     {
@@ -208,7 +279,17 @@ std::pair<bool, Game> Database::isExistant(unsigned int id)
 std::pair<bool, Game> Database::isExistant(QString name)
 {
     QSqlQuery query(db);
-    query.prepare("SELECT ID, GAMEDIRECTORY, GAMEEXECUTABLE, ARGUMENTS, DRM FROM GAMES WHERE GAMENAME = :name;");
+    query.prepare("SELECT ID,"
+                      "GAMEDIRECTORY,"
+                      "GAMEEXECUTABLE,"
+                      "ARGUMENTS,"
+                      "DRM,"
+                      "DEVELOPER,"
+                      "PUBLISHER,"
+                      "RELEASEDATE,"
+                      "GENRE,"
+                      "BANNERPATH"
+                      " FROM GAMES WHERE GAMENAME = :name;");
     query.bindValue(":name", name);
     query.exec();
     if (query.next())
@@ -218,8 +299,23 @@ std::pair<bool, Game> Database::isExistant(QString name)
         QString exe = query.value(2).toString();
         QString args = query.value(3).toString();
         int drm = query.value(4).toInt();
+        QString developer = query.value(5).toString();
+        QString publisher = query.value(6).toString();
+        QString releaseDate = query.value(7).toString();
+        QString genre = query.value(8).toString();
+        QString bannerPath = query.value(9).toString();
 
-        return std::make_pair(true, Game {id, name, path, exe, args, drm});
+        return std::make_pair(true, Game {id,
+                                          name,
+                                          path,
+                                          exe,
+                                          args,
+                                          drm,
+                                          developer,
+                                          publisher,
+                                          releaseDate,
+                                          genre,
+                                          bannerPath});
     }
     else
     {
@@ -234,7 +330,18 @@ QList<Game> Database::getGames()
 {
     QList<Game> games;
     QSqlQuery query;
-    query.exec("SELECT ID, GAMENAME, GAMEDIRECTORY, GAMEEXECUTABLE, ARGUMENTS, DRM FROM GAMES;");
+    query.exec("SELECT ID,"
+                      "GAMENAME,"
+                      "GAMEDIRECTORY,"
+                      "GAMEEXECUTABLE,"
+                      "ARGUMENTS,"
+                      "DRM,"
+                      "DEVELOPER,"
+                      "PUBLISHER,"
+                      "RELEASEDATE,"
+                      "GENRE,"
+                      "BANNERPATH"
+                      " FROM GAMES;");
     while (query.next())
     {
         unsigned int id = query.value(0).toUInt();
@@ -243,8 +350,23 @@ QList<Game> Database::getGames()
         QString exe = query.value(3).toString();
         QString args = query.value(4).toString();
         int drm = query.value(5).toInt();
+        QString developer = query.value(6).toString();
+        QString publisher = query.value(7).toString();
+        QString releaseDate = query.value(8).toString();
+        QString genre = query.value(9).toString();
+        QString bannerPath = query.value(10).toString();
 
-        games.append({id, name, path, exe, args, drm});
+        games.append({id,
+                      name,
+                      path,
+                      exe,
+                      args,
+                      drm,
+                      developer,
+                      publisher,
+                      releaseDate,
+                      genre,
+                      bannerPath});
     }
     return games;
 }
