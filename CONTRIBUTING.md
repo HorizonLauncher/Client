@@ -29,7 +29,7 @@ void miracleSort(FancyArray<int> numGroup)
     4. Conditional / OS-dependent inclusions
 - Conditional and iterative statements should include a space, and should always be bracketed:
 ```C++
-while/if (a > 3) 
+while/if (a > 3)
 {
     // Logic
 }
@@ -50,7 +50,7 @@ while/if (a > 3)
 - Each pull request will be reviewed by at least two members of the team. Be patient.
     - If your changes are OS-dependent, or you suspect that there may be conflict in that regard, please make that clear.
     - Please don’t open a pull request that adds entirely new features or aesthetic - most of this will be decided by the UI team. PRs should extend or complement existing functionality.
-- Official releases will be reviewed by members of all teams, and confirmed to function properly on several different operating systems and desktop environments.    
+- Official releases will be reviewed by members of all teams, and confirmed to function properly on several different operating systems and desktop environments.
 - Any pull requests relating to the localization of the client will be closed. The [OneSky service](http://horizon.oneskyapp.com/collaboration/project?id=111884) must be used for localization.
 
 ## Comments
@@ -59,12 +59,12 @@ while/if (a > 3)
 
 ## Clang Format
 
-To automate this style, some of our team use [clang-format](http://clang.llvm.org/docs/ClangFormat.html) with the below setup:  
+To automate this style, some of our team use [clang-format](http://clang.llvm.org/docs/ClangFormat.html) with the below setup:
 ```YAML
-BasedOnStyle: "Google"  
+BasedOnStyle: "Google"
 IndentWidth: 4
-UseTab: Never   
-BreakBeforeBraces: Allman  
+UseTab: Never
+BreakBeforeBraces: Allman
 PointerAlignment: Left
 ColumnLimit: 0
 ```
