@@ -2,7 +2,7 @@
 
 [![Slack Status](http://horizonlauncher-slack.herokuapp.com/badge.svg)](http://slack.launchhorizon.com)
 [![Chat on Freenode](https://img.shields.io/badge/chat-on%20freenode-blue.svg?style=flat)](https://kiwiirc.com/client/chat.freenode.net/#horizonlauncher)
-[![Build Status](https://travis-ci.org/HorizonLauncher/Client.svg?branch=dev)](https://travis-ci.org/HorizonLauncher/Client)
+[![Build Status](http://builds.thomasross.io/badge?builder=build)](http://builds.thomasross.io)
 
 Welcome to the Horizon Launcher client repository!
 
