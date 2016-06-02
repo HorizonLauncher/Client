@@ -156,7 +156,7 @@ LRESULT CALLBACK BorderlessWindow::WndProc(HWND hWnd, UINT message, WPARAM wPara
         if (widget)
         {
             str += QString(" to %1 (%2)").arg(widget->objectName()).arg(widget->metaObject()->className());
-        } 
+        }
         str += "\n";
 
         OutputDebugStringA(str.toLocal8Bit().data());
