@@ -218,9 +218,9 @@ void LibraryCarouselView::refreshGames()
         }
 
         QString displayedName = game.gameName;
-        if (displayedName.length() > 20)
+        if (displayedName.length() > 30)
         {
-            displayedName = displayedName.left(20) + "...";
+            displayedName = displayedName.left(30) + "...";
         }
 
         if (i == 0)
@@ -237,7 +237,16 @@ void LibraryCarouselView::refreshGames()
             i = 1;
         }
 
-        GridGameWidget* gameWidget = new GridGameWidget(displayedName, 999);
+        QStringList backgrounds;
+        backgrounds << ":Resource/Images/LibraryGridPlaceholder.png"
+                    << ":Resource/Images/LibraryGridPlaceholder1.png"
+                    << ":Resource/Images/LibraryGridPlaceholder2.png"
+                    << ":Resource/Images/LibraryGridPlaceholder3.png"
+                    << ":Resource/Images/LibraryGridPlaceholder4.png";
+
+        QString background = backgrounds[qrand() % backgrounds.length()];
+
+        GridGameWidget* gameWidget = new GridGameWidget(displayedName, 999, background);
         gamesLayout->addWidget(gameWidget);
         gamesWidgets.append(gameWidget);
 

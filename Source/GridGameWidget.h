@@ -11,7 +11,7 @@ class GridGameWidget : public QWidget
     Q_OBJECT
 
 public:
-    GridGameWidget(QString gameName, int hours, QWidget* parent = 0);
+    GridGameWidget(QString gameName, int hours, QString background, QWidget* parent = 0);
 
     void mousePressEvent(QMouseEvent* event);
 

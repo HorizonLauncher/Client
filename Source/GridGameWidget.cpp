@@ -5,19 +5,19 @@
 #include <QMouseEvent>
 #include <QMenu>
 
-GridGameWidget::GridGameWidget(QString gameName, int hours, QWidget* parent)
+GridGameWidget::GridGameWidget(QString gameName, int hours, QString background, QWidget* parent)
     : QWidget(parent)
 {
-    this->setMinimumSize(270, 170);
+    this->setMinimumSize(364, 170);
     this->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     QGridLayout* coreLayout = new QGridLayout(this);
 
     QFrame* backgroundWidget = new QFrame();
-    backgroundWidget->setStyleSheet("background-image: url(:Resource/Images/LibraryGridPlaceholder.png);"
+    backgroundWidget->setStyleSheet("background-image: url(" + background + ");"
                                     "background-repeat: none;"
                                     "background-color: #232323;");
-    backgroundWidget->setMinimumSize(270, 170);
+    backgroundWidget->setMinimumSize(364, 170);
     coreLayout->addWidget(backgroundWidget, 0, 0);
 
     QVBoxLayout* backgroundLayout = new QVBoxLayout(backgroundWidget);
@@ -27,7 +27,7 @@ GridGameWidget::GridGameWidget(QString gameName, int hours, QWidget* parent)
 
     QWidget *infoBar = new QWidget();
     infoBar->setStyleSheet("background: rgba(16, 16, 16, 0.80);");
-    infoBar->setMinimumSize(270, 70);
+    infoBar->setMinimumSize(364, 70);
     infoBar->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     backgroundLayout->addWidget(infoBar, Qt::AlignBottom);
 

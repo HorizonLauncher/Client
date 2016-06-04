@@ -81,23 +81,32 @@ void LibraryGridView::refreshGames()
         }
 
         QString displayedName = game.gameName;
-        if (displayedName.length() > 20)
+        if (displayedName.length() > 30)
         {
-            displayedName = displayedName.left(20) + "...";
+            displayedName = displayedName.left(30) + "...";
         }
 
-        GridGameWidget* gameWidget = new GridGameWidget(displayedName, 999);
+        QStringList backgrounds;
+        backgrounds << ":Resource/Images/LibraryGridPlaceholder.png"
+                    << ":Resource/Images/LibraryGridPlaceholder1.png"
+                    << ":Resource/Images/LibraryGridPlaceholder2.png"
+                    << ":Resource/Images/LibraryGridPlaceholder3.png"
+                    << ":Resource/Images/LibraryGridPlaceholder4.png";
+
+        QString background = backgrounds[qrand() % backgrounds.length()];
+
+        GridGameWidget* gameWidget = new GridGameWidget(displayedName, 999, background);
         gamesLayout->addWidget(gameWidget, row, col);
         connect(gameWidget, &GridGameWidget::leftClick, [=] { library->launchGame(game.gameName); });
         connect(gameWidget, &GridGameWidget::changeLaunchOpts, [=]{ library->changeLaunchOpts(game.gameName); });
         connect(gameWidget, &GridGameWidget::removeGame, [=]{ Library::db.removeGameByName(game.gameName); });
         gamesWidgets.append(gameWidget);
 
-        if (col == 3)
+        if (col == 2)
         {
             row++;
         }
-        col = (col < 3 ? col + 1 : 0);
+        col = (col < 2 ? col + 1 : 0);
     }
 }
 

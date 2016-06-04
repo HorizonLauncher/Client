@@ -2,6 +2,10 @@
     <qresource prefix="/Resource">
         <file>Images/TitleBarPattern.png</file>
         <file>Images/LibraryGridPlaceholder.png</file>
+        <file>Images/LibraryGridPlaceholder1.png</file>
+        <file>Images/LibraryGridPlaceholder2.png</file>
+        <file>Images/LibraryGridPlaceholder3.png</file>
+        <file>Images/LibraryGridPlaceholder4.png</file>
         <file>Images/ProfilePlaceholder.png</file>
         <file>Images/LibraryCarouselPlaceholder.png</file>
         <file>Images/LibraryCarouselPlaceholderActive.png</file>
