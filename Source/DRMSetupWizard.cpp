@@ -98,5 +98,22 @@ bool GamesFoundPage::validatePage()
                              "steam://run/" + addGames[game],
                              1};
         Library::db.addGame(gameObj);
+
+        SteamMetadataHelper *helper = new SteamMetadataHelper(addGames[game]);
+        connect(helper, &SteamMetadataHelper::metadataRecieved, [=] (SteamMetadata metadata)
+        {
+            onMetadataRecieved(game, metadata);
+        });
+        helper->getMetadata();
     }
+}
+
+void GamesFoundPage::onMetadataRecieved(QString gameName, SteamMetadata metadata)
+{
+    Game game = Library::db.getGameByName(gameName);
+    game.developer = metadata.developer;
+    game.publisher = metadata.publisher;
+    game.releaseDate = metadata.releaseDate;
+    game.genre = metadata.genres;
+    Library::db.updateGame(game);
 }

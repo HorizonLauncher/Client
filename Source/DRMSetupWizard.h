@@ -4,6 +4,8 @@
 #include <QWizard>
 #include <QtWidgets>
 
+#include "SteamMetadataHelper.h"
+
 /** DRMSetupWizard Class
  * Class help the user add all of their games to Horizon
 */
@@ -44,6 +46,9 @@ public:
 private:
     QVBoxLayout* gamesLayout;
     QMap<QString, QString> addGames;
+
+public slots:
+    void onMetadataRecieved(QString gameName, SteamMetadata metadata);
 
 protected:
     void initializePage() Q_DECL_OVERRIDE;
