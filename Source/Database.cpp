@@ -406,6 +406,59 @@ unsigned int Database::getGameCount() const
     return query.value(0).toUInt();
 }
 
+/** Update a games details by its ID.
+ * \param game
+ * \parblock
+ * The game object to update. `id` will not be updated and will be
+ * used as the key to the game that will be updated.
+ * \endparblock
+ * \return Success (true)/Failure (false) of the operation.
+*/
+bool Database::updateGame(Game game)
+{
+    if (std::get<0>(isExistant(game.id)))
+    {
+        QSqlQuery query(db);
+        query.prepare("UPDATE games SET `GAMENAME` = :gameName,"
+                                       "`GAMEDIRECTORY` = :gameDirectory,"
+                                       "`GAMEEXECUTABLE` = :executablePath,"
+                                       "`ARGUMENTS` = :arguments,"
+                                       "`DRM` = :drm,"
+                                       "`DEVELOPER` = :developer,"
+                                       "`PUBLISHER` = :publisher,"
+                                       "`RELEASEDATE` = :releaseDate,"
+                                       "`GENRE` = :genre,"
+                                       "`BANNERPATH` = :bannerPath"
+                                   " WHERE ID = :id;");
+
+       query.bindValue(":gameName", game.gameName);
+       query.bindValue(":gameDirectory", game.gameDirectory);
+       query.bindValue(":executablePath", game.executablePath);
+       query.bindValue(":arguments", game.arguments);
+       query.bindValue(":drm", game.drm);
+       query.bindValue(":developer", game.developer);
+       query.bindValue(":publisher", game.publisher);
+       query.bindValue(":releaseDate", game.releaseDate);
+       query.bindValue(":genre", game.genre);
+       query.bindValue(":bannerPath", game.bannerPath);
+
+       query.bindValue(":id", game.id);
+
+       bool rtn = query.exec();
+
+       if (rtn)
+       {
+           emit dbChanged();
+       }
+
+       return rtn;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 /** Sets the launch options of a game by ID.
  * \param id The ID of the game
  * \param launchOpts The new launch options

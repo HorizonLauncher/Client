@@ -59,6 +59,8 @@ public:
     bool setLaunchOptionsById(unsigned int id, QString launchOpts);
     bool setLaunchOptionsByName(QString name, QString launchOpts);
 
+    bool updateGame(Game game);
+
     static QString getDRMString(int drmID);
 
 signals:
