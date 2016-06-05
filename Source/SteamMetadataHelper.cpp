@@ -8,6 +8,9 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 
+#include <QPixmap>
+#include <QFile>
+
 /** SteamMetadataHelper constructor
  * Class to handle downloading metadata & game art from SteamHelper
  * \param appid The AppID of the game to download metadata of.
@@ -34,11 +37,30 @@ void SteamMetadataHelper::getMetadata()
 }
 
 /** Download game header art.
- * Stub.
  * When done, the headerDownloadCompleted signal will be emitted.
+ * \param filePath The path for the image to be saved to.
  */
 void SteamMetadataHelper::downloadHeader(QString filePath)
-{}
+{
+    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
+    QUrl url("http://cdn.akamai.steamstatic.com/steam/apps/" + this->appid + "/header.jpg");
+    QNetworkRequest *req = new QNetworkRequest(url);
+    QNetworkReply *reply = manager->get(*req);
+
+    QObject::connect(reply, &QNetworkReply::finished, [=]
+    {
+        QPixmap p;
+        p.loadFromData(reply->readAll());
+
+        if (!p.isNull())
+        {
+            QPixmap scaledP = p.scaled(364, 170);
+            scaledP.save(filePath, "PNG");
+
+            emit headerDownloadCompleted();
+        }
+    });
+}
 
 void SteamMetadataHelper::headerRequestFinished(QNetworkReply *reply)
 {
