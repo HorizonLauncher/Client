@@ -1,79 +1,58 @@
 #include "DetailGameWidget.h"
 #include <QSpacerItem>
 
-DetailGameWidget::DetailGameWidget(Game game, QSettings* palette, QWidget* parent) : QWidget(parent)
+DetailGameWidget::DetailGameWidget(Game game, QSettings* palette, QString background, QWidget* parent) : QWidget(parent)
 {
     this->palette = palette;
     this->setObjectName("DetailGameWidget");
-    this->setStyleSheet("background-color: rgba(0,0,0,0)");
+    this->setStyleSheet("background-color: rgba(0, 0, 0, 0)");
 
     QHBoxLayout* widgetLayout = new QHBoxLayout(this);
     widgetLayout->setSpacing(0);
+
     QLabel* imageLabel = new QLabel("");
-
-
-    QPixmap imageMap(":Resource/Images/LibraryGridPlaceholder.png");
+    QPixmap imageMap(background);
     imageLabel->setPixmap(imageMap.scaledToHeight(100));
-    imageLabel->setContentsMargins(5,5,5,5);
+    imageLabel->setContentsMargins(5, 5, 5, 5);
     widgetLayout->addWidget(imageLabel);
 
     //Create the main title label and sublabels
     gameTitleWidget = new QWidget(this);
     gameTitleWidget->setAutoFillBackground(false);
     QVBoxLayout* gameTitleWidgetLayout = new QVBoxLayout(gameTitleWidget);
-    QLabel* titleLabel = new QLabel(game.gameName);
-    titleLabel->setStyleSheet("font-family: Roboto; font-style: normal; font-size: 16pt");
-    QLabel* hoursLabel = new QLabel(tr("999 Hours"));
-    styleLabel(hoursLabel);
-    gameTitleWidgetLayout->addWidget(titleLabel);
-    gameTitleWidgetLayout->addWidget(hoursLabel);
-    QWidget* titleSpacerWidget = new QWidget(this);
-    titleSpacerWidget->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
-    gameTitleWidgetLayout->addWidget(titleSpacerWidget);
-    gameTitleWidget->setLayout(gameTitleWidgetLayout);
     widgetLayout->addWidget(gameTitleWidget);
 
-    QWidget* spacerWidget = new QWidget(this);
-    QHBoxLayout* layout = new QHBoxLayout(spacerWidget);
-    layout->addWidget(new QLabel (""));
-    //spacerWidget->setStyleSheet("background-color: red");
-    //spacerWidget->setMinimumWidth(200 - game.gameName.length()); //Yay hacks!
-    spacerWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    widgetLayout->addWidget(spacerWidget);
+    QLabel* titleLabel = new QLabel(game.gameName);
+    titleLabel->setStyleSheet("font-family: Roboto; font-weight: 300; font-size: 14pt");
+    gameTitleWidgetLayout->addWidget(titleLabel);
 
-    //Create the detailswidget
+    QLabel* hoursLabel = new QLabel(tr("999 Hours"));
+    styleLabel(hoursLabel);
+    gameTitleWidgetLayout->addWidget(hoursLabel);
+
+    widgetLayout->addStretch();
+
     this->gameDetailsWidget = new QWidget(this);
     QVBoxLayout* detailsLayout = new QVBoxLayout(gameDetailsWidget);
-    gameDetailsWidget->setLayout(detailsLayout);
-    QLabel* reviewsLabel = new QLabel("Reviews: 7.5/10");
-    QLabel* releaseDateLabel = new QLabel("Release Date: 10/20/30");
-    QWidget* detailsSpacerWidget = new QWidget(this);
-    styleLabel(reviewsLabel);
+
+    QLabel* genresLabel = new QLabel("Genres: " + game.genre);
+    styleLabel(genresLabel);
+    detailsLayout->addWidget(genresLabel);
+
+    QLabel* releaseDateLabel = new QLabel("Release Date: " + game.releaseDate);
     styleLabel(releaseDateLabel);
-    detailsSpacerWidget->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
-    detailsLayout->addWidget(reviewsLabel);
     detailsLayout->addWidget(releaseDateLabel);
-    detailsLayout->addWidget(detailsSpacerWidget);
+
+    QLabel* developersLabel = new QLabel("Developers: " + game.developer);
+    styleLabel(developersLabel);
+    detailsLayout->addWidget(developersLabel);
+
+    QLabel* publishersLabel = new QLabel ("Publishers: " + game.publisher);
+    styleLabel(publishersLabel);
+    detailsLayout->addWidget(publishersLabel);
+
     widgetLayout->addWidget(gameDetailsWidget);
 
-    //Create mod/achievement support widget
-    this->gameSupportInfoWidget = new QWidget(this);
-    QLabel* gameModeLabel = new QLabel("Mode: SinglePlayer");
-    QLabel* modSupportLabel = new QLabel ("Mods: Supported");
-    QLabel* achievementSupportLabel = new QLabel ("Achievements: Supported");
-    styleLabel(gameModeLabel);
-    styleLabel(modSupportLabel);
-    styleLabel(achievementSupportLabel);
-    QVBoxLayout* supportWidgetLayout = new QVBoxLayout(this->gameSupportInfoWidget);
-    QWidget* gameSupportInfoSpacerWidget = new QWidget (this);
-    gameSupportInfoSpacerWidget->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
-    supportWidgetLayout->addWidget(gameModeLabel);
-    supportWidgetLayout->addWidget(modSupportLabel);
-    supportWidgetLayout->addWidget(achievementSupportLabel);
-    supportWidgetLayout->addWidget(gameSupportInfoSpacerWidget);
-    widgetLayout->addWidget(gameSupportInfoWidget);
-
-    //Create Button
     QPushButton* playButton = new QPushButton();
     playButton->setStyleSheet("background-image: url(:Resource/Icons/Material/Launch.svg);"
                               "background-repeat: no-repeat;"
@@ -86,18 +65,14 @@ DetailGameWidget::DetailGameWidget(Game game, QSettings* palette, QWidget* paren
 
 void DetailGameWidget::enterEvent(QEvent* event)
 {
-   //this->setStyleSheet("background-color: " + this->palette->value("Primary/HoverSelection").toString());
-   this->currentlyHoveredOver = true;
-   this->setCursor(Qt::PointingHandCursor);
-
+    this->currentlyHoveredOver = true;
+    this->setCursor(Qt::PointingHandCursor);
 }
 
 void DetailGameWidget::leaveEvent(QEvent* event)
 {
-    //this->setStyleSheet("background-color: " + this->palette->value("Primary/SecondaryBase").toString());
     this->currentlyHoveredOver = false;
     this->setCursor(Qt::ArrowCursor);
-
 }
 
 /**
@@ -105,13 +80,11 @@ void DetailGameWidget::leaveEvent(QEvent* event)
   @param label The label to style
   */
 void DetailGameWidget::styleLabel(QLabel *label){
-    label->setStyleSheet("font-family: Roboto; font-style: normal; font-size: 10pt");
+    label->setStyleSheet("font-family: Roboto; font-weight: 300; font-size: 10pt");
 }
 
 void DetailGameWidget::paintEvent(QPaintEvent* event)
 {
     QPainter painter(this);
-    QString imageString;
-    QPixmap imageMap(":Resource/Images/LibraryListPlaceholderBG.png");
-    painter.drawPixmap(0,0,this->width(), this->height(), imageMap);
+    painter.fillRect(0, 0, this->width(), this->height(), QBrush(QColor(0, 0, 0, 80)));
 }

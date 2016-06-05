@@ -14,14 +14,14 @@ class DetailGameWidget : public QWidget
     Q_OBJECT
 
 public:
-    DetailGameWidget(Game game, QSettings* palette, QWidget* parent = 0);
+    DetailGameWidget(Game game, QSettings* palette, QString background, QWidget* parent = 0);
 
 private:
     QHBoxLayout* mainLayout;
     QLabel* imageLabel;
     QWidget* gameTitleWidget;
     QWidget* gameDetailsWidget;
-    QWidget* gameSupportInfoWidget;
+    QWidget* creatorInfoWidget;
     void enterEvent(QEvent*) override;
     void leaveEvent(QEvent*) override;
     void paintEvent(QPaintEvent *) override;

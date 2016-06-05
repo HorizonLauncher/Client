@@ -42,7 +42,16 @@ void LibraryDetailView::refreshGames()
             continue;
         }
 
-        DetailGameWidget* gameWidget = new DetailGameWidget(game, this->palette, this);
+        QStringList backgrounds;
+        backgrounds << ":Resource/Images/LibraryGridPlaceholder.png"
+                    << ":Resource/Images/LibraryGridPlaceholder1.png"
+                    << ":Resource/Images/LibraryGridPlaceholder2.png"
+                    << ":Resource/Images/LibraryGridPlaceholder3.png"
+                    << ":Resource/Images/LibraryGridPlaceholder4.png";
+
+        QString background = backgrounds[qrand() % backgrounds.length()];
+
+        DetailGameWidget* gameWidget = new DetailGameWidget(game, this->palette, background, this);
         gameWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
         mainLayout->addWidget(gameWidget);
         gamesWidgets.append(gameWidget);
