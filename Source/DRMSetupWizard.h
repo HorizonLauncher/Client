@@ -49,6 +49,7 @@ private:
 
 public slots:
     void onMetadataRecieved(QString gameName, SteamMetadata metadata);
+    void onHeaderDLCompleted(QString gameName, QString bannerPath);
 
 protected:
     void initializePage() Q_DECL_OVERRIDE;

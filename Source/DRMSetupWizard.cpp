@@ -3,6 +3,9 @@
 #include "SteamHelper.h"
 #include "Library.h"
 #include "Database.h"
+#include "Defines.h"
+
+#include <QDir>
 
 /** DRMSetupWizard constructor
  */
@@ -99,12 +102,18 @@ bool GamesFoundPage::validatePage()
                              1};
         Library::db.addGame(gameObj);
 
+        QString bannerPath = CONFIG_FOLDER + QDir::separator() + "image" + QDir::separator() + "steam_" + addGames[game] + "_banner.png";
         SteamMetadataHelper *helper = new SteamMetadataHelper(addGames[game]);
         connect(helper, &SteamMetadataHelper::metadataRecieved, [=] (SteamMetadata metadata)
         {
             onMetadataRecieved(game, metadata);
         });
+        connect(helper, &SteamMetadataHelper::headerDownloadCompleted, [=]
+        {
+            onHeaderDLCompleted(game, bannerPath);
+        });
         helper->getMetadata();
+        helper->downloadHeader(bannerPath);
     }
 }
 
@@ -115,5 +124,12 @@ void GamesFoundPage::onMetadataRecieved(QString gameName, SteamMetadata metadata
     game.publisher = metadata.publisher;
     game.releaseDate = metadata.releaseDate;
     game.genre = metadata.genres;
+    Library::db.updateGame(game);
+}
+
+void GamesFoundPage::onHeaderDLCompleted(QString gameName, QString bannerPath)
+{
+    Game game = Library::db.getGameByName(gameName);
+    game.bannerPath = bannerPath;
     Library::db.updateGame(game);
 }
