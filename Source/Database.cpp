@@ -109,22 +109,44 @@ bool Database::reset()
 }
 
 /** Add a game to the database and repopulate the games list.
- * \param gameName The name of the game.
- * \param gameDirectory Working directory of the game.
- * \param executablePath The location of the executable on the filesystem.
- * \param arguments List of arguments to launch with.
- * \param drm The DRM the game came from, where 0 = None, 1 = Steam, 2 = Origin, 3 = uPlay
+ * \param game The game struct to add.
  * \return Success/failure of the operation.
 */
-bool Database::addGame(QString gameName, QString gameDirectory, QString executablePath, QString arguments, int drm)
+bool Database::addGame(Game game)
 {
     QSqlQuery query(db);
-    query.prepare("INSERT OR IGNORE INTO GAMES(GAMENAME, GAMEDIRECTORY, GAMEEXECUTABLE, ARGUMENTS, DRM) VALUES (:gameName, :gameDirectory, :executablePath, :arguments, :drm);");
-    query.bindValue(":gameName", gameName);
-    query.bindValue(":gameDirectory", gameDirectory);
-    query.bindValue(":executablePath", executablePath);
-    query.bindValue(":arguments", arguments);
-    query.bindValue(":drm", drm);
+    query.prepare("INSERT OR IGNORE INTO GAMES (GAMENAME,"
+                                               "GAMEDIRECTORY,"
+                                               "GAMEEXECUTABLE,"
+                                               "ARGUMENTS,"
+                                               "DRM,"
+                                               "DEVELOPER,"
+                                               "PUBLISHER,"
+                                               "RELEASEDATE,"
+                                               "GENRE,"
+                                               "BANNERPATH)"
+                                        "VALUES (:gameName,"
+                                                ":gameDirectory,"
+                                                ":executablePath,"
+                                                ":arguments,"
+                                                ":drm,"
+                                                ":developer,"
+                                                ":publisher,"
+                                                ":releaseDate,"
+                                                ":genre,"
+                                                ":bannerPath);");
+
+    query.bindValue(":gameName", game.gameName);
+    query.bindValue(":gameDirectory", game.gameDirectory);
+    query.bindValue(":executablePath", game.executablePath);
+    query.bindValue(":arguments", game.arguments);
+    query.bindValue(":drm", game.drm);
+    query.bindValue(":developer", game.developer);
+    query.bindValue(":publisher", game.publisher);
+    query.bindValue(":releaseDate", game.releaseDate);
+    query.bindValue(":genre", game.genre);
+    query.bindValue(":bannerPath", game.bannerPath);
+
     bool rtn = query.exec();
 
     if (rtn)
@@ -141,10 +163,8 @@ void Database::addGames(GameList games)
 {
     for (auto& game : games)
     {
-        addGame(game.gameName, game.gameDirectory, game.executablePath, game.arguments, game.drm);
+        addGame(game);
     }
-
-    emit dbChanged();
 }
 
 /** Remove a game from the database by their ID.

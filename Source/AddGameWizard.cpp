@@ -115,8 +115,14 @@ void LastPage::initializePage()
 
     if (!std::get<0>(Library::db.isExistant(field("nameEdit").toString())))
     {
+        Game game = Game {0,
+                         field("nameEdit").toString(),
+                         field("dirEdit").toString(),
+                         field("exeEdit").toString(),
+                         field("argsEdit").toString(),
+                         0};
+        Library::db.addGame(game);
         label->setText(tr("Game added successfully."));
-        Library::db.addGame(field("nameEdit").toString(),field("dirEdit").toString(), field("exeEdit").toString(),field("argsEdit").toString(), 0);
     }
     else
     {

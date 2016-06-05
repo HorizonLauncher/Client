@@ -9,7 +9,7 @@
  * Defines a game type.
  * Members correspond to a field within the database.
  */
-typedef struct
+struct Game
 {
     unsigned int id;  /**< DB ID of the game. */
     QString gameName; /**< Name of the game to display */
@@ -22,7 +22,7 @@ typedef struct
     QString releaseDate;
     QString genre;
     QString bannerPath;
-} Game;
+};
 
 typedef std::vector<Game> GameList;
 
@@ -41,7 +41,7 @@ public:
     bool init();
     bool reset();
 
-    bool addGame(QString gameName, QString gameDirectory, QString executablePath, QString arguments, int drm = 0);
+    bool addGame(Game game);
     void addGames(GameList games);
 
     bool removeGameById(unsigned int id);

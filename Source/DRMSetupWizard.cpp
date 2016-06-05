@@ -2,6 +2,7 @@
 #include "AddGameWizard.h"
 #include "SteamHelper.h"
 #include "Library.h"
+#include "Database.h"
 
 /** DRMSetupWizard constructor
  */
@@ -90,6 +91,12 @@ bool GamesFoundPage::validatePage()
         #elif defined(__APPLE__)
             QString openWith = "open";
         #endif
-        Library::db.addGame(game, ".", openWith, "steam://run/" + addGames[game], 1);
+        Game gameObj = Game {0,
+                             game,
+                             ".",
+                             openWith,
+                             "steam://run/" + addGames[game],
+                             1};
+        Library::db.addGame(gameObj);
     }
 }
