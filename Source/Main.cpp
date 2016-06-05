@@ -42,6 +42,13 @@ int main(int argc, char* argv[])
         configFolder.mkdir("HorizonLauncher");
     }
 
+    QDir imageDirectory(CONFIG_FOLDER + QDir::separator() + "image");
+    if (!imageDirectory.exists())
+    {
+        imageDirectory.cdUp();
+        imageDirectory.mkdir("image");
+    }
+
     bool dbExists = QFile(QDir(CONFIG_FOLDER).filePath("horizon.db")).exists();
 
     if (!Library::db.init())
