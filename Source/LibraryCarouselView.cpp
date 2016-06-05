@@ -237,14 +237,22 @@ void LibraryCarouselView::refreshGames()
             i = 1;
         }
 
-        QStringList backgrounds;
-        backgrounds << ":Resource/Images/LibraryGridPlaceholder.png"
-                    << ":Resource/Images/LibraryGridPlaceholder1.png"
-                    << ":Resource/Images/LibraryGridPlaceholder2.png"
-                    << ":Resource/Images/LibraryGridPlaceholder3.png"
-                    << ":Resource/Images/LibraryGridPlaceholder4.png";
+        QString background;
+        if (!game.bannerPath.isEmpty())
+        {
+            background = game.bannerPath;
+        }
+        else
+        {
+            QStringList backgrounds;
+            backgrounds << ":Resource/Images/LibraryGridPlaceholder.png"
+                        << ":Resource/Images/LibraryGridPlaceholder1.png"
+                        << ":Resource/Images/LibraryGridPlaceholder2.png"
+                        << ":Resource/Images/LibraryGridPlaceholder3.png"
+                        << ":Resource/Images/LibraryGridPlaceholder4.png";
 
-        QString background = backgrounds[qrand() % backgrounds.length()];
+            background = backgrounds[qrand() % backgrounds.length()];
+        }
 
         GridGameWidget* gameWidget = new GridGameWidget(displayedName, 999, background);
         gamesLayout->addWidget(gameWidget);
