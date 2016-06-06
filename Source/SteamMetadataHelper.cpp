@@ -11,6 +11,18 @@
 #include <QPixmap>
 #include <QFile>
 
+void SteamMetadataWorker::downloadData(QString url)
+{
+    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
+    QNetworkRequest *req = new QNetworkRequest(QUrl(url));
+    QNetworkReply *reply = manager->get(*req);
+
+    QObject::connect(reply, &QNetworkReply::finished, [=]
+    {
+        emit resultReady(reply->readAll());
+    });
+}
+
 /** SteamMetadataHelper constructor
  * Class to handle downloading metadata & game art from SteamHelper
  * \param appid The AppID of the game to download metadata of.
@@ -25,15 +37,15 @@ SteamMetadataHelper::SteamMetadataHelper(QString appid)
  */
 void SteamMetadataHelper::getMetadata()
 {
-    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
-    QUrl url("http://store.steampowered.com/api/appdetails?appids=" + this->appid);
-    QNetworkRequest *req = new QNetworkRequest(url);
-    QNetworkReply *reply = manager->get(*req);
+    SteamMetadataWorker *worker = new SteamMetadataWorker;
+    worker->moveToThread(&this->workerThread);
 
-    QObject::connect(reply, &QNetworkReply::finished, [=]
-    {
-        this->headerRequestFinished(reply);
-    });
+    connect(&this->workerThread, &QThread::finished, worker, &QObject::deleteLater);
+    connect(this, &SteamMetadataHelper::startMetadataDownload, worker, &SteamMetadataWorker::downloadData);
+    connect(worker, &SteamMetadataWorker::resultReady, this, &SteamMetadataHelper::metadataRequestFinished);
+
+    workerThread.start();
+    emit startMetadataDownload("http://store.steampowered.com/api/appdetails?appids=" + this->appid);
 }
 
 /** Download game header art.
@@ -42,15 +54,15 @@ void SteamMetadataHelper::getMetadata()
  */
 void SteamMetadataHelper::downloadHeader(QString filePath)
 {
-    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
-    QUrl url("http://cdn.akamai.steamstatic.com/steam/apps/" + this->appid + "/header.jpg");
-    QNetworkRequest *req = new QNetworkRequest(url);
-    QNetworkReply *reply = manager->get(*req);
+    SteamMetadataWorker *worker = new SteamMetadataWorker;
+    worker->moveToThread(&this->workerThread);
 
-    QObject::connect(reply, &QNetworkReply::finished, [=]
+    connect(&this->workerThread, &QThread::finished, worker, &QObject::deleteLater);
+    connect(this, &SteamMetadataHelper::startHeaderDownload, worker, &SteamMetadataWorker::downloadData);
+    connect(worker, &SteamMetadataWorker::resultReady, [=](QByteArray result)
     {
         QPixmap p;
-        p.loadFromData(reply->readAll());
+        p.loadFromData(result);
 
         if (!p.isNull())
         {
@@ -60,12 +72,17 @@ void SteamMetadataHelper::downloadHeader(QString filePath)
             emit headerDownloadCompleted();
         }
     });
+
+    QString url("http://localhost:8000/steam/apps/" + this->appid + "/header.jpg");
+    //QUrl url("http://cdn.akamai.steamstatic.com/steam/apps/" + this->appid + "/header.jpg");
+
+    workerThread.start();
+    emit startHeaderDownload(url);
 }
 
-void SteamMetadataHelper::headerRequestFinished(QNetworkReply *reply)
+void SteamMetadataHelper::metadataRequestFinished(QByteArray response)
 {
-    QByteArray replyBytes = reply->readAll();
-    QString jsonString(replyBytes);
+    QString jsonString(response);
 
     QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonString.toUtf8());
     QJsonObject jsonObj = jsonDoc.object();

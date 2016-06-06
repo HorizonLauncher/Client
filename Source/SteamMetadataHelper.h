@@ -5,6 +5,8 @@
 
 #include <QtNetwork/QNetworkReply>
 
+#include <QThread>
+
 struct SteamMetadata
 {
     QString appid;
@@ -12,6 +14,17 @@ struct SteamMetadata
     QString publisher;
     QString releaseDate;
     QString genres;
+};
+
+class SteamMetadataWorker : public QObject
+{
+    Q_OBJECT
+
+public:
+    void downloadData(QString url);
+
+signals:
+    void resultReady(QByteArray result);
 };
 
 class SteamMetadataHelper : public QObject
@@ -28,10 +41,15 @@ signals:
     void metadataRecieved(SteamMetadata metadata);
     void headerDownloadCompleted();
 
+    void startMetadataDownload(QString url);
+    void startHeaderDownload(QString url);
+
 private:
     QString appid;
+    QThread workerThread;
 
-    void headerRequestFinished(QNetworkReply *reply);
+private slots:
+    void metadataRequestFinished(QByteArray response);
 };
 
 #endif
