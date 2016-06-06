@@ -16,98 +16,54 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 set(SOURCE
     # MAIN
-    Source/Main.cpp
-    Source/MainPanel.cpp
+    src/main.cpp
+    src/widgets/mainpanel.cpp
 
     # NAVBAR
-    Source/Navbar.cpp
-    Source/TabWidget.cpp
-    Source/TabLabel.cpp
+    src/widgets/navbar/navbar.cpp
+    src/widgets/navbar/tabwidget.cpp
+    src/widgets/navbar/tablabel.cpp
 
     # STACKED WIDGETS
-    Source/Library.cpp
-    Source/Homepage.cpp
-    Source/News.cpp
-    Source/Community.cpp
-    Source/Store.cpp
+    src/widgets/stack/library.cpp
+    src/widgets/stack/homepage.cpp
+    src/widgets/stack/news.cpp
+    src/widgets/stack/community.cpp
+    src/widgets/stack/store.cpp
+    src/widgets/stack/settings.cpp
 
     # OTHER WIDGETS
-    Source/Settings.cpp
-    Source/NewsItemWidget.cpp
-    Source/GridGameWidget.cpp
-    Source/BuddyListExpandable.cpp
-    Source/NewsFeedChooserWindow.cpp
-    Source/DetailGameWidget.cpp
-    Source/Store.cpp
-    Source/BuddyList.cpp
+    src/widgets/newsitemwidget.cpp
+    src/widgets/gridgamewidget.cpp
+    src/widgets/buddylistexpandable.cpp
+    src/widgets/newsfeedchooserwindow.cpp
+    src/widgets/detailgamewidget.cpp
+    src/widgets/buddylist.cpp
 
     # LIBRARY VIEWS
-    Source/LibraryGridView.cpp
-    Source/LibraryDetailView.cpp
-    Source/LibraryCarouselView.cpp
+    src/widgets/views/librarygridview.cpp
+    src/widgets/views/librarydetailview.cpp
+    src/widgets/views/librarycarouselview.cpp
 
     # WIZARDS
-    Source/DRMSetupWizard.cpp
-    Source/AddGameWizard.cpp
-    Source/SetupWizard.cpp
+    src/widgets/wizards/drmsetupwizard.cpp
+    src/widgets/wizards/addgamewizard.cpp
+    src/widgets/wizards/setupwizard.cpp
+
+    # STEAM
+    src/steam/steamhelper.cpp
+    src/steam/steammetadatahelper.cpp
 
     # MISC
-    Source/Database.cpp
-    Source/GameLauncher.cpp
-    Source/SteamHelper.cpp
-    Source/SteamMetadataHelper.cpp
-)
-
-set(HEADERS
-    # MAIN
-    Source/MainPanel.h
-    Source/Init.h
-
-    # NAVBAR
-    Source/Navbar.h
-    Source/TabWidget.h
-    Source/TabLabel.h
-
-    # STACKED WIDGETS
-    Source/Library.h
-    Source/Homepage.h
-    Source/News.h
-    Source/Community.h
-    Source/Store.h
-
-    # OTHER WIDGETS
-    Source/Settings.h
-    Source/NewsItemWidget.h
-    Source/GridGameWidget.h
-    Source/BuddyListExpandable.h
-    Source/NewsFeedChooserWindow.h
-    Source/Store.h
-    Source/DetailGameWidget.h
-    Source/BuddyList.h
-
-    # LIBRARY VIEWS
-    Source/LibraryGridView.h
-    Source/LibraryDetailView.h
-    Source/LibraryCarouselView.h
-
-    # WIZARDS
-    Source/DRMSetupWizard.h
-    Source/AddGameWizard.h
-    Source/SetupWizard.h
-
-    # MISC
-    Source/Database.h
-    Source/GameLauncher.h
-    Source/SteamHelper.h
-    Source/SteamMetadataHelper.h
-    Source/Defines.h
+    src/database.cpp
+    src/gamelauncher.cpp
 )
 
 set(RESOURCES
-    Resource/Icons.qrc
-    Resource/Fonts.qrc
-    Resource/Styles.qrc
-    Resource/Images.qrc
+    res/icon.qrc
+    res/font.qrc
+    res/styles.qrc
+    res/image.qrc
 )
 
 set(GUI_TYPE "")
@@ -129,19 +85,11 @@ if(WIN32)
     # set(GUI_TYPE WIN32)
 
     set(SOURCE ${SOURCE}
-        Source/BorderlessWindow.cpp
-        Source/WinWindow.cpp
-        Source/WinPanel.cpp
+        src/widgets/window/borderlesswindow.cpp
+        src/widgets/window/winwindow.cpp
+        src/widgets/window/winpanel.cpp
         BorderlessWindow/QWinHost.cpp
         BorderlessWindow/QWinWidget.cpp
-    )
-
-    set(HEADERS ${HEADERS}
-        Source/BorderlessWindow.h
-        Source/WinWindow.h
-        Source/WinPanel.h
-        BorderlessWindow/QWinHost.h
-        BorderlessWindow/QWinWidget.h
     )
 elseif(UNIX)
     # Additional configuration for Unix systems.
@@ -152,13 +100,8 @@ elseif(UNIX)
     # endif(APPLE)
 
     set(SOURCE ${SOURCE}
-        Source/UnixWindow.cpp
-        Source/UnixPanel.cpp
-    )
-
-    set(HEADERS ${HEADERS}
-        Source/UnixWindow.h
-        Source/UnixPanel.h
+        src/widgets/window/unixwindow.cpp
+        src/widgets/window/unixpanel.cpp
     )
 else()
     # Suspend the configuration process if the target OS isn't recognized.
@@ -190,7 +133,7 @@ include_directories(
     ${Qt5Sql_INCLUDE_DIRS}
     ${Boost_INCLUDE_DIRS}
     BorderlessWindow
-    Source
+    src
 )
 add_executable(HorizonLauncher
     ${GUI_TYPE}
@@ -219,7 +162,7 @@ if(WIN32)
     )
 
     if(MSVC)
-        set(WIN_LINKFLAGS \"${CMAKE_CURRENT_SOURCE_DIR}/Resource/Launcher.res\")
+        set(WIN_LINKFLAGS \"${CMAKE_CURRENT_SOURCE_DIR}/res/launcher.res\")
         set_target_properties(HorizonLauncher PROPERTIES LINK_FLAGS ${WIN_LINKFLAGS})
         set_target_properties(HorizonLauncher PROPERTIES COMPILE_FLAGS "/EHsc")
     endif(MSVC)

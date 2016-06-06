@@ -1,0 +1,128 @@
+#ifndef MAINPANEL_H
+#define MAINPANEL_H
+
+#include "navbar/tabwidget.h"
+#include "navbar/navbar.h"
+#include "stack/library.h"
+#include "stack/homepage.h"
+#include "stack/community.h"
+#include "stack/news.h"
+#include "stack/settings.h"
+#include "stack/store.h"
+
+#include <QStackedWidget>
+#include <QApplication>
+#include <QSettings>
+#include <QWidget>
+
+/** MainPanel class.
+* Class to construct the core content of the launcher window.
+* Also moderates interaction between navbar and stacked content.
+*/
+class MainPanel : public QWidget
+{
+    Q_OBJECT
+
+public:
+    MainPanel(QWidget* parent = 0);
+    ~MainPanel()
+    {
+        delete p;
+    }
+
+public slots:
+    virtual void pushButtonMinimize() = 0;
+    virtual void pushButtonMaximize() = 0;
+    virtual void pushButtonClose() = 0;
+    void onStackedChanged(int index);
+
+protected:
+    QStackedWidget* stack;
+    QScrollArea* scrollArea;
+    void init();
+
+private:
+    QSettings* p;
+    Navbar* navbar;
+    TabWidget* activeTab;
+
+    Homepage* home;
+    Community* community;
+    Library* library;
+    Settings* settings;
+    News* news;
+    Store* store;
+
+private slots:
+    void setHome()
+    {
+        if (!(activeTab == navbar->homeTab))
+        {
+            activeTab->toggleInactive();
+            stack->setCurrentWidget(home);
+            activeTab = navbar->homeTab;
+            activeTab->toggleActive();
+        }
+    }
+    void setStore()
+    {
+        if (!(activeTab == navbar->storeTab))
+        {
+            activeTab->toggleInactive();
+            stack->setCurrentWidget(store);
+            activeTab = navbar->storeTab;
+            activeTab->toggleActive();
+        }
+    }
+    void setGames()
+    {
+        if (!(activeTab == navbar->gamesTab))
+        {
+            activeTab->toggleInactive();
+            stack->setCurrentWidget(library);
+            activeTab = navbar->gamesTab;
+            activeTab->toggleActive();
+        }
+    }
+    void setCommunity()
+    {
+        if (!(activeTab == navbar->communityTab))
+        {
+            activeTab->toggleInactive();
+            stack->setCurrentWidget(community);
+            activeTab = navbar->communityTab;
+            activeTab->toggleActive();
+        }
+    }
+    void setNews()
+    {
+        if (!(activeTab == navbar->newsTab))
+        {
+            activeTab->toggleInactive();
+            stack->setCurrentWidget(news);
+            activeTab = navbar->newsTab;
+            activeTab->toggleActive();
+        }
+    }
+    void setMods()
+    {
+        if (!(activeTab == navbar->modsTab))
+        {
+            activeTab->toggleInactive();
+            activeTab = navbar->modsTab;
+            activeTab->toggleActive();
+        }
+    }
+    void setSettings()
+    {
+        if (!(activeTab == navbar->settingsTab))
+        {
+            activeTab->toggleInactive();
+            stack->setCurrentWidget(settings);
+            activeTab = navbar->settingsTab;
+            activeTab->toggleActive();
+        }
+    }
+};
+
+#endif

@@ -1,0 +1,26 @@
+<RCC>
+    <qresource prefix="/res">
+        <!-- Logo -->
+        <file>icon/Horizon.png</file>
+        <file>icon/Horizon.ico</file>
+
+        <!-- Material Icons -->
+        <file>icon/Material/NavArrowLeft.svg</file>
+        <file>icon/Material/NavArrowRight.svg</file>
+        <file>icon/Material/WinClose.svg</file>
+        <file>icon/Material/WinCloseHover.svg</file>
+        <file>icon/Material/WinMaximize.svg</file>
+        <file>icon/Material/WinMaximizeHover.svg</file>
+        <file>icon/Material/WinMinimize.svg</file>
+        <file>icon/Material/WinMinimizeHover.svg</file>
+        <file>icon/Material/Refresh.svg</file>
+        <file>icon/Material/Search.svg</file>
+        <file>icon/Material/Dropdown.svg</file>
+        <file>icon/Material/LibCarouselView.svg</file>
+        <file>icon/Material/LibDetailedListView.svg</file>
+        <file>icon/Material/LibGridView.svg</file>
+        <file>icon/Material/File.svg</file>
+        <file>icon/Material/Launch.svg</file>
+        <file>icon/Material/delete.svg</file>
+    </qresource>
+</RCC>

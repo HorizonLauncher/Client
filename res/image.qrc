@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/res">
+        <file>image/TitleBarPattern.png</file>
+        <file>image/LibraryGridPlaceholder.png</file>
+        <file>image/LibraryGridPlaceholder1.png</file>
+        <file>image/LibraryGridPlaceholder2.png</file>
+        <file>image/LibraryGridPlaceholder3.png</file>
+        <file>image/LibraryGridPlaceholder4.png</file>
+        <file>image/ProfilePlaceholder.png</file>
+        <file>image/LibraryCarouselPlaceholder.png</file>
+        <file>image/LibraryCarouselPlaceholderActive.png</file>
+        <file>image/LibraryListPlaceholderBG.png</file>
+    </qresource>
+</RCC>
