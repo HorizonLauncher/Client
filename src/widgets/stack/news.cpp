@@ -75,7 +75,7 @@ void News::loadXMLfromUrls()
         req->setRawHeader("User-Agent", "Horizon Launcher");
         QNetworkReply* reply = manager->get(*req);
 
-        QObject::connect(reply, &QNetworkReply::finished, [=]
+        connect(reply, &QNetworkReply::finished, [=]
         {
             QString feedLabel;
 
@@ -165,30 +165,42 @@ void News::onFetchComplete(QNetworkReply *reply, QString sourceLabel)
     {
         if (reader.isStartElement())
         {
-            if (reader.name() == "item")
+            if (reader.name() == "item" || reader.name() == "entry")
             {
-               while (reader.name() != "title")
-               {
-                    reader.readNext();
-               }
-               QString title = reader.readElementText();
-
-               while (reader.name() != "link")
-               {
-                   reader.readNext();
-               }
-               QString urlString = reader.readElementText();
-
-               while (reader.name() != "description")
-               {
                 reader.readNext();
-               }
-               QString descriptionRawString = reader.readElementText(QXmlStreamReader::SkipChildElements);
-               QString descriptionString = cleanDescriptionString(descriptionRawString);
+                QString title, link, desc;
+                while (!(reader.isEndElement() && (reader.name() == "item" || reader.name() == "entry")))
+                {
+                    if (reader.name() == "title")
+                    {
+                        title = reader.readElementText();
+                    }
+                    else if (reader.name() == "link")
+                    {
+                        for (const QXmlStreamAttribute &attr : reader.attributes())
+                        {
+                            if (attr.name().toString() == "href")
+                            {
+                                link = attr.value().toString();
+                            }
+                        }
+                        QString elemText = reader.readElementText();
+                        if (!elemText.isEmpty() && link.isEmpty())
+                        {
+                            link = elemText;
+                        }
+                    }
+                    else if (reader.name() == "description")
+                    {
+                        QString descriptionRawString = reader.readElementText(QXmlStreamReader::SkipChildElements);
+                        desc = cleanDescriptionString(descriptionRawString);
+                    }
+                    reader.readNext();
+                }
 
-                              NewsItemWidget* currentItemWidget = new NewsItemWidget(settings, urlString, sourceLabel, title, descriptionString);
+               NewsItemWidget* currentItemWidget = new NewsItemWidget(settings, link, sourceLabel, title, desc);
                headlines.append(currentItemWidget);
-            }
+           }
 
         }
 
