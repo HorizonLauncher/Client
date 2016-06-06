@@ -32,7 +32,7 @@ void SteamMetadataHelper::getMetadata()
 
     QObject::connect(reply, &QNetworkReply::finished, [=]
     {
-        this->headerRequestFinished(reply);
+        this->metadataRequestFinished(reply);
     });
 }
 
@@ -62,7 +62,7 @@ void SteamMetadataHelper::downloadHeader(QString filePath)
     });
 }
 
-void SteamMetadataHelper::headerRequestFinished(QNetworkReply *reply)
+void SteamMetadataHelper::metadataRequestFinished(QNetworkReply *reply)
 {
     QByteArray replyBytes = reply->readAll();
     QString jsonString(replyBytes);
