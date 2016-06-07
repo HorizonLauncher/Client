@@ -242,8 +242,8 @@ LRESULT CALLBACK BorderlessWindow::WndProc(HWND hWnd, UINT message, WPARAM wPara
             QPushButton* pushButtonMaximize = mainPanel->findChild<QPushButton*>("pushButtonMaximize");
             pushButtonMaximize->setStyleSheet(
                 "#pushButtonMaximize {"
-                    "image: url(:/res/icon/Restore.png);
-                }"
+                    "image: url(:/res/icon/Restore.png);"
+                "}"
                 "#pushButtonMaximize:hover {"
                     "image: url(:/res/icon/RestoreHover.png);"
                 "}"
