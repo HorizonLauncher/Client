@@ -1,0 +1,11 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node2" href="$d3/d0b/class_add_game_page.html" title="AddGamePage" alt="" coords="175,5,292,32"/>
+<area shape="rect" id="node3" href="$df/d60/class_add_news_feeds_page.html" title="AddNewsFeedsPage" alt="" coords="159,56,308,83"/>
+<area shape="rect" id="node4" href="$d1/d17/class_d_r_ms_found_page.html" title="DRMsFoundPage" alt="" coords="169,107,297,133"/>
+<area shape="rect" id="node5" href="$d2/d18/class_games_found_page.html" title="GamesFoundPage" alt="" coords="164,157,303,184"/>
+<area shape="rect" id="node6" href="$d8/d44/class_info_page.html" title="InfoPage class Class to handle the page in which the user will input the information about the game t..." alt="" coords="195,208,271,235"/>
+<area shape="rect" id="node7" href="$d1/df5/class_init_page.html" title="InitPage class. " alt="" coords="197,259,269,285"/>
+<area shape="rect" id="node8" href="$d0/d42/class_last_page.html" title="LastPage class Class to handle the last page. " alt="" coords="193,309,273,336"/>
+<area shape="rect" id="node9" href="$d9/de7/class_start_page.html" title="StartPage" alt="" coords="191,360,276,387"/>
+<area shape="rect" id="node10" href="$db/dc0/class_welcome_page.html" title="WelcomePage" alt="" coords="178,411,289,437"/>
+</map>
