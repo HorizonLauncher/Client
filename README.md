@@ -1,6 +1,6 @@
 #Horizon Launcher Client Repository
 
-[![Slack Status](http://horizonlauncher-slack.herokuapp.com/badge.svg)](http://slack.launchhorizon.com)
+[![Slack Status](http://slack.launchhorizon.com/badge.svg)](http://slack.launchhorizon.com)
 [![Chat on Freenode](https://img.shields.io/badge/chat-on%20freenode-blue.svg?style=flat)](https://kiwiirc.com/client/chat.freenode.net/#horizonlauncher)
 
 Linux Build Status: [![Linux Build Status](http://builds.thomasross.io/badge?builder=linuxbuild)](http://builds.thomasross.io)  
