@@ -13,7 +13,7 @@ Settings::Settings(QSettings* p, QWidget* parent) :
     QWidget(parent)
 {
     this->setObjectName("settingsUI");
-    this->setStyleSheet("background-color: " + p->value("Primary/SecondaryBase").toString() + ";} "
+    this->setStyleSheet("background-color: " + p->value("Body/Background").toString() + ";} "
         "QLabel, QGroupBox {"
         "color: " + p->value("Primary/LightText").toString() + "; }"
         "QPushButton {"
