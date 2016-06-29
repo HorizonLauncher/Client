@@ -124,6 +124,7 @@ AddNewsFeedsPage::AddNewsFeedsPage(QWidget* parent)
         newsFeeds.append(*new QList<QString>({"/r/linux_gaming", "https://www.reddit.com/r/pcgaming/.rss"}));
         newsFeeds.append(*new QList<QString>({"gamingonlinux.com", "https://www.gamingonlinux.com/article_rss.php"}));
         newsFeeds.append(*new QList<QString>({"Phoronix", "https://www.phoronix.com/rss.php"}));
+        newsFeeds.append(*new QList<QString>({"RootGamer", "https://rootgamer.com/feed"}));
     #endif
     newsFeeds.append(*new QList<QString>({"Gamasutra", "http://feeds.feedburner.com/GamasutraNews"}));
     newsFeeds.append(*new QList<QString>({"GameInformer", "http://www.gameinformer.com/feeds/thefeedrss.aspx"}));
