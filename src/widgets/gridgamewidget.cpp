@@ -58,14 +58,14 @@ GridGameWidget::GridGameWidget(QString gameName, int hours, QString background, 
 */
 void GridGameWidget::mousePressEvent(QMouseEvent* event)
 {
-    Q_EMIT clicked();
+    emit clicked();
     if (event->button() == Qt::LeftButton)
     {
-        Q_EMIT leftClick();
+        emit leftClick();
     }
     else if (event->button() == Qt::RightButton)
     {
-        Q_EMIT rightClick();
+        emit rightClick();
     }
     QWidget::mousePressEvent(event);
 }
@@ -84,11 +84,11 @@ void GridGameWidget::showContextMenu(const QPoint& pos)
     {
         if (selected->text() == tr("Change launch options"))
         {
-            Q_EMIT changeLaunchOpts();
+            emit changeLaunchOpts();
         }
         else if (selected->text() == tr("Remove game from Library"))
         {
-            Q_EMIT removeGame();
+            emit removeGame();
         }
     }
 }
