@@ -2,6 +2,7 @@
 
 #include "../gridgamewidget.h"
 #include "../wizards/addgamewizard.h"
+#include "../gamepropertyeditor.h"
 
 /** LibraryGridView constructor
  * Initialize the grid UI and generate an initial list of all the games available.
@@ -28,8 +29,9 @@ LibraryGridView::LibraryGridView(QSettings* p, Library* library, QWidget* parent
                         "QComboBox::down-arrow { image: url(:/res/icon/Material/Dropdown.svg); }");
 
     this->library = library;
+    this->palette = p;
 
-    init(p);
+    init();
 
     QList<Game> games = Library::db.getGames();
 
@@ -38,7 +40,7 @@ LibraryGridView::LibraryGridView(QSettings* p, Library* library, QWidget* parent
     refreshGames();
 }
 
-void LibraryGridView::init(QSettings* p)
+void LibraryGridView::init()
 {
     QGridLayout* mainLayout = new QGridLayout(this);
     mainLayout->setMargin(0);
@@ -106,8 +108,14 @@ void LibraryGridView::refreshGames()
         GridGameWidget* gameWidget = new GridGameWidget(displayedName, 999, background);
         gamesLayout->addWidget(gameWidget, row, col);
         connect(gameWidget, &GridGameWidget::leftClick, [=] { library->launchGame(game.gameName); });
-        connect(gameWidget, &GridGameWidget::changeLaunchOpts, [=]{ library->changeLaunchOpts(game.gameName); });
         connect(gameWidget, &GridGameWidget::removeGame, [=]{ Library::db.removeGameByName(game.gameName); });
+
+        connect(gameWidget, &GridGameWidget::openPropertyEditor, [=]
+        {
+            GamePropertyEditor* gpa = new GamePropertyEditor(game, this->palette);
+            gpa->show();
+        });
+
         gamesWidgets.append(gameWidget);
 
         if (col == 2)

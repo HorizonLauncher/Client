@@ -217,25 +217,6 @@ void Library::launchGame(QString gameName)
     }
 }
 
-void Library::changeLaunchOpts(QString gameName)
-{
-    Game game = Library::db.getGameByName(gameName);
-    bool ok;
-
-    QString newLaunchOpts = QInputDialog::getText(this,
-                                tr("Change Launch Options"),
-                                tr("Launch Options: "),
-                                QLineEdit::Normal,
-                                game.arguments,
-                                &ok);
-
-    if (ok)
-    {
-        Library::db.setLaunchOptionsByName(gameName, newLaunchOpts);
-    }
-}
-
-
 /**
   Sets the current games layout to the grid view
  */

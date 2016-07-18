@@ -26,7 +26,7 @@ signals:
     void leftClick();
     void rightClick();
 
-    void changeLaunchOpts();
+    void openPropertyEditor();
     void removeGame();
 };
 

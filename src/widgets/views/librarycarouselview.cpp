@@ -2,6 +2,7 @@
 
 #include "../gridgamewidget.h"
 #include "../wizards/addgamewizard.h"
+#include "../gamepropertyeditor.h"
 
 /** LibraryCarouselView constructor
  * Initialize the carousel UI and generate an initial list of all the games available.
@@ -28,8 +29,9 @@ LibraryCarouselView::LibraryCarouselView(QSettings* p, Library* library, QWidget
                         "QComboBox::down-arrow { image: url(:/res/icon/Material/Dropdown.svg); }");
 
     this->library = library;
+    this->palette = p;
 
-    init(p);
+    init();
 
     QList<Game> games = Library::db.getGames();
 
@@ -40,7 +42,7 @@ LibraryCarouselView::LibraryCarouselView(QSettings* p, Library* library, QWidget
     refreshGames();
 }
 
-void LibraryCarouselView::init(QSettings* p)
+void LibraryCarouselView::init()
 {
     QGridLayout* mainGrid = new QGridLayout(this);
 
@@ -60,7 +62,7 @@ void LibraryCarouselView::init(QSettings* p)
     contentLayout->addWidget(nameLabel);
 
     QWidget* hoursLaunchWidget = new QWidget();
-    hoursLaunchWidget->setStyleSheet("background-color: " + p->value("Primary/DarkestBase").toString() + ";");
+    hoursLaunchWidget->setStyleSheet("background-color: " + palette->value("Primary/DarkestBase").toString() + ";");
     hoursLaunchWidget->setMinimumWidth(350);
     hoursLaunchWidget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     contentLayout->addWidget(hoursLaunchWidget);
@@ -86,7 +88,7 @@ void LibraryCarouselView::init(QSettings* p)
     hoursLaunchLayout->addWidget(launchBtn, 0, 1);
 
     QWidget* friendsPlayingWidget = new QWidget();
-    friendsPlayingWidget->setStyleSheet("background-color: " + p->value("Primary/DarkestBase").toString() + ";");
+    friendsPlayingWidget->setStyleSheet("background-color: " + palette->value("Primary/DarkestBase").toString() + ";");
     friendsPlayingWidget->setMinimumWidth(350);
     friendsPlayingWidget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     contentLayout->addWidget(friendsPlayingWidget);
@@ -102,23 +104,23 @@ void LibraryCarouselView::init(QSettings* p)
     gameInfoTabs->setStyleSheet(
         "QTabWidget::pane {"
             "border: none;"
-            "border-top: 2px solid " + p->value("Primary/DarkestBase").toString() +";"
+            "border-top: 2px solid " + palette->value("Primary/DarkestBase").toString() +";"
             "left: 2px;"
         "}"
         "QTabBar::tab {"
             "padding: 5px;"
             "border: none;"
-            "color: " + p->value("Primary/LightText").toString() + ";"
+            "color: " + palette->value("Primary/LightText").toString() + ";"
             "margin: 2px;"
         "}"
         "QTabBar::tab::selected, QTabBar::tab::hover {"
-            "background-color: " + p->value("Primary/DarkestBase").toString() + ";"
+            "background-color: " + palette->value("Primary/DarkestBase").toString() + ";"
         "}"
         "QTabBar::tab::!selected{"
-            "background-color: " + p->value("Primary/TertiaryBase").toString() + ";"
+            "background-color: " + palette->value("Primary/TertiaryBase").toString() + ";"
         "}"
         "QTabWidget {"
-            "color: " + p->value("Primary/LightText").toString() + ";"
+            "color: " + palette->value("Primary/LightText").toString() + ";"
         "}");
     gameInfoTabs->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
     gameInfoTabs->setMinimumWidth(350);
@@ -270,6 +272,21 @@ void LibraryCarouselView::refreshGames()
                         library->launchGame(game.gameName);
                     }
                 );
+            }
+        );
+
+        connect(gameWidget, &GridGameWidget::removeGame,
+            [=]
+            {
+                Library::db.removeGameByName(game.gameName);
+            }
+        );
+
+        connect(gameWidget, &GridGameWidget::openPropertyEditor,
+            [=]
+            {
+                GamePropertyEditor* gpa = new GamePropertyEditor(game, this->palette);
+                gpa->show();
             }
         );
     }

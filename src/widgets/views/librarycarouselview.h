@@ -25,7 +25,9 @@ private slots:
     void addGame();
 
 private:
-    void init(QSettings* p);
+    void init();
+
+    QSettings* palette;
 
     QVBoxLayout* gamesLayout;
     QList<QWidget*> gamesWidgets;

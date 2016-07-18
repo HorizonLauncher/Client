@@ -38,6 +38,7 @@ void initSettings(QApplication &application)
         palette.setValue("SecondaryBase", "#1F1F1F");
         palette.setValue("TertiaryBase", "#131313");
         palette.setValue("DarkestBase", "#0F0F0F");
+        palette.setValue("TextHighlight", "#1F252F");
         palette.endGroup();
 
         palette.beginGroup("Body");

@@ -39,6 +39,7 @@ set(SOURCE
     src/widgets/newsfeedchooserwindow.cpp
     src/widgets/detailgamewidget.cpp
     src/widgets/buddylist.cpp
+    src/widgets/gamepropertyeditor.cpp
 
     # LIBRARY VIEWS
     src/widgets/views/librarygridview.cpp

@@ -30,7 +30,6 @@ public:
     Library(QSettings* p, QWidget* parent = 0);
 
     void launchGame(QString gameName);
-    void changeLaunchOpts(QString gameName);
 
     static Database db;
 
