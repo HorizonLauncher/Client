@@ -21,9 +21,9 @@ News::News(QSettings* p, QWidget* parent) :
 {
     this->setObjectName("NewsUI");
     this->setStyleSheet("#leftSidebar {"
-                        "background-color: " + p->value("Primary/SecondaryBase").toString() + ";} "
+                        "background-color: " + p->value("Body/Background").toString() + ";} "
                         "#content {"
-                        "background-color: " + p->value("Primary/SecondaryBase").toString() + ";} "
+                        "background-color: " + p->value("Body/Background").toString() + ";} "
                         "QPushButton {"
                         "color: " + p->value("Primary/LightText").toString() + "; "
                         "background-color: " + p->value("Primary/DarkElement").toString() + "; "

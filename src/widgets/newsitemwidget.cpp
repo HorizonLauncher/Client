@@ -124,12 +124,12 @@ void NewsItemWidget::enterEvent(QEvent* event)
 
 void NewsItemWidget::leaveEvent(QEvent* event)
 {
-   titleLabel->setStyleSheet("background-color: " + this->palette->value("Primary/SecondaryBase").toString() + ";");
+   titleLabel->setStyleSheet("background-color: " + this->palette->value("Body/Background").toString() + ";");
    descriptionLabel->setStyleSheet("font-size: 12px;"
-                                   "background-color: " + this->palette->value("Primary/SecondaryBase").toString() + ";");
+                                   "background-color: " + this->palette->value("Body/Background").toString() + ";");
    sourceLabel->setStyleSheet("font-size: 10px; "
-                              "background-color: " + this->palette->value("Primary/SecondaryBase").toString() + ";");
-   imageLabel->setStyleSheet("background-color: " + this->palette->value("Primary/SecondaryBase").toString() + ";");
+                              "background-color: " + this->palette->value("Body/Background").toString() + ";");
+   imageLabel->setStyleSheet("background-color: " + this->palette->value("Body/Background").toString() + ";");
    this->setCursor(Qt::ArrowCursor);
 
 }
