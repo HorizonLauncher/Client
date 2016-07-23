@@ -48,7 +48,7 @@ GamePropertyEditor::GamePropertyEditor(Game game, QSettings* palette, QWidget *p
                             "font-size: 14px;"
                         "}");
 
-    this->setWindowTitle(game.gameName + " details");
+    this->setWindowTitle(game.gameName + " Details");
 
     QGridLayout* mainLayout = new QGridLayout(this);
 
