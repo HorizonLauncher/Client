@@ -35,7 +35,7 @@ void initSettings(QApplication &application)
         palette.setValue("DarkText", "#7D8F94");
         palette.setValue("SubText", "#B2B4B3");
         palette.setValue("PrimaryBase", "#282828");
-        palette.setValue("SecondaryBase", "#1F1F1F");
+        palette.setValue("SecondaryBase", "#242b37");
         palette.setValue("TertiaryBase", "#131313");
         palette.setValue("DarkestBase", "#0F0F0F");
         palette.setValue("TextHighlight", "#1F252F");
