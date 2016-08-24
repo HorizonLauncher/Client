@@ -11,7 +11,7 @@ class BuddyList : public QWidget
     Q_OBJECT
 
 public:
-    explicit BuddyList(QSettings* p, QWidget *parent = 0);
+    explicit BuddyList(QSettings* p, QWidget* parent = 0);
 private:
     void init(QSettings* p);
     BuddyListExpandable* online;

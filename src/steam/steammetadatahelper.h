@@ -31,7 +31,7 @@ signals:
 private:
     QString appid;
 
-    void metadataRequestFinished(QNetworkReply *reply);
+    void metadataRequestFinished(QNetworkReply* reply);
 };
 
 #endif

@@ -27,10 +27,10 @@ SteamMetadataHelper::SteamMetadataHelper(QString appid)
  */
 void SteamMetadataHelper::getMetadata()
 {
-    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
+    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
     QUrl url("http://store.steampowered.com/api/appdetails?appids=" + this->appid);
-    QNetworkRequest *req = new QNetworkRequest(url);
-    QNetworkReply *reply = manager->get(*req);
+    QNetworkRequest* req = new QNetworkRequest(url);
+    QNetworkReply* reply = manager->get(*req);
 
     QObject::connect(reply, &QNetworkReply::finished, [=]
     {
@@ -44,10 +44,10 @@ void SteamMetadataHelper::getMetadata()
  */
 void SteamMetadataHelper::downloadHeader(QString filePath)
 {
-    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
+    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
     QUrl url("http://cdn.akamai.steamstatic.com/steam/apps/" + this->appid + "/header.jpg");
-    QNetworkRequest *req = new QNetworkRequest(url);
-    QNetworkReply *reply = manager->get(*req);
+    QNetworkRequest* req = new QNetworkRequest(url);
+    QNetworkReply* reply = manager->get(*req);
 
     QObject::connect(reply, &QNetworkReply::finished, [=]
     {
@@ -64,7 +64,7 @@ void SteamMetadataHelper::downloadHeader(QString filePath)
     });
 }
 
-void SteamMetadataHelper::metadataRequestFinished(QNetworkReply *reply)
+void SteamMetadataHelper::metadataRequestFinished(QNetworkReply* reply)
 {
     QByteArray replyBytes = reply->readAll();
     QString jsonString(replyBytes);

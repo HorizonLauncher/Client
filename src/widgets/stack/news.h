@@ -25,7 +25,7 @@ private:
     void reloadHeadlines();
     void loadFeedUrlsFromSettings();
     void clearLayout(QLayout* layout);
-    void onFetchComplete(QNetworkReply *reply, QString sourceLabel);
+    void onFetchComplete(QNetworkReply* reply, QString sourceLabel);
     QString cleanDescriptionString (QString);
     QSettings* settings;
     QVector<NewsItemWidget*> headlines;

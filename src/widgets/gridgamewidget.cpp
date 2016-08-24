@@ -25,7 +25,7 @@ GridGameWidget::GridGameWidget(QString gameName, int hours, QString background, 
     backgroundLayout->setMargin(0);
     backgroundLayout->setAlignment(Qt::AlignBottom);
 
-    QWidget *infoBar = new QWidget();
+    QWidget* infoBar = new QWidget();
     infoBar->setStyleSheet("background: rgba(16, 16, 16, 0.80);");
     infoBar->setMinimumSize(364, 70);
     infoBar->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);

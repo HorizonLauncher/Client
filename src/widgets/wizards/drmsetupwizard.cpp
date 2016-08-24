@@ -102,7 +102,7 @@ bool GamesFoundPage::validatePage()
         Library::db.addGame(gameObj);
 
         QString bannerPath = CONFIG_FOLDER + QDir::separator() + "image" + QDir::separator() + "steam_" + addGames[game] + "_banner.png";
-        SteamMetadataHelper *helper = new SteamMetadataHelper(addGames[game]);
+        SteamMetadataHelper* helper = new SteamMetadataHelper(addGames[game]);
         connect(helper, &SteamMetadataHelper::metadataRecieved, [=] (SteamMetadata metadata)
         {
             onMetadataRecieved(game, metadata);

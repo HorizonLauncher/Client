@@ -22,7 +22,7 @@ private:
     QString curRandom;
     bool noGames;
 
-    QLabel *randomGameLbl;
+    QLabel* randomGameLbl;
     QPushButton* playRandom;
     QPushButton* newRandom;
 

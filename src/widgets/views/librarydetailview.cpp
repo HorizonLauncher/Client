@@ -6,7 +6,7 @@
 #include <QPixmap>
 #include <QScrollArea>
 
-LibraryDetailView::LibraryDetailView(QSettings* p, QWidget *parent) : QWidget(parent)
+LibraryDetailView::LibraryDetailView(QSettings* p, QWidget* parent) : QWidget(parent)
 {
 
     this->mainLayout = new QVBoxLayout(this);

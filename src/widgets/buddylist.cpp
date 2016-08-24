@@ -5,7 +5,7 @@
 #include <QGridLayout>
 #include <QLineEdit>
 
-BuddyList::BuddyList(QSettings* p, QWidget *parent) :
+BuddyList::BuddyList(QSettings* p, QWidget* parent) :
     QWidget(parent)
 {
     this->setStyleSheet("background-color: " + p->value("Primary/SecondaryBase").toString() + ";} "

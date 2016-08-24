@@ -6,7 +6,7 @@
 #include <QtWidgets>
 #include <QMessageBox>
 
-NewsFeedChooserWindow::NewsFeedChooserWindow(QWidget *parent) : QDialog(parent)
+NewsFeedChooserWindow::NewsFeedChooserWindow(QWidget* parent) : QDialog(parent)
 {
     layout = new QVBoxLayout();
     this->setLayout(layout);

@@ -12,7 +12,7 @@ class NewsFeedChooserWindow : public QDialog
 {
     Q_OBJECT
 public:
-    explicit NewsFeedChooserWindow(QWidget *parent = 0);
+    explicit NewsFeedChooserWindow(QWidget* parent = 0);
 
 public slots:
     void onAddURLButtonClicked();

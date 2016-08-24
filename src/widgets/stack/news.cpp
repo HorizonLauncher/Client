@@ -149,7 +149,7 @@ void News::setupUI()
  * Called when the the fetches from the XML urls are finished.
  * Parses the XML and stores the headlines.
  */
-void News::onFetchComplete(QNetworkReply *reply, QString sourceLabel)
+void News::onFetchComplete(QNetworkReply* reply, QString sourceLabel)
 {
     QByteArray array = reply->readAll();
     QXmlStreamReader reader(array);
@@ -276,9 +276,9 @@ void News::reloadHeadlines()
     }
 }
 
-void News::clearLayout(QLayout *layout)
+void News::clearLayout(QLayout* layout)
 {
-     QLayoutItem *item;
+     QLayoutItem* item;
      while ((item = layout->takeAt(0)))
      {
         delete item->widget();

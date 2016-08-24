@@ -80,7 +80,7 @@ void DetailGameWidget::leaveEvent(QEvent* event)
   Applies default font and color styling to a label for display
   @param label The label to style
   */
-void DetailGameWidget::styleLabel(QLabel *label){
+void DetailGameWidget::styleLabel(QLabel* label){
     label->setStyleSheet("font-family: Roboto; font-weight: 300; font-size: 10pt");
 }
 

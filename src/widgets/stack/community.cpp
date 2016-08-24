@@ -36,6 +36,6 @@ void Community::init(QSettings* p)
 
 void Community::openBuddyList(QSettings* p)
 {
-    QWidget *buddyL = new BuddyList(p);
+    QWidget* buddyL = new BuddyList(p);
     buddyL->show();
 }

@@ -10,7 +10,7 @@
 #include <QDir>
 #include <QDateTime>
 
-GamePropertyEditor::GamePropertyEditor(Game game, QSettings* palette, QWidget *parent)
+GamePropertyEditor::GamePropertyEditor(Game game, QSettings* palette, QWidget* parent)
 {
     this->gameID = game.id;
 
