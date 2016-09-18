@@ -7,6 +7,9 @@
 #include <QRegExp>
 #include <QTextStream>
 
+/** Checks if Steam exists on the system
+*   \return true if Steam is installed, false otherwise
+*/
 bool SteamHelper::doesExist()
 {
     #if defined(__linux__)
@@ -23,6 +26,9 @@ bool SteamHelper::doesExist()
     #endif
 }
 
+/** Gets the path to Steam
+*   \return The path to the Steam installation folder
+*/
 QString SteamHelper::getFolder()
 {
     if (!doesExist())
@@ -40,6 +46,14 @@ QString SteamHelper::getFolder()
     #endif
 }
 
+/** Returns a map of key/value pairs in a VDF file.
+*   Really hacky. Ignores objects (e.g. a = "b", b { z = "s" }, c { z = "z" })
+*   z will be "z" because the objects get ignored. Will break if Valve
+*   complicates the one file that this is used for.
+*
+*   \param vdfPath a path to the VDF file to be read
+*   \return A QMap of key/value pairs in a VDF file.
+*/
 QMap<QString, QString> SteamHelper::getVdfKeyVals(QString vdfPath)
 {
     QFile vdfFile(vdfPath);
@@ -70,6 +84,9 @@ QMap<QString, QString> SteamHelper::getVdfKeyVals(QString vdfPath)
     return keyVals;
 }
 
+/** Gets list of Steam library folders
+*   \return A QList with paths to Steam library folders. Does NOT include main folder.
+*/
 QList<QString> SteamHelper::getLibFolders()
 {
     if (!doesExist())
@@ -107,6 +124,10 @@ QList<QString> SteamHelper::getLibFolders()
     return libFolders;
 }
 
+/** Get a list of all games in a Steam library folder
+*   \param folderPath A path to the Steam library folder
+*   \return A map of games. Key is the name, value is the appID.
+*/
 QMap<QString, QString> SteamHelper::getGamesInFolder(QString folderPath)
 {
     QDir folder(folderPath);
@@ -150,6 +171,9 @@ QMap<QString, QString> SteamHelper::getGamesInFolder(QString folderPath)
     return games;
 }
 
+/** Get a map of ALL games in all Steam library folders.
+*   \return A map of games. Key is the name, value is the appID.
+*/
 QMap<QString, QString> SteamHelper::getGames()
 {
     if (!doesExist())
