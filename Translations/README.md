@@ -1,4 +1,4 @@
-#Horizon Launcher Localization
+# Horizon Launcher Localization
 
 [![Slack Status](http://horizonlauncher-slack.herokuapp.com/badge.svg)](http://slack.launchhorizon.com)
 [![Chat on Freenode](https://img.shields.io/badge/chat-on%20freenode-blue.svg?style=flat)](https://kiwiirc.com/client/chat.freenode.net/#horizonlauncher)
